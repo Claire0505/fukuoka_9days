@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🇯🇵 福岡 9 日頂級遠征行程</title>
+    <!-- Tailwind CSS 用於快速且強大的響應式排版 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc; /* Tailwind slate-50 */
+            color: #334155; /* Tailwind slate-700 */
+            line-height: 1.6;
+        }
+        
+        /* 隱藏捲軸但保留捲動功能 (選用，讓畫面更乾淨) */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            border-radius: 0 0 2rem 2rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            padding: 4rem 1.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 640px) {
+            .hero-section {
+                padding: 3rem 1rem;
+                border-radius: 0 0 1.5rem 1.5rem;
+            }
+        }
+
+        .day-card {
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            margin-bottom: 2rem;
+            overflow: hidden; /* 確保邊界圓角完美 */
+            border-top-width: 8px;
+            border-style: solid;
+        }
+        
+        .day-header {
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.8);
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .timeline-container {
+            padding: 1.5rem;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-icon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.5rem;
+            background: white;
+            z-index: 10;
+        }
+        
+        /* 時間軸的虛線 */
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0.75rem; /* 對齊 icon 中心 */
+            top: 2rem;
+            bottom: -1rem;
+            width: 2px;
+            background-image: linear-gradient(to bottom, #cbd5e1 50%, rgba(255, 255, 255, 0) 0%);
+            background-position: left;
+            background-size: 2px 10px;
+            background-repeat: repeat-y;
+            z-index: 1;
+        }
+        
+        .timeline-item:last-child::before {
+            display: none; /* 最後一個項目不需要向下延伸的線 */
+        }
+
+        .timeline-content h3 {
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-content p {
+            font-size: 1rem;
+            color: #475569;
+        }
+
+        .map-link {
+            display: inline-flex;
+            align-items: center;
+            background-color: #eff6ff;
+            color: #2563eb;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px; /* 全圓角 */
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.875rem; /* text-sm */
+            border: 1px solid #bfdbfe;
+            transition: all 0.2s;
+            margin: 0.25rem 0.25rem 0.25rem 0;
+        }
+        .map-link:hover {
+            background-color: #dbeafe;
+            color: #1d4ed8;
+            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.1);
+        }
+
+        .character-dialogue {
+            display: flex;
+            align-items: flex-start;
+            background-color: #f8fafc;
+            border-radius: 1rem;
+            padding: 1rem;
+            margin-top: 1rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .character-img-container {
+            flex-shrink: 0;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 9999px;
+            overflow: hidden;
+            background-color: white;
+            border: 2px solid #e2e8f0;
+            margin-right: 1rem;
+        }
+
+        .character-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .character-text {
+            font-weight: 500;
+            color: #334155;
+            font-size: 0.95rem;
+            padding-top: 0.25rem;
+        }
+
+        /* 針對首頁三主角的特殊排版 */
+        .hero-characters {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .hero-character-box {
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(4px);
+            border-radius: 1rem;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        
+        .hero-character-box img {
+            width: 4rem;
+            height: 4rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* 浮動導航列 (可選，讓長網頁更好用) */
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid #e2e8f0;
+            padding: 0.5rem 1rem;
+            display: flex;
+            overflow-x: auto;
+            white-space: nowrap;
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .sticky-nav::-webkit-scrollbar {
+            display: none; /* Safari and Chrome */
+        }
+        .nav-pill {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin-right: 0.5rem;
+            border-radius: 9999px;
+            background: #f1f5f9;
+            color: #475569;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        .nav-pill:hover, .nav-pill:active {
+            background: #e2e8f0;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="sticky-nav">
+        <a href="#day1" class="nav-pill">D1 市區</a>
+        <a href="#day2" class="nav-pill">D2 廣島</a>
+        <a href="#day3" class="nav-pill">D3 天神</a>
+        <a href="#day4" class="nav-pill">D4 太宰府</a>
+        <a href="#day5" class="nav-pill">D5 門司港</a>
+        <a href="#day6" class="nav-pill">D6 由布院</a>
+        <a href="#day7" class="nav-pill">D7 糸島</a>
+        <a href="#day8" class="nav-pill">D8 福岡塔</a>
+        <a href="#day9" class="nav-pill">D9 返台</a>
+    </nav>
+
+    <div class="max-w-4xl mx-auto pb-12">
+        <header class="hero-section">
+            <h1 class="text-3xl md:text-5xl font-black text-slate-800 mb-4 tracking-tight">🇯🇵 福岡 9 日頂級遠征行程</h1>
+            <p class="text-lg text-slate-600 mb-6 font-medium">核心戰術：4 人 2 車機動接駁｜零過度拉車｜美食與重裝採購</p>
+            
+            <div class="flex flex-wrap justify-center gap-2 mb-8">
+                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-bold text-sm">🚄 新幹線極速平穩</span>
+                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full font-bold text-sm">🚕 GO App 包車戰術</span>
+                <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full font-bold text-sm">🥩 頂級黑毛和牛</span>
+            </div>
+
+            <div class="bg-yellow-50 border border-yellow-200 text-yellow-800 p-4 rounded-xl text-left max-w-2xl mx-auto shadow-sm">
+                <p class="font-bold mb-1 flex items-center">
+                    <span class="text-xl mr-2">💡</span> 導覽提示
+                </p>
+                <p class="text-sm">網頁內的所有 <span class="text-blue-600 font-bold bg-blue-100 px-1 rounded">📍 地標</span>，點擊即可直接開啟 Google Maps 導航！請直接往下捲動瀏覽行程。</p>
+            </div>
+
+            <div class="hero-characters">
+                <div class="hero-character-box border border-pink-200" style="background-color: #fff0f6;">
+                    <img src="吉伊卡哇.png" alt="吉伊卡哇">
+                    <span class="text-pink-700 font-bold text-sm">準備好吃好多東西了...🥺</span>
+                </div>
+                <div class="hero-character-box border border-yellow-200" style="background-color: #fffbe6;">
+                    <img src="Usagi.png" alt="烏薩奇">
+                    <span class="text-yellow-700 font-bold text-sm">呀哈——！出發！拔草！</span>
+                </div>
+                <div class="hero-character-box border border-blue-200" style="background-color: #e6f7ff;">
+                    <img src="小八.png" alt="小八">
+                    <span class="text-blue-700 font-bold text-sm">這是一定要拍下來的吧！📸</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="px-4 sm:px-6">
+            <section id="day1" class="day-card" style="border-color: #3b82f6;">
+                <div class="day-header" style="background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%);">
+                    <span class="inline-block bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded mb-2">Day 1｜市區重裝日</span>
+                    <h2 class="text-2xl sm:text-3xl font-black text-slate-800">抵達福岡與重裝採購戰線</h2>
+                </div>
+                <div class="timeline-container">
+                    <div class="timeline-item">
+                        <div class="timeline-icon">✈️</div>
+                        <div class="timeline-content">
+                            <h3>11:20 降落福岡 ➔ 雙車直達飯店</h3>
+                            <p>長榮抵達。大門開啟 GO App 叫 2 台計程車，直達 <a href="https://www.google.com/maps/search/?api=1&query=Base+Layer+Hotel+Fukuoka" target="_blank" class="map-link">📍 Base Layer Hotel</a> 寄放行李。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">🍜</div>
+                        <div class="timeline-content">
+                            <h3>13:30 午餐首戰：達摩拉麵</h3>
+                            <p>直球對決 <a href="https://www.google.com/maps/search/?api=1&query=博多だるま+総本店" target="_blank" class="map-link">📍 博多達摩拉麵 總本店</a>，下午入店翻桌極快。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">🪖</div>
+                        <div class="timeline-content">
+                            <h3>14:30 重裝採購：雙保險戰線</h3>
+                            <p>首選 <a href="https://www.google.com/maps/search/?api=1&query=SHOEI+Gallery+FUKUOKA" target="_blank" class="map-link">📍 SHOEI Gallery</a> (需預約)。備案則搭車至 <a href="https://www.google.com/maps/search/?api=1&query=ライコランド福岡空港店" target="_blank" class="map-link">📍 RICOLAND 機場店</a>。買完紙箱鎖進飯店！</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">🍲</div>
+                        <div class="timeline-content">
+                            <h3>20:15 Mina天神補給 & 牛腸鍋</h3>
+                            <p>至 <a href="https://www.google.com/maps/search/?api=1&query=ミーナ天神" target="_blank" class="map-link">📍 Mina 天神</a> 採購無印/UNIQLO，晚餐享用極致白味噌 <a href="https://www.google.com/maps/search/?api=1&query=博多もつ鍋+越後屋+今泉本店" target="_blank" class="map-link">📍 越後屋 牛腸鍋</a>。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="character-dialogue border-yellow-200 bg-yellow-50">
+                        <div class="character-img-container border-yellow-300">
+                            <img src="Usagi.png" alt="烏薩奇" class="character-img">
+                        </div>
+                        <div class="character-text text-yellow-800">
+                            呀哈——！搭計程車載安全帽最爽啦！完全不用走路！プルル！
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="day2" class="day-card" style="border-color: #ef4444;">
+                <div class="day-header" style="background: linear-gradient(135deg, #ffffff 0%, #fef2f2 100%);">
+                    <span class="inline-block bg-red-100 text-red-800 text-xs font-bold px-2 py-1 rounded mb-2">Day 2｜外地遠征日</span>
+                    <h2 class="text-2xl sm:text-3xl font-black text-slate-800">廣島與山陽新幹線大遠征</h2>
+                </div>
+                <div class="timeline-container">
+                    <div class="timeline-item">
+                        <div class="timeline-icon">🚄</div>
+                        <div class="timeline-content">
+                            <h3>07:45 新幹線極速突擊</h3>
+                            <p>自 <a href="https://www.google.com/maps/search/?api=1&query=博多駅" target="_blank" class="map-link">📍 JR 博多站</a> 搭山陽新幹線直達廣島，零震動極致平穩。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">⛩️</div>
+                        <div class="timeline-content">
+                            <h3>10:00 宮島嚴島神社 (海上大鳥居)</h3>
+                            <p>朝聖 <a href="https://www.google.com/maps/search/?api=1&query=厳島神社" target="_blank" class="map-link">📍 嚴島神社</a>。午餐享用現烤廣島牡蠣與廣島燒 (<a href="https://www.google.com/maps/search/?api=1&query=電光石火+駅前ひろば店" target="_blank" class="map-link">📍 電光石火</a>)。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">🕊️</div>
+                        <div class="timeline-content">
+                            <h3>14:30 廣島歷史巡禮</h3>
+                            <p>搭乘廣電前往市區，參觀 <a href="https://www.google.com/maps/search/?api=1&query=原爆ドーム" target="_blank" class="map-link">📍 原爆圓頂館</a> 與和平紀念公園。18:30 搭新幹線回程補眠。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">🍜</div>
+                        <div class="timeline-content">
+                            <h3>21:00 深夜靈魂卡布奇諾 (泡系拉麵)</h3>
+                            <p>降落博多後直攻 <a href="https://www.google.com/maps/search/?api=1&query=博多一双+博多駅東本店" target="_blank" class="map-link">📍 博多一雙 總本店</a>，避開尖峰。吃飽叫車回飯店。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="character-dialogue border-pink-200 bg-pink-50">
+                        <div class="character-img-container border-pink-300">
+                            <img src="吉伊卡哇.png" alt="吉伊卡哇" class="character-img">
+                        </div>
+                        <div class="character-text text-pink-800">
+                            新幹線好快...而且完全不會暈車欸... (感動流淚) 🥺 泡系拉麵也好濃郁...
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="day3" class="day-card" style="border-color: #f59e0b;">
+                <div class="day-header" style="background: linear-gradient(135deg, #ffffff 0%, #fffbeb 100%);">
+                    <span class="inline-block bg-amber-100 text-amber-800 text-xs font-bold px-2 py-1 rounded mb-2">Day 3｜市區慢活日</span>
+                    <h2 class="text-2xl sm:text-3xl font-black text-slate-800">大濠公園慢活與動漫大採購</h2>
+                </div>
+                <div class="timeline-container">
+                    <div class="timeline-item">
+                        <div class="timeline-icon">😴</div>
+                        <div class="timeline-content">
+                            <h3>08:00 睡到自然醒 ➔ 兼虎沾麵</h3>
+                            <p>戰術回血！午餐享用極粗麵條與重口味魚粉的 <a href="https://www.google.com/maps/search/?api=1&query=麺や兼虎+天神本店" target="_blank" class="map-link">📍 沾麵 兼虎 天神本店</a>。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">☕</div>
+                        <div class="timeline-content">
+                            <h3>13:30 大濠公園湖景與職人咖啡</h3>
+                            <p>漫步 <a href="https://www.google.com/maps/search/?api=1&query=大濠公園" target="_blank" class="map-link">📍 大濠公園</a>。放空組至 <a href="https://www.google.com/maps/search/?api=1&query=ブルーボトルコーヒー+福岡天神カフェ" target="_blank" class="map-link">📍 藍瓶咖啡</a>，老饕組至 <a href="https://www.google.com/maps/search/?api=1&query=珈琲美美" target="_blank" class="map-link">📍 珈琲美美</a>，後於 <a href="https://www.google.com/maps/search/?api=1&query=警固神社" target="_blank" class="map-link">📍 警固神社足湯</a> 泡腳。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">🛍️</div>
+                        <div class="timeline-content">
+                            <h3>15:30 動漫採購與草莓甜點</h3>
+                            <p>直擊 <a href="https://www.google.com/maps/search/?api=1&query=アニメイト福岡パルコ" target="_blank" class="map-link">📍 駿河屋/Animate/PARCO</a>，中途吃 <a href="https://www.google.com/maps/search/?api=1&query=伊都きんぐ+天神店" target="_blank" class="map-link">📍 伊都大王</a> 草莓銅鑼燒回血。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">🍢</div>
+                        <div class="timeline-content">
+                            <h3>19:30 博多靈魂串燒慶功</h3>
+                            <p>外酥內爆汁烤雞皮！直接殺去 <a href="https://www.google.com/maps/search/?api=1&query=博多とりかわ大臣+天神南串まる店" target="_blank" class="map-link">📍 鳥皮大臣</a>，每人 10 串起跳！</p>
+                        </div>
+                    </div>
+                    
+                    <div class="character-dialogue border-blue-200 bg-blue-50">
+                        <div class="character-img-container border-blue-300">
+                            <img src="小八.png" alt="小八" class="character-img">
+                        </div>
+                        <div class="character-text text-blue-800">
+                            大濠公園的風景好漂亮，好像可以拍很多照片呢！烤雞皮也好好吃喔～
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="day4" class="day-card" style="border-color: #10b981;">
+                <div class="day-header" style="background: linear-gradient(135deg, #ffffff 0%, #ecfdf5 100%);">
+                    <span class="inline-block bg-emerald-100 text-emerald-800 text-xs font-bold px-2 py-1 rounded mb-2">Day 4｜外地近郊日</span>
+                    <h2 class="text-2xl sm:text-3xl font-black text-slate-800">太宰府神域與動態備案分流</h2>
+                </div>
+                <div class="timeline-container">
+                    <div class="timeline-item">
+                        <div class="timeline-icon">⛩️</div>
+                        <div class="timeline-content">
+                            <h3>08:45 計程車直攻山頂 (避爬坡)</h3>
+                            <p>出太宰府站叫車直攻 <a href="https://www.google.com/maps/search/?api=1&query=宝満宮+竈門神社" target="_blank" class="map-link">📍 寶滿宮 竈門神社</a>。再搭車至天滿宮後方。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">🚶</div>
+                        <div class="timeline-content">
+                            <h3>09:45 無痛順向下坡參拜</h3>
+                            <p>從 <a href="https://www.google.com/maps/search/?api=1&query=天開稲荷社" target="_blank" class="map-link">📍 天開稻荷神社</a> 一路順坡往下參拜 <a href="https://www.google.com/maps/search/?api=1&query=太宰府天満宮" target="_blank" class="map-link">📍 太宰府天滿宮</a>，並在參道吃 <a href="https://www.google.com/maps/search/?api=1&query=かさの家" target="_blank" class="map-link">📍 かさの家</a> 梅枝餅。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">🚦</div>
+                        <div class="timeline-content">
+                            <h3>11:00 【動態分流備案】(視體力決定)</h3>
+                            <div class="mt-2 space-y-2">
+                                <div class="bg-green-50 p-2 rounded border border-green-100 text-sm">
+                                    <span class="font-bold text-green-700">🟢 方案A (進度快)：</span>直奔柳川 <a href="https://www.google.com/maps/search/?api=1&query=元祖+本吉屋" target="_blank" class="map-link">📍 元祖本吉屋</a> 吃 340 年蒸籠鰻魚飯 (禁船)。
+                                </div>
+                                <div class="bg-amber-50 p-2 rounded border border-amber-100 text-sm">
+                                    <span class="font-bold text-amber-700">🟡 方案B (慢活)：</span>前往久留米散策，晚餐吃 <a href="https://www.google.com/maps/search/?api=1&query=焼鳥+鉄砲+本店" target="_blank" class="map-link">📍 焼鳥 鉄砲 本店</a> 元祖燒鳥。
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="character-dialogue border-yellow-200 bg-yellow-50">
+                        <div class="character-img-container border-yellow-300">
+                            <img src="Usagi.png" alt="烏薩奇" class="character-img">
+                        </div>
+                        <div class="character-text text-yellow-800">
+                            プルルルル！計程車直接衝上山頂啦！完全不用爬樓梯，呀哈！
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="day5" class="day-card" style="border-color: #8b5cf6;">
+                <div class="day-header" style="background: linear-gradient(135deg, #ffffff 0%, #f5f3ff 100%);">
+                    <span class="inline-block bg-purple-100 text-purple-800 text-xs font-bold px-2 py-1 rounded mb-2">Day 5｜外地遠征日</span>
+                    <h2 class="text-2xl sm:text-3xl font-black text-slate-800">門司港大正風情與百萬夜景</h2>
+                </div>
+                <div class="timeline-container">
+                    <div class="timeline-item">
+                        <div class="timeline-icon">⚓</div>
+                        <div class="timeline-content">
+                            <h3>09:30 門司港懷舊散策 (堅守陸路)</h3>
+                            <p>搭乘新幹線轉 JR 抵達 <a href="https://www.google.com/maps/search/?api=1&query=門司港レトロ" target="_blank" class="map-link">📍 門司港</a>。參觀歐風建築與 <a href="https://www.google.com/maps/search/?api=1&query=ブルーウィングもじ" target="_blank" class="map-link">📍 藍翼門司吊橋</a> (全面禁船)。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">🍛</div>
+                        <div class="timeline-content">
+                            <h3>12:00 燒咖哩重火力補給</h3>
+                            <p>朝聖爆漿起司名物 <a href="https://www.google.com/maps/search/?api=1&query=伽哩本舗+門司港レトロ店" target="_blank" class="map-link">📍 咖哩本舖</a>。下午走逛 <a href="https://www.google.com/maps/search/?api=1&query=小倉城" target="_blank" class="map-link">📍 小倉城</a> 與 <a href="https://www.google.com/maps/search/?api=1&query=魚町銀天街" target="_blank" class="map-link">📍 魚町銀天街</a>。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">🌃</div>
+                        <div class="timeline-content">
+                            <h3>17:15 皿倉山：百萬之眼夜景</h3>
+                            <p>搭乘爬坡纜車登頂 <a href="https://www.google.com/maps/search/?api=1&query=皿倉山展望台" target="_blank" class="map-link">📍 皿倉山展望台</a>，俯瞰 200° 萬家燈火。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">🚕</div>
+                        <div class="timeline-content">
+                            <h3>20:00 包車直擊下山免排隊</h3>
+                            <p>下山直接 GO App 叫 2 台車吹冷氣直奔小倉站晚餐，免去寒風中排隊擠公車。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="character-dialogue border-pink-200 bg-pink-50">
+                        <div class="character-img-container border-pink-300">
+                            <img src="吉伊卡哇.png" alt="吉伊卡哇" class="character-img">
+                        </div>
+                        <div class="character-text text-pink-800">
+                            燒咖哩牽絲了...好燙...但是好好吃喔... (呼呼) 夜景也超級漂亮的...
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="day6" class="day-card" style="border-color: #059669;">
+                <div class="day-header" style="background: linear-gradient(135deg, #ffffff 0%, #ecfdf5 100%);">
+                    <span class="inline-block bg-emerald-100 text-emerald-800 text-xs font-bold px-2 py-1 rounded mb-2">Day 6｜外地觀光日</span>
+                    <h2 class="text-2xl sm:text-3xl font-black text-slate-800">由布院之森山城慢活遠征</h2>
+                </div>
+                <div class="timeline-container">
+                    <div class="timeline-item">
+                        <div class="timeline-icon">🚆</div>
+                        <div class="timeline-content">
+                            <h3>09:11 觀光特急：由布院之森 1 號</h3>
+                            <p>車上享用大豆冰淇淋。抵達 <a href="https://www.google.com/maps/search/?api=1&query=由布院駅" target="_blank" class="map-link">📍 JR 由布院站</a>。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">🍲</div>
+                        <div class="timeline-content">
+                            <h3>12:30 極致釜飯與湯之坪散策</h3>
+                            <p>漫步 <a href="https://www.google.com/maps/search/?api=1&query=湯の坪街道" target="_blank" class="map-link">📍 湯之坪街道</a> (吃抹茶冰淇淋)。午餐享用 <a href="https://www.google.com/maps/search/?api=1&query=由布まぶし+心+金鱗湖本店" target="_blank" class="map-link">📍 由布まぶし 心</a> 豐後牛釜飯三吃。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">🍰</div>
+                        <div class="timeline-content">
+                            <h3>15:30 甜點防線與金鱗湖</h3>
+                            <p>參觀起霧的 <a href="https://www.google.com/maps/search/?api=1&query=金鱗湖" target="_blank" class="map-link">📍 金鱗湖</a>，回程朝聖第一生乳捲 <a href="https://www.google.com/maps/search/?api=1&query=B-speak" target="_blank" class="map-link">📍 B-speak</a>。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">🚂</div>
+                        <div class="timeline-content">
+                            <h3>17:11 搭乘特急返程補眠</h3>
+                            <p>搭乘由布院之森直返博多。晚餐享用 <a href="https://www.google.com/maps/search/?api=1&query=博多らーめん+Shin-Shin+博多デイトス店" target="_blank" class="map-link">📍 Shin-Shin 拉麵</a> 或厚切牛舌。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="character-dialogue border-blue-200 bg-blue-50">
+                        <div class="character-img-container border-blue-300">
+                            <img src="小八.png" alt="小八" class="character-img">
+                        </div>
+                        <div class="character-text text-blue-800">
+                            火車綠油油的好可愛！吃到了傳說中的豐後牛釜飯，感覺這趟旅行真的好值得了！
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="day7" class="day-card" style="border-color: #0ea5e9;">
+                <div class="day-header" style="background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);">
+                    <span class="inline-block bg-sky-100 text-sky-800 text-xs font-bold px-2 py-1 rounded mb-2">Day 7｜近郊與購物日</span>
+                    <h2 class="text-2xl sm:text-3xl font-black text-slate-800">糸島海景與頂級和牛慶功</h2>
+                </div>
+                <div class="timeline-container">
+                    <div class="timeline-item">
+                        <div class="timeline-icon">🌊</div>
+                        <div class="timeline-content">
+                            <h3>09:15 雙車直奔海岸 (避等公車)</h3>
+                            <p>出車站叫 2 台車直奔海岸，朝聖 <a href="https://www.google.com/maps/search/?api=1&query=桜井二見ヶ浦の夫婦岩" target="_blank" class="map-link">📍 二見浦 夫婦岩(白色鳥居)</a>，去 <a href="https://www.google.com/maps/search/?api=1&query=ロンドンバスカフェ" target="_blank" class="map-link">📍 London Bus Cafe</a> 看海。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">🛍️</div>
+                        <div class="timeline-content">
+                            <h3>13:00 Chiikawa 與潮流爆買</h3>
+                            <p>直攻天神 PARCO 8F <a href="https://www.google.com/maps/search/?api=1&query=ちいかわらんど+福岡パルコ店" target="_blank" class="map-link">📍 Chiikawa Land</a>！並於 <a href="https://www.google.com/maps/search/?api=1&query=岩田屋本店" target="_blank" class="map-link">📍 岩田屋</a> 精品補給。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">🥩</div>
+                        <div class="timeline-content">
+                            <h3>19:00 頂級黑毛和牛雙暴擊</h3>
+                            <p>晚餐：<a href="https://www.google.com/maps/search/?api=1&query=極味や+福岡パルコ店" target="_blank" class="map-link">📍 極味屋</a> 或 答庵。入口即化頂級和牛燒肉，搭配冰啤酒！</p>
+                        </div>
+                    </div>
+                    
+                    <div class="character-dialogue border-yellow-200 bg-yellow-50">
+                        <div class="character-img-container border-yellow-300">
+                            <img src="Usagi.png" alt="烏薩奇" class="character-img">
+                        </div>
+                        <div class="character-text text-yellow-800">
+                            在 Chiikawa Land 買爆啦！！！呀哈！和牛超級軟的啦！
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="day8" class="day-card" style="border-color: #ec4899;">
+                <div class="day-header" style="background: linear-gradient(135deg, #ffffff 0%, #fdf2f8 100%);">
+                    <span class="inline-block bg-pink-100 text-pink-800 text-xs font-bold px-2 py-1 rounded mb-2">Day 8｜市區收尾日</span>
+                    <h2 class="text-2xl sm:text-3xl font-black text-slate-800">天神最後掃貨、福岡塔與大打包</h2>
+                </div>
+                <div class="timeline-container">
+                    <div class="timeline-item">
+                        <div class="timeline-icon">🛍️</div>
+                        <div class="timeline-content">
+                            <h3>10:30 商圈最終補漏戰線</h3>
+                            <p>百貨退稅、<a href="https://www.google.com/maps/search/?api=1&query=ビックカメラ+天神1号館" target="_blank" class="map-link">📍 Bic Camera</a> 買電器，地下街藥妝一站式合購。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">🗼</div>
+                        <div class="timeline-content">
+                            <h3>17:00 福岡塔夕陽夜景</h3>
+                            <p>漫步 <a href="https://www.google.com/maps/search/?api=1&query=シーサイドももち海浜公園" target="_blank" class="map-link">📍 百道濱海濱公園</a>，登頂 <a href="https://www.google.com/maps/search/?api=1&query=福岡タワー" target="_blank" class="map-link">📍 福岡塔</a> 俯瞰灣景。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">📦</div>
+                        <div class="timeline-content">
+                            <h3>20:00 華味鳥水瀧鍋 ➔ 無痛大打包</h3>
+                            <p>享用 <a href="https://www.google.com/maps/search/?api=1&query=博多華味鳥+天神店" target="_blank" class="map-link">📍 博多華味鳥</a>。回飯店開啟「4人2車」優勢，無痛將安全帽打包入箱！</p>
+                        </div>
+                    </div>
+                    
+                    <div class="character-dialogue border-blue-200 bg-blue-50">
+                        <div class="character-img-container border-blue-300">
+                            <img src="小八.png" alt="小八" class="character-img">
+                        </div>
+                        <div class="character-text text-blue-800">
+                            夕陽下的福岡塔好美喔，今晚要把滿滿的戰利品都塞進去行李箱了...
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="day9" class="day-card" style="border-color: #64748b;">
+                <div class="day-header" style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);">
+                    <span class="inline-block bg-slate-200 text-slate-800 text-xs font-bold px-2 py-1 rounded mb-2">Day 9｜順暢賦歸日</span>
+                    <h2 class="text-2xl sm:text-3xl font-black text-slate-800">優雅送機與免稅店最終補給</h2>
+                </div>
+                <div class="timeline-container">
+                    <div class="timeline-item">
+                        <div class="timeline-icon">🚕</div>
+                        <div class="timeline-content">
+                            <h3>09:30 GO App 雙車包車直達</h3>
+                            <p>飯店優雅退房，吹冷氣 15 分鐘平穩直達 <a href="https://www.google.com/maps/search/?api=1&query=福岡空港" target="_blank" class="map-link">📍 福岡機場</a>（免搬行李擠地鐵）。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">🛍️</div>
+                        <div class="timeline-content">
+                            <h3>10:45 機場免稅店大掃貨</h3>
+                            <p>搶購：福砂屋長崎蛋糕、博多通饅頭、ROYCE' 生巧與獺祭清酒。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon">✈️</div>
+                        <div class="timeline-content">
+                            <h3>12:10 長榮航空 輕鬆返航</h3>
+                            <p>帶著滿載的安全帽、戰利品與滿格的回憶，13:45 順暢降落台灣，遠征大成功！</p>
+                        </div>
+                    </div>
+                    
+                    <div class="character-dialogue border-pink-200 bg-pink-50">
+                        <div class="character-img-container border-pink-300">
+                            <img src="吉伊卡哇.png" alt="吉伊卡哇" class="character-img">
+                        </div>
+                        <div class="character-text text-pink-800">
+                            嗚哇...要回家了...但是買了好多好吃的蛋糕跟餅乾呢！🥺
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <footer class="text-center py-8 text-slate-500 text-sm">
+            <p>🇯🇵 九州福岡 9 日頂級遠征行程表</p>
+            <p class="mt-1">Designed for best travel experience.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
