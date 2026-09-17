@@ -3,633 +3,1066 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>🇯🇵 福岡 9 日頂級遠征行程</title>
+    <title>🇯🇵 日本九州福岡 9 日旅遊行程</title>
 
     <!-- === PWA / Web App 體驗設定 === -->
-    <!-- iOS Safari 專用設定 -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="福岡遠征">
-    <!-- 設定 iOS 加到主畫面時的圖示 (這裡使用吉伊卡哇，您可以換成網路上的絕對網址) -->
     <link rel="apple-touch-icon" href="./chiikawa.png">
-    
-    <!-- Android / Chrome 專用設定 (Inline Manifest) -->
-    <meta name="theme-color" content="#bae6fd">
+    <meta name="theme-color" content="#3b82f6">
     <link rel="icon" type="image/png" href="./chiikawa.png">
-    <link rel="manifest" href='data:application/manifest+json;utf-8,%7B%22name%22%3A%22%E7%A6%8F%E5%B2%A1%209%20%E6%97%A5%E9%81%A0%E5%BE%81%22%2C%22short_name%22%3A%22%E7%A6%8F%E5%B2%A1%E9%81%A0%E5%BE%81%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23f8fafc%22%2C%22theme_color%22%3A%22%23bae6fd%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22./chiikawa.png%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image/png%22%7D%5D%7D'>
-    <!-- ============================= -->
 
-    <!-- Tailwind CSS 用於快速且強大的響應式排版 -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
     
     <style>
-        html {
-            scroll-behavior: smooth; /* 加入平滑捲動，跳轉時更滑順 */
-        }
-        
+        html { scroll-behavior: smooth; }
         body {
             font-family: 'Noto Sans TC', sans-serif;
-            background-color: #f8fafc; /* Tailwind slate-50 */
-            color: #334155; /* Tailwind slate-700 */
-            line-height: 1.6;
-        }
-        
-        /* 隱藏捲軸但保留捲動功能 */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-
-        .hero-section {
-            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
-            border-radius: 0 0 2rem 2rem;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            padding: 3rem 1rem; /* 預設手機 padding */
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        @media (min-width: 768px) {
-            .hero-section {
-                padding: 4rem 1.5rem; /* 電腦版 padding */
-            }
+            background-color: #f8fafc; /* 溫和的淡灰藍背景 */
+            color: #334155;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .day-card {
-            background: white;
-            border-radius: 1.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            margin-bottom: 2rem;
-            overflow: hidden;
-            border-top-width: 8px;
-            border-style: solid;
+        /* 隱藏預設捲軸，讓畫面更乾淨 (針對左右滑動的選單) */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
         }
-        
-        .day-header {
-            padding: 1.25rem;
-            background: rgba(255,255,255,0.8);
-            border-bottom: 1px solid #f1f5f9;
-        }
-        @media (min-width: 768px) {
-            .day-header { padding: 1.5rem; }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
 
-        .timeline-container {
-            padding: 1.25rem;
-        }
-        @media (min-width: 768px) {
-            .timeline-container { padding: 1.5rem; }
-        }
-
-        .timeline-item {
+        /* 漸層英雄橫幅 */
+        .hero-gradient {
+            background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 50%, #06b6d4 100%);
             position: relative;
-            padding-left: 2.5rem;
-            margin-bottom: 1.5rem;
+            overflow: hidden;
         }
-        .timeline-item:last-child { margin-bottom: 0; }
-
-        .timeline-icon {
-            position: absolute;
-            left: 0;
-            top: 0;
-            font-size: 1.25rem;
-            background: white;
-            z-index: 10;
-        }
-        
-        .timeline-item::before {
+        /* 增加橫幅的層次感背景裝飾 */
+        .hero-gradient::after {
             content: '';
             position: absolute;
-            left: 0.625rem; /* 對齊 icon 中心 */
-            top: 2rem;
-            bottom: -1rem;
-            width: 2px;
-            background-image: linear-gradient(to bottom, #cbd5e1 50%, rgba(255, 255, 255, 0) 0%);
-            background-position: left;
-            background-size: 2px 10px;
-            background-repeat: repeat-y;
-            z-index: 1;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
         }
-        .timeline-item:last-child::before { display: none; }
 
-        .timeline-content h3 {
-            font-size: 1rem; /* 手機字體稍小 */
+        /* 左側導覽列的活動狀態 (Active State) */
+        .nav-item-active {
+            background-color: #eff6ff; /* blue-50 */
+            color: #2563eb; /* blue-600 */
+            border-left-width: 4px;
+            border-color: #3b82f6; /* blue-500 */
             font-weight: 700;
-            color: #1e293b;
-            margin-bottom: 0.25rem;
-        }
-        @media (min-width: 768px) {
-            .timeline-content h3 { font-size: 1.125rem; } /* 電腦字體 */
-        }
-        
-        .timeline-content p {
-            font-size: 0.95rem;
-            color: #475569;
         }
 
-        .map-link {
-            display: inline-flex;
-            align-items: center;
-            background-color: #eff6ff;
-            color: #2563eb;
-            padding: 0.25rem 0.6rem;
-            border-radius: 9999px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.85rem;
-            border: 1px solid #bfdbfe;
-            transition: all 0.2s;
-            margin: 0.25rem 0.25rem 0.25rem 0;
-            word-break: break-word; /* 防止長連結破版 */
+        /* 卡片懸浮效果 */
+        .hover-card-effect {
+            transition: all 0.3s ease;
         }
-        .map-link:hover {
-            background-color: #dbeafe;
-            color: #1d4ed8;
-            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.1);
+        .hover-card-effect:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
         }
 
-        .character-dialogue {
-            display: flex;
-            align-items: flex-start;
-            background-color: #f8fafc;
+        /* 角色對話框 */
+        .chat-bubble {
+            position: relative;
+            background: #ffffff;
             border-radius: 1rem;
             padding: 1rem;
-            margin-top: 1rem;
             border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
         }
-
-        .character-img-container {
-            flex-shrink: 0;
+        .chat-avatar {
             width: 3rem;
             height: 3rem;
             border-radius: 9999px;
-            overflow: hidden;
-            background-color: white;
-            border: 2px solid #e2e8f0;
-            margin-right: 0.75rem;
+            object-fit: cover;
+            border: 2px solid #bae6fd;
+            background-color: #f0f9ff;
+            flex-shrink: 0;
         }
 
-        .character-img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; /* 改為 contain 避免裁切角色頭像 */
-        }
-        
-        .character-text {
-            font-weight: 500;
-            color: #334155;
-            font-size: 0.95rem;
-            padding-top: 0.25rem;
-        }
-
-        /* 浮動導航列 (升級為膠囊懸浮樣式) */
-        .sticky-nav {
-            position: sticky;
-            top: 0.75rem; /* 稍微往下移，做出懸浮感 */
-            z-index: 50;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(226, 232, 240, 0.6);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            padding: 0.5rem;
-            margin: 0.75rem 1rem;
-            border-radius: 9999px;
-            display: flex;
-            overflow-x: auto;
-            white-space: nowrap;
-            -ms-overflow-style: none; 
-            scrollbar-width: none; 
-        }
-        @media (min-width: 768px) {
-            .sticky-nav { margin: 1rem auto; max-width: 56rem; }
-        }
-        .sticky-nav::-webkit-scrollbar { display: none; }
-        
-        .nav-pill {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            margin-right: 0.25rem;
-            border-radius: 9999px;
-            color: #475569;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 700;
-            transition: all 0.2s ease;
-        }
-        .nav-pill:hover, .nav-pill:active { 
-            background: #bae6fd; 
-            color: #0369a1;
-            transform: scale(1.05);
-        }
-
-        /* 懸浮快速回頂部按鈕 */
-        .scroll-nav-buttons {
-            position: fixed;
-            bottom: 1.5rem;
-            right: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            z-index: 100;
-        }
-        .scroll-btn {
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(8px);
-            border: 1px solid #e2e8f0;
-            color: #334155;
-            width: 3.5rem;
-            height: 3.5rem;
-            border-radius: 9999px;
-            display: flex;
+        /* Google Map 按鈕 */
+        .map-btn {
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            text-decoration: none;
-            transition: all 0.3s;
+            background-color: #f1f5f9;
+            color: #3b82f6;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            white-space: normal;
+            word-break: break-word;
+            line-height: 1.2;
+            border: 1px solid #e2e8f0;
+            margin-top: 0.25rem;
         }
-        .scroll-btn:hover { 
-            background-color: #f8fafc; 
-            transform: translateY(-3px);
+        .map-btn:hover {
+            background-color: #dbeafe;
+            color: #2563eb;
+            border-color: #bfdbfe;
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="text-slate-700">
 
-    <!-- 膠囊懸浮導航列 -->
-    <nav class="sticky-nav">
-        <a href="#day1" class="nav-pill">D1 抵達</a>
-        <a href="#day2" class="nav-pill">D2 天神</a>
-        <a href="#day3" class="nav-pill">D3 大濠</a>
-        <a href="#day4" class="nav-pill">D4 太宰府</a>
-        <a href="#day5" class="nav-pill">D5 下關/小倉</a>
-        <a href="#day6" class="nav-pill">D6 由布院</a>
-        <a href="#day7" class="nav-pill">D7 糸島/博多</a>
-        <a href="#day8" class="nav-pill">D8 LaLaport</a>
-        <a href="#day9" class="nav-pill">D9 返台</a>
+    <!-- 手機版頂部橫向導覽列 (僅在手機顯示) -->
+    <nav class="lg:hidden sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="flex overflow-x-auto hide-scrollbar p-3 gap-2 px-4 items-center">
+            <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded-md shrink-0 mr-1">快捷跳轉</span>
+            <a href="#day1" class="shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold bg-slate-100 text-slate-600 hover:bg-blue-100 hover:text-blue-700">D1 市區</a>
+            <a href="#day2" class="shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold bg-slate-100 text-slate-600 hover:bg-blue-100 hover:text-blue-700">D2 廣島</a>
+            <a href="#day3" class="shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold bg-slate-100 text-slate-600 hover:bg-blue-100 hover:text-blue-700">D3 大濠</a>
+            <a href="#day4" class="shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold bg-slate-100 text-slate-600 hover:bg-blue-100 hover:text-blue-700">D4 太宰府</a>
+            <a href="#day5" class="shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold bg-slate-100 text-slate-600 hover:bg-blue-100 hover:text-blue-700">D5 門司港</a>
+            <a href="#day6" class="shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold bg-slate-100 text-slate-600 hover:bg-blue-100 hover:text-blue-700">D6 由布院</a>
+            <a href="#day7" class="shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold bg-slate-100 text-slate-600 hover:bg-blue-100 hover:text-blue-700">D7 糸島</a>
+            <a href="#day8" class="shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold bg-slate-100 text-slate-600 hover:bg-blue-100 hover:text-blue-700">D8 LaLaport</a>
+            <a href="#day9" class="shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold bg-slate-100 text-slate-600 hover:bg-blue-100 hover:text-blue-700">D9 賦歸</a>
+        </div>
     </nav>
 
-    <div class="max-w-4xl mx-auto pb-12">
-        <header class="hero-section">
-            <h1 class="text-3xl md:text-5xl font-black text-slate-800 mb-4 tracking-tight">🇯🇵 福岡 9 日旅遊行程</h1>
-            
-            <!-- 住宿資訊卡片 -->
-            <div class="bg-white border-2 border-indigo-100 text-slate-700 p-5 rounded-2xl text-left max-w-2xl mx-auto shadow-md">
-                <h2 class="text-xl md:text-2xl font-black text-indigo-800 mb-4 flex items-center border-b border-indigo-50 pb-3">
-                    <span class="mr-2 text-2xl">🏨</span> 住宿 BASE LAYER HOTEL 福岡
-                </h2>
-                <div class="space-y-3 text-sm md:text-base font-medium">
-                    <div class="flex items-start">
-                        <span class="text-lg mr-2 mt-0.5">📍</span>
-                        <span class="pt-0.5">BASE LAYER HOTEL FUKUOKA</span>
-                    </div>
-                    <div class="flex items-start">
-                        <span class="text-lg mr-2 mt-0.5">🗺️</span>
-                        <span class="pt-0.5">〒810-0005 日本福岡縣福岡市中央區清川1丁目14-15</span>
-                    </div>
-                    
-                    <div class="pt-2 grid grid-cols-1 md:grid-cols-2 gap-3">
-                        <a href="https://maps.app.goo.gl/Yf8YWkPApBmtAtp68" target="_blank" class="col-span-1 md:col-span-2 flex items-center justify-center bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 md:py-3 px-4 rounded-xl transition-colors shadow-sm w-full text-center text-sm md:text-base">
-                            <span class="mr-2">🗺️</span> BASE LAYER HOTEL 至 博多 (Google 地圖導航)
-                        </a>
-                        <a href="https://subway.city.fukuoka.lg.jp/cha_trad/route/" target="_blank" class="flex items-center justify-center bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-3 rounded-xl transition-colors shadow-sm w-full text-center text-xs md:text-sm">
-                            <span class="mr-1">🚇</span> 地鐵路線圖 | 福岡市地鐵
-                        </a>
-                        <a href="https://subway.city.fukuoka.lg.jp/eki/stations/hakata.php" target="_blank" class="flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-xl transition-colors shadow-sm w-full text-center text-xs md:text-sm">
-                            <span class="mr-1">🚉</span> 博多駅 | 福岡市地下鉄
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-yellow-50 border border-yellow-200 text-yellow-800 p-4 rounded-xl text-left max-w-2xl mx-auto shadow-sm mt-6 mb-2">
-                <p class="font-bold flex items-center">
-                    <span class="text-xl mr-2">💡</span> 網頁內的所有 <span class="text-blue-600 font-bold bg-blue-100 px-1 rounded mx-1">📍 地標</span>，點擊即可直接開啟 Google Maps 導航！
-                </p>
-            </div>
-            
-            <!-- 手機用方向導航 -->
-            <div class="flex justify-center gap-4 mt-6 md:hidden">
-                <a href="#day1" class="bg-white border shadow px-6 py-2 rounded-full font-bold text-slate-600">〈 開始導覽</a>
-            </div>
-        </header>
-
-        <div class="px-4 sm:px-6">
-            <section id="day1" class="day-card" style="border-color: #3b82f6;">
-                <div class="day-header" style="background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%);">
-                    <span class="inline-block bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded mb-2">第1天 (2026/10/21)</span>
-                    <h2 class="text-2xl sm:text-3xl font-black text-slate-800">抵達福岡與重裝採購</h2>
-                </div>
-                <div class="timeline-container">
-                    <div class="timeline-item"><div class="timeline-icon">✈️</div><div class="timeline-content"><h3>06:00 <a href="https://www.google.com/maps/search/?api=1&query=Terminal+2" target="_blank" class="map-link">📍 Terminal 2</a></h3><p>停留 03時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🛬</div><div class="timeline-content"><h3>11:20 <a href="https://www.google.com/maps/search/?api=1&query=福岡空港国際線ターミナル" target="_blank" class="map-link">📍 福岡空港国際線ターミナル</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🏨</div><div class="timeline-content"><h3>12:36 <a href="https://www.google.com/maps/search/?api=1&query=BASE+LAYER+HOTEL+FUKUOKA" target="_blank" class="map-link">📍 BASE LAYER HOTEL 福岡</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🏪</div><div class="timeline-content"><h3>13:38 <a href="https://www.google.com/maps/search/?api=1&query=7-11+福岡高砂１丁目店" target="_blank" class="map-link">📍 7-11 福岡高砂１丁目店</a></h3><p>停留 00時20分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🪖</div><div class="timeline-content"><h3>14:01 <a href="https://www.google.com/maps/search/?api=1&query=SHOEI+Gallery+FUKUOKA" target="_blank" class="map-link">📍 SHOEI Gallery FUKUOKA</a></h3><p>停留 03時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🍜</div><div class="timeline-content"><h3>17:14 <a href="https://www.google.com/maps/search/?api=1&query=博多だるま+総本店" target="_blank" class="map-link">📍 達摩拉麵 本店</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🛒</div><div class="timeline-content"><h3>18:16 <a href="https://www.google.com/maps/search/?api=1&query=Maxvalu+Express+Watanabedori+3-chome+Shop" target="_blank" class="map-link">📍 Maxvalu Express Watanabedori 3-chome Shop</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🛒</div><div class="timeline-content"><h3>19:24 <a href="https://www.google.com/maps/search/?api=1&query=SUNNY+渡辺通店" target="_blank" class="map-link">📍 SUNNY 渡邊通店</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🛒</div><div class="timeline-content"><h3>20:30 <a href="https://www.google.com/maps/search/?api=1&query=マックスバリュエクスプレス住吉4丁目店" target="_blank" class="map-link">📍 マックスバリュエクスプレス住吉4丁目店</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🍢</div><div class="timeline-content"><h3>20:35 <a href="https://www.google.com/maps/search/?api=1&query=博多とりかわ大臣+住吉串房" target="_blank" class="map-link">📍 博多とりかわ大臣 住吉串房</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🏨</div><div class="timeline-content"><h3>20:35 <a href="https://www.google.com/maps/search/?api=1&query=BASE+LAYER+HOTEL+FUKUOKA" target="_blank" class="map-link">📍 BASE LAYER HOTEL 福岡</a></h3><p>停留 09時00分</p></div></div>
-                    
-                    <div class="character-dialogue border-yellow-200 bg-yellow-50">
-                        <div class="character-img-container border-yellow-300">
-                            <img src="./usagi.png" alt="烏薩奇" class="character-img" onerror="this.src='https://placehold.co/100x100/eab308/ffffff?text=Usagi'">
-                        </div>
-                        <div class="character-text text-yellow-800">
-                            プルルル！連逛三間超市也太嗨了吧！呀哈——買爆布丁！
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="day2" class="day-card" style="border-color: #ef4444;">
-                <div class="day-header" style="background: linear-gradient(135deg, #ffffff 0%, #fef2f2 100%);">
-                    <span class="inline-block bg-red-100 text-red-800 text-xs font-bold px-2 py-1 rounded mb-2">第2天 (2026/10/22)</span>
-                    <h2 class="text-2xl sm:text-3xl font-black text-slate-800">天神周邊與和牛雙暴擊</h2>
-                </div>
-                <div class="timeline-container">
-                    <div class="timeline-item"><div class="timeline-icon">🏨</div><div class="timeline-content"><h3>08:00 <a href="https://www.google.com/maps/search/?api=1&query=BASE+LAYER+HOTEL+FUKUOKA" target="_blank" class="map-link">📍 BASE LAYER HOTEL 福岡</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">⛩️</div><div class="timeline-content"><h3>08:12 <a href="https://www.google.com/maps/search/?api=1&query=櫛田神社" target="_blank" class="map-link">📍 櫛田神社</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🥖</div><div class="timeline-content"><h3>09:20 <a href="https://www.google.com/maps/search/?api=1&query=The+Full+Full+Hakata" target="_blank" class="map-link">📍 The Full Full Hakata</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🛍️</div><div class="timeline-content"><h3>10:27 <a href="https://www.google.com/maps/search/?api=1&query=上川端通商店街" target="_blank" class="map-link">📍 上川端通商店街 shopping street</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🥩</div><div class="timeline-content"><h3>11:48 <a href="https://www.google.com/maps/search/?api=1&query=挽肉と米+今泉" target="_blank" class="map-link">📍 挽肉與米 (今泉)</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🥩</div><div class="timeline-content"><h3>12:48 <a href="https://www.google.com/maps/search/?api=1&query=極味や+福岡パルコ店" target="_blank" class="map-link">📍 極味屋 福岡Parco店</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🛍️</div><div class="timeline-content"><h3>13:50 <a href="https://www.google.com/maps/search/?api=1&query=ちいかわらんど+福岡パルコ店" target="_blank" class="map-link">📍 ちいかわらんど 福岡パルコ店</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🃏</div><div class="timeline-content"><h3>14:53 <a href="https://www.google.com/maps/search/?api=1&query=駿河屋+新天町トレカ館" target="_blank" class="map-link">📍 Surugaya Shintencho Treka-kan</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🛍️</div><div class="timeline-content"><h3>16:00 <a href="https://www.google.com/maps/search/?api=1&query=ミーナ天神" target="_blank" class="map-link">📍 Mina 天神</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🍓</div><div class="timeline-content"><h3>17:00 <a href="https://www.google.com/maps/search/?api=1&query=伊都きんぐ+天神地下街店" target="_blank" class="map-link">📍 伊都King 天神地下街店</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🥩</div><div class="timeline-content"><h3>18:00 <a href="https://www.google.com/maps/search/?api=1&query=極味や" target="_blank" class="map-link">📍 燒肉 極味屋</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🏨</div><div class="timeline-content"><h3>19:00 <a href="https://www.google.com/maps/search/?api=1&query=BASE+LAYER+HOTEL+FUKUOKA" target="_blank" class="map-link">📍 BASE LAYER HOTEL 福岡</a></h3><p>停留 01時00分</p></div></div>
-                    
-                    <div class="character-dialogue border-pink-200 bg-pink-50">
-                        <div class="character-img-container border-pink-300">
-                            <img src="./chiikawa.png" alt="吉伊卡哇" class="character-img" onerror="this.src='https://placehold.co/100x100/f472b6/ffffff?text=Chiikawa'">
-                        </div>
-                        <div class="character-text text-pink-800">
-                            嗚哇！買到了好多新的公仔...而且連續吃和牛跟漢堡排超級軟的啦！(流口水) 🥺
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="day3" class="day-card" style="border-color: #f59e0b;">
-                <div class="day-header" style="background: linear-gradient(135deg, #ffffff 0%, #fffbeb 100%);">
-                    <span class="inline-block bg-amber-100 text-amber-800 text-xs font-bold px-2 py-1 rounded mb-2">第3天 (2026/10/23)</span>
-                    <h2 class="text-2xl sm:text-3xl font-black text-slate-800">大濠公園慢活與福岡塔夜景</h2>
-                </div>
-                <div class="timeline-container">
-                    <div class="timeline-item"><div class="timeline-icon">🏨</div><div class="timeline-content"><h3>08:00 <a href="https://www.google.com/maps/search/?api=1&query=BASE+LAYER+HOTEL+FUKUOKA" target="_blank" class="map-link">📍 BASE LAYER HOTEL 福岡</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">☕</div><div class="timeline-content"><h3>08:15 <a href="https://www.google.com/maps/search/?api=1&query=FUK+COFFEE+Parks" target="_blank" class="map-link">📍 FUK COFFEE Parks</a></h3><p>停留 00時30分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">☕</div><div class="timeline-content"><h3>08:54 <a href="https://www.google.com/maps/search/?api=1&query=スターバックスコーヒー+福岡大濠公園店" target="_blank" class="map-link">📍 星巴克 福岡大濠公園店</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🌳</div><div class="timeline-content"><h3>09:01 <a href="https://www.google.com/maps/search/?api=1&query=大濠公園+日本庭園" target="_blank" class="map-link">📍 大濠公園 日本庭園</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">☕</div><div class="timeline-content"><h3>10:17 <a href="https://www.google.com/maps/search/?api=1&query=珈琲美美" target="_blank" class="map-link">📍 Cafe Bimi</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🏯</div><div class="timeline-content"><h3>10:26 <a href="https://www.google.com/maps/search/?api=1&query=福岡城+鉄御門跡" target="_blank" class="map-link">📍 福岡城 鐵御門跡</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🌳</div><div class="timeline-content"><h3>11:39 <a href="https://www.google.com/maps/search/?api=1&query=大濠公園" target="_blank" class="map-link">📍 大濠公園</a></h3><p>停留 00時10分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚉</div><div class="timeline-content"><h3>12:05 <a href="https://www.google.com/maps/search/?api=1&query=天神" target="_blank" class="map-link">📍 天神</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🌳</div><div class="timeline-content"><h3>12:12 <a href="https://www.google.com/maps/search/?api=1&query=警固公園" target="_blank" class="map-link">📍 警固公園</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">☕</div><div class="timeline-content"><h3>13:14 <a href="https://www.google.com/maps/search/?api=1&query=ブルーボトルコーヒー+福岡天神カフェ" target="_blank" class="map-link">📍 藍瓶咖啡 福岡天神店</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🍜</div><div class="timeline-content"><h3>13:18 <a href="https://www.google.com/maps/search/?api=1&query=麺や兼虎+天神本店" target="_blank" class="map-link">📍 麵屋兼虎 天神本店</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚉</div><div class="timeline-content"><h3>14:32 <a href="https://www.google.com/maps/search/?api=1&query=博多駅" target="_blank" class="map-link">📍 博多</a></h3><p>停留 02時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🗼</div><div class="timeline-content"><h3>17:12 <a href="https://www.google.com/maps/search/?api=1&query=福岡タワー" target="_blank" class="map-link">📍 福岡塔</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🏨</div><div class="timeline-content"><h3>18:54 <a href="https://www.google.com/maps/search/?api=1&query=BASE+LAYER+HOTEL+FUKUOKA" target="_blank" class="map-link">📍 BASE LAYER HOTEL 福岡</a></h3><p>停留 10時00分</p></div></div>
-                    
-                    <div class="character-dialogue border-blue-200 bg-blue-50">
-                        <div class="character-img-container border-blue-300">
-                            <img src="./hachiware.png" alt="小八" class="character-img" onerror="this.src='https://placehold.co/100x100/38bdf8/ffffff?text=Hachiware'">
-                        </div>
-                        <div class="character-text text-blue-800">
-                            大濠公園喝咖啡好舒服喔～傍晚還去了福岡塔看風景，真是充實的一天呢！📸
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="day4" class="day-card" style="border-color: #10b981;">
-                <div class="day-header" style="background: linear-gradient(135deg, #ffffff 0%, #ecfdf5 100%);">
-                    <span class="inline-block bg-emerald-100 text-emerald-800 text-xs font-bold px-2 py-1 rounded mb-2">第4天 (2026/10/24)</span>
-                    <h2 class="text-2xl sm:text-3xl font-black text-slate-800">太宰府神域與久留米拉麵</h2>
-                </div>
-                <div class="timeline-container">
-                    <div class="timeline-item"><div class="timeline-icon">🏨</div><div class="timeline-content"><h3>08:00 <a href="https://www.google.com/maps/search/?api=1&query=BASE+LAYER+HOTEL+FUKUOKA" target="_blank" class="map-link">📍 BASE LAYER HOTEL 福岡</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚆</div><div class="timeline-content"><h3>08:11 <a href="https://www.google.com/maps/search/?api=1&query=西鉄福岡（天神）駅" target="_blank" class="map-link">📍 西鐵福岡（天神）</a></h3><p>停留 00時10分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚆</div><div class="timeline-content"><h3>09:07 <a href="https://www.google.com/maps/search/?api=1&query=西鉄二日市駅" target="_blank" class="map-link">📍 西鐵二日市車站</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚉</div><div class="timeline-content"><h3>09:45 <a href="https://www.google.com/maps/search/?api=1&query=太宰府駅" target="_blank" class="map-link">📍 太宰府</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚉</div><div class="timeline-content"><h3>09:47 <a href="https://www.google.com/maps/search/?api=1&query=Nishitetsu+Dazaifu+Station" target="_blank" class="map-link">📍 Nishitetsu Dazaifu Eki</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚌</div><div class="timeline-content"><h3>09:53 <a href="https://www.google.com/maps/search/?api=1&query=内山（バス）" target="_blank" class="map-link">📍 Uchiyama(bus)</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">⛩️</div><div class="timeline-content"><h3>09:57 <a href="https://www.google.com/maps/search/?api=1&query=宝満宮+竈門神社" target="_blank" class="map-link">📍 竈門神社のクスノキ</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚌</div><div class="timeline-content"><h3>11:01 <a href="https://www.google.com/maps/search/?api=1&query=内山（バス）" target="_blank" class="map-link">📍 Uchiyama(bus)</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚉</div><div class="timeline-content"><h3>11:07 <a href="https://www.google.com/maps/search/?api=1&query=Nishitetsu+Dazaifu+Station" target="_blank" class="map-link">📍 Nishitetsu Dazaifu Eki</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚶</div><div class="timeline-content"><h3>11:09 <a href="https://www.google.com/maps/search/?api=1&query=太宰府天満宮参道" target="_blank" class="map-link">📍 太宰府前表参道</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">☕</div><div class="timeline-content"><h3>12:11 <a href="https://www.google.com/maps/search/?api=1&query=スターバックス+コーヒー+太宰府天満宮表参道店" target="_blank" class="map-link">📍 星巴克 太宰府天滿宮表參道店</a></h3><p>停留 00時30分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">⛩️</div><div class="timeline-content"><h3>12:46 <a href="https://www.google.com/maps/search/?api=1&query=太宰府天満宮" target="_blank" class="map-link">📍 太宰府天滿宮</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">⛩️</div><div class="timeline-content"><h3>13:56 <a href="https://www.google.com/maps/search/?api=1&query=天開稲荷社" target="_blank" class="map-link">📍 天開稻荷神社</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚉</div><div class="timeline-content"><h3>15:11 <a href="https://www.google.com/maps/search/?api=1&query=太宰府駅" target="_blank" class="map-link">📍 太宰府</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚉</div><div class="timeline-content"><h3>15:47 <a href="https://www.google.com/maps/search/?api=1&query=西鉄久留米駅" target="_blank" class="map-link">📍 西鐵久留米</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🍜</div><div class="timeline-content"><h3>15:48 <a href="https://www.google.com/maps/search/?api=1&query=久留米ラーメン清陽軒+西鉄久留米駅前店" target="_blank" class="map-link">📍 Kurume Ramen Seiyoken</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🍜</div><div class="timeline-content"><h3>15:58 <a href="https://www.google.com/maps/search/?api=1&query=大砲ラーメン+本店" target="_blank" class="map-link">📍 Taiho Ramen main shop</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🛍️</div><div class="timeline-content"><h3>17:13 <a href="https://www.google.com/maps/search/?api=1&query=久留米+一番街" target="_blank" class="map-link">📍 一番街</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚉</div><div class="timeline-content"><h3>18:18 <a href="https://www.google.com/maps/search/?api=1&query=西鉄久留米駅" target="_blank" class="map-link">📍 西鐵久留米</a></h3><p>停留 00時20分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚉</div><div class="timeline-content"><h3>19:19 <a href="https://www.google.com/maps/search/?api=1&query=西鉄福岡（天神）駅" target="_blank" class="map-link">📍 西鐵福岡（天神）</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🏨</div><div class="timeline-content"><h3>19:30 <a href="https://www.google.com/maps/search/?api=1&query=BASE+LAYER+HOTEL+FUKUOKA" target="_blank" class="map-link">📍 BASE LAYER HOTEL 福岡</a></h3><p>停留 01時00分</p></div></div>
-                    
-                    <div class="character-dialogue border-yellow-200 bg-yellow-50">
-                        <div class="character-img-container border-yellow-300">
-                            <img src="./usagi.png" alt="烏薩奇" class="character-img" onerror="this.src='https://placehold.co/100x100/eab308/ffffff?text=Usagi'">
-                        </div>
-                        <div class="character-text text-yellow-800">
-                            プルルルル！逛完太宰府又跑去久留米連吃兩碗拉麵啦！呀哈！
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="day5" class="day-card" style="border-color: #8b5cf6;">
-                <div class="day-header" style="background: linear-gradient(135deg, #ffffff 0%, #f5f3ff 100%);">
-                    <span class="inline-block bg-purple-100 text-purple-800 text-xs font-bold px-2 py-1 rounded mb-2">第5天 (2026/10/25)</span>
-                    <h2 class="text-2xl sm:text-3xl font-black text-slate-800">下關海鮮與門司港百萬夜景</h2>
-                </div>
-                <div class="timeline-container">
-                    <div class="timeline-item"><div class="timeline-icon">🏨</div><div class="timeline-content"><h3>08:00 <a href="https://www.google.com/maps/search/?api=1&query=BASE+LAYER+HOTEL+FUKUOKA" target="_blank" class="map-link">📍 BASE LAYER HOTEL 福岡</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🎫</div><div class="timeline-content"><h3>08:12 <a href="https://www.google.com/maps/search/?api=1&query=博多駅+みどりの窓口" target="_blank" class="map-link">📍 博多車站 新幹線中央口 綠色窗口</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚄</div><div class="timeline-content"><h3>08:40 <a href="https://www.google.com/maps/search/?api=1&query=小倉駅" target="_blank" class="map-link">📍 小倉站新幹線口</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚉</div><div class="timeline-content"><h3>09:07 <a href="https://www.google.com/maps/search/?api=1&query=門司港駅" target="_blank" class="map-link">📍 門司港車站</a></h3><p>停留 00時20分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">⛴️</div><div class="timeline-content"><h3>09:31 <a href="https://www.google.com/maps/search/?api=1&query=関門連絡船+門司港" target="_blank" class="map-link">📍 關門聯絡船(門司港)</a></h3><p>停留 00時10分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🍣</div><div class="timeline-content"><h3>10:03 <a href="https://www.google.com/maps/search/?api=1&query=唐戸市場" target="_blank" class="map-link">📍 唐戶市場</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🍣</div><div class="timeline-content"><h3>11:04 <a href="https://www.google.com/maps/search/?api=1&query=唐戸市場+活きいき馬関街" target="_blank" class="map-link">📍 唐戶市場 熱鬧的馬關街</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">⛩️</div><div class="timeline-content"><h3>11:11 <a href="https://www.google.com/maps/search/?api=1&query=赤間神宮" target="_blank" class="map-link">📍 赤間神宮</a></h3><p>停留 00時20分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🐡</div><div class="timeline-content"><h3>11:33 <a href="https://www.google.com/maps/search/?api=1&query=春帆楼本店" target="_blank" class="map-link">📍 下關春帆樓本店</a></h3><p>停留 00時20分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚶</div><div class="timeline-content"><h3>12:10 <a href="https://www.google.com/maps/search/?api=1&query=関門トンネル人道入口（下関側）" target="_blank" class="map-link">📍 関門トンネル人道入口（下関側）</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚶</div><div class="timeline-content"><h3>12:22 <a href="https://www.google.com/maps/search/?api=1&query=関門トンネル人道+門司側" target="_blank" class="map-link">📍 關門隧道人行道 門司側 公共廁所</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🏛️</div><div class="timeline-content"><h3>12:47 <a href="https://www.google.com/maps/search/?api=1&query=旧門司税関" target="_blank" class="map-link">📍 北九州市舊門司稅關</a></h3><p>停留 00時30分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🍛</div><div class="timeline-content"><h3>13:24 <a href="https://www.google.com/maps/search/?api=1&query=BEAR+FRUITS+門司港本店" target="_blank" class="map-link">📍 焗烤咖哩飯 BEAR FRUITS 本店</a></h3><p>停留 00時30分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚉</div><div class="timeline-content"><h3>13:57 <a href="https://www.google.com/maps/search/?api=1&query=門司港駅" target="_blank" class="map-link">📍 門司港車站</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚄</div><div class="timeline-content"><h3>14:24 <a href="https://www.google.com/maps/search/?api=1&query=小倉駅" target="_blank" class="map-link">📍 小倉站新幹線口</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚉</div><div class="timeline-content"><h3>14:30 <a href="https://www.google.com/maps/search/?api=1&query=小倉駅南口広場" target="_blank" class="map-link">📍 小倉駅 南口広場</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🛍️</div><div class="timeline-content"><h3>14:36 <a href="https://www.google.com/maps/search/?api=1&query=魚町銀天街" target="_blank" class="map-link">📍 魚町銀天街</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🏯</div><div class="timeline-content"><h3>14:44 <a href="https://www.google.com/maps/search/?api=1&query=小倉城" target="_blank" class="map-link">📍 小倉城</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚄</div><div class="timeline-content"><h3>16:03 <a href="https://www.google.com/maps/search/?api=1&query=小倉駅" target="_blank" class="map-link">📍 小倉站新幹線口</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚉</div><div class="timeline-content"><h3>16:18 <a href="https://www.google.com/maps/search/?api=1&query=八幡駅（福岡）" target="_blank" class="map-link">📍 八幡（福岡）</a></h3><p>停留 00時10分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚌</div><div class="timeline-content"><h3>16:31 <a href="https://www.google.com/maps/search/?api=1&query=皿倉山シャトルバス" target="_blank" class="map-link">📍 往皿倉山接駁巴士</a></h3><p>停留 00時30分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚠</div><div class="timeline-content"><h3>17:01 <a href="https://www.google.com/maps/search/?api=1&query=山麓駅（皿倉山）" target="_blank" class="map-link">📍 山麓（皿倉山）</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚠</div><div class="timeline-content"><h3>17:02 <a href="https://www.google.com/maps/search/?api=1&query=皿倉山ケーブルカー" target="_blank" class="map-link">📍 皿倉山纜車 山麓站</a></h3><p>停留 00時10分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚠</div><div class="timeline-content"><h3>17:12 <a href="https://www.google.com/maps/search/?api=1&query=皿倉山スロープカー" target="_blank" class="map-link">📍 皿倉山爬坡車 山上站</a></h3><p>停留 00時10分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🌃</div><div class="timeline-content"><h3>17:41 <a href="https://www.google.com/maps/search/?api=1&query=皿倉山展望台" target="_blank" class="map-link">📍 皿倉山展望台</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚠</div><div class="timeline-content"><h3>18:59 <a href="https://www.google.com/maps/search/?api=1&query=皿倉山スロープカー" target="_blank" class="map-link">📍 皿倉山爬坡車 山上站</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚠</div><div class="timeline-content"><h3>19:09 <a href="https://www.google.com/maps/search/?api=1&query=皿倉山ケーブルカー" target="_blank" class="map-link">📍 皿倉山纜車 山麓站</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚠</div><div class="timeline-content"><h3>19:10 <a href="https://www.google.com/maps/search/?api=1&query=山麓駅（皿倉山）" target="_blank" class="map-link">📍 山麓（皿倉山）</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚌</div><div class="timeline-content"><h3>19:33 <a href="https://www.google.com/maps/search/?api=1&query=皿倉山シャトルバス" target="_blank" class="map-link">📍 往皿倉山接駁巴士</a></h3><p>停留 00時20分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚉</div><div class="timeline-content"><h3>19:56 <a href="https://www.google.com/maps/search/?api=1&query=八幡駅（福岡）" target="_blank" class="map-link">📍 八幡（福岡）</a></h3><p>停留 00時10分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚄</div><div class="timeline-content"><h3>20:21 <a href="https://www.google.com/maps/search/?api=1&query=小倉駅" target="_blank" class="map-link">📍 小倉站新幹線口</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🎫</div><div class="timeline-content"><h3>20:49 <a href="https://www.google.com/maps/search/?api=1&query=博多駅+みどりの窓口" target="_blank" class="map-link">📍 博多車站 新幹線中央口 綠色窗口</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🏨</div><div class="timeline-content"><h3>21:01 <a href="https://www.google.com/maps/search/?api=1&query=BASE+LAYER+HOTEL+FUKUOKA" target="_blank" class="map-link">📍 BASE LAYER HOTEL 福岡</a></h3><p>停留 00時00分</p></div></div>
-                    
-                    <div class="character-dialogue border-pink-200 bg-pink-50">
-                        <div class="character-img-container border-pink-300">
-                            <img src="./chiikawa.png" alt="吉伊卡哇" class="character-img" onerror="this.src='https://placehold.co/100x100/f472b6/ffffff?text=Chiikawa'">
-                        </div>
-                        <div class="character-text text-pink-800">
-                            搭了船去了唐戶市場...還吃了河豚！最後的皿倉山纜車跟夜景超級漂亮的...🥺
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="day6" class="day-card" style="border-color: #059669;">
-                <div class="day-header" style="background: linear-gradient(135deg, #ffffff 0%, #ecfdf5 100%);">
-                    <span class="inline-block bg-emerald-100 text-emerald-800 text-xs font-bold px-2 py-1 rounded mb-2">第6天 (2026/10/26)</span>
-                    <h2 class="text-2xl sm:text-3xl font-black text-slate-800">由布院山城慢活遠征</h2>
-                </div>
-                <div class="timeline-container">
-                    <div class="timeline-item"><div class="timeline-icon">🏨</div><div class="timeline-content"><h3>08:00 <a href="https://www.google.com/maps/search/?api=1&query=BASE+LAYER+HOTEL+FUKUOKA" target="_blank" class="map-link">📍 BASE LAYER HOTEL 福岡</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚉</div><div class="timeline-content"><h3>08:12 <a href="https://www.google.com/maps/search/?api=1&query=博多駅" target="_blank" class="map-link">📍 博多</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚉</div><div class="timeline-content"><h3>10:32 <a href="https://www.google.com/maps/search/?api=1&query=由布院駅" target="_blank" class="map-link">📍 由布院站</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🍲</div><div class="timeline-content"><h3>10:33 <a href="https://www.google.com/maps/search/?api=1&query=由布まぶし+心+駅前支店" target="_blank" class="map-link">📍 由布釜飯 「心」湯布院站前店</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🍮</div><div class="timeline-content"><h3>10:43 <a href="https://www.google.com/maps/search/?api=1&query=由布院+Milch" target="_blank" class="map-link">📍 由布院 Milch 布丁 半熟起司蛋糕</a></h3><p>停留 00時20分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🥔</div><div class="timeline-content"><h3>11:05 <a href="https://www.google.com/maps/search/?api=1&query=金賞コロッケ+2号店" target="_blank" class="map-link">📍 金賞可樂餅 2號店</a></h3><p>停留 00時20分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚶</div><div class="timeline-content"><h3>11:29 <a href="https://www.google.com/maps/search/?api=1&query=湯の坪街道" target="_blank" class="map-link">📍 湯之坪街道</a></h3><p>停留 00時20分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🥔</div><div class="timeline-content"><h3>11:52 <a href="https://www.google.com/maps/search/?api=1&query=金賞コロッケ+本店" target="_blank" class="map-link">📍 金賞可樂餅 本店</a></h3><p>停留 00時10分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🍲</div><div class="timeline-content"><h3>12:06 <a href="https://www.google.com/maps/search/?api=1&query=由布まぶし+心+金鱗湖本店" target="_blank" class="map-link">📍 由布釜飯 「心」金鱗湖本店</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🌊</div><div class="timeline-content"><h3>13:09 <a href="https://www.google.com/maps/search/?api=1&query=金鱗湖" target="_blank" class="map-link">📍 金鱗湖</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">☕</div><div class="timeline-content"><h3>14:12 <a href="https://www.google.com/maps/search/?api=1&query=Cafe+La+Ruche" target="_blank" class="map-link">📍 湖畔咖啡廳 Cafe La Ruche</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚉</div><div class="timeline-content"><h3>14:31 <a href="https://www.google.com/maps/search/?api=1&query=由布院駅" target="_blank" class="map-link">📍 由布院站</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚉</div><div class="timeline-content"><h3>16:51 <a href="https://www.google.com/maps/search/?api=1&query=博多駅" target="_blank" class="map-link">📍 博多</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🏨</div><div class="timeline-content"><h3>17:03 <a href="https://www.google.com/maps/search/?api=1&query=BASE+LAYER+HOTEL+FUKUOKA" target="_blank" class="map-link">📍 BASE LAYER HOTEL 福岡</a></h3><p>停留 00時00分</p></div></div>
-                    
-                    <div class="character-dialogue border-blue-200 bg-blue-50">
-                        <div class="character-img-container border-blue-300">
-                            <img src="./hachiware.png" alt="小八" class="character-img" onerror="this.src='https://placehold.co/100x100/38bdf8/ffffff?text=Hachiware'">
-                        </div>
-                        <div class="character-text text-blue-800">
-                            由布院好棒！吃了金賞可樂餅還有釜飯，沿路好多點心，感覺旅行好充實呢！📸
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="day7" class="day-card" style="border-color: #0ea5e9;">
-                <div class="day-header" style="background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);">
-                    <span class="inline-block bg-sky-100 text-sky-800 text-xs font-bold px-2 py-1 rounded mb-2">第7天 (2026/10/27)</span>
-                    <h2 class="text-2xl sm:text-3xl font-black text-slate-800">糸島海景與博多伴手禮大戰</h2>
-                </div>
-                <div class="timeline-container">
-                    <div class="timeline-item"><div class="timeline-icon">🏨</div><div class="timeline-content"><h3>08:00 <a href="https://www.google.com/maps/search/?api=1&query=BASE+LAYER+HOTEL+FUKUOKA" target="_blank" class="map-link">📍 BASE LAYER HOTEL 福岡</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚉</div><div class="timeline-content"><h3>08:12 <a href="https://www.google.com/maps/search/?api=1&query=博多駅" target="_blank" class="map-link">📍 博多</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚌</div><div class="timeline-content"><h3>08:17 <a href="https://www.google.com/maps/search/?api=1&query=博多バスターミナル" target="_blank" class="map-link">📍 博多巴士總站</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🌊</div><div class="timeline-content"><h3>09:37 <a href="https://www.google.com/maps/search/?api=1&query=二見ヶ浦・月と太陽糸島茶房前" target="_blank" class="map-link">📍 二見ヶ浦・月と太陽糸島茶房前</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">⛩️</div><div class="timeline-content"><h3>09:41 <a href="https://www.google.com/maps/search/?api=1&query=桜井二見ヶ浦の夫婦岩" target="_blank" class="map-link">📍 櫻井二見浦 夫婦岩</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🌊</div><div class="timeline-content"><h3>10:46 <a href="https://www.google.com/maps/search/?api=1&query=二見ヶ浦・月と太陽糸島茶房前" target="_blank" class="map-link">📍 二見ヶ浦・月と太陽糸島茶房前</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">⛩️</div><div class="timeline-content"><h3>11:06 <a href="https://www.google.com/maps/search/?api=1&query=櫻井神社" target="_blank" class="map-link">📍 櫻井神社</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚌</div><div class="timeline-content"><h3>13:26 <a href="https://www.google.com/maps/search/?api=1&query=博多バスターミナル" target="_blank" class="map-link">📍 博多巴士總站</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🛍️</div><div class="timeline-content"><h3>13:30 <a href="https://www.google.com/maps/search/?api=1&query=BARNYARDSTORM+博多阪急百貨店" target="_blank" class="map-link">📍 BARNYARDSTORM 博多阪急百貨店</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🍟</div><div class="timeline-content"><h3>13:30 <a href="https://www.google.com/maps/search/?api=1&query=カルビープラス+博多阪急店" target="_blank" class="map-link">📍 カルビープラス 博多阪急店</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🍓</div><div class="timeline-content"><h3>13:30 <a href="https://www.google.com/maps/search/?api=1&query=AMANBERRY" target="_blank" class="map-link">📍 AMANBERRY</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🍘</div><div class="timeline-content"><h3>13:33 <a href="https://www.google.com/maps/search/?api=1&query=福太郎Premium+Menbei+博多阪急店" target="_blank" class="map-link">📍 福太郎Premium Menbei 博多阪急店</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🍪</div><div class="timeline-content"><h3>13:36 <a href="https://www.google.com/maps/search/?api=1&query=シュガーバターの木+博多阪急店" target="_blank" class="map-link">📍 奶油酥餅 Sugar Butter Tree 阪急</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🛍️</div><div class="timeline-content"><h3>13:39 <a href="https://www.google.com/maps/search/?api=1&query=いっぴん通り" target="_blank" class="map-link">📍 いっぴん通り</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🍓</div><div class="timeline-content"><h3>14:43 <a href="https://www.google.com/maps/search/?api=1&query=伊都きんぐ+博多阪急店" target="_blank" class="map-link">📍 伊都King 博多阪急店</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🍡</div><div class="timeline-content"><h3>14:47 <a href="https://www.google.com/maps/search/?api=1&query=石村萬盛堂+博多デイトス店" target="_blank" class="map-link">📍 石村萬盛堂 博多站DEITOS店</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🛍️</div><div class="timeline-content"><h3>15:50 <a href="https://www.google.com/maps/search/?api=1&query=I'm+LILY" target="_blank" class="map-link">📍 I'm LILY</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🛍️</div><div class="timeline-content"><h3>15:52 <a href="https://www.google.com/maps/search/?api=1&query=博多銘品蔵+博多口店" target="_blank" class="map-link">📍 博多銘品藏 博多站中央店</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🍰</div><div class="timeline-content"><h3>15:55 <a href="https://www.google.com/maps/search/?api=1&query=なんばん往来+博多阪急店" target="_blank" class="map-link">📍 なんばん往来 博多阪急店</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🌶️</div><div class="timeline-content"><h3>15:59 <a href="https://www.google.com/maps/search/?api=1&query=ふくや+博多駅地下街店" target="_blank" class="map-link">📍 明太子福屋 博多站地下街店</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🍰</div><div class="timeline-content"><h3>16:03 <a href="https://www.google.com/maps/search/?api=1&query=なんばん往来+さかえ屋+博多マイング店" target="_blank" class="map-link">📍 蛋糕「南蠻往來」 榮屋 博多MING店</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🛍️</div><div class="timeline-content"><h3>16:06 <a href="https://www.google.com/maps/search/?api=1&query=FUQUOKKA+博多デイトス店" target="_blank" class="map-link">📍 FUQUOKKA 【フクオッカ］博多デイトス店</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🛍️</div><div class="timeline-content"><h3>16:06 <a href="https://www.google.com/maps/search/?api=1&query=KOKUNEKO" target="_blank" class="map-link">📍 KOKUNEKO</a></h3><p>停留 00時00分</p></div></div>
-                    
-                    <div class="character-dialogue border-yellow-200 bg-yellow-50">
-                        <div class="character-img-container border-yellow-300">
-                            <img src="./usagi.png" alt="烏薩奇" class="character-img" onerror="this.src='https://placehold.co/100x100/eab308/ffffff?text=Usagi'">
-                        </div>
-                        <div class="character-text text-yellow-800">
-                            プルル！糸島看海完，直接回博多買爆一整排伴手禮啦！呀哈！
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="day8" class="day-card" style="border-color: #ec4899;">
-                <div class="day-header" style="background: linear-gradient(135deg, #ffffff 0%, #fdf2f8 100%);">
-                    <span class="inline-block bg-pink-100 text-pink-800 text-xs font-bold px-2 py-1 rounded mb-2">第8天 (2026/10/28)</span>
-                    <h2 class="text-2xl sm:text-3xl font-black text-slate-800">LaLaport 福岡巨型鋼彈朝聖</h2>
-                </div>
-                <div class="timeline-container">
-                    <div class="timeline-item"><div class="timeline-icon">🏨</div><div class="timeline-content"><h3>08:00 <a href="https://www.google.com/maps/search/?api=1&query=BASE+LAYER+HOTEL+FUKUOKA" target="_blank" class="map-link">📍 BASE LAYER HOTEL 福岡</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚌</div><div class="timeline-content"><h3>08:05 <a href="https://www.google.com/maps/search/?api=1&query=渡辺通一丁目（サンセルコ前）" target="_blank" class="map-link">📍 Watanabe-dori 1-chome(Sun Selco-mae)(C)(bus)</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🚌</div><div class="timeline-content"><h3>08:25 <a href="https://www.google.com/maps/search/?api=1&query=ららぽーと福岡バスターミナル" target="_blank" class="map-link">📍 ららぽーと福岡バスターミナル</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🤖</div><div class="timeline-content"><h3>08:27 <a href="https://www.google.com/maps/search/?api=1&query=三井ショッピングパーク+ららぽーと福岡" target="_blank" class="map-link">📍 Mitsui Shopping Park LaLaport福岡</a></h3><p>停留 01時00分</p></div></div>
-                    
-                    <div class="character-dialogue border-blue-200 bg-blue-50">
-                        <div class="character-img-container border-blue-300">
-                            <img src="./hachiware.png" alt="小八" class="character-img" onerror="this.src='https://placehold.co/100x100/38bdf8/ffffff?text=Hachiware'">
-                        </div>
-                        <div class="character-text text-blue-800">
-                            哇...LaLaport 裡面的鋼彈超級巨大的！能在這裡逛街真的是很棒的回憶呢！
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="day9" class="day-card" style="border-color: #64748b;">
-                <div class="day-header" style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);">
-                    <span class="inline-block bg-slate-200 text-slate-800 text-xs font-bold px-2 py-1 rounded mb-2">第9天 (2026/10/29)</span>
-                    <h2 class="text-2xl sm:text-3xl font-black text-slate-800">優雅退房與順暢賦歸</h2>
-                </div>
-                <div class="timeline-container">
-                    <div class="timeline-item"><div class="timeline-icon">🏨</div><div class="timeline-content"><h3>08:00 <a href="https://www.google.com/maps/search/?api=1&query=BASE+LAYER+HOTEL+FUKUOKA" target="_blank" class="map-link">📍 BASE LAYER HOTEL 福岡</a></h3><p>停留 00時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">✈️</div><div class="timeline-content"><h3>10:15 <a href="https://www.google.com/maps/search/?api=1&query=福岡空港国際線ターミナル" target="_blank" class="map-link">📍 福岡空港国際線ターミナル</a></h3><p>停留 01時00分</p></div></div>
-                    <div class="timeline-item"><div class="timeline-icon">🛬</div><div class="timeline-content"><h3>13:50 <a href="https://www.google.com/maps/search/?api=1&query=Terminal+2" target="_blank" class="map-link">📍 Terminal 2</a></h3><p>停留 01時00分</p></div></div>
-                    
-                    <div class="character-dialogue border-pink-200 bg-pink-50">
-                        <div class="character-img-container border-pink-300">
-                            <img src="./chiikawa.png" alt="吉伊卡哇" class="character-img" onerror="this.src='https://placehold.co/100x100/f472b6/ffffff?text=Chiikawa'">
-                        </div>
-                        <div class="character-text text-pink-800">
-                            嗚哇...要回家了...但是買了好多好吃的東西呢！滿載而歸！🥺
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
+    <div class="max-w-7xl mx-auto w-full flex flex-col lg:flex-row gap-6 p-4 lg:p-6 lg:pt-8">
         
-        <footer class="text-center py-8 text-slate-500 text-sm">
-            <p>🇯🇵 九州福岡 9 日頂級遠征行程表</p>
-            <p class="mt-1">Designed for best travel experience.</p>
+        <!-- 左側固定導覽列 Sidebar (僅在電腦版顯示) -->
+        <aside class="hidden lg:block w-72 shrink-0">
+            <div class="sticky top-8 bg-white rounded-2xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-slate-100 overflow-hidden">
+                
+                <div class="p-5 border-b border-slate-100 bg-slate-50/50">
+                    <h2 class="text-sm font-bold text-slate-800 flex items-center tracking-wide">
+                        <span class="text-blue-500 text-lg mr-2">📑</span> 行程章節快速索引
+                    </h2>
+                    <!-- 裝飾用搜尋框 -->
+                    <div class="mt-4 bg-white border border-slate-200 rounded-full px-4 py-2 text-xs text-slate-400 flex items-center shadow-sm">
+                        <span class="mr-2">🔍</span> 搜尋景點、餐廳、天數...
+                    </div>
+                </div>
+
+                <div class="py-2 max-h-[calc(100vh-14rem)] overflow-y-auto hide-scrollbar">
+                    <a href="#day1" class="flex items-center px-6 py-3 text-sm text-slate-600 hover:bg-slate-50 transition-colors border-l-4 border-transparent group">
+                        <span class="font-black text-slate-300 w-8 group-hover:text-blue-400">1.1</span>
+                        <span class="font-medium group-hover:text-blue-600">Day 1 (重裝突擊與安頓)</span>
+                    </a>
+                    <a href="#day2" class="flex items-center px-6 py-3 text-sm text-slate-600 hover:bg-slate-50 transition-colors border-l-4 border-transparent group">
+                        <span class="font-black text-slate-300 w-8 group-hover:text-blue-400">1.2</span>
+                        <span class="font-medium group-hover:text-blue-600">Day 2 (廣島與新幹線)</span>
+                    </a>
+                    <a href="#day3" class="flex items-center px-6 py-3 text-sm text-slate-600 hover:bg-slate-50 transition-colors border-l-4 border-transparent group">
+                        <span class="font-black text-slate-300 w-8 group-hover:text-blue-400">2.1</span>
+                        <span class="font-medium group-hover:text-blue-600">Day 3 (大濠公園與動漫)</span>
+                    </a>
+                    <a href="#day4" class="flex items-center px-6 py-3 text-sm text-slate-600 hover:bg-slate-50 transition-colors border-l-4 border-transparent group">
+                        <span class="font-black text-slate-300 w-8 group-hover:text-blue-400">2.2</span>
+                        <span class="font-medium group-hover:text-blue-600">Day 4 (太宰府雙神社)</span>
+                    </a>
+                    <a href="#day5" class="flex items-center px-6 py-3 text-sm text-slate-600 hover:bg-slate-50 transition-colors border-l-4 border-transparent group">
+                        <span class="font-black text-slate-300 w-8 group-hover:text-blue-400">3.1</span>
+                        <span class="font-medium group-hover:text-blue-600">Day 5 (門司港與百萬夜景)</span>
+                    </a>
+                    <a href="#day6" class="flex items-center px-6 py-3 text-sm text-slate-600 hover:bg-slate-50 transition-colors border-l-4 border-transparent group">
+                        <span class="font-black text-slate-300 w-8 group-hover:text-blue-400">3.2</span>
+                        <span class="font-medium group-hover:text-blue-600">Day 6 (由布院山城慢活)</span>
+                    </a>
+                    <a href="#day7" class="flex items-center px-6 py-3 text-sm text-slate-600 hover:bg-slate-50 transition-colors border-l-4 border-transparent group">
+                        <span class="font-black text-slate-300 w-8 group-hover:text-blue-400">4.1</span>
+                        <span class="font-medium group-hover:text-blue-600">Day 7 (糸島海景與和牛)</span>
+                    </a>
+                    <a href="#day8" class="flex items-center px-6 py-3 text-sm text-slate-600 hover:bg-slate-50 transition-colors border-l-4 border-transparent group">
+                        <span class="font-black text-slate-300 w-8 group-hover:text-blue-400">4.2</span>
+                        <span class="font-medium group-hover:text-blue-600">Day 8 (天神掃貨與LaLaport)</span>
+                    </a>
+                    <a href="#day9" class="flex items-center px-6 py-3 text-sm text-slate-600 hover:bg-slate-50 transition-colors border-l-4 border-transparent group">
+                        <span class="font-black text-slate-300 w-8 group-hover:text-blue-400">5.1</span>
+                        <span class="font-medium group-hover:text-blue-600">Day 9 (順暢賦歸與伴手禮)</span>
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- 右側主要內容區 Main Content -->
+        <main class="flex-1 min-w-0 flex flex-col gap-6">
             
-            <a href="https://chictrip-share.app.link/9Boc6BkZ75b" target="_blank" class="inline-block mt-5 bg-blue-100 text-blue-700 font-bold py-2.5 px-6 rounded-full hover:bg-blue-200 transition-colors shadow-sm">
-                🔗 點擊下方連結，立即用「去趣」看我的行程細節！
-            </a>
-        </footer>
+            <!-- Hero Banner 英雄橫幅 (多層次藍色漸層) -->
+            <section class="hero-gradient rounded-3xl p-6 lg:p-10 shadow-lg text-white hover-card-effect">
+                <div class="relative z-10">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold tracking-wider border border-white/30">手機 / 電腦 雙模自動適配版</span>
+                    </div>
+                    
+                    <h1 class="text-3xl lg:text-4xl xl:text-5xl font-black mb-3 leading-tight tracking-tight drop-shadow-md">
+                        🇯🇵 日本九州福岡 9 日旅遊行程
+                    </h1>
+                    
+                    <p class="text-blue-50 text-sm lg:text-base mb-6 leading-relaxed max-w-2xl font-medium">
+                        全行程完整收錄：機場報到與無痛接駁、SHOEI安全帽重裝採購、廣島嚴島神社、太宰府天滿宮、門司港大正風情、由布院之森山城慢活、糸島海景與頂級黑毛和牛！
+                    </p>
+
+                    <!-- 學習機按鈕區 -->
+                    <div class="flex flex-wrap gap-3">
+                        <a href="https://claire0505.github.io/japan_fukuoka_trip_lesson/" target="_blank" class="inline-flex items-center bg-white text-indigo-700 hover:bg-indigo-50 font-bold py-2.5 px-5 rounded-full transition-colors shadow-md text-sm border border-transparent hover:border-indigo-200">
+                            <span class="mr-2 text-lg">🔊</span> 日英雙語旅遊實戰 隨身學習機
+                        </a>
+                        <a href="https://claire0505.github.io/Enjoy-Japan-with-Japanese/" target="_blank" class="inline-flex items-center bg-transparent border-2 border-white/70 hover:border-white text-white hover:bg-white/10 font-bold py-2.5 px-5 rounded-full transition-colors shadow-sm text-sm">
+                            <span class="mr-2 text-lg">A</span> 輕鬆用日語玩日本
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 住宿資訊卡片 -->
+            <section class="bg-white rounded-2xl p-5 lg:p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-lg font-bold text-slate-800 flex items-center mb-3">
+                        <span class="text-2xl mr-2">🏨</span> 住宿：BASE LAYER HOTEL 福岡
+                    </h2>
+                    <div class="space-y-1.5 text-sm text-slate-600">
+                        <div class="flex items-start">
+                            <span class="mr-2 mt-0.5 text-rose-500">📍</span>
+                            <span>BASE LAYER HOTEL FUKUOKA</span>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="mr-2 mt-0.5 text-emerald-500">🗺️</span>
+                            <span>〒810-0005 福岡縣福岡市中央區清川1丁目14-15</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 精巧標籤式連結按鈕 -->
+                <div class="flex flex-col gap-2 shrink-0 md:w-48">
+                    <a href="https://maps.app.goo.gl/Yf8YWkPApBmtAtp68" target="_blank" class="flex items-center justify-center bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 font-bold py-2 px-3 rounded-xl transition-colors text-xs shadow-sm">
+                        📍 至博多 (Google 地圖)
+                    </a>
+                    <a href="https://subway.city.fukuoka.lg.jp/cha_trad/route/" target="_blank" class="flex items-center justify-center bg-teal-50 hover:bg-teal-100 text-teal-700 border border-teal-200 font-bold py-2 px-3 rounded-xl transition-colors text-xs shadow-sm">
+                        🚇 福岡市地鐵路線圖
+                    </a>
+                    <a href="https://subway.city.fukuoka.lg.jp/eki/stations/hakata.php" target="_blank" class="flex items-center justify-center bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 font-bold py-2 px-3 rounded-xl transition-colors text-xs shadow-sm">
+                        🚉 博多駅地鐵資訊
+                    </a>
+                </div>
+            </section>
+
+            <!-- 每日行程列表區 -->
+            <div class="space-y-6 pb-20">
+                
+                <!-- DAY 1 -->
+                <section id="day1" class="bg-white rounded-2xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-slate-100 overflow-hidden hover-card-effect">
+                    <div class="p-5 lg:p-6 border-b border-slate-50 flex items-center gap-3">
+                        <span class="bg-blue-100 text-blue-700 font-black text-xs px-2.5 py-1 rounded-md tracking-wider">DAY 1</span>
+                        <h3 class="text-xl font-bold text-slate-800">抵達福岡與重裝採購戰線</h3>
+                        <span class="text-slate-400 text-sm ml-auto font-medium hidden sm:block">2026/10/21 (三)</span>
+                    </div>
+                    <div class="p-5 lg:p-6 bg-slate-50/30">
+                        <div class="space-y-4">
+                            <!-- Timeline Items -->
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">✈️</div>
+                                <div><div class="font-bold text-slate-700">06:00 <a href="https://maps.google.com/?cid=8529418028248193854&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">Terminal 2</a></div><div class="text-sm text-slate-500 mt-0.5">停留 03時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🛬</div>
+                                <div><div class="font-bold text-slate-700">11:20 <a href="https://maps.google.com/?cid=17455481111876712638&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">福岡空港国際線ターミナル</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🏨</div>
+                                <div><div class="font-bold text-slate-700">12:36 <a href="https://maps.google.com/?cid=10614813981361681911&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">BASE LAYER HOTEL 福岡</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🏪</div>
+                                <div><div class="font-bold text-slate-700">13:38 <a href="https://maps.google.com/?cid=12729272297403013363&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">7-11 福岡高砂１丁目店</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時20分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🪖</div>
+                                <div><div class="font-bold text-slate-700">14:01 <a href="https://maps.google.com/?cid=9054684987645807402&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">SHOEI Gallery FUKUOKA</a></div><div class="text-sm text-slate-500 mt-0.5">停留 03時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🍜</div>
+                                <div><div class="font-bold text-slate-700">17:14 <a href="https://maps.google.com/?cid=8967911634281358941&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">達摩拉麵 本店</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🛒</div>
+                                <div><div class="font-bold text-slate-700">18:16 <a href="https://maps.google.com/?cid=3685999933420201184&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">Maxvalu Express Watanabedori 3-chome Shop</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🛒</div>
+                                <div><div class="font-bold text-slate-700">19:24 <a href="https://maps.google.com/?cid=10452407047249045425&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">SUNNY 渡邊通店</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🛒</div>
+                                <div><div class="font-bold text-slate-700">20:30 <a href="https://maps.google.com/?cid=11872476266429753200&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">マックスバリュエクスプレス住吉4丁目店</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🍢</div>
+                                <div><div class="font-bold text-slate-700">20:35 <a href="https://maps.google.com/?cid=8336214041793136270&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">博多とりかわ大臣 住吉串房</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🏨</div>
+                                <div><div class="font-bold text-slate-700">20:35 <a href="https://maps.google.com/?cid=10614813981361681911&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">BASE LAYER HOTEL 福岡</a></div><div class="text-sm text-slate-500 mt-0.5">停留 09時00分</div></div>
+                            </div>
+                        </div>
+                        
+                        <!-- 對話框 -->
+                        <div class="mt-6 chat-bubble">
+                            <img src="./usagi.png" alt="烏薩奇" class="chat-avatar" onerror="this.src='https://placehold.co/100x100/fef08a/a16207?text=Usagi'">
+                            <div>
+                                <div class="font-bold text-slate-800 text-sm mb-1">烏薩奇 (Usagi)</div>
+                                <div class="text-slate-600 text-sm">プルルル！連逛三間超市也太嗨了吧！呀哈——買爆布丁！🐰🍮</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- DAY 2 -->
+                <section id="day2" class="bg-white rounded-2xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-slate-100 overflow-hidden hover-card-effect">
+                    <div class="p-5 lg:p-6 border-b border-slate-50 flex items-center gap-3">
+                        <span class="bg-red-100 text-red-700 font-black text-xs px-2.5 py-1 rounded-md tracking-wider">DAY 2</span>
+                        <h3 class="text-xl font-bold text-slate-800">廣島與天神爆買大遠征</h3>
+                        <span class="text-slate-400 text-sm ml-auto font-medium hidden sm:block">2026/10/22 (四)</span>
+                    </div>
+                    <div class="p-5 lg:p-6 bg-slate-50/30">
+                        <div class="space-y-4">
+                            <!-- Timeline Items -->
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🏨</div>
+                                <div><div class="font-bold text-slate-700">08:00 <a href="https://maps.google.com/?cid=10614813981361681911&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">BASE LAYER HOTEL 福岡</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">⛩️</div>
+                                <div><div class="font-bold text-slate-700">08:12 <a href="https://maps.google.com/?cid=11639954002556587428&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">櫛田神社</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🥖</div>
+                                <div><div class="font-bold text-slate-700">09:20 <a href="https://maps.google.com/?cid=2916074012331889391&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">The Full Full Hakata</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🛍️</div>
+                                <div><div class="font-bold text-slate-700">10:27 <a href="https://maps.google.com/?cid=8985099508241152168&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">上川端通商店街 shopping street</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🥩</div>
+                                <div><div class="font-bold text-slate-700">11:48 <a href="https://maps.google.com/?cid=15061615000572791404&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">挽肉與米 (今泉)</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🥩</div>
+                                <div><div class="font-bold text-slate-700">12:48 <a href="https://maps.google.com/?cid=16629553268585557470&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">極味屋 福岡Parco店</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🛍️</div>
+                                <div><div class="font-bold text-slate-700">13:50 <a href="https://maps.google.com/?cid=13573852294352654884&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">ちいかわらんど 福岡パルコ店</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🃏</div>
+                                <div><div class="font-bold text-slate-700">14:53 <a href="https://maps.google.com/?cid=7457293733221894506&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">Surugaya Shintencho Treka-kan (Trading Card Shop)</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🛍️</div>
+                                <div><div class="font-bold text-slate-700">16:00 <a href="https://maps.google.com/?cid=18036947488806088742&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">Mina 天神</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🍓</div>
+                                <div><div class="font-bold text-slate-700">17:00 <a href="https://maps.google.com/?cid=8963031380000956626&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">伊都King 天神地下街店</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🥩</div>
+                                <div><div class="font-bold text-slate-700">18:00 <a href="https://maps.google.com/?cid=16629553268585557470&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">燒肉 極味屋</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🏨</div>
+                                <div><div class="font-bold text-slate-700">19:00 <a href="https://maps.google.com/?cid=10614813981361681911&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">BASE LAYER HOTEL 福岡</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                        </div>
+
+                        <!-- 對話框 -->
+                        <div class="mt-6 chat-bubble bg-pink-50/50">
+                            <img src="./chiikawa.png" alt="吉伊卡哇" class="chat-avatar border-pink-200" onerror="this.src='https://placehold.co/100x100/fbcfe8/be185d?text=Chii'">
+                            <div>
+                                <div class="font-bold text-pink-800 text-sm mb-1">吉伊卡哇 (Chiikawa)</div>
+                                <div class="text-pink-700 text-sm">嗚哇！買到了好多新的公仔...而且連續吃漢堡排跟極味屋超級軟的啦！(流口水) 🥺🍔</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- DAY 3 -->
+                <section id="day3" class="bg-white rounded-2xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-slate-100 overflow-hidden hover-card-effect">
+                    <div class="p-5 lg:p-6 border-b border-slate-50 flex items-center gap-3">
+                        <span class="bg-amber-100 text-amber-700 font-black text-xs px-2.5 py-1 rounded-md tracking-wider">DAY 3</span>
+                        <h3 class="text-xl font-bold text-slate-800">大濠公園慢活與福岡塔</h3>
+                        <span class="text-slate-400 text-sm ml-auto font-medium hidden sm:block">2026/10/23 (五)</span>
+                    </div>
+                    <div class="p-5 lg:p-6 bg-slate-50/30">
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🏨</div>
+                                <div><div class="font-bold text-slate-700">08:00 <a href="https://maps.google.com/?cid=10614813981361681911&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">BASE LAYER HOTEL 福岡</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">☕</div>
+                                <div><div class="font-bold text-slate-700">08:15 <a href="https://maps.google.com/?cid=10137058493483818815&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">FUK COFFEE Parks</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時30分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">☕</div>
+                                <div><div class="font-bold text-slate-700">08:54 <a href="https://maps.google.com/?cid=17915287457129344281&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">星巴克 福岡大濠公園店</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🌳</div>
+                                <div><div class="font-bold text-slate-700">09:01 <a href="https://maps.google.com/?cid=3684926055179100047&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">大濠公園 日本庭園</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">☕</div>
+                                <div><div class="font-bold text-slate-700">10:17 <a href="https://maps.google.com/?cid=15474742106657865097&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">Cafe Bimi</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🏯</div>
+                                <div><div class="font-bold text-slate-700">10:26 <a href="https://maps.google.com/?cid=16737938061788184968&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">福岡城 鐵御門跡</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🌳</div>
+                                <div><div class="font-bold text-slate-700">11:39 <a href="https://maps.google.com/?cid=14839213291318671256&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">大濠公園</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時10分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚉</div>
+                                <div><div class="font-bold text-slate-700">12:05 <a href="https://maps.google.com/?cid=304755538478112359&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">天神</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🌳</div>
+                                <div><div class="font-bold text-slate-700">12:12 <a href="https://maps.google.com/?cid=12015045507143745291&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">警固公園</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">☕</div>
+                                <div><div class="font-bold text-slate-700">13:14 <a href="https://maps.google.com/?cid=18163898032218220777&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">藍瓶咖啡 福岡天神店</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🍜</div>
+                                <div><div class="font-bold text-slate-700">13:18 <a href="https://maps.google.com/?cid=1615588943183878116&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">麵屋兼虎 天神本店</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚉</div>
+                                <div><div class="font-bold text-slate-700">14:32 <a href="https://maps.google.com/?cid=17997729080813657674&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">博多</a></div><div class="text-sm text-slate-500 mt-0.5">停留 02時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🗼</div>
+                                <div><div class="font-bold text-slate-700">17:12 <a href="https://maps.google.com/?cid=17975057117492187437&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">福岡塔</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🏨</div>
+                                <div><div class="font-bold text-slate-700">18:54 <a href="https://maps.google.com/?cid=10614813981361681911&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">BASE LAYER HOTEL 福岡</a></div><div class="text-sm text-slate-500 mt-0.5">停留 10時00分</div></div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 chat-bubble bg-indigo-50/50">
+                            <img src="./hachiware.png" alt="小八" class="chat-avatar border-indigo-200" onerror="this.src='https://placehold.co/100x100/c7d2fe/4338ca?text=Hachi'">
+                            <div>
+                                <div class="font-bold text-indigo-800 text-sm mb-1">小八 (Hachiware)</div>
+                                <div class="text-indigo-700 text-sm">大濠公園喝咖啡好舒服喔～而且兼虎的沾麵雖然好粗但吃起來超級過癮的！📸</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- DAY 4 -->
+                <section id="day4" class="bg-white rounded-2xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-slate-100 overflow-hidden hover-card-effect">
+                    <div class="p-5 lg:p-6 border-b border-slate-50 flex items-center gap-3">
+                        <span class="bg-emerald-100 text-emerald-700 font-black text-xs px-2.5 py-1 rounded-md tracking-wider">DAY 4</span>
+                        <h3 class="text-xl font-bold text-slate-800">太宰府神域與久留米</h3>
+                        <span class="text-slate-400 text-sm ml-auto font-medium hidden sm:block">2026/10/24 (六)</span>
+                    </div>
+                    <div class="p-5 lg:p-6 bg-slate-50/30">
+                        <div class="space-y-4">
+                            <!-- Timeline Items -->
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🏨</div>
+                                <div><div class="font-bold text-slate-700">08:00 <a href="https://maps.google.com/?cid=10614813981361681911&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">BASE LAYER HOTEL 福岡</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚆</div>
+                                <div><div class="font-bold text-slate-700">08:11 <a href="https://maps.google.com/?cid=14091618602910633290&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">西鐵福岡（天神）</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時10分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚆</div>
+                                <div><div class="font-bold text-slate-700">09:07 <a href="https://maps.google.com/?cid=13229928327803423012&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">西鐵二日市車站</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚉</div>
+                                <div><div class="font-bold text-slate-700">09:45 <a href="https://maps.google.com/?cid=4759919442290773956&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">太宰府</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚉</div>
+                                <div><div class="font-bold text-slate-700">09:47 <a href="https://maps.google.com/?cid=11310630039723767289&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">Nishitetsu Dazaifu Eki(Nishitetsu Dazaifu Station)</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚌</div>
+                                <div><div class="font-bold text-slate-700">09:53 <a href="https://maps.google.com/?cid=1580029679655078934&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">Uchiyama(bus)</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">⛩️</div>
+                                <div><div class="font-bold text-slate-700">09:57 <a href="https://maps.google.com/?cid=16277584972693378242&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">竈門神社のクスノキ</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚌</div>
+                                <div><div class="font-bold text-slate-700">11:01 <a href="https://maps.google.com/?cid=1580029679655078934&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">Uchiyama(bus)</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚉</div>
+                                <div><div class="font-bold text-slate-700">11:07 <a href="https://maps.google.com/?cid=11310630039723767289&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">Nishitetsu Dazaifu Eki(Nishitetsu Dazaifu Station)</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚶</div>
+                                <div><div class="font-bold text-slate-700">11:09 <a href="https://maps.google.com/?cid=16408850457029779298&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">太宰府前表参道</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">☕</div>
+                                <div><div class="font-bold text-slate-700">12:11 <a href="https://maps.google.com/?cid=8527849138083372303&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">星巴克 太宰府天滿宮表參道店</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時30分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">⛩️</div>
+                                <div><div class="font-bold text-slate-700">12:46 <a href="https://maps.google.com/?cid=13268960937318002327&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">太宰府天滿宮</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">⛩️</div>
+                                <div><div class="font-bold text-slate-700">13:56 <a href="https://maps.google.com/?cid=8033739474599759938&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">天開稻荷神社</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚉</div>
+                                <div><div class="font-bold text-slate-700">15:11 <a href="https://maps.google.com/?cid=6086742288581410527&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">太宰府</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚉</div>
+                                <div><div class="font-bold text-slate-700">15:47 <a href="https://maps.google.com/?cid=6716409799297308873&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">西鐵久留米</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🍜</div>
+                                <div><div class="font-bold text-slate-700">15:48 <a href="https://maps.google.com/?cid=8698559951381539283&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">Kurume Ramen Seiyoken Nishitetsu-Kurume shop</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🍜</div>
+                                <div><div class="font-bold text-slate-700">15:58 <a href="https://maps.google.com/?cid=3509146378498580323&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">Taiho Ramen main shop</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🛍️</div>
+                                <div><div class="font-bold text-slate-700">17:13 <a href="https://maps.google.com/?cid=15623465379354117077&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">一番街</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚉</div>
+                                <div><div class="font-bold text-slate-700">18:18 <a href="https://maps.google.com/?cid=6716409799297308873&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">西鐵久留米</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時20分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚉</div>
+                                <div><div class="font-bold text-slate-700">19:19 <a href="https://maps.google.com/?cid=14091618602910633290&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">西鐵福岡（天神）</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🏨</div>
+                                <div><div class="font-bold text-slate-700">19:30 <a href="https://maps.google.com/?cid=10614813981361681911&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">BASE LAYER HOTEL 福岡</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 chat-bubble">
+                            <img src="./usagi.png" alt="烏薩奇" class="chat-avatar" onerror="this.src='https://placehold.co/100x100/fef08a/a16207?text=Usagi'">
+                            <div>
+                                <div class="font-bold text-slate-800 text-sm mb-1">烏薩奇 (Usagi)</div>
+                                <div class="text-slate-600 text-sm">プルルルル！計程車直接衝上山頂啦！完全不用爬樓梯，呀哈！🐰🚀</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- DAY 5 -->
+                <section id="day5" class="bg-white rounded-2xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-slate-100 overflow-hidden hover-card-effect">
+                    <div class="p-5 lg:p-6 border-b border-slate-50 flex items-center gap-3">
+                        <span class="bg-purple-100 text-purple-700 font-black text-xs px-2.5 py-1 rounded-md tracking-wider">DAY 5</span>
+                        <h3 class="text-xl font-bold text-slate-800">門司港大正風情與百萬夜景</h3>
+                        <span class="text-slate-400 text-sm ml-auto font-medium hidden sm:block">2026/10/25 (日)</span>
+                    </div>
+                    <div class="p-5 lg:p-6 bg-slate-50/30">
+                        <div class="space-y-4">
+                            <!-- Timeline Items -->
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🏨</div>
+                                <div><div class="font-bold text-slate-700">08:00 <a href="https://maps.google.com/?cid=10614813981361681911&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">BASE LAYER HOTEL 福岡</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🎫</div>
+                                <div><div class="font-bold text-slate-700">08:12 <a href="https://maps.google.com/?cid=11763026570156003775&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">博多車站 新幹線中央口 綠色窗口</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時30分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚄</div>
+                                <div><div class="font-bold text-slate-700">08:40 <a href="https://maps.google.com/?cid=3215064457093418265&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">小倉站新幹線口</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚉</div>
+                                <div><div class="font-bold text-slate-700">09:07 <a href="https://maps.google.com/?cid=17935131387985945506&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">門司港車站</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時20分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">⛴️</div>
+                                <div><div class="font-bold text-slate-700">09:31 <a href="https://maps.google.com/?cid=14807085690407908017&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">關門聯絡船(門司港)</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時10分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🍣</div>
+                                <div><div class="font-bold text-slate-700">10:03 <a href="https://maps.google.com/?cid=7791985743706569026&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">唐戶市場</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🍣</div>
+                                <div><div class="font-bold text-slate-700">11:04 <a href="https://maps.google.com/?cid=7791985743706569026&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">唐戶市場 熱鬧的馬關街</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">⛩️</div>
+                                <div><div class="font-bold text-slate-700">11:11 <a href="https://maps.google.com/?cid=1051657783476446194&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">赤間神宮</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時20分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🐡</div>
+                                <div><div class="font-bold text-slate-700">11:33 <a href="https://maps.google.com/?cid=4947736048488364993&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">下關春帆樓本店</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時20分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚶</div>
+                                <div><div class="font-bold text-slate-700">12:10 <a href="https://maps.google.com/?cid=12259094045568630120&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">関門トンネル人道入口（下関側）</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚶</div>
+                                <div><div class="font-bold text-slate-700">12:22 <a href="https://maps.google.com/?cid=5086902754658706236&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">關門隧道人行道 門司側 公共廁所</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🏛️</div>
+                                <div><div class="font-bold text-slate-700">12:47 <a href="https://maps.google.com/?cid=14171112523094842438&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">北九州市舊門司稅關</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時30分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🍛</div>
+                                <div><div class="font-bold text-slate-700">13:24 <a href="https://maps.google.com/?cid=4799326744322264152&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">焗烤咖哩飯 BEAR FRUITS 本店</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時30分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚉</div>
+                                <div><div class="font-bold text-slate-700">13:57 <a href="https://maps.google.com/?cid=17935131387985945506&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">門司港車站</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚄</div>
+                                <div><div class="font-bold text-slate-700">14:24 <a href="https://maps.google.com/?cid=3215064457093418265&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">小倉站新幹線口</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚉</div>
+                                <div><div class="font-bold text-slate-700">14:30 <a href="https://maps.google.com/?cid=5355526991054342278&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">小倉駅 南口広場</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🛍️</div>
+                                <div><div class="font-bold text-slate-700">14:36 <a href="https://maps.google.com/?cid=4377804362766434808&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">魚町銀天街</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🏯</div>
+                                <div><div class="font-bold text-slate-700">14:44 <a href="https://maps.google.com/?cid=1371327252959948136&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">小倉城</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚄</div>
+                                <div><div class="font-bold text-slate-700">16:03 <a href="https://maps.google.com/?cid=3215064457093418265&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">小倉站新幹線口</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚉</div>
+                                <div><div class="font-bold text-slate-700">16:18 <a href="https://maps.google.com/?cid=10456556534012508905&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">八幡（福岡）</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時10分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚌</div>
+                                <div><div class="font-bold text-slate-700">16:31 <a href="https://maps.google.com/?cid=2065256038899358271&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">往皿倉山接駁巴士</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時30分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚠</div>
+                                <div><div class="font-bold text-slate-700">17:01 <a href="https://maps.google.com/?cid=2567859106008310889&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">山麓（皿倉山）</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚠</div>
+                                <div><div class="font-bold text-slate-700">17:02 <a href="https://maps.google.com/?cid=5282697707216040956&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">皿倉山纜車 山麓站</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時10分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚠</div>
+                                <div><div class="font-bold text-slate-700">17:12 <a href="https://maps.google.com/?cid=8830120437270209606&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">皿倉山爬坡車 山上站</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時10分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🌃</div>
+                                <div><div class="font-bold text-slate-700">17:41 <a href="https://maps.google.com/?cid=15617041537211558758&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">皿倉山展望台</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚠</div>
+                                <div><div class="font-bold text-slate-700">18:59 <a href="https://maps.google.com/?cid=8830120437270209606&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">皿倉山爬坡車 山上站</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚠</div>
+                                <div><div class="font-bold text-slate-700">19:09 <a href="https://maps.google.com/?cid=5282697707216040956&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">皿倉山纜車 山麓站</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚠</div>
+                                <div><div class="font-bold text-slate-700">19:10 <a href="https://maps.google.com/?cid=2567859106008310889&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">山麓（皿倉山）</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚌</div>
+                                <div><div class="font-bold text-slate-700">19:33 <a href="https://maps.google.com/?cid=2065256038899358271&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">往皿倉山接駁巴士</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時20分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚉</div>
+                                <div><div class="font-bold text-slate-700">19:56 <a href="https://maps.google.com/?cid=10456556534012508905&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">八幡（福岡）</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時10分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚄</div>
+                                <div><div class="font-bold text-slate-700">20:21 <a href="https://maps.google.com/?cid=3215064457093418265&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">小倉站新幹線口</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🎫</div>
+                                <div><div class="font-bold text-slate-700">20:49 <a href="https://maps.google.com/?cid=11763026570156003775&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">博多車站 新幹線中央口 綠色窗口</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🏨</div>
+                                <div><div class="font-bold text-slate-700">21:01 <a href="https://maps.google.com/?cid=10614813981361681911&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">BASE LAYER HOTEL 福岡</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 chat-bubble bg-pink-50/50">
+                            <img src="./chiikawa.png" alt="吉伊卡哇" class="chat-avatar border-pink-200" onerror="this.src='https://placehold.co/100x100/fbcfe8/be185d?text=Chii'">
+                            <div>
+                                <div class="font-bold text-pink-800 text-sm mb-1">吉伊卡哇 (Chiikawa)</div>
+                                <div class="text-pink-700 text-sm">搭船去了唐戶市場...燒咖哩牽絲了...好燙...但是好好吃喔... (呼呼) 夜景也超級漂亮的...🌃</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- DAY 6 -->
+                <section id="day6" class="bg-white rounded-2xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-slate-100 overflow-hidden hover-card-effect">
+                    <div class="p-5 lg:p-6 border-b border-slate-50 flex items-center gap-3">
+                        <span class="bg-teal-100 text-teal-700 font-black text-xs px-2.5 py-1 rounded-md tracking-wider">DAY 6</span>
+                        <h3 class="text-xl font-bold text-slate-800">由布院之森山城慢活</h3>
+                        <span class="text-slate-400 text-sm ml-auto font-medium hidden sm:block">2026/10/26 (一)</span>
+                    </div>
+                    <div class="p-5 lg:p-6 bg-slate-50/30">
+                        <div class="space-y-4">
+                            <!-- Timeline Items -->
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🏨</div>
+                                <div><div class="font-bold text-slate-700">08:00 <a href="https://maps.google.com/?cid=10614813981361681911&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">BASE LAYER HOTEL 福岡</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚉</div>
+                                <div><div class="font-bold text-slate-700">08:12 <a href="https://maps.google.com/?cid=17997729080813657674&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">博多</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚉</div>
+                                <div><div class="font-bold text-slate-700">10:32 <a href="https://maps.google.com/?cid=9981118884584608729&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">由布院站</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🍲</div>
+                                <div><div class="font-bold text-slate-700">10:33 <a href="https://maps.google.com/?cid=4272000750359788915&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">由布釜飯 「心」湯布院站前店</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🍮</div>
+                                <div><div class="font-bold text-slate-700">10:43 <a href="https://maps.google.com/?cid=9729263317818336382&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">由布院 Milch 布丁 半熟起司蛋糕</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時20分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🥔</div>
+                                <div><div class="font-bold text-slate-700">11:05 <a href="https://maps.google.com/?cid=4201187240819157160&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">金賞可樂餅 2號店</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時20分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚶</div>
+                                <div><div class="font-bold text-slate-700">11:29 <a href="https://maps.google.com/?cid=13171827688111737097&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">湯之坪街道</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時20分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🥔</div>
+                                <div><div class="font-bold text-slate-700">11:52 <a href="https://maps.google.com/?cid=263437002528520843&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">金賞可樂餅 本店</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時10分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🍲</div>
+                                <div><div class="font-bold text-slate-700">12:06 <a href="https://maps.google.com/?cid=3785927126435412653&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">由布釜飯 「心」金鱗湖本店</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🌊</div>
+                                <div><div class="font-bold text-slate-700">13:09 <a href="https://maps.google.com/?cid=10265864507533133798&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">金鱗湖</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">☕</div>
+                                <div><div class="font-bold text-slate-700">14:12 <a href="https://maps.google.com/?cid=4021657092509322010&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">湖畔咖啡廳 Cafe La Ruche</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚉</div>
+                                <div><div class="font-bold text-slate-700">14:31 <a href="https://maps.google.com/?cid=9981118884584608729&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">由布院站</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚉</div>
+                                <div><div class="font-bold text-slate-700">16:51 <a href="https://maps.google.com/?cid=17997729080813657674&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">博多</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🏨</div>
+                                <div><div class="font-bold text-slate-700">17:03 <a href="https://maps.google.com/?cid=10614813981361681911&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">BASE LAYER HOTEL 福岡</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 chat-bubble bg-indigo-50/50">
+                            <img src="./hachiware.png" alt="小八" class="chat-avatar border-indigo-200" onerror="this.src='https://placehold.co/100x100/c7d2fe/4338ca?text=Hachi'">
+                            <div>
+                                <div class="font-bold text-indigo-800 text-sm mb-1">小八 (Hachiware)</div>
+                                <div class="text-indigo-700 text-sm">火車綠油油的好可愛！吃到了傳說中的豐後牛釜飯，感覺這趟旅行真的好值得了！🛤️</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- DAY 7 -->
+                <section id="day7" class="bg-white rounded-2xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-slate-100 overflow-hidden hover-card-effect">
+                    <div class="p-5 lg:p-6 border-b border-slate-50 flex items-center gap-3">
+                        <span class="bg-cyan-100 text-cyan-700 font-black text-xs px-2.5 py-1 rounded-md tracking-wider">DAY 7</span>
+                        <h3 class="text-xl font-bold text-slate-800">糸島海景與博多伴手禮大戰</h3>
+                        <span class="text-slate-400 text-sm ml-auto font-medium hidden sm:block">2026/10/27 (二)</span>
+                    </div>
+                    <div class="p-5 lg:p-6 bg-slate-50/30">
+                        <div class="space-y-4">
+                            <!-- Timeline Items -->
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🏨</div>
+                                <div><div class="font-bold text-slate-700">08:00 <a href="https://maps.google.com/?cid=10614813981361681911&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">BASE LAYER HOTEL 福岡</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">⛩️</div>
+                                <div><div class="font-bold text-slate-700">08:00 <a href="https://maps.google.com/?cid=1353508457548761201&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">住吉神社</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🌳</div>
+                                <div><div class="font-bold text-slate-700">09:03 <a href="https://maps.google.com/?cid=5888888259692739908&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">樂水園</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🛍️</div>
+                                <div><div class="font-bold text-slate-700">10:10 <a href="https://maps.google.com/?cid=508462832005116723&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">Alpen 福岡</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚉</div>
+                                <div><div class="font-bold text-slate-700">11:10 <a href="https://maps.google.com/?cid=17997729080813657674&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">博多</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚌</div>
+                                <div><div class="font-bold text-slate-700">11:15 <a href="https://maps.google.com/?cid=10456616174238705749&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">博多巴士總站</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🌊</div>
+                                <div><div class="font-bold text-slate-700">12:35 <a href="https://maps.google.com/?cid=7279660068161122219&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">二見ヶ浦・月と太陽糸島茶房前</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">⛩️</div>
+                                <div><div class="font-bold text-slate-700">12:39 <a href="https://maps.google.com/?cid=5186366294324366694&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">櫻井二見浦 夫婦岩</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🌊</div>
+                                <div><div class="font-bold text-slate-700">13:44 <a href="https://maps.google.com/?cid=17910031710924952147&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">二見ヶ浦・月と太陽糸島茶房前</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">⛩️</div>
+                                <div><div class="font-bold text-slate-700">14:04 <a href="https://maps.google.com/?cid=7566288688637534428&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">櫻井神社</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚌</div>
+                                <div><div class="font-bold text-slate-700">16:24 <a href="https://maps.google.com/?cid=10456616174238705749&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">博多巴士總站</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">💊</div>
+                                <div><div class="font-bold text-slate-700">16:30 <a href="https://maps.google.com/?cid=18273458840585595309&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">SUGI藥局 博多站 筑紫口店</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🛍️</div>
+                                <div><div class="font-bold text-slate-700">17:35 <a href="https://maps.google.com/?cid=18429508308682537513&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">BARNYARDSTORM 博多阪急百貨店</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🍟</div>
+                                <div><div class="font-bold text-slate-700">17:35 <a href="https://maps.google.com/?cid=14881770195785221050&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">カルビープラス 博多阪急店</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🍓</div>
+                                <div><div class="font-bold text-slate-700">17:35 <a href="https://maps.google.com/?cid=16537014050970143245&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">AMANBERRY</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🍘</div>
+                                <div><div class="font-bold text-slate-700">17:38 <a href="https://maps.google.com/?cid=17816887083859201528&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">福太郎Premium Menbei 博多阪急店</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🍪</div>
+                                <div><div class="font-bold text-slate-700">17:41 <a href="https://maps.google.com/?cid=7264857245308419768&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">奶油酥餅 Sugar Butter Tree 阪急</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🛍️</div>
+                                <div><div class="font-bold text-slate-700">17:44 <a href="https://maps.google.com/?cid=9781055204971360078&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">いっぴん通り</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🍓</div>
+                                <div><div class="font-bold text-slate-700">18:48 <a href="https://www.google.com/maps/search/?api=1&query=伊都きんぐ+博多阪急店" target="_blank" class="map-btn">伊都King 博多阪急店</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🍡</div>
+                                <div><div class="font-bold text-slate-700">18:52 <a href="https://maps.google.com/?cid=11885287602550611607&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">石村萬盛堂 博多站DEITOS店</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🛍️</div>
+                                <div><div class="font-bold text-slate-700">19:55 <a href="https://maps.google.com/?cid=11856863120919128268&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">I'm LILY</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🛍️</div>
+                                <div><div class="font-bold text-slate-700">19:57 <a href="https://maps.google.com/?cid=1037473731513946402&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">博多銘品藏 博多站中央店</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🍰</div>
+                                <div><div class="font-bold text-slate-700">20:00 <a href="https://maps.google.com/?cid=6811539577343966056&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">なんばん往来 博多阪急店</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🌶️</div>
+                                <div><div class="font-bold text-slate-700">20:04 <a href="https://maps.google.com/?cid=5766003464402139971&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">明太子福屋 博多站地下街店</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🍰</div>
+                                <div><div class="font-bold text-slate-700">20:08 <a href="https://maps.google.com/?cid=4748278064736703160&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">蛋糕「南蠻往來」 榮屋 博多MING店</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🛍️</div>
+                                <div><div class="font-bold text-slate-700">20:11 <a href="https://maps.google.com/?cid=472476344059799429&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">FUQUOKKA 【フクオッカ］博多デイトス店</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🛍️</div>
+                                <div><div class="font-bold text-slate-700">20:11 <a href="https://maps.google.com/?cid=2355269209182044089&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">KOKUNEKO</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🗼</div>
+                                <div><div class="font-bold text-slate-700">20:11 <a href="https://maps.google.com/?cid=17975057117492187437&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">福岡塔</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 chat-bubble">
+                            <img src="./usagi.png" alt="烏薩奇" class="chat-avatar" onerror="this.src='https://placehold.co/100x100/fef08a/a16207?text=Usagi'">
+                            <div>
+                                <div class="font-bold text-slate-800 text-sm mb-1">烏薩奇 (Usagi)</div>
+                                <div class="text-slate-600 text-sm">プルル！糸島看海完，直接回博多買爆一整排伴手禮啦！呀哈！🐰🛍️</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- DAY 8 -->
+                <section id="day8" class="bg-white rounded-2xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-slate-100 overflow-hidden hover-card-effect">
+                    <div class="p-5 lg:p-6 border-b border-slate-50 flex items-center gap-3">
+                        <span class="bg-pink-100 text-pink-700 font-black text-xs px-2.5 py-1 rounded-md tracking-wider">DAY 8</span>
+                        <h3 class="text-xl font-bold text-slate-800">LaLaport 巨型鋼彈朝聖</h3>
+                        <span class="text-slate-400 text-sm ml-auto font-medium hidden sm:block">2026/10/28 (三)</span>
+                    </div>
+                    <div class="p-5 lg:p-6 bg-slate-50/30">
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🏨</div>
+                                <div><div class="font-bold text-slate-700">08:00 <a href="https://maps.google.com/?cid=10614813981361681911&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">BASE LAYER HOTEL 福岡</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚌</div>
+                                <div><div class="font-bold text-slate-700">08:05 <a href="https://maps.google.com/?cid=3926956086780909192&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">Watanabe-dori 1-chome(bus)</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🚌</div>
+                                <div><div class="font-bold text-slate-700">08:25 <a href="https://maps.google.com/?cid=14708515601499860049&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">ららぽーと福岡バスターミナル</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🤖</div>
+                                <div><div class="font-bold text-slate-700">08:27 <a href="https://maps.google.com/?cid=16534745193780662528&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">Mitsui Shopping Park LaLaport福岡</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                        </div>
+                        <div class="mt-6 chat-bubble bg-indigo-50/50">
+                            <img src="./hachiware.png" alt="小八" class="chat-avatar border-indigo-200" onerror="this.src='https://placehold.co/100x100/c7d2fe/4338ca?text=Hachi'">
+                            <div>
+                                <div class="font-bold text-indigo-800 text-sm mb-1">小八 (Hachiware)</div>
+                                <div class="text-indigo-700 text-sm">哇...LaLaport 裡面的鋼彈超級巨大的！能在這裡逛街真的是很棒的回憶呢！🤖</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- DAY 9 -->
+                <section id="day9" class="bg-white rounded-2xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-slate-100 overflow-hidden hover-card-effect">
+                    <div class="p-5 lg:p-6 border-b border-slate-50 flex items-center gap-3">
+                        <span class="bg-slate-200 text-slate-700 font-black text-xs px-2.5 py-1 rounded-md tracking-wider">DAY 9</span>
+                        <h3 class="text-xl font-bold text-slate-800">優雅退房與順暢賦歸</h3>
+                        <span class="text-slate-400 text-sm ml-auto font-medium hidden sm:block">2026/10/29 (四)</span>
+                    </div>
+                    <div class="p-5 lg:p-6 bg-slate-50/30">
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🏨</div>
+                                <div><div class="font-bold text-slate-700">08:00 <a href="https://maps.google.com/?cid=10614813981361681911&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">BASE LAYER HOTEL 福岡</a></div><div class="text-sm text-slate-500 mt-0.5">停留 00時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">✈️</div>
+                                <div><div class="font-bold text-slate-700">10:15 <a href="https://maps.google.com/?cid=17455481111876712638&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">福岡空港国際線ターミナル</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-xl w-8 text-center shrink-0">🛬</div>
+                                <div><div class="font-bold text-slate-700">13:50 <a href="https://maps.google.com/?cid=8529418028248193854&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="map-btn">Terminal 2</a></div><div class="text-sm text-slate-500 mt-0.5">停留 01時00分</div></div>
+                            </div>
+                        </div>
+                        <div class="mt-6 chat-bubble bg-pink-50/50">
+                            <img src="./chiikawa.png" alt="吉伊卡哇" class="chat-avatar border-pink-200" onerror="this.src='https://placehold.co/100x100/fbcfe8/be185d?text=Chii'">
+                            <div>
+                                <div class="font-bold text-pink-800 text-sm mb-1">吉伊卡哇 (Chiikawa)</div>
+                                <div class="text-pink-700 text-sm">嗚哇...要回家了...但是買了好多好吃的東西呢！滿載而歸！🥺</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- 去趣 App 連結 -->
+                <div class="text-center py-6">
+                    <p class="text-slate-500 text-sm mb-4">🇯🇵 Designed for best travel experience.</p>
+                    <a href="https://chictrip-share.app.link/9Boc6BkZ75b" target="_blank" class="inline-flex items-center bg-white hover:bg-slate-50 text-slate-800 font-bold py-3 px-6 rounded-full transition-colors shadow-md border border-slate-200 text-sm">
+                        📱 點擊這裡，立即用「去趣」看我的行程細節！
+                    </a>
+                </div>
+
+            </div>
+        </main>
     </div>
 
-    <!-- 右下角懸浮快速回頂部按鈕 -->
-    <div class="scroll-nav-buttons">
-        <a href="#" class="scroll-btn" title="回到最頂部">
-            <span class="text-2xl">⬆️</span>
-        </a>
-    </div>
+    <!-- 左下角懸浮按鈕 (手機端輔助使用) -->
+    <a href="#" class="lg:hidden fixed bottom-6 right-6 z-50 bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl shadow-lg hover:bg-blue-700 transition-colors border-2 border-white">
+        ⬆️
+    </a>
 
+    <script>
+        // 偵測滾動，為左側導覽列加上 Active 狀態
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section[id^="day"]');
+            const navLinks = document.querySelectorAll('aside a[href^="#day"]');
+
+            // 簡單的 Intersection Observer 實作
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        
+                        // 移除所有 active
+                        navLinks.forEach(link => {
+                            link.classList.remove('nav-item-active');
+                            link.classList.remove('border-blue-500');
+                        });
+                        
+                        // 加上 active 到當前標籤
+                        const activeLink = document.querySelector(`aside a[href="#${id}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add('nav-item-active');
+                            activeLink.classList.add('border-blue-500');
+                        }
+                    }
+                });
+            }, { rootMargin: '-20% 0px -60% 0px' });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
 </body>
 </html>
