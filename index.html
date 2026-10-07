@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2026 福岡九州 9 日深度自由行手冊</title>
+  <title>2026 福岡 9 日深度自由行手冊</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- FontAwesome Icons -->
@@ -30,12 +30,6 @@
               700: '#1d4ed8',
               800: '#1e40af',
               900: '#1e3a8a',
-            },
-            accent: {
-              subway: '#0284c7', // 地鐵藍
-              jr: '#dc2626',     // JR 紅
-              bus: '#16a34a',    // 公車綠
-              pay: '#d97706',    // 支付黃/橘
             }
           }
         }
@@ -43,20 +37,26 @@
     }
   </script>
   <style>
-    /* Custom scrollbar for horizontal tabs */
-    .no-scrollbar::-webkit-scrollbar {
-      display: none;
+    /* Styling scrollbars for smooth Day tabs navigation */
+    .tab-scrollbar::-webkit-scrollbar {
+      height: 4px;
     }
-    .no-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
+    .tab-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .tab-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.4);
+      border-radius: 9999px;
+    }
+    .tab-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: rgba(100, 116, 139, 0.6);
     }
     .glass-nav {
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(12px);
     }
     .dark .glass-nav {
-      background: rgba(15, 23, 42, 0.94);
+      background: rgba(15, 23, 42, 0.95);
       border-color: rgba(51, 65, 85, 0.8);
     }
   </style>
@@ -66,28 +66,50 @@
   <!-- Top Header -->
   <header class="sticky top-0 z-50 glass-nav border-b border-slate-200/80 shadow-xs">
     <div class="max-w-6xl mx-auto px-4 py-2.5 space-y-2">
-      <!-- Row 1: Brand title & ONLY Theme Toggle on top right for maximum title space -->
-      <div class="flex items-center justify-between gap-3">
-        <div class="flex items-center gap-2.5 min-w-0 flex-1">
-          <span class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white flex items-center justify-center font-bold text-base shadow-xs shrink-0">
+      <!-- Row 1: Brand title & ONLY compact icon-only action buttons for maximum title space -->
+      <div class="flex items-center justify-between gap-2">
+        <div class="flex items-center gap-2 min-w-0 flex-1">
+          <span class="w-8 h-8 md:w-9 md:h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white flex items-center justify-center font-bold text-sm md:text-base shadow-xs shrink-0">
             <i class="fa-solid fa-plane-departure"></i>
           </span>
           <div class="min-w-0 flex-1">
-            <h1 class="text-base sm:text-lg md:text-xl font-bold tracking-tight text-slate-900 dark:text-white leading-tight">
+            <h1 class="text-sm sm:text-base md:text-lg font-bold tracking-tight text-slate-900 dark:text-white leading-tight truncate">
               2026 福岡 9 日深度自由行手冊
             </h1>
-            <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400">10/21(三) ~ 10/29(四) 全鐵路防暈切換・支付防呆</p>
+            <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 truncate">10/21(三) ~ 10/29(四) 全鐵路防暈切換・支付防呆</p>
           </div>
         </div>
 
-        <!-- Right: ONLY Theme Toggle Button (齒輪/主題圖示) -->
-        <button onclick="toggleDarkMode()" 
-                id="theme-toggle-btn"
-                class="w-8 h-8 rounded-xl flex items-center justify-center bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-amber-400 border border-slate-200 dark:border-slate-700 transition-all shadow-2xs active:scale-95 shrink-0"
-                title="切換暗黑 / 明亮模式">
-          <i id="theme-moon-icon" class="fa-solid fa-gear text-xs"></i>
-          <i id="theme-sun-icon" class="fa-solid fa-gear text-xs hidden"></i>
-        </button>
+        <!-- Right: Pure Icon-Only Action Buttons (書本 + 手機 + 齒輪) -->
+        <div class="flex items-center gap-1.5 shrink-0">
+          <!-- External Course Book Icon Button -->
+          <a href="https://claire0505.github.io/japan_fukuoka_trip_lesson/" 
+             target="_blank" 
+             rel="noopener noreferrer"
+             class="w-8 h-8 rounded-xl flex items-center justify-center bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/70 dark:hover:bg-emerald-900/80 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 transition-all shadow-2xs active:scale-95"
+             title="日英旅遊雙語隨身學習"
+             aria-label="日英旅遊雙語隨身學習">
+            <i class="fa-solid fa-book-open text-xs"></i>
+          </a>
+
+          <!-- Add to Home Screen Phone Icon Button -->
+          <button onclick="openAddToHomeModal()" 
+                  class="w-8 h-8 rounded-xl flex items-center justify-center bg-blue-50 hover:bg-blue-100 dark:bg-blue-950/70 dark:hover:bg-blue-900/80 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 transition-all shadow-2xs active:scale-95"
+                  title="將手冊加入手機主畫面捷徑"
+                  aria-label="加入手機主畫面捷徑">
+            <i class="fa-solid fa-mobile-screen-button text-xs"></i>
+          </button>
+
+          <!-- Theme Gear Icon Button -->
+          <button onclick="toggleDarkMode()" 
+                  id="theme-toggle-btn"
+                  class="w-8 h-8 rounded-xl flex items-center justify-center bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-amber-400 border border-slate-200 dark:border-slate-700 transition-all shadow-2xs active:scale-95"
+                  title="切換暗黑 / 明亮模式"
+                  aria-label="切換主題模式">
+            <i id="theme-moon-icon" class="fa-solid fa-gear text-xs"></i>
+            <i id="theme-sun-icon" class="fa-solid fa-gear text-xs hidden"></i>
+          </button>
+        </div>
       </div>
 
       <!-- Row 2: Live Japan Clock & Fukuoka Weather -->
@@ -102,32 +124,55 @@
         </div>
       </div>
 
-      <!-- Row 3: Action Buttons Moved Below Weather (旅遊雙語 + 存主畫面) -->
-      <div class="grid grid-cols-2 sm:flex sm:items-center sm:justify-end gap-2 pt-0.5">
-        <!-- External Course Link Button -->
-        <a href="https://claire0505.github.io/japan_fukuoka_trip_lesson/" 
-           target="_blank" 
-           rel="noopener noreferrer"
-           class="flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/70 dark:hover:bg-emerald-900/80 text-emerald-800 dark:text-emerald-200 border border-emerald-300 dark:border-emerald-700 transition-all shadow-2xs active:scale-95"
-           title="前往日英旅遊雙語隨身學習網頁">
-          <i class="fa-solid fa-graduation-cap text-emerald-600 dark:text-emerald-400"></i>
-          <span>日英旅遊雙語隨身學習</span>
-          <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-emerald-500 opacity-70"></i>
-        </a>
+      <!-- Row 3: Flight Itinerary Summary Card (長榮航空簡明航班) -->
+      <div class="rounded-xl border border-slate-200/90 dark:border-slate-800 bg-gradient-to-r from-blue-50/70 via-indigo-50/40 to-slate-50/70 dark:from-slate-900 dark:via-slate-900 dark:to-slate-900 p-2.5 sm:p-3 text-xs shadow-2xs space-y-2">
+        <div class="flex items-center justify-between border-b border-blue-100/80 dark:border-slate-800 pb-1.5">
+          <span class="font-bold text-slate-900 dark:text-white flex items-center gap-1.5 text-[11px] sm:text-xs">
+            <i class="fa-solid fa-ticket text-blue-600 dark:text-blue-400"></i>
+            長榮航空航班資訊
+          </span>
+          <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">
+            波音 787-9・經濟艙 (W)
+          </span>
+        </div>
 
-        <!-- Add to Home Screen Button -->
-        <button onclick="openAddToHomeModal()" 
-                class="flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-blue-50 hover:bg-blue-100 dark:bg-blue-950/70 dark:hover:bg-blue-900/80 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 transition-all shadow-2xs active:scale-95"
-                title="將本手冊加入手機主畫面">
-          <i class="fa-solid fa-mobile-screen-button text-blue-600 dark:text-blue-400"></i>
-          <span>加入主畫面捷徑</span>
-        </button>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] sm:text-xs leading-relaxed">
+          <!-- Outbound Flight -->
+          <div class="p-2 rounded-lg bg-white/90 dark:bg-slate-800/80 border border-blue-100 dark:border-slate-700/80 space-y-1">
+            <div class="flex items-center justify-between font-bold text-blue-900 dark:text-blue-300">
+              <span class="flex items-center gap-1">
+                <i class="fa-solid fa-plane-departure text-[10px] text-blue-600"></i>
+                去程 BR106
+              </span>
+              <span class="text-[10px] font-medium text-blue-600 dark:text-blue-400">2h 20m</span>
+            </div>
+            <div class="text-slate-700 dark:text-slate-300">
+              <p><span class="text-slate-500 dark:text-slate-400">起飛：</span>10/21 (三) 08:00 桃園 T2</p>
+              <p><span class="text-slate-500 dark:text-slate-400">抵達：</span>10/21 (三) 11:20 福岡 FUK 國際線</p>
+            </div>
+          </div>
+
+          <!-- Inbound Flight -->
+          <div class="p-2 rounded-lg bg-white/90 dark:bg-slate-800/80 border border-blue-100 dark:border-slate-700/80 space-y-1">
+            <div class="flex items-center justify-between font-bold text-indigo-900 dark:text-indigo-300">
+              <span class="flex items-center gap-1">
+                <i class="fa-solid fa-plane-arrival text-[10px] text-indigo-600"></i>
+                回程 BR105
+              </span>
+              <span class="text-[10px] font-medium text-indigo-600 dark:text-indigo-400">2h 35m</span>
+            </div>
+            <div class="text-slate-700 dark:text-slate-300">
+              <p><span class="text-slate-500 dark:text-slate-400">起飛：</span>10/29 (四) 12:15 福岡 FUK 國際線</p>
+              <p><span class="text-slate-500 dark:text-slate-400">抵達：</span>10/29 (四) 13:50 桃園 T2</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Day Navigation Bar (Horizontal Scrollable) -->
-    <div class="border-t border-slate-100 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-900/40 px-2 py-2">
-      <div class="max-w-6xl mx-auto flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 px-2" id="day-tabs">
+    <!-- Day Navigation Bar (Scrollable through Day 9) -->
+    <div class="border-t border-slate-100 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-900/40 px-3 py-2">
+      <div class="max-w-6xl mx-auto flex items-center gap-2 overflow-x-auto tab-scrollbar scroll-smooth py-1 px-1" id="day-tabs">
         <!-- Dynamically rendered tabs -->
       </div>
     </div>
@@ -979,7 +1024,7 @@
                 name: "搭乘 特急由布院之森 3 號 (ゆふいんの森)",
                 mapQuery: "JR由布院站",
                 transfer: "博多站 1F「在來線中央改札」刷 QR Code 進站 ➔ 電子螢幕確認在來線 5/6/7 號月台 ➔ 10:11 發車 ➔ 12:27 抵達 JR 由布院站。",
-                tips: "乘車資訊：4 號車廂 12 番 CD、13 番 CD。高層式古典車廂，沿途欣賞大分森林山川風光。"
+                tips: "【QR 故障備案】：若手機無網路或 QR Code 無法使用，持訂票時使用的信用卡＋訂票電話末四碼（1256），到 JR 綠色窗口／指定席售票機列印實體車票。博多站走「在來線中央剪票口」（或博多口／筑紫口在來線閘門），切勿走藍色招牌的新幹線閘門！4 號車廂 12 番 CD、13 番 CD。"
               }
             ]
           },
@@ -1358,7 +1403,7 @@
                 name: "飯店 ➔ 福岡機場國際線 3 樓出發大廳",
                 mapQuery: "福岡空港 国際線 3階出発ロビー",
                 transfer: "使用 GO App 叫 2 台一般計程車 (每台 2人+2大箱+隨身)，輸入目的地標註「3 階 出発ロビー」。",
-                tips: "計程車直接開上高架專用降車場，正前方就是長榮報到大廳！【注意】：日本計程車門由司機自動控制開關，切勿自己動手拉車門！"
+                tips: "【叫車防呆】：一個 GO 帳號同時只能叫 1 台車。請兩位旅伴各用自己的 GO App 同時叫車；出發前先完成手機認證與信用卡綁定。若只有一個帳號可用，請飯店櫃檯協助叫第二台計程車。計程車直接開上高架專用降車場，正前方就是長榮報到大廳！注意：日本計程車門由司機自動控制開關，切勿自己動手拉車門！"
               },
               {
                 time: "10:25 - 11:00",
@@ -1424,21 +1469,24 @@
 
     function renderDayTabs() {
       const container = document.getElementById('day-tabs');
-      container.innerHTML = ITINERARY_DATA.map((d, index) => {
+      const tabsHtml = ITINERARY_DATA.map((d, index) => {
         const isActive = index === currentDayIndex;
         return `
           <button onclick="switchDay(${index})" 
-                  class="flex-shrink-0 flex items-center gap-2 px-3.5 py-1.5 rounded-xl font-medium text-xs md:text-sm transition-all duration-200 ${
+                  class="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-medium text-xs md:text-sm transition-all duration-200 select-none ${
                     isActive 
                       ? 'bg-blue-600 text-white shadow-sm ring-2 ring-blue-400/40 font-semibold' 
                       : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200/80 dark:border-slate-800 hover:text-slate-900 dark:hover:text-white'
                   }">
             <span class="w-2 h-2 rounded-full ${isActive ? 'bg-emerald-300 animate-pulse' : 'bg-slate-300 dark:bg-slate-700'}"></span>
             <span>Day ${d.day}</span>
-            <span class="${isActive ? 'text-blue-100' : 'text-slate-400 dark:text-slate-500'} text-[11px]">(${d.date} ${d.weekday})</span>
+            <span class="${isActive ? 'text-blue-100' : 'text-slate-400 dark:text-slate-500'} text-[11px]">(${d.date})</span>
           </button>
         `;
       }).join('');
+
+      // Add generous trailing spacer to make sure Day 8 & Day 9 are never hidden by container overflow
+      container.innerHTML = tabsHtml + '<div class="shrink-0 w-12 h-6 pointer-events-none"></div>';
     }
 
     function renderDayBanner(data) {
@@ -1533,21 +1581,16 @@
       container.innerHTML = budgetHtml + paymentHtml;
     }
 
-    // Helper to highlight transit keywords (platforms, fares, step numbers, and arrows) with vivid badges
+    // Helper to highlight transit keywords
     function decorateKeywords(text) {
       if (!text) return '';
       return text
-        // Replace arrows with a sleek, colored arrow symbol without bulky badges
         .replace(/\s*(?:➔|->|→)\s*/g, ' <span class="font-bold text-blue-600 text-sm md:text-base px-1">➔</span> ')
-        // Highlight step numbers at start or in sentences (e.g. 1. 2. 3. 4.)
         .replace(/(?:^|\s)([1-5])[\.、]\s*/g, ' <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-blue-600 text-white font-bold text-[11px] mx-1 align-middle">$1</span> ')
-        // Highlight platform tags like 【2號月台】 or 【1號月台】
         .replace(/(【[^】]+】)/g, '<span class="font-bold text-blue-900 bg-blue-100/80 px-2 py-0.5 rounded border border-blue-200 inline-block my-0.5 align-middle text-[12px] md:text-[13px]">$1</span>')
-        // Highlight transit cost/fare info like (車資 260円...) or (單程 420 日圓...)
         .replace(/(\([^)]*?(?:車資|日圓|円|封頂|逼卡|刷卡)[^)]*?\))/g, '<span class="font-medium text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 inline-block my-0.5 align-middle text-[12px] md:text-[13px]">$1</span>');
     }
 
-    // Helper to format transit routes as a unified block with matching balanced font size
     function formatTransferSteps(transferText) {
       if (!transferText) return '';
       return `
@@ -1557,9 +1600,7 @@
       `;
     }
 
-    // Dynamic stage color palette palette generator based on the active Day's theme
     const DAY_THEME_PALETTES = {
-      // Day 1: 博多藍調
       1: [
         { bg: "bg-sky-50 dark:bg-slate-800/90", border: "border-sky-200/80 dark:border-slate-700", iconBg: "bg-sky-600 text-white", titleColor: "text-sky-950 dark:text-white", badge: "bg-sky-100 text-sky-800 border-sky-300 dark:bg-slate-700 dark:text-sky-300 dark:border-slate-600" },
         { bg: "bg-blue-50 dark:bg-slate-800/90", border: "border-blue-200/80 dark:border-slate-700", iconBg: "bg-blue-600 text-white", titleColor: "text-blue-950 dark:text-white", badge: "bg-blue-100 text-blue-800 border-blue-300 dark:bg-slate-700 dark:text-blue-300 dark:border-slate-600" },
@@ -1567,7 +1608,6 @@
         { bg: "bg-cyan-50 dark:bg-slate-800/90", border: "border-cyan-200/80 dark:border-slate-700", iconBg: "bg-cyan-700 text-white", titleColor: "text-cyan-950 dark:text-white", badge: "bg-cyan-100 text-cyan-800 border-cyan-300 dark:bg-slate-700 dark:text-cyan-300 dark:border-slate-600" },
         { bg: "bg-blue-100/70 dark:bg-slate-800/90", border: "border-blue-300/80 dark:border-slate-700", iconBg: "bg-blue-800 text-white", titleColor: "text-blue-950 dark:text-white", badge: "bg-blue-200/70 text-blue-900 border-blue-400 dark:bg-slate-700 dark:text-blue-300 dark:border-slate-600" },
       ],
-      // Day 2: 綠意與湖水
       2: [
         { bg: "bg-emerald-50 dark:bg-slate-800/90", border: "border-emerald-200/80 dark:border-slate-700", iconBg: "bg-emerald-600 text-white", titleColor: "text-emerald-950 dark:text-white", badge: "bg-emerald-100 text-emerald-800 border-emerald-300 dark:bg-slate-700 dark:text-emerald-300 dark:border-slate-600" },
         { bg: "bg-teal-50 dark:bg-slate-800/90", border: "border-teal-200/80 dark:border-slate-700", iconBg: "bg-teal-600 text-white", titleColor: "text-teal-950 dark:text-white", badge: "bg-teal-100 text-teal-800 border-teal-300 dark:bg-slate-700 dark:text-teal-300 dark:border-slate-600" },
@@ -1575,7 +1615,6 @@
         { bg: "bg-cyan-50 dark:bg-slate-800/90", border: "border-cyan-200/80 dark:border-slate-700", iconBg: "bg-cyan-700 text-white", titleColor: "text-cyan-950 dark:text-white", badge: "bg-cyan-100 text-cyan-800 border-cyan-300 dark:bg-slate-700 dark:text-cyan-300 dark:border-slate-600" },
         { bg: "bg-teal-100/60 dark:bg-slate-800/90", border: "border-teal-300/80 dark:border-slate-700", iconBg: "bg-teal-800 text-white", titleColor: "text-teal-950 dark:text-white", badge: "bg-teal-200/70 text-teal-900 border-teal-400 dark:bg-slate-700 dark:text-teal-300 dark:border-slate-600" },
       ],
-      // Day 3: 紫羅蘭微醺
       3: [
         { bg: "bg-purple-50 dark:bg-slate-800/90", border: "border-purple-200/80 dark:border-slate-700", iconBg: "bg-purple-600 text-white", titleColor: "text-purple-950 dark:text-white", badge: "bg-purple-100 text-purple-800 border-purple-300 dark:bg-slate-700 dark:text-purple-300 dark:border-slate-600" },
         { bg: "bg-fuchsia-50 dark:bg-slate-800/90", border: "border-fuchsia-200/80 dark:border-slate-700", iconBg: "bg-fuchsia-600 text-white", titleColor: "text-fuchsia-950 dark:text-white", badge: "bg-fuchsia-100 text-fuchsia-800 border-fuchsia-300 dark:bg-slate-700 dark:text-fuchsia-300 dark:border-slate-600" },
@@ -1583,7 +1622,6 @@
         { bg: "bg-pink-50 dark:bg-slate-800/90", border: "border-pink-200/80 dark:border-slate-700", iconBg: "bg-pink-600 text-white", titleColor: "text-pink-950 dark:text-white", badge: "bg-pink-100 text-pink-800 border-pink-300 dark:bg-slate-700 dark:text-pink-300 dark:border-slate-600" },
         { bg: "bg-purple-100/60 dark:bg-slate-800/90", border: "border-purple-300/80 dark:border-slate-700", iconBg: "bg-purple-800 text-white", titleColor: "text-purple-950 dark:text-white", badge: "bg-purple-200/70 text-purple-900 border-purple-400 dark:bg-slate-700 dark:text-purple-300 dark:border-slate-600" },
       ],
-      // Day 4: 暖陽太宰府
       4: [
         { bg: "bg-amber-50 dark:bg-slate-800/90", border: "border-amber-200/80 dark:border-slate-700", iconBg: "bg-amber-600 text-white", titleColor: "text-amber-950 dark:text-white", badge: "bg-amber-100 text-amber-800 border-amber-300 dark:bg-slate-700 dark:text-amber-300 dark:border-slate-600" },
         { bg: "bg-orange-50 dark:bg-slate-800/90", border: "border-orange-200/80 dark:border-slate-700", iconBg: "bg-orange-600 text-white", titleColor: "text-orange-950 dark:text-white", badge: "bg-orange-100 text-orange-800 border-orange-300 dark:bg-slate-700 dark:text-orange-300 dark:border-slate-600" },
@@ -1591,7 +1629,6 @@
         { bg: "bg-rose-50 dark:bg-slate-800/90", border: "border-rose-200/80 dark:border-slate-700", iconBg: "bg-rose-600 text-white", titleColor: "text-rose-950 dark:text-white", badge: "bg-rose-100 text-rose-800 border-rose-300 dark:bg-slate-700 dark:text-rose-300 dark:border-slate-600" },
         { bg: "bg-amber-100/70 dark:bg-slate-800/90", border: "border-amber-300/80 dark:border-slate-700", iconBg: "bg-amber-800 text-white", titleColor: "text-amber-950 dark:text-white", badge: "bg-amber-200/70 text-amber-900 border-amber-400 dark:bg-slate-700 dark:text-amber-300 dark:border-slate-600" },
       ],
-      // Day 5: 關門海峽深邃海藍
       5: [
         { bg: "bg-slate-100 dark:bg-slate-800/90", border: "border-slate-300/80 dark:border-slate-700", iconBg: "bg-slate-700 text-white", titleColor: "text-slate-950 dark:text-white", badge: "bg-slate-200 text-slate-800 border-slate-300 dark:bg-slate-700 dark:text-slate-200 dark:border-slate-600" },
         { bg: "bg-blue-100/70 dark:bg-slate-800/90", border: "border-blue-300/80 dark:border-slate-700", iconBg: "bg-blue-800 text-white", titleColor: "text-blue-950 dark:text-white", badge: "bg-blue-200/70 text-blue-900 border-blue-300 dark:bg-slate-700 dark:text-blue-300 dark:border-slate-600" },
@@ -1599,7 +1636,6 @@
         { bg: "bg-sky-100/70 dark:bg-slate-800/90", border: "border-sky-300/80 dark:border-slate-700", iconBg: "bg-sky-800 text-white", titleColor: "text-sky-950 dark:text-white", badge: "bg-sky-200/70 text-sky-900 border-sky-300 dark:bg-slate-700 dark:text-sky-300 dark:border-slate-600" },
         { bg: "bg-slate-200/70 dark:bg-slate-800/90", border: "border-slate-400/70 dark:border-slate-700", iconBg: "bg-slate-900 text-white", titleColor: "text-slate-950 dark:text-white", badge: "bg-slate-300/70 text-slate-900 border-slate-400 dark:bg-slate-700 dark:text-slate-300 dark:border-slate-600" },
       ],
-      // Day 6: 由布院山林翠綠
       6: [
         { bg: "bg-emerald-50 dark:bg-slate-800/90", border: "border-emerald-200/80 dark:border-slate-700", iconBg: "bg-emerald-700 text-white", titleColor: "text-emerald-950 dark:text-white", badge: "bg-emerald-100 text-emerald-800 border-emerald-300 dark:bg-slate-700 dark:text-emerald-300 dark:border-slate-600" },
         { bg: "bg-green-50 dark:bg-slate-800/90", border: "border-green-200/80 dark:border-slate-700", iconBg: "bg-green-700 text-white", titleColor: "text-green-950 dark:text-white", badge: "bg-green-100 text-green-800 border-green-300 dark:bg-slate-700 dark:text-green-300 dark:border-slate-600" },
@@ -1607,7 +1643,6 @@
         { bg: "bg-lime-50 dark:bg-slate-800/90", border: "border-lime-200/80 dark:border-slate-700", iconBg: "bg-lime-700 text-white", titleColor: "text-lime-950 dark:text-white", badge: "bg-lime-100 text-lime-800 border-lime-300 dark:bg-slate-700 dark:text-lime-300 dark:border-slate-600" },
         { bg: "bg-emerald-100/70 dark:bg-slate-800/90", border: "border-emerald-300/80 dark:border-slate-700", iconBg: "bg-emerald-900 text-white", titleColor: "text-emerald-950 dark:text-white", badge: "bg-emerald-200/70 text-emerald-900 border-emerald-400 dark:bg-slate-700 dark:text-emerald-300 dark:border-slate-600" },
       ],
-      // Day 7: 糸島海洋青藍
       7: [
         { bg: "bg-cyan-50 dark:bg-slate-800/90", border: "border-cyan-200/80 dark:border-slate-700", iconBg: "bg-cyan-600 text-white", titleColor: "text-cyan-950 dark:text-white", badge: "bg-cyan-100 text-cyan-800 border-cyan-300 dark:bg-slate-700 dark:text-cyan-300 dark:border-slate-600" },
         { bg: "bg-teal-50 dark:bg-slate-800/90", border: "border-teal-200/80 dark:border-slate-700", iconBg: "bg-teal-600 text-white", titleColor: "text-teal-950 dark:text-white", badge: "bg-teal-100 text-teal-800 border-teal-300 dark:bg-slate-700 dark:text-teal-300 dark:border-slate-600" },
@@ -1615,7 +1650,6 @@
         { bg: "bg-cyan-100/60 dark:bg-slate-800/90", border: "border-cyan-300/80 dark:border-slate-700", iconBg: "bg-cyan-700 text-white", titleColor: "text-cyan-950 dark:text-white", badge: "bg-cyan-200/70 text-cyan-900 border-cyan-400 dark:bg-slate-700 dark:text-cyan-300 dark:border-slate-600" },
         { bg: "bg-teal-100/70 dark:bg-slate-800/90", border: "border-teal-300/80 dark:border-slate-700", iconBg: "bg-teal-800 text-white", titleColor: "text-teal-950 dark:text-white", badge: "bg-teal-200/70 text-teal-900 border-teal-400 dark:bg-slate-700 dark:text-teal-300 dark:border-slate-600" },
       ],
-      // Day 8: 百道夕照與天際藍
       8: [
         { bg: "bg-blue-50 dark:bg-slate-800/90", border: "border-blue-200/80 dark:border-slate-700", iconBg: "bg-blue-600 text-white", titleColor: "text-blue-950 dark:text-white", badge: "bg-blue-100 text-blue-800 border-blue-300 dark:bg-slate-700 dark:text-blue-300 dark:border-slate-600" },
         { bg: "bg-indigo-50 dark:bg-slate-800/90", border: "border-indigo-200/80 dark:border-slate-700", iconBg: "bg-indigo-600 text-white", titleColor: "text-indigo-950 dark:text-white", badge: "bg-indigo-100 text-indigo-800 border-indigo-300 dark:bg-slate-700 dark:text-indigo-300 dark:border-slate-600" },
@@ -1623,7 +1657,6 @@
         { bg: "bg-blue-100/60 dark:bg-slate-800/90", border: "border-blue-300/80 dark:border-slate-700", iconBg: "bg-blue-700 text-white", titleColor: "text-blue-950 dark:text-white", badge: "bg-blue-200/70 text-blue-900 border-blue-400 dark:bg-slate-700 dark:text-blue-300 dark:border-slate-600" },
         { bg: "bg-indigo-100/70 dark:bg-slate-800/90", border: "border-indigo-300/80 dark:border-slate-700", iconBg: "bg-indigo-900 text-white", titleColor: "text-indigo-950 dark:text-white", badge: "bg-indigo-200/70 text-indigo-900 border-indigo-400 dark:bg-slate-700 dark:text-indigo-300 dark:border-slate-600" },
       ],
-      // Day 9: 賦歸岩灰藍
       9: [
         { bg: "bg-slate-50 dark:bg-slate-800/90", border: "border-slate-200/80 dark:border-slate-700", iconBg: "bg-slate-600 text-white", titleColor: "text-slate-950 dark:text-white", badge: "bg-slate-100 text-slate-800 border-slate-300 dark:bg-slate-700 dark:text-slate-300 dark:border-slate-600" },
         { bg: "bg-blue-50/80 dark:bg-slate-800/90", border: "border-blue-200/80 dark:border-slate-700", iconBg: "bg-blue-600 text-white", titleColor: "text-blue-950 dark:text-white", badge: "bg-blue-100 text-blue-800 border-blue-300 dark:bg-slate-700 dark:text-blue-300 dark:border-slate-600" },
@@ -1641,7 +1674,7 @@
         const theme = dayPalettes[sIdx % dayPalettes.length];
         return `
           <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xs overflow-hidden transition-all duration-200">
-            <!-- Stage Header with Day-Coordinated Palette and High-Contrast Dark Mode Styling -->
+            <!-- Stage Header -->
             <div class="px-4 md:px-5 py-3 ${theme.bg} border-b ${theme.border} flex flex-wrap items-center justify-between gap-2">
               <div class="flex items-center gap-2.5">
                 <span class="w-7 h-7 md:w-8 md:h-8 rounded-lg ${theme.iconBg} flex items-center justify-center text-xs md:text-sm font-semibold shadow-2xs">
@@ -1700,7 +1733,7 @@
                       ${formatTransferSteps(item.transfer)}
                     </div>
 
-                    <!-- Key Tips and Anti-Mistake Alert with compact refined font -->
+                    <!-- Key Tips and Anti-Mistake Alert -->
                     ${item.tips ? `
                       <div class="flex items-start gap-2 pt-2 border-t border-amber-200 dark:border-amber-900/60 bg-amber-50/70 dark:bg-amber-950/30 p-3 rounded-xl text-amber-950 dark:text-amber-200 shadow-2xs">
                         <span class="mt-0.5 text-amber-600 dark:text-amber-400 text-sm md:text-base flex-shrink-0"><i class="fa-solid fa-triangle-exclamation"></i></span>
@@ -1784,19 +1817,17 @@
     // Text-to-Speech audio speech synthesis helper
     function playSpeech(text, lang = 'ja-JP') {
       if (!('speechSynthesis' in window)) {
-        // Fallback message if speech is not supported in the user agent
         console.warn('Speech synthesis not supported in this browser.');
         return;
       }
 
-      window.speechSynthesis.cancel(); // Stop any ongoing speech
+      window.speechSynthesis.cancel();
 
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = lang;
-      utterance.rate = 0.88; // Slightly relaxed pace for crystal clear comprehension
+      utterance.rate = 0.88;
       utterance.pitch = 1.0;
 
-      // Select matching localized voice if available
       const voices = window.speechSynthesis.getVoices();
       if (voices && voices.length > 0) {
         const matchedVoice = voices.find(v => v.lang.startsWith(lang) || v.lang.replace('_', '-').startsWith(lang));
@@ -1808,7 +1839,6 @@
       window.speechSynthesis.speak(utterance);
     }
 
-    // Ensure voices are loaded ahead of time
     if ('speechSynthesis' in window) {
       window.speechSynthesis.onvoiceschanged = () => {
         window.speechSynthesis.getVoices();
@@ -1842,7 +1872,6 @@
       `;
     }
 
-    // Modal helpers for Add to Home screen
     function openAddToHomeModal() {
       const modal = document.getElementById('pwa-modal');
       if (modal) modal.classList.remove('hidden');
@@ -1853,7 +1882,6 @@
       if (modal) modal.classList.add('hidden');
     }
 
-    // Dark Mode Toggle Logic
     function toggleDarkMode() {
       const htmlEl = document.documentElement;
       const isDark = htmlEl.classList.toggle('dark');
@@ -1893,7 +1921,6 @@
       }
     }
 
-    // Live Japan Clock Updater (UTC+9 JST)
     function updateJapanClock() {
       const clockEl = document.getElementById('japan-clock');
       if (!clockEl) return;
@@ -1914,7 +1941,6 @@
       clockEl.innerHTML = `${jstString} <span class="text-blue-600 dark:text-blue-400 font-bold ml-0.5">JST</span>`;
     }
 
-    // Fetch Live Fukuoka Weather
     async function fetchFukuokaWeather() {
       const weatherEl = document.getElementById('fukuoka-weather');
       if (!weatherEl) return;
@@ -1963,7 +1989,6 @@
       }
     }
 
-    // Initialize on page load
     window.addEventListener('DOMContentLoaded', () => {
       initTheme();
       updateView();
