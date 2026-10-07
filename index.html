@@ -66,54 +66,31 @@
   <!-- Top Header -->
   <header class="sticky top-0 z-50 glass-nav border-b border-slate-200/80 shadow-xs">
     <div class="max-w-6xl mx-auto px-4 py-2.5 space-y-2">
-      <!-- Row 1: Brand title & Action buttons (Dark mode + Add to Home) -->
+      <!-- Row 1: Brand title & ONLY Theme Toggle on top right for maximum title space -->
       <div class="flex items-center justify-between gap-3">
-        <div class="flex items-center gap-2.5 min-w-0">
+        <div class="flex items-center gap-2.5 min-w-0 flex-1">
           <span class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white flex items-center justify-center font-bold text-base shadow-xs shrink-0">
             <i class="fa-solid fa-plane-departure"></i>
           </span>
-          <div class="min-w-0">
-            <h1 class="text-base md:text-xl font-bold tracking-tight text-slate-900 dark:text-white truncate">
+          <div class="min-w-0 flex-1">
+            <h1 class="text-base sm:text-lg md:text-xl font-bold tracking-tight text-slate-900 dark:text-white leading-tight">
               2026 福岡 9 日深度自由行手冊
             </h1>
-            <p class="text-[11px] md:text-xs text-slate-500 dark:text-slate-400 truncate">10/21(三) ~ 10/29(四) 全鐵路防暈切換・支付防呆</p>
+            <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400">10/21(三) ~ 10/29(四) 全鐵路防暈切換・支付防呆</p>
           </div>
         </div>
 
-        <div class="flex items-center gap-1.5 shrink-0">
-          <!-- External Course Link Button -->
-          <a href="https://claire0505.github.io/japan_fukuoka_trip_lesson/" 
-             target="_blank" 
-             rel="noopener noreferrer"
-             class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/70 dark:hover:bg-emerald-900/80 text-emerald-800 dark:text-emerald-200 border border-emerald-300 dark:border-emerald-700 transition-all shadow-2xs active:scale-95"
-             title="前往日英旅遊雙語隨身學習網頁">
-            <i class="fa-solid fa-graduation-cap text-emerald-600 dark:text-emerald-400"></i>
-            <span class="hidden sm:inline">日英旅遊雙語隨身學習</span>
-            <span class="sm:hidden text-[11px]">旅遊雙語</span>
-            <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-emerald-500 opacity-70"></i>
-          </a>
-
-          <!-- Add to Home Screen Button -->
-          <button onclick="openAddToHomeModal()" 
-                  class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-blue-50 hover:bg-blue-100 dark:bg-blue-950/70 dark:hover:bg-blue-900/80 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 transition-all shadow-2xs active:scale-95"
-                  title="將本手冊加入手機主畫面">
-            <i class="fa-solid fa-mobile-screen-button text-blue-600 dark:text-blue-400"></i>
-            <span class="hidden sm:inline">加入主畫面</span>
-            <span class="sm:hidden text-[11px]">存主畫面</span>
-          </button>
-
-          <!-- Dark Mode Toggle Button -->
-          <button onclick="toggleDarkMode()" 
-                  id="theme-toggle-btn"
-                  class="w-8 h-8 rounded-xl flex items-center justify-center bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-amber-400 border border-slate-200 dark:border-slate-700 transition-all shadow-2xs active:scale-95"
-                  title="切換暗黑 / 明亮模式">
-            <i id="theme-moon-icon" class="fa-solid fa-moon text-xs"></i>
-            <i id="theme-sun-icon" class="fa-solid fa-sun text-xs hidden"></i>
-          </button>
-        </div>
+        <!-- Right: ONLY Theme Toggle Button (齒輪/主題圖示) -->
+        <button onclick="toggleDarkMode()" 
+                id="theme-toggle-btn"
+                class="w-8 h-8 rounded-xl flex items-center justify-center bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-amber-400 border border-slate-200 dark:border-slate-700 transition-all shadow-2xs active:scale-95 shrink-0"
+                title="切換暗黑 / 明亮模式">
+          <i id="theme-moon-icon" class="fa-solid fa-gear text-xs"></i>
+          <i id="theme-sun-icon" class="fa-solid fa-gear text-xs hidden"></i>
+        </button>
       </div>
 
-      <!-- Row 2: Live Japan Clock & Fukuoka Weather (Dedicated row for mobile breathing room) -->
+      <!-- Row 2: Live Japan Clock & Fukuoka Weather -->
       <div class="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-700 dark:text-slate-300 bg-slate-100/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 px-3 py-1.5 rounded-xl shadow-2xs">
         <div id="fukuoka-weather" class="flex items-center gap-1.5 font-medium">
           <i class="fa-solid fa-cloud-sun text-amber-500 animate-pulse"></i>
@@ -123,6 +100,28 @@
           <i class="fa-regular fa-clock text-blue-600 dark:text-blue-400"></i>
           <span id="japan-clock" class="font-semibold text-slate-900 dark:text-slate-100">載入日本時間...</span>
         </div>
+      </div>
+
+      <!-- Row 3: Action Buttons Moved Below Weather (旅遊雙語 + 存主畫面) -->
+      <div class="grid grid-cols-2 sm:flex sm:items-center sm:justify-end gap-2 pt-0.5">
+        <!-- External Course Link Button -->
+        <a href="https://claire0505.github.io/japan_fukuoka_trip_lesson/" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/70 dark:hover:bg-emerald-900/80 text-emerald-800 dark:text-emerald-200 border border-emerald-300 dark:border-emerald-700 transition-all shadow-2xs active:scale-95"
+           title="前往日英旅遊雙語隨身學習網頁">
+          <i class="fa-solid fa-graduation-cap text-emerald-600 dark:text-emerald-400"></i>
+          <span>日英旅遊雙語隨身學習</span>
+          <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-emerald-500 opacity-70"></i>
+        </a>
+
+        <!-- Add to Home Screen Button -->
+        <button onclick="openAddToHomeModal()" 
+                class="flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-blue-50 hover:bg-blue-100 dark:bg-blue-950/70 dark:hover:bg-blue-900/80 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 transition-all shadow-2xs active:scale-95"
+                title="將本手冊加入手機主畫面">
+          <i class="fa-solid fa-mobile-screen-button text-blue-600 dark:text-blue-400"></i>
+          <span>加入主畫面捷徑</span>
+        </button>
       </div>
     </div>
 
