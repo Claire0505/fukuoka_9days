@@ -1,0 +1,1978 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026 福岡九州 9 日深度自由行手冊</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'Noto Sans TC', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            },
+            accent: {
+              subway: '#0284c7', // 地鐵藍
+              jr: '#dc2626',     // JR 紅
+              bus: '#16a34a',    // 公車綠
+              pay: '#d97706',    // 支付黃/橘
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom scrollbar for horizontal tabs */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(12px);
+    }
+    .dark .glass-nav {
+      background: rgba(15, 23, 42, 0.94);
+      border-color: rgba(51, 65, 85, 0.8);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 antialiased min-h-screen flex flex-col font-sans selection:bg-blue-100 selection:text-blue-900 transition-colors duration-200">
+
+  <!-- Top Header -->
+  <header class="sticky top-0 z-50 glass-nav border-b border-slate-200/80 shadow-xs">
+    <div class="max-w-6xl mx-auto px-4 py-2.5 space-y-2">
+      <!-- Row 1: Brand title & Action buttons (Dark mode + Add to Home) -->
+      <div class="flex items-center justify-between gap-3">
+        <div class="flex items-center gap-2.5 min-w-0">
+          <span class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white flex items-center justify-center font-bold text-base shadow-xs shrink-0">
+            <i class="fa-solid fa-plane-departure"></i>
+          </span>
+          <div class="min-w-0">
+            <h1 class="text-base md:text-xl font-bold tracking-tight text-slate-900 dark:text-white truncate">
+              2026 福岡 9 日深度自由行手冊
+            </h1>
+            <p class="text-[11px] md:text-xs text-slate-500 dark:text-slate-400 truncate">10/21(三) ~ 10/29(四) 全鐵路防暈切換・支付防呆</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-1.5 shrink-0">
+          <!-- External Course Link Button -->
+          <a href="https://claire0505.github.io/japan_fukuoka_trip_lesson/" 
+             target="_blank" 
+             rel="noopener noreferrer"
+             class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/70 dark:hover:bg-emerald-900/80 text-emerald-800 dark:text-emerald-200 border border-emerald-300 dark:border-emerald-700 transition-all shadow-2xs active:scale-95"
+             title="前往日英旅遊雙語隨身學習網頁">
+            <i class="fa-solid fa-graduation-cap text-emerald-600 dark:text-emerald-400"></i>
+            <span class="hidden sm:inline">日英旅遊雙語隨身學習</span>
+            <span class="sm:hidden text-[11px]">旅遊雙語</span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-emerald-500 opacity-70"></i>
+          </a>
+
+          <!-- Add to Home Screen Button -->
+          <button onclick="openAddToHomeModal()" 
+                  class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-blue-50 hover:bg-blue-100 dark:bg-blue-950/70 dark:hover:bg-blue-900/80 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 transition-all shadow-2xs active:scale-95"
+                  title="將本手冊加入手機主畫面">
+            <i class="fa-solid fa-mobile-screen-button text-blue-600 dark:text-blue-400"></i>
+            <span class="hidden sm:inline">加入主畫面</span>
+            <span class="sm:hidden text-[11px]">存主畫面</span>
+          </button>
+
+          <!-- Dark Mode Toggle Button -->
+          <button onclick="toggleDarkMode()" 
+                  id="theme-toggle-btn"
+                  class="w-8 h-8 rounded-xl flex items-center justify-center bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-amber-400 border border-slate-200 dark:border-slate-700 transition-all shadow-2xs active:scale-95"
+                  title="切換暗黑 / 明亮模式">
+            <i id="theme-moon-icon" class="fa-solid fa-moon text-xs"></i>
+            <i id="theme-sun-icon" class="fa-solid fa-sun text-xs hidden"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Row 2: Live Japan Clock & Fukuoka Weather (Dedicated row for mobile breathing room) -->
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-700 dark:text-slate-300 bg-slate-100/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 px-3 py-1.5 rounded-xl shadow-2xs">
+        <div id="fukuoka-weather" class="flex items-center gap-1.5 font-medium">
+          <i class="fa-solid fa-cloud-sun text-amber-500 animate-pulse"></i>
+          <span>福岡天氣取得中...</span>
+        </div>
+        <div class="flex items-center gap-1.5 font-mono text-[11px] md:text-xs">
+          <i class="fa-regular fa-clock text-blue-600 dark:text-blue-400"></i>
+          <span id="japan-clock" class="font-semibold text-slate-900 dark:text-slate-100">載入日本時間...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day Navigation Bar (Horizontal Scrollable) -->
+    <div class="border-t border-slate-100 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-900/40 px-2 py-2">
+      <div class="max-w-6xl mx-auto flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 px-2" id="day-tabs">
+        <!-- Dynamically rendered tabs -->
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 py-6 md:py-8 space-y-6">
+    <!-- Day Header Summary Banner -->
+    <div id="day-banner" class="rounded-2xl p-5 md:p-7 text-white shadow-md relative overflow-hidden transition-all duration-300">
+      <!-- Dynamic Banner Content Loaded via JS -->
+    </div>
+
+    <!-- Payment & Budget Guide Row -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="budget-payment-cards">
+      <!-- Dynamic Cost and Payment Cards Loaded via JS -->
+    </div>
+
+    <!-- Timeline Itinerary Details -->
+    <div class="space-y-4" id="timeline-container">
+      <!-- Timeline cards inserted dynamically -->
+    </div>
+
+    <!-- Daily Special Tips & Logistics Modal / Card -->
+    <div id="extra-notes-container" class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-xs">
+      <!-- Extra Notes Content -->
+    </div>
+  </main>
+
+  <!-- Add to Home Screen Modal -->
+  <div id="pwa-modal" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4 hidden">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-sm w-full p-5 border border-slate-200 dark:border-slate-800 shadow-xl space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+        <h3 class="font-bold text-slate-900 dark:text-white text-base flex items-center gap-2">
+          <i class="fa-solid fa-mobile-screen text-blue-600"></i>
+          加入手機主畫面捷徑
+        </h3>
+        <button onclick="closeAddToHomeModal()" class="w-7 h-7 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 flex items-center justify-center">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="space-y-3 text-xs md:text-sm text-slate-600 dark:text-slate-300">
+        <!-- iOS Safari Instructions -->
+        <div class="p-3 bg-blue-50/70 dark:bg-blue-950/40 rounded-xl border border-blue-100 dark:border-blue-900/60 space-y-1.5">
+          <div class="font-bold text-blue-950 dark:text-blue-300 flex items-center gap-1.5">
+            <i class="fa-brands fa-apple text-sm"></i>
+            iPhone (Safari 瀏覽器)
+          </div>
+          <ol class="list-decimal list-inside space-y-1 text-slate-700 dark:text-slate-300 text-xs">
+            <li>點擊底部工具列中間的「<i class="fa-solid fa-arrow-up-from-bracket text-blue-600"></i> <b>分享</b>」圖示</li>
+            <li>在選單中往下滾動，點選「<i class="fa-regular fa-square-plus text-slate-700 dark:text-slate-300"></i> <b>加入主畫面</b>」</li>
+            <li>點擊右上角「<b>新增</b>」即可以 App 圖標常駐手機！</li>
+          </ol>
+        </div>
+
+        <!-- Android Chrome Instructions -->
+        <div class="p-3 bg-emerald-50/70 dark:bg-emerald-950/40 rounded-xl border border-emerald-100 dark:border-emerald-900/60 space-y-1.5">
+          <div class="font-bold text-emerald-950 dark:text-emerald-300 flex items-center gap-1.5">
+            <i class="fa-brands fa-android text-sm"></i>
+            Android / Pixel (Chrome)
+          </div>
+          <ol class="list-decimal list-inside space-y-1 text-slate-700 dark:text-slate-300 text-xs">
+            <li>點擊右上角「<i class="fa-solid fa-ellipsis-vertical text-slate-700 dark:text-slate-300"></i> <b>三個點</b>」選單</li>
+            <li>點選「<b>加到主螢幕</b>」或「<b>安裝應用程式</b>」</li>
+            <li>確認「<b>新增</b>」完成捷徑設置！</li>
+          </ol>
+        </div>
+      </div>
+
+      <button onclick="closeAddToHomeModal()" class="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs md:text-sm shadow-xs transition-colors">
+        我知道了
+      </button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="mt-auto border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 py-6 text-center text-xs text-slate-500 dark:text-slate-400">
+    <div class="max-w-6xl mx-auto px-4 space-y-2">
+      <p class="font-medium text-slate-700 dark:text-slate-300">福岡・太宰府・門司港・由布院・糸島・南藏院 9 日全圖解行程手冊</p>
+      <p>點擊任何景點或車站名稱可直接連往 Google 地圖導航與查閱即時店家狀態。</p>
+      <div class="flex justify-center items-center gap-4 text-slate-400 dark:text-slate-500 pt-1">
+        <span><i class="fa-solid fa-train-subway mr-1"></i>地下鐵封頂 640円</span>
+        <span>•</span>
+        <span><i class="fa-solid fa-credit-card mr-1"></i>雙武器感應</span>
+        <span>•</span>
+        <span><i class="fa-solid fa-location-dot mr-1"></i>全面點位整合</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Helper to generate Google Maps Search URL
+    function gmapUrl(placeName, queryAppend = "福岡") {
+      const q = encodeURIComponent(`${placeName} ${queryAppend}`.trim());
+      return `https://www.google.com/maps/search/?api=1&query=${q}`;
+    }
+
+    const ITINERARY_DATA = [
+      {
+        day: 1,
+        date: "10/21",
+        weekday: "週三",
+        theme: "初來乍到福岡・機場通關與博多舊市區文化巡禮",
+        colorTheme: "from-blue-700 via-indigo-700 to-sky-700",
+        budget: {
+          transport: "約 720~800 日圓/人 (地鐵觸發 640 日圓單日封頂)",
+          tickets: "0 日圓/人 (神社、商店街與屋台皆為免費開放區域)",
+          baseCost: "約 680 日圓 (達封頂後超過次數系統自動全免)",
+        },
+        paymentWeapon: {
+          subway: "【全體皆刷信用卡】七隈線/空港線，單日最高上限自動封頂 640 日圓 (搭超過3次自動免錢)。切勿刷 Suica/ICOCA，否則無封頂優惠！",
+          bus: "【全體皆刷交通 IC 卡】西鐵巴士尚未支援信用卡感應，iPhone 逼 Apple Pay 交通卡，Pixel 逼實體 IC 卡 (無卡抽整理券投現)。"
+        },
+        stages: [
+          {
+            time: "03:40 - 12:45",
+            title: "第一階段：出發飛抵福岡・入境通關 ＆ 飯店寄物",
+            icon: "fa-plane-arrival",
+            items: [
+              {
+                time: "12:00 - 12:30",
+                name: "國際線接駁車 ➔ 福岡地下鐵空港線",
+                mapQuery: "福岡空港 國內線",
+                transfer: "【機場動線推薦】：出關經 LAWSON 右轉走 A2/A3 出口 ➔ 搭「國際線→國內線免費接駁車」➔ 下樓進入地下鐵「福岡空港站」搭空港線至博多站，轉乘七隈線至「渡邊通站」 (車資 260円，全體刷信用卡累積今日封頂)。",
+                tips: "由國內線進地鐵閘門，全體開始累積單日 640円 額度。"
+              },
+              {
+                time: "12:36 - 12:45",
+                name: "BASE LAYER HOTEL 福岡",
+                mapQuery: "BASE LAYER HOTEL 福岡",
+                transfer: "從「渡邊通站」出站步行約 2 分鐘即達飯店。",
+                tips: "【行李寄放】：未滿 15:00 自助機台未開，請走向人工櫃檯出示或播放下方日英語對話卡，領取引換証號碼牌。",
+                phrases: [
+                  {
+                    title: "飯店櫃檯｜入住前先寄放行李",
+                    ja: "チェックイン前ですが、荷物を預かっていただけますか？",
+                    romaji: "Check-in mae desu ga, nimotsu o azukatte itadakemasu ka?",
+                    zh: "還沒到入住時間，請問可以先寄放行李嗎？",
+                    en: "It's before check-in time, but could you please keep our luggage?"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            time: "13:00 - 15:15",
+            title: "第二階段：白金茶房名物午餐 ＆ 返回飯店正式 Check-in",
+            icon: "fa-utensils",
+            items: [
+              {
+                time: "13:00 - 14:30",
+                name: "白金茶房 (Sirogane Sabo)",
+                mapQuery: "白金茶房 福岡",
+                transfer: "從飯店步行約 6 分鐘前往。",
+                tips: "享用福岡在地知名的經典手沖咖啡與完美職人圓形鬆餅。"
+              },
+              {
+                time: "14:30 - 14:45",
+                name: "7-ELEVEN 福岡高砂1丁目店",
+                mapQuery: "7-Eleven 福岡高砂1丁目店",
+                transfer: "餐後順路步行回飯店途中。",
+                tips: "補給冷飲與零嘴。"
+              },
+              {
+                time: "14:50 - 15:15",
+                name: "BASE LAYER HOTEL 福岡 (正式入住)",
+                mapQuery: "BASE LAYER HOTEL 福岡",
+                transfer: "步行回飯店櫃檯。",
+                tips: "櫃檯辦理入住並憑號碼牌領取行李進房整備，稍作休息準備下午行程。",
+                phrases: [
+                  {
+                    title: "飯店櫃檯｜辦理入住 ＆ 憑號碼牌領取行李",
+                    ja: "チェックインをお願いします。あと、こちらが先ほど預けた荷物の引換証です。よろしくお願いします。",
+                    romaji: "Check-in o onegai shimasu. Ato, kochira ga sakihodo azuketa nimotsu no hikikaeshō desu. Yoroshiku onegai shimasu.",
+                    zh: "我要辦理入住。另外這是剛才寄放行李的號碼牌，麻煩您了。",
+                    en: "I'd like to check in, please. Also, here is the claim ticket for the luggage we left earlier. Thank you."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            time: "15:20 - 17:30",
+            title: "第三階段：博多舊市區文化巡禮",
+            icon: "fa-torii-gate",
+            items: [
+              {
+                time: "15:20 - 15:33",
+                name: "渡邊通站 ➔ 櫛田神社前站 (七隈線)",
+                mapQuery: "櫛田神社前站",
+                transfer: "自「渡邊通站」搭乘地下鐵七隈線 2 站直達「櫛田神社前站」。車資 210円 (全體逼感應信用卡)。",
+                tips: "七隈線全線最新最快，出站即達神社旁。"
+              },
+              {
+                time: "15:37 - 16:30",
+                name: "櫛田神社",
+                mapQuery: "櫛田神社 福岡",
+                transfer: "出站步行 1 分鐘。",
+                tips: "博多總鎮守，必看常設的巨大「博多祇園山笠」神轎，祈求旅途平安。"
+              },
+              {
+                time: "16:39 - 17:30",
+                name: "上川端商店街",
+                mapQuery: "上川端商店街 福岡",
+                transfer: "自櫛田神社步行 3 分鐘即達。",
+                tips: "博多最古老的拱廊商店街，長達 400 公尺的老舖、雜貨與藥妝散策。"
+              }
+            ]
+          },
+          {
+            time: "17:42 - 20:20",
+            title: "第四階段：【彈性晚餐對決】鰻魚 vs. 運河城 vs. 中洲屋台",
+            icon: "fa-bowl-rice",
+            items: [
+              {
+                time: "17:42 - 19:30",
+                name: "選擇A：博多名代 吉塚鰻魚屋",
+                mapQuery: "博多名代 吉塚うなぎ屋",
+                transfer: "自上川端商店街步行約 5 分鐘。",
+                tips: "百年老字號鰻魚飯，外酥內嫩；若人潮適中可直接排隊入座。"
+              },
+              {
+                time: "17:50 - 19:10",
+                name: "選擇B：The Full Full Hakata ＆ 博多運河城",
+                mapQuery: "THE FULL FULL HAKATA",
+                transfer: "若鰻魚飯大排長龍，先至 Full Full 買招牌明太子法國麵包墊胃，再漫步至博多運河城。",
+                tips: "運河城看水舞秀與逛街，晚餐備案可選城內「鰻のエイト (Unagi no Eight)」(19:13)。"
+              },
+              {
+                time: "19:16 - 20:20",
+                name: "選擇C：中洲屋台街",
+                mapQuery: "中洲屋台街 福岡",
+                transfer: "沿那珂川河畔步行前往中洲屋台區。",
+                tips: "體驗博多道地路邊攤氛圍、關東煮、一口餃子與拉麵。"
+              }
+            ]
+          },
+          {
+            time: "20:22 之後",
+            title: "第五階段：地鐵封頂回航 ＆ 24H 超市大補給",
+            icon: "fa-basket-shopping",
+            items: [
+              {
+                time: "20:22 - 20:38",
+                name: "櫛田神社前站 ➔ 渡邊通站",
+                mapQuery: "渡邊通站",
+                transfer: "搭乘地下鐵七隈線回「渡邊通站」。車資 210円 (全體感應信用卡)。",
+                tips: "【封頂觸發】：此趟刷完累計 680円，觸發單日 640円 封頂機制，多出的 40円 自動免收！"
+              },
+              {
+                time: "20:38 - 21:00",
+                name: "SUNNY 渡邊通店 (24小時營業超市)",
+                mapQuery: "SUNNY 渡辺通店",
+                transfer: "出渡邊通站徒步 1 分鐘即達。",
+                tips: "品項最齊全的在地大超市，採買今晚宵夜、福岡草莓、當季水果與隔日早餐。"
+              },
+              {
+                time: "21:06",
+                name: "返回 BASE LAYER HOTEL 福岡",
+                mapQuery: "BASE LAYER HOTEL 福岡",
+                transfer: "從 SUNNY 步行 3 分鐘回飯店休息。",
+                tips: "整理戰利品，準備迎接明日天神購物與大濠公園行程。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        day: 2,
+        date: "10/22",
+        weekday: "週四",
+        theme: "大濠公園晨光・大丸美妝與安全帽雙線進擊 ＆ 天神伴手禮大掃蕩",
+        colorTheme: "from-sky-700 via-teal-700 to-emerald-700",
+        budget: {
+          transport: "單日最高自動封頂 640 日圓 (全日搭福岡地下鐵)",
+          tickets: "0~250 日圓 (大濠公園日本庭園入場門票另計)",
+          baseCost: "約 640 日圓 (全體同一張信用卡刷到底)",
+        },
+        paymentWeapon: {
+          subway: "【全日刷同一張感應信用卡】Apple Pay / Google Pay 或實體卡走信用卡閘門。切記：一人限同一卡同一設備刷整天！否則分開計算無法封頂。",
+          bus: "備用交通 IC 卡 (iPhone 刷 Suica/ICOCA，Pixel 實體卡)。"
+        },
+        stages: [
+          {
+            time: "08:00 - 11:50",
+            title: "第一階段：大濠公園晨光散策與咖啡巡禮",
+            icon: "fa-tree",
+            items: [
+              {
+                time: "08:00 - 08:45",
+                name: "飯店 ➔ 大濠公園 (精準地鐵轉乘)",
+                mapQuery: "大濠公園",
+                transfer: "1. 渡邊通站 往【2號月台】(博多方面) 搭七隈線 1 站至「天神南站」 ➔ 2. 出站沿天神地下街往北步行 8 分鐘至空港線「天神站」 ➔ 3. 往【1號月台】(姪浜/唐津方面) 搭空港線 2 站至「大濠公園站」下車。",
+                tips: "乘車前務必抬頭核對月台 LED 螢幕顯示的發車時間與番線！"
+              },
+              {
+                time: "08:45 - 11:50",
+                name: "大濠公園 ＆ 福岡城跡",
+                mapQuery: "FUK COFFEE Parks",
+                transfer: "出站沿湖畔漫步。",
+                tips: "外帶 FUK COFFEE Parks 咖啡、散步至日本庭園、Cafe Bimi 與福岡城下之橋御門跡。"
+              }
+            ]
+          },
+          {
+            time: "11:50 - 14:00",
+            title: "第二階段：【雙線分頭行動】SHOEI 安全帽 vs. 大丸美妝全制霸",
+            icon: "fa-split",
+            items: [
+              {
+                time: "11:50 - 12:00",
+                name: "大濠公園站 ➔ 天神站 (匯流分線點)",
+                mapQuery: "地下鐵 天神站",
+                transfer: "大濠公園站【2號月台】(福岡空港方面) 搭空港線回「天神站」下車，在此兵分兩路！",
+                tips: "全體仍刷信用卡，累積次數計入 640円 封頂。"
+              },
+              {
+                time: "12:00 - 14:00",
+                name: "■ Pixel 組：SHOEI Gallery FUKUOKA",
+                mapQuery: "SHOEI Gallery FUKUOKA",
+                transfer: "天神站走地下街至「天神南站」【1號月台】搭七隈線回「渡邊通站」，出站步行 7 分鐘抵達 SHOEI。",
+                tips: "Z-9 安全帽選購與 PFS 個人化頭型量測。結束後先回 Base Layer Hotel 放好裝備，再搭七隈線至天神南站往北走到「福岡 PARCO」B1F 會合。",
+                phrases: [
+                  {
+                    title: "店內報到｜表明預約身分 ＆ 出示預訂編號",
+                    ja: "こんにちは。本日予約をしている［お名前］です。予約番号は SHOEI-0016995 です。よろしくお願いします。",
+                    romaji: "Konnichiwa. Honjitsu yoyaku o shite iru [Onamae] desu. Yoyaku bangou wa SHOEI-0016995 desu. Yoroshiku onegai shimasu.",
+                    zh: "您好，我有事先預約今天，我叫［您的姓名］。預訂編號是 SHOEI-0016995，麻煩您了。",
+                    en: "Hello, I have a reservation today under [Your Name]. My booking reference is SHOEI-0016995. Thank you."
+                  },
+                  {
+                    title: "試戴服務｜指名 Z-9 與 PFS 頭型量測",
+                    ja: "Z-9（ゼットナイン）の試着と、PFS（頭型フィッティング）をお願いできますか？",
+                    romaji: "Z-nine no shichaku to, PFS (fitting) o onegai dekimasu ka?",
+                    zh: "我想試戴 Z-9 型號，並進行 PFS 個人化頭型量測，請問可以幫我安排嗎？",
+                    en: "Could I please try on the Z-9 model and do the PFS personal fitting service?"
+                  },
+                  {
+                    title: "結帳免稅｜確認退稅與加購專用防霧片",
+                    ja: "免税（Tax-Free）でお願いします。あと、Z-9専用のピンロックシートも1枚追加してください。",
+                    romaji: "Menzei (Tax-Free) de onegai shimasu. Ato, Z-nine sen'you no Pinlock sheet mo ichimai tsuika shite kudasai.",
+                    zh: "我要辦理免稅。另外請幫我加購一片 Z-9 專用的 Pinlock 防霧片。",
+                    en: "Tax-free refund, please. Also, please add one Z-9 Pinlock anti-fog sheet as well."
+                  }
+                ]
+              },
+              {
+                time: "12:00 - 14:00",
+                name: "■ iPhone 組：福岡大丸百貨 (Daimaru)",
+                mapQuery: "福岡大丸百貨",
+                transfer: "天神站出站沿地下街往南直走到底，直接連通走進大丸百貨。",
+                tips: "東館 1F 買齊 Dior、肌膚之鑰、SK-II (缺貨轉往三越/岩田屋)；東館 B1 逛無印良品；本館 B2 買 Yoku moku、茅乃舍與「鈴懸」迷你銅鑼燒。至本館 B1 免稅櫃台抽號碼牌退稅。"
+              }
+            ]
+          },
+          {
+            time: "14:00 - 16:30",
+            title: "第三階段：【全體匯流】PARCO 潮流午餐與動漫可愛爆擊",
+            icon: "fa-gamepad",
+            items: [
+              {
+                time: "14:00 - 15:20",
+                name: "福岡 PARCO 本館 B1F (午餐 ＆ 買努努雞)",
+                mapQuery: "福岡 PARCO",
+                transfer: "全體於 PARCO 本館 B1F 會合。",
+                tips: "排隊名店 3 選 1：Shin Shin 拉麵、極味や (鐵板漢堡排)、麺や兼虎 (沾麵)。吃飽在 B1F「The天神」買一盒招牌「努努雞 (冷炸雞)」放保冷袋回飯店冰。"
+              },
+              {
+                time: "15:20 - 16:30",
+                name: "PARCO 本館 8F ＆ HOKA Fukuoka Tenjin",
+                mapQuery: "HOKA Fukuoka Tenjin",
+                transfer: "搭乘商場電梯至 8F，逛完前往周邊 HOKA 門市。",
+                tips: "掃貨吉伊卡哇 (ちいかわらんど)、KIDDY LAND、吉卜力橡子共和國，再到 HOKA 試穿選鞋。"
+              }
+            ]
+          },
+          {
+            time: "16:30 - 19:30",
+            title: "第四階段：【由北向南】MINA 天神 ＆ 地下街伴手禮大掃蕩",
+            icon: "fa-bag-shopping",
+            items: [
+              {
+                time: "16:30 - 17:40",
+                name: "MINA 天神 (商圈最北端)",
+                mapQuery: "MINA 天神",
+                transfer: "自 PARCO 往北步行 2 分鐘。",
+                tips: "1F/2F 旗艦級 UNIQLO (店內專用櫃台退稅)、B1F 3COINS+plus 與松本清藥妝補貨。"
+              },
+              {
+                time: "17:40 - 19:30",
+                name: "天神地下街伴手禮名店連線",
+                mapQuery: "天神地下街",
+                transfer: "全體進入天神地下街「由北往南」邊逛邊買。",
+                tips: "西4番街 RINGO 蘋果派、東4番街 BAKE 起司塔、西6番街 ふくや明太子罐頭、西6番街 伊都きんぐ草莓生銅鑼燒、西7番街 PRESS BUTTER SAND、東11番街 芋屋金次郎 (必買現炸地瓜條分食！)。"
+              }
+            ]
+          },
+          {
+            time: "19:30 之後",
+            title: "第五階段：返抵飯店 ＆ 宵夜甜點炸雞派對",
+            icon: "fa-beer-mug-empty",
+            items: [
+              {
+                time: "19:30 - 20:00",
+                name: "天神南站 ➔ 渡邊通站",
+                mapQuery: "天神南站",
+                transfer: "地下街最南端進入「天神南站」，往【1號月台】(橋本方面) 搭七隈線 1 站回「渡邊通站」。",
+                tips: "全體感應信用卡進出閘門，達今日上限 640円。"
+              },
+              {
+                time: "20:00 之後",
+                name: "飯店卸貨 ＆ 宵夜甜點盛宴",
+                mapQuery: "BASE LAYER HOTEL 福岡",
+                transfer: "步行回飯店放戰利品，就近在居酒屋晚餐。",
+                tips: "回房舉辦頂級點心派對：鈴懸銅鑼燒、RINGO蘋果派、BAKE起司塔、現炸地瓜條配冰涼努努雞與生啤酒！"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        day: 3,
+        date: "10/23",
+        weekday: "週五",
+        theme: "警固早茶・天神/博多拉麵對決・博多車站百貨主力爆買 ＆ 裏天神微醺夜",
+        colorTheme: "from-indigo-700 via-purple-700 to-pink-700",
+        budget: {
+          transport: "約 630 日圓/人 (地下鐵 210 x 3趟，若多搭一趟亦封頂 640円)",
+          tickets: "0 日圓 (樂水園抹茶體驗另計 600 日圓)",
+          baseCost: "約 630 日圓",
+        },
+        paymentWeapon: {
+          subway: "【全體皆刷信用卡】地下鐵全線 210円/趟，滿 640円 自動封頂。iPhone 建議使用實體感應信用卡避開 Apple Pay 交通卡干擾。",
+          bus: "西鐵公車或小店使用 Apple Pay Suica / 實體交通 IC 卡。"
+        },
+        stages: [
+          {
+            time: "09:30 - 10:45",
+            title: "第一階段：警固早茶慢活時光 ＆ 天然足湯",
+            icon: "fa-mug-hot",
+            items: [
+              {
+                time: "09:30 - 09:40",
+                name: "Base Layer Hotel ➔ 警固神社 / 警固公園",
+                mapQuery: "警固神社",
+                transfer: "直接步行約 10 分鐘，或搭七隈線至「天神南站」走過去。",
+                tips: "早晨悠閒醒腦步調。"
+              },
+              {
+                time: "09:40 - 10:45",
+                name: "Blue Bottle Coffee 天神店 ＆ 警固足湯",
+                mapQuery: "藍瓶咖啡 警固神社",
+                transfer: "警固神社社務所 1 樓。",
+                tips: "社務所 1 樓藍瓶外帶手沖咖啡，至旁邊免費天然足湯泡腳暖身。"
+              }
+            ]
+          },
+          {
+            time: "10:45 - 12:30",
+            title: "第二階段：午餐拉麵對決 (2 選 1・皆無豬腥味)",
+            icon: "fa-bowl-food",
+            items: [
+              {
+                time: "10:45 - 12:00",
+                name: "方案A：麺処兼虎 天神本店 (極致濃郁魚介沾麵)",
+                mapQuery: "麺処 兼虎 天神本店",
+                transfer: "從警固神社步行 3 分鐘直達兼虎 ➔ 吃飽後自天神站搭空港線往【2號月台】(博多/福岡空港行) 直達博多站 (210円)。",
+                tips: "招牌超粗極太麵搭配濃厚魚介豚骨湯頭，滿足重口味愛好者。"
+              },
+              {
+                time: "10:45 - 12:00",
+                name: "方案B：博多 Shin-Shin 拉麵 (博多 DEITOS 店)",
+                mapQuery: "博多らーめん ShinShin 博多デイトス店",
+                transfer: "自天神站搭空港線至「博多站」 ➔ 直攻博多 Deitos 2 樓麵街道 (210円)。",
+                tips: "湯頭純粹甘甜清爽、毫無豬腥味，招牌極細麵，吃完無縫開始逛博多車站！"
+              }
+            ]
+          },
+          {
+            time: "12:30 - 17:00",
+            title: "第三階段：博多車站百貨主力爆買 ＆ 貼心分組閒晃路線",
+            icon: "fa-cart-shopping",
+            items: [
+              {
+                time: "12:30 - 17:00",
+                name: "主力逛街：博多車站商圈 (阪急 / AMU / DEITOS)",
+                mapQuery: "博多阪急",
+                transfer: "博多站出站即達各大商場連通道。",
+                tips: "博多阪急 1F 領 5% 優惠券、3F 退稅，B1F 搶 AMANBERRY、galette au beurre 現烤餅乾、MENBEI Premium；AMU Plaza 5F 迪士尼、8F 任天堂；中央北改札旁現烤 PRESS BUTTER SAND。"
+              },
+              {
+                time: "分組休閒",
+                name: "不逛街分組：3 條博多防迷路悠閒路線 (約 16:30 中央大時鐘會合)",
+                mapQuery: "JR博多城 屋上庭園",
+                transfer: "以博多站中央大時鐘為原點分流。",
+                tips: "【路線1 車站頂樓】：搭電梯上 10F/RF 燕林廣場空中花園鐵道神社；【路線2 浪漫庭園】：漫步至樂水園喝抹茶(門票100+抹茶500)與住吉神社；【路線3 歷史散步】：大博通直走訪東長寺日本最大木雕坐佛與櫛田神社。"
+              }
+            ]
+          },
+          {
+            time: "17:00 - 18:30",
+            title: "第四階段：退回飯店卸裝充電",
+            icon: "fa-hotel",
+            items: [
+              {
+                time: "17:00 - 17:15",
+                name: "博多站 ➔ 渡邊通站 (Base Layer Hotel)",
+                mapQuery: "渡邊通站",
+                transfer: "於地鐵博多站下樓至七隈線改札口，抬頭確認往「天神南・橋本」月台後刷信用卡進站。車資 210円。",
+                tips: "七隈線一車免轉乘直達飯店樓下。"
+              },
+              {
+                time: "17:15 - 18:30",
+                name: "客房卸裝休息整備",
+                mapQuery: "BASE LAYER HOTEL 福岡",
+                transfer: "出站步行 2 分鐘進房。",
+                tips: "雙手淨空，洗臉補妝，準備迎接無負擔微醺之夜。"
+              }
+            ]
+          },
+          {
+            time: "18:30 之後",
+            title: "第五階段：裏天神居酒屋微醺之夜",
+            icon: "fa-champagne-glasses",
+            items: [
+              {
+                time: "18:30 左右",
+                name: "首選：炉端 むさし座 (Musashiza)",
+                mapQuery: "炉端 むさし座 福岡",
+                transfer: "飯店往天神南方向步行 5-8 分鐘的小巷戰區。",
+                tips: "裏天神超人氣名店！傳統大飯杓遞送料理，必吃炭烤海鮮、烤雞肉串與特色沙拉 (客滿則轉戰隔壁「銀」等居酒屋)。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        day: 4,
+        date: "10/24",
+        weekday: "週六",
+        theme: "太宰府神仙走法・雙商圈彈性補漏 ＆ 福岡塔百萬夜景",
+        colorTheme: "from-amber-600 via-rose-700 to-purple-800",
+        budget: {
+          transport: "約 1,600 ～ 2,000 日圓/人 (地鐵+西鐵+公車)",
+          tickets: "800 日圓/人 (福岡塔觀景台，出示護照或享優惠)",
+          baseCost: "約 2,400 ～ 2,800 日圓",
+        },
+        paymentWeapon: {
+          subway: "【全體皆刷信用卡】福岡地下鐵全線，享單日 640 日圓自動封頂！",
+          bus: "【全體皆刷交通 IC 卡】西鐵電車、太宰府巴士、西鐵公車皆尚未支援信用卡，iPhone 逼 Suica/ICOCA，Pixel 拿實體 IC 卡。"
+        },
+        stages: [
+          {
+            time: "08:45 - 10:15",
+            title: "第一階段：觀光列車直奔太宰府",
+            icon: "fa-train",
+            items: [
+              {
+                time: "08:45 - 09:30",
+                name: "飯店 ➔ 西鐵福岡 (天神) 站",
+                mapQuery: "西鐵福岡天神站",
+                transfer: "渡邊通站搭七隈線 1 站至「天神南站」 (刷信用卡 210円) ➔ 走地下街抵達西鐵天神站「南口」。",
+                tips: "走地下街防曬避雨最輕鬆。"
+              },
+              {
+                time: "09:47 - 10:14",
+                name: "西鐵天神 ➔ 太宰府 (旅人列車直達)",
+                mapQuery: "西鐵太宰府站",
+                transfer: "西鐵天神站第 1/2 月台搭乘 09:47 太宰府行「旅人直達車」 (420円，逼交通 IC 卡)。",
+                tips: "若錯過直達車：搭特急/急行至「西鐵二日市站」1/4月台轉普通車至終點太宰府。"
+              }
+            ]
+          },
+          {
+            time: "10:20 - 14:30",
+            title: "第二階段：【護腿神仙走法】雙神社祈福與表參道",
+            icon: "fa-torii-gate",
+            items: [
+              {
+                time: "10:20 - 11:20",
+                name: "寶滿宮 竈門神社 (結緣名社)",
+                mapQuery: "寶滿宮 竈門神社",
+                transfer: "太宰府站出站右側站牌搭「まほろば號」巴士至終點「內山」下車 (100円，逼 IC 卡)。",
+                tips: "知名結緣聖地，社務所設計絕美現代，櫻花楓樹林立。"
+              },
+              {
+                time: "11:30 - 12:15",
+                name: "天開稻荷神社 (免爬好漢坡平移法)",
+                mapQuery: "天開稻荷神社",
+                transfer: "內山原站牌搭下山方向巴士，於「三条公民館前」下車 (100円)，走山洞隧道平移直達天開稻荷神社！",
+                tips: "不用爬百階長梯，輕鬆平移參拜九州著名開運神社。"
+              },
+              {
+                time: "12:15 - 14:30",
+                name: "太宰府天滿宮 ＆ 表參道名物午餐",
+                mapQuery: "太宰府天滿宮",
+                transfer: "自稻荷神社沿步道一路下坡直達太宰府本殿後方。",
+                tips: "摸御神牛與參拜臨時假殿。午餐表參道吃「暖暮拉麵」、買「かさの家」現烤梅枝餅、朝聖隈研吾設計星巴克。"
+              }
+            ]
+          },
+          {
+            time: "14:30 - 17:30",
+            title: "第三階段：【雙商圈彈性補漏】天神美妝 vs. 博多車站",
+            icon: "fa-arrows-split-up-and-left",
+            items: [
+              {
+                time: "14:30 - 15:10",
+                name: "太宰府 ➔ 天神 ➔ 飯店卸貨",
+                mapQuery: "BASE LAYER HOTEL 福岡",
+                transfer: "搭西鐵至二日市站轉特急回西鐵天神站南口 (420円) ➔ 方案A：直接往南步行 6-8 分回飯店；方案B：天神南站搭七隈線 1 站回渡邊通站 (刷信用卡 210円)。",
+                tips: "回飯店稍作休息，隨後依前兩日購物進度二選一出發補考！"
+              },
+              {
+                time: "補考選擇A",
+                name: "天神商圈補考版 (主攻動漫周邊、專櫃彩妝)",
+                mapQuery: "福岡大丸百貨",
+                transfer: "步行直達天神核心商圈。",
+                tips: "大丸百貨補齊 DIOR、肌膚之鑰、SK-II；PARCO KIDDY LAND；天神地下街 PRESS BUTTER SAND。"
+              },
+              {
+                time: "補考選擇B",
+                name: "博多車站掃貨版 (主攻伴手禮、電器、現烤點心)",
+                mapQuery: "JR博多城 AMU PLAZA",
+                transfer: "渡邊通站搭七隈線 3 站直達「博多站」 (刷卡 210円)。",
+                tips: "博多阪急 B1F AMANBERRY、MENBEI 仙貝；AMU Plaza 任天堂與頂樓空中花園。"
+              }
+            ]
+          },
+          {
+            time: "17:40 - 20:00",
+            title: "第四階段：匯流出發 ＆ 福岡塔百萬夜景",
+            icon: "fa-tower-observation",
+            items: [
+              {
+                time: "17:40 - 18:10",
+                name: "出發前往福岡塔 (Fukuoka Tower)",
+                mapQuery: "福岡塔",
+                transfer: "天神出發：於「天神巴士總站前 1A」搭西鐵巴士 W1、302直達；博多出發：於「博多巴士總站 1F 6號」搭 306 直達 (車資約 240円，刷 IC 卡)。",
+                tips: "直達海濱塔下，免去多次轉乘。"
+              },
+              {
+                time: "18:10 - 19:30",
+                name: "福岡塔觀景台浪漫百萬夜景",
+                mapQuery: "福岡塔 觀景台",
+                transfer: "購票搭透明高速電梯直衝 123 公尺高空。",
+                tips: "360 度俯瞰博多灣夕陽與市區閃爍萬家燈火。"
+              },
+              {
+                time: "19:30 - 20:00",
+                name: "福岡塔 ➔ 返回市區",
+                mapQuery: "渡邊通",
+                transfer: "於「福岡塔前」搭 W1 / W2 號公車直達天神/渡邊通 (刷交通卡)。若回博多取件搭 306 號轉七隈線。",
+                tips: "地鐵已觸發 640円 封頂，免費乘搭。"
+              }
+            ]
+          },
+          {
+            time: "20:00 之後",
+            title: "第五階段：春吉/渡邊通在地美食慶功",
+            icon: "fa-utensils",
+            items: [
+              {
+                time: "20:00 之後",
+                name: "渡邊通 / 春吉 地雞居酒屋與博多一口餃子",
+                mapQuery: "春吉 居酒屋",
+                transfer: "步行於春吉與渡邊通巷弄間。",
+                tips: "挑選炭火地雞串燒配上博多一口餃子與生啤酒，放鬆乾杯！"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        day: 5,
+        date: "10/25",
+        weekday: "週日",
+        theme: "關門海峽大縱走 ＆ 皿倉山竹燈雙夜景 (終極神仙實戰版)",
+        colorTheme: "from-blue-900 via-indigo-950 to-slate-900",
+        budget: {
+          transport: "約 5,040 日圓/人 (新幹線來回3200+JR1040+聯絡船800)",
+          tickets: "約 2,230 日圓/人 (皿倉山纜車來回1230+小倉城竹燈節當日券1000)",
+          baseCost: "約 7,270 日圓/人",
+        },
+        paymentWeapon: {
+          subway: "【武器一：感應信用卡】福岡地下鐵七隈線、JR 鹿兒島本線 (全面支援信用卡直接進出站)。",
+          bus: "【武器二：交通 IC 卡與現金】關門聯絡船、西鐵公車、皿倉山纜車售票機。iPhone 逼 Suica，Pixel 現金購票。",
+          shinkansen: "【新幹線特惠票】：走人工通道出示紙本整理票與護照正本，嚴禁插自動閘門！"
+        },
+        stages: [
+          {
+            time: "07:40 - 09:00",
+            title: "第一階段：博多換票與新幹線直奔小倉・門司港",
+            icon: "fa-bolt",
+            items: [
+              {
+                time: "07:40 - 08:00",
+                name: "博多站筑紫口 (1F) 取票通關",
+                mapQuery: "JR博多站 筑紫口",
+                transfer: "搭七隈線至博多站 (刷信用卡 210円) ➔ 1F 筑紫口側新幹線中央改札旁「専用引き換え機 (粉色機台)」掃 4 次 QR Code 取去程整理票。",
+                tips: "人工窗口出示紙本整理票與護照正本進站，直奔 1~3 車廂自由席。"
+              },
+              {
+                time: "08:12 - 08:27",
+                name: "博多 ➔ 小倉 (山陽新幹線)",
+                mapQuery: "JR小倉站",
+                transfer: "新幹線僅 15 分鐘極速直達小倉站！",
+                tips: "下至 3 樓大廳，走人工通道出示整理票「完全出站」。"
+              },
+              {
+                time: "08:40 - 08:55",
+                name: "小倉 ➔ 門司港 (JR 鹿兒島本線)",
+                mapQuery: "JR門司港站",
+                transfer: "從小倉站 3 樓大廳紅色標誌「JR九州線」進站，第 7 或 8 月台搭車至門司港 (單程 280円，全體刷感應信用卡)。",
+                tips: "無縫換乘，15 分鐘達九州鐵路起點門司港。"
+              }
+            ]
+          },
+          {
+            time: "09:10 - 12:45",
+            title: "第二階段：唐戶市場活跳跳海鮮 ＆ 跨海回程",
+            icon: "fa-fish",
+            items: [
+              {
+                time: "09:10 - 09:15",
+                name: "門司港碼頭 ➔ 唐戶市場 (關門聯絡船)",
+                mapQuery: "唐戶市場",
+                transfer: "步行至碼頭搭乘關門快艇，5 分鐘直衝本州下關碼頭 (單程 400円，iPhone 逼 Suica，Pixel 現金直接買 800円 來回票)。",
+                tips: "吹海風欣賞關門大橋。"
+              },
+              {
+                time: "09:30 - 11:10",
+                name: "唐戶市場 (活跳跳馬關街) ＆ 赤間神宮",
+                mapQuery: "唐戶市場 馬關街",
+                transfer: "下船步行 2 分鐘進市場，隨後漫步至赤間神宮與春帆樓。",
+                tips: "週日限定海鮮市集！自選手握黑鮪魚壽司、河豚刺身到岸邊野餐。"
+              },
+              {
+                time: "11:15 - 12:45",
+                name: "跨海回程【方案B最推薦】：搭船回門司港",
+                mapQuery: "門司港懷舊區",
+                transfer: "方案A：走 780m 海底隧道；方案B (最推薦)：散步回唐戶碼頭搭 5 分鐘快艇回門司港；方案C：搭公車經下關站走陸路。",
+                tips: "方案B最省體力，保留雙腿給晚上的皿倉山與小倉城。"
+              }
+            ]
+          },
+          {
+            time: "12:45 - 14:00",
+            title: "2.5 階段：門司港懷舊散策 ＆ 焗烤燒咖哩午餐",
+            icon: "fa-pepper-hot",
+            items: [
+              {
+                time: "散策亮點",
+                name: "門司港懷舊區打卡巡禮",
+                mapQuery: "藍翼門司吊橋",
+                transfer: "景點皆在步行 1~10 分鐘內。",
+                tips: "香蕉人公仔(1分)、藍翼門司吊橋(2分)、舊門司稅關(4分)、門司港懷舊展望室(5分/門票300円)、舊門司三井倶樂部(5分)、JR門司港車站星巴克(6分)。"
+              },
+              {
+                time: "燒咖哩午餐",
+                name: "名店 3 選 1：BEAR FRUITS / 伽哩本舗 / こがねむし",
+                mapQuery: "BEAR FRUITS 門司港",
+                transfer: "BEAR FRUITS 就在 JR 車站正對面；伽哩本舗在港邊 2 樓景觀席。",
+                tips: "熱騰騰濃郁牽絲起司配半熟蛋與秘製香料咖哩，人氣爆棚！"
+              }
+            ]
+          },
+          {
+            time: "14:00 - 21:00",
+            title: "第三階段：下半場黃金交叉點【推薦路線C：皿倉山夜景＋小倉城竹燈】",
+            icon: "fa-mountain-sun",
+            items: [
+              {
+                time: "15:30 - 16:30",
+                name: "門司港 ➔ 八幡 (JR 免出站直達)",
+                mapQuery: "JR八幡站",
+                transfer: "門司港搭 JR 鹿兒島本線直達八幡站 (480円，刷信用卡)。",
+                tips: "一車直達，出站轉乘皿倉山免費登山接駁巴士。"
+              },
+              {
+                time: "16:30 - 18:20",
+                name: "皿倉山百萬夜景 (新日本三大夜景)",
+                mapQuery: "皿倉山纜車站",
+                transfer: "八幡站搭免費接駁巴士抵達山麓站 ➔ 搭登山斜坡纜車與單軌懸吊纜車上山頂 (來回 1,230円，iPhone 逼 Suica/Pixel 投現)。",
+                tips: "居高臨下俯瞰北九州「價值百億」壯麗工業港灣全景燈海！"
+              },
+              {
+                time: "19:20 - 20:45",
+                name: "八幡 ➔ 小倉 ＆ 小倉城竹燈節 (Kokura Castle Takeakari)",
+                mapQuery: "小倉城",
+                transfer: "八幡搭 JR 回小倉 (280円，刷信用卡) ➔ 步行至小倉城花園 (門票 1,000円 現金)。",
+                tips: "漫步在萬盞手雕竹燈燭火掩映的小倉城古城下，光影極致夢幻！"
+              },
+              {
+                time: "小倉美食",
+                name: "小倉魚町銀天街必買",
+                mapQuery: "シロヤベーカリー 小倉店",
+                transfer: "小倉城步行至魚町銀天街。",
+                tips: "SHIROYA (シロヤ) 鮮奶油蛋糕與煉乳麵包、OCM 三明治烤雞奶油起司、辻利茶舗抹茶冰淇淋。"
+              }
+            ]
+          },
+          {
+            time: "21:00 之後",
+            title: "第四階段：小倉 3F 取回程票 ＆ 新幹線極速回博多",
+            icon: "fa-train-subway",
+            items: [
+              {
+                time: "21:00 - 21:30",
+                name: "小倉站 ➔ 博多站 (山陽新幹線)",
+                mapQuery: "JR小倉站 新幹線改札口",
+                transfer: "小倉站 3F 綠色窗口旁粉紅機台掃 QR Code 領回程紙本整理票 ➔ 走人工通道出示護照搭新幹線自由席直奔博多 (15分鐘)。",
+                tips: "返抵博多轉乘地鐵七隈線回渡邊通 (刷信用卡 0~210円)，完美收官。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        day: 6,
+        date: "10/26",
+        weekday: "週一",
+        theme: "由布院之森景觀鐵道・湯之坪街道散策・金鱗湖仙境 ＆ 博多站伴手禮夜戰",
+        colorTheme: "from-emerald-800 via-teal-900 to-green-900",
+        budget: {
+          transport: "約 420 日圓/人 (地鐵七隈線往返，由布院之森特急已預先結帳)",
+          tickets: "0 日圓/人",
+          baseCost: "約 420 日圓",
+        },
+        paymentWeapon: {
+          subway: "【全體刷實體感應信用卡】渡邊通往返博多站，單日上限 640 日圓。免除 iPhone 交通卡手動切換困擾。",
+          yufuinNoMori: "【QR Code 電子車票過閘】博多站在來線中央剪票口出示專屬網址 QR Code，過閘後按更新轉為綠色「乘車中」。"
+        },
+        stages: [
+          {
+            time: "09:30 - 12:30",
+            title: "第一階段：飯店出發 ＆ 由布院之森 3 號直奔溫泉鄉",
+            icon: "fa-tree",
+            items: [
+              {
+                time: "09:30 - 09:50",
+                name: "飯店 ➔ JR 博多站",
+                mapQuery: "渡邊通站",
+                transfer: "渡邊通站搭七隈線往【1號月台】(博多方向) 直達終點「博多站」 (刷卡 210円)。",
+                tips: "一車直達博多站地下一樓。"
+              },
+              {
+                time: "09:50 - 12:27",
+                name: "搭乘 特急由布院之森 3 號 (ゆふいんの森)",
+                mapQuery: "JR由布院站",
+                transfer: "博多站 1F「在來線中央改札」刷 QR Code 進站 ➔ 電子螢幕確認在來線 5/6/7 號月台 ➔ 10:11 發車 ➔ 12:27 抵達 JR 由布院站。",
+                tips: "乘車資訊：4 號車廂 12 番 CD、13 番 CD。高層式古典車廂，沿途欣賞大分森林山川風光。"
+              }
+            ]
+          },
+          {
+            time: "12:30 - 15:30",
+            title: "第二階段：湯之坪街道吃貨散策 ＆ 金鱗湖仙境",
+            icon: "fa-water",
+            items: [
+              {
+                time: "12:30 - 13:30",
+                name: "湯之坪街道散策名物連發",
+                mapQuery: "湯之坪街道 由布院",
+                transfer: "出由布院站沿站前主街筆直前行。",
+                tips: "必吃由布院 Milch 半熟起司蛋糕與手作布丁、金賞可樂餅 (牛肉馬鈴薯餡)。"
+              },
+              {
+                time: "13:30 - 14:30",
+                name: "午餐：由布まぶし 心 (金鱗湖本店)",
+                mapQuery: "由布まぶし 心 金鱗湖本店",
+                transfer: "緊鄰金鱗湖畔。",
+                tips: "享用大分在地特產「豐後牛」或「地雞」釜飯三吃 (原味、拌柚子胡椒醬菜、注高湯成茶泡飯)。"
+              },
+              {
+                time: "14:30 - 15:30",
+                name: "金鱗湖散策 ＆ 天祖神社水中鳥居",
+                mapQuery: "金鱗湖 水中鳥居",
+                transfer: "步行環湖一周。",
+                tips: "天然溫泉與冷泉交匯湖泊，欣賞波光倒影、參拜天祖神社水上鳥居，或在 Cafe La Ruche 畔歇腳。"
+              }
+            ]
+          },
+          {
+            time: "15:30 - 19:30",
+            title: "第三階段：悠閒返程 ＆ 抵達博多",
+            icon: "fa-train-tram",
+            items: [
+              {
+                time: "15:30 - 16:50",
+                name: "金鱗湖 ➔ 漫步返回 JR 由布院站",
+                mapQuery: "JR由布院站",
+                transfer: "沿途逛特色小店與吉卜力專賣店，悠閒散步回車站候車。",
+                tips: "進站看電子看板確認月台 (通常為 1 或 2 號月台)。"
+              },
+              {
+                time: "17:17 - 19:28",
+                name: "搭乘 特急由布院之森 6 號返回博多",
+                mapQuery: "JR博多站",
+                transfer: "17:17 由布院發車 ➔ 19:28 抵達博多站。",
+                tips: "座位：5 號車廂 CD 側相連座位 (預約番號：65516)。"
+              }
+            ]
+          },
+          {
+            time: "19:30 - 22:30",
+            title: "第四與五階段：博多站 1F 伴手禮夜戰 ＆ 空天百萬夜景晚餐",
+            icon: "fa-gift",
+            items: [
+              {
+                time: "19:30 - 21:00",
+                name: "博多車站 1F 伴手禮名店街 (營業至 21:00)",
+                mapQuery: "マイング (Ming) 博多",
+                transfer: "下車不出站體，直接進入 1F マイング (Ming)、DEITOS 與名品市場。",
+                tips: "搶買名單：マイング 1F 努努雞 (冷炸雞易售罄下車先衝)、中央改札旁 PRESS BUTTER SAND 現烤焦糖奶油餅、ふくや 明太子、KOKONEKO貓掌費南雪。"
+              },
+              {
+                time: "21:00 - 22:30",
+                name: "頂樓燕林廣場空中花園夜景 ＆ 空天 (Kooten) 晚餐",
+                mapQuery: "博多城 City Dining Kooten",
+                transfer: "搭乘直達電梯上 10F/RF 頂樓 (開放至 22:00)，再至 9F/10F 挑選餐廳。",
+                tips: "利久牛舌或博多華味鳥水瀧雞肉鍋；餐後自博多站搭七隈線 3/4 月台回渡邊通站 (刷卡 210円)。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        day: 7,
+        date: "10/27",
+        weekday: "週二",
+        theme: "糸島山海秘境包車慢遊 ＆ 博多商圈大採買 (精修旗艦版)",
+        colorTheme: "from-teal-700 via-cyan-800 to-sky-900",
+        budget: {
+          transport: "約 1,940 ～ 2,240 日圓/人 (博多-加布里直通720x2+短程計程車平攤)",
+          tickets: "400 日圓/人 (雷山千如寺參拜料)",
+          charter: "包車 28,000 日圓/車 (4人平攤每人 7,000 日圓現金)",
+          baseCost: "約 9,340 ～ 9,640 日圓 (含包車)",
+        },
+        paymentWeapon: {
+          subway: "【博多 ⇄ 加布里 直通電車：逼交通 IC 卡】姪濱站後切換 JR 鐵路區間，跨系統不適用地鐵封頂，全體逼交通卡 (iPhone: Suica, Pixel: 實體卡)。",
+          charterPay: "【包車尾款】：日圓現金整數支付予司機 (備案: PayPay QR Code)。"
+        },
+        stages: [
+          {
+            time: "08:20 - 09:30",
+            title: "第一階段：計程車接駁 ＆ 一車直通加布里站",
+            icon: "fa-car-side",
+            items: [
+              {
+                time: "08:20 - 08:35",
+                name: "飯店 ➔ 博多站筑紫口 (計程車短駁)",
+                mapQuery: "JR博多站 筑紫口",
+                transfer: "Base Layer Hotel 門口直接搭計程車至博多站筑紫口 (4人平攤約 250-300円/人)，免早起轉乘疲累。",
+                tips: "省時省力直達地鐵空港線改札口。"
+              },
+              {
+                time: "08:44 - 09:20",
+                name: "博多站 ➔ JR 加布里站 (直通運轉・免下車換乘)",
+                mapQuery: "JR加布里站",
+                transfer: "地下鐵博多站【2號月台】搭空港線 (往「筑前前原/西唐津」班次)。列車過姪濱自動直通 JR 筑肥線，一車坐到底！",
+                tips: "車程 36 分鐘車資 720円 (逼交通 IC 卡)。09:20 於加布里站與專屬包車司機會合登車。"
+              }
+            ]
+          },
+          {
+            time: "09:30 - 16:00",
+            title: "第二階段：糸島山海雙境・歷史傳說與深度慢遊 (飲食 2 選 1)",
+            icon: "fa-camera-retro",
+            items: [
+              {
+                time: "選擇A 早午餐",
+                name: "第一站：加布里漁港 住吉丸 牡蠣小屋",
+                mapQuery: "住吉丸 牡蠣小屋 糸島",
+                transfer: "加布里站集合後車程 5 分鐘抵達漁港。",
+                tips: "漁師直營碳烤！必吃牡蠣燒賣、現烤加布里蛤蜊、熟食星鰻/螃蟹釜飯 (全熟食無負擔)。"
+              },
+              {
+                time: "選擇B 午餐",
+                name: "備選：糸島食堂 ほもり (日式手作熟肉定食)",
+                mapQuery: "糸島食堂 ほもり",
+                transfer: "若不吃牡蠣小屋，可選此定食店。",
+                tips: "A5 和牛漢堡排、手作塔塔醬南蠻炸雞、在地櫻井產野菜天婦羅。"
+              },
+              {
+                time: "山海名勝",
+                name: "第二站：雷山千如寺大悲王院 (1300年國家級古剎)",
+                mapQuery: "雷山千如寺大悲王院",
+                transfer: "包車前往山區 (上山彎道多，建議含酸梅防暈車)。",
+                tips: "參拜 4.6 公尺木造千手千眼觀音(國指定重要文化財)、賞 400 年樹齡雷山大楓樹枯山水庭園，求 Samuhara 開運御守。"
+              },
+              {
+                time: "山海名勝",
+                name: "第三站：白絲瀑布 (清冽避暑名勝)",
+                mapQuery: "白絲瀑布 糸島",
+                transfer: "車程約 20 分鐘。",
+                tips: "落差 24 公尺清冽飛瀑、吸飽芬多精負離子，可在小鋪品嚐炭火現烤「鹽烤山女鱒魚」。"
+              },
+              {
+                time: "山海名勝",
+                name: "第四站：芥屋大門公園 龍貓森林綠色隧道",
+                mapQuery: "芥屋大門公園 龍貓森林",
+                transfer: "車程約 35 分鐘前往半島前端。",
+                tips: "日本最大玄武岩海蝕洞旁，走入宮崎駿童話般的防風林弧形拱門，登展望台遠眺玄界灘壯闊海浪。"
+              },
+              {
+                time: "山海名勝",
+                name: "第五站：櫻井二見浦 白色鳥居 ＆ 夫婦岩",
+                mapQuery: "櫻井二見浦 夫婦岩",
+                transfer: "車程約 20 分鐘。",
+                tips: "夕陽二見浦！海中純白大鳥居與以巨大注連繩牽繫的夫婦岩，下午斜陽灑在金色浪花與細沙上最美。"
+              }
+            ]
+          },
+          {
+            time: "16:15 - 19:30",
+            title: "第三與四階段：直通電車返航 ＆ 博多車站商圈旗艦掃貨",
+            icon: "fa-basket-shopping",
+            items: [
+              {
+                time: "16:15 - 16:58",
+                name: "JR 加布里 ➔ 博多站 (直通免轉乘)",
+                mapQuery: "JR加布里站",
+                transfer: "加布里站第 1 月台搭 JR 筑肥線往福岡空港行班次，過姪濱自動變地鐵，一車坐回博多站 (720円，逼交通卡)。",
+                tips: "全體在車上閉目補眠 43 分鐘。"
+              },
+              {
+                time: "17:00 - 19:30",
+                name: "Yodobashi 友都八喜博多旗艦店 ＆ 名品藏",
+                mapQuery: "友都八喜 博多店",
+                transfer: "博多站筑紫口步行 2 分鐘直達 Yodobashi。",
+                tips: "1F~3F 3C電器免稅、4F 超巨型扭蛋機牆 Gashapon Official Shop、B1F 藥妝；站內中央名品藏補齊博多通饅頭與仙貝。戰利品可鎖在筑紫口置物櫃！"
+              }
+            ]
+          },
+          {
+            time: "19:30 之後",
+            title: "第五階段：在地居酒屋慶功 ＆ 返回飯店",
+            icon: "fa-drumstick-bite",
+            items: [
+              {
+                time: "19:30 - 21:30",
+                name: "慶功居酒屋 (平板點餐 2 選 1)：竹乃屋 vs. 鳥貴族",
+                mapQuery: "竹乃屋 博多駅店",
+                transfer: "皆在博多車站步行 2 分鐘內。",
+                tips: "質感在地風【竹乃屋】：主攻福岡名物螺旋烤雞皮、鐵板餃子；歡樂飽食風【鳥貴族筑紫口店】：全中文平板點餐、巨無霸蔥肉串與炊飯。餐後搭七隈線或排班計程車回飯店。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        day: 8,
+        date: "10/28",
+        weekday: "週三",
+        theme: "臥佛朝聖・鋼彈出擊 ＆ 百道濱海濱夕陽福岡塔 (最終夜慶功)",
+        colorTheme: "from-blue-800 via-indigo-900 to-sky-950",
+        budget: {
+          transport: "約 2,100 日圓/人 (地鐵+JR+西鐵公車)",
+          tickets: "800 日圓/人 (福岡塔觀景台門票)",
+          baseCost: "約 2,900 日圓",
+        },
+        paymentWeapon: {
+          subway: "【福岡地下鐵：刷感應信用卡】市區搭乘七隈線刷信用卡累積 640 日圓自動封頂。",
+          bus: "【JR 篠栗線/鹿兒島本線 ＆ 西鐵公車：刷交通 IC 卡】iPhone 逼 Suica，Pixel 逼實體 IC 卡 (公車上下車皆須逼卡)。"
+        },
+        stages: [
+          {
+            time: "07:45 - 10:30",
+            title: "第一階段：前進南藏院 ＆ 世界最大級青銅臥佛朝聖",
+            icon: "fa-hands-praying",
+            items: [
+              {
+                time: "07:45 - 08:30",
+                name: "飯店 ➔ JR 城戶南藏院前站",
+                mapQuery: "城戶南藏院前站",
+                transfer: "渡邊通站搭七隈線至「博多站」 (刷信用卡 210円) ➔ 站內轉乘 JR 篠栗線 (福北豐線) 至「城戶南藏院前站」 (JR車資 380円，逼交通卡)。",
+                tips: "出站步行 3 分鐘即達南藏院境內。"
+              },
+              {
+                time: "08:30 - 10:30",
+                name: "南藏院 (巨大青銅涅槃像)",
+                mapQuery: "南藏院 臥佛",
+                transfer: "出站過木橋進入參道。",
+                tips: "參拜長 41 公尺、重 300 噸世界最大級青銅臥佛；手持硬幣挑戰投入缽中祈福，入手特產「雷神木祈福御守」。"
+              }
+            ]
+          },
+          {
+            time: "10:30 - 14:15",
+            title: "第二階段：LaLaport 福岡・1:1 實物大 ν 鋼彈朝聖 ＆ 午餐",
+            icon: "fa-robot",
+            items: [
+              {
+                time: "10:30 - 11:15",
+                name: "南藏院 ➔ LaLaport 福岡",
+                mapQuery: "LaLaport 福岡",
+                transfer: "城戶南藏院前站搭 JR 篠栗線回博多站 ➔ 同站轉 JR 鹿兒島本線至「JR 竹下站」 ➔ 東口步行約 9 分鐘達商場 (JR約 480円，逼交通卡)。",
+                tips: "動線極順，沿途平坦好走。"
+              },
+              {
+                time: "11:15 - 14:15",
+                name: "GUNDAM SIDE-F 採買 ＆ 1:1 立像 ＆ 3F 美食街",
+                mapQuery: "GUNDAM SIDE-F 福岡",
+                transfer: "商場 4F 採買、1F 戶外公園合影、3F Grand Dining 用餐。",
+                tips: "先衝 4F GUNDAM SIDE-F 搶購限定模型 RG 1/144 RX-93ff ν鋼彈；12:00 前往戶外拍 24.8m 鋼彈壯容；午餐享用仙臺牛舌、一風堂或金子半之助。"
+              }
+            ]
+          },
+          {
+            time: "14:15 - 16:30",
+            title: "第三階段：戰利品卸貨 ＆ 藥院文青/住吉神社散策",
+            icon: "fa-mug-saucer",
+            items: [
+              {
+                time: "14:15 - 14:45",
+                name: "LaLaport ➔ 飯店卸貨充電",
+                mapQuery: "BASE LAYER HOTEL 福岡",
+                transfer: "商場門口搭西鐵公車 44 號 (往天神/博多方面) 於「渡辺通一丁目」下車步行回飯店 (320円，逼交通卡)。若模型大箱可 4 人直接叫計程車約 15 分鐘達陣。",
+                tips: "把巨大模型箱丟回房間，兩手空空出門。"
+              },
+              {
+                time: "下午漫遊 2 選 1",
+                name: "選擇A：住吉神社祈福 或 選擇B：藥院質感文青散策",
+                mapQuery: "NO COFFEE 福岡",
+                transfer: "皆從飯店步行可達。",
+                tips: "A: 步行 10 分訪住吉神社抽可愛星鰻籤；B: 探訪藥院文青區，朝聖潮牌咖啡 NO COFFEE、REC COFFEE、買むつか堂生吐司當早餐。"
+              }
+            ]
+          },
+          {
+            time: "16:30 - 19:30",
+            title: "第四階段：百道濱海濱夕陽 ＆ 福岡塔百萬夜景",
+            icon: "fa-sun",
+            items: [
+              {
+                time: "16:30 - 17:00",
+                name: "飯店 ➔ 福岡塔 (都市高速公車直達)",
+                mapQuery: "福岡塔",
+                transfer: "飯店過馬路至「渡辺通二丁目」搭西鐵巴士 W1、302 號經都市高速直達「福岡塔」 (約 260円，逼交通卡)。",
+                tips: "走高架都市高速免塞車。"
+              },
+              {
+                time: "17:00 - 19:30",
+                name: "百道濱海濱公園夕陽 ＆ 登福岡塔觀景台",
+                mapQuery: "百道濱海濱公園",
+                transfer: "福岡塔旁海濱木棧道散步。",
+                tips: "把握 17:30 黃金日落，拍博多灣橘粉晚霞；隨後購票搭透明電梯上 123 公尺觀景台，360 度俯瞰璀璨海灣夜景。"
+              }
+            ]
+          },
+          {
+            time: "19:30 之後",
+            title: "第五階段：最終夜慶功宴 ＆ 終極大打包",
+            icon: "fa-champagne-glasses",
+            items: [
+              {
+                time: "19:30 - 20:00",
+                name: "福岡塔 ➔ 天神市區 (公車直達)",
+                mapQuery: "天神ソラリアステージ前",
+                transfer: "「福岡塔前」搭西鐵公車 W1 號直達天神大丸前/警固公園周邊 (逼交通卡)。",
+                tips: "直達慶功餐廳門口。"
+              },
+              {
+                time: "20:00 之後",
+                name: "最終夜慶功宴 3 選 1：焼肉バクロ / とんかつわか葉 / 磯貝",
+                mapQuery: "焼肉バクロ 薬院本店",
+                transfer: "慶功首選：焼肉バクロ 薬院本店 (整頭鹿兒島黑毛和牛燒肉大拼盤配生啤酒)。",
+                tips: "備選：とんかつわか葉 (低溫油炸極品厚切炸豬排) 或 磯貝天神店 (熱鬧海鮮居酒屋)。餐後回房完成「4 箱+4 手提+4 後背」最終大打包！"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        day: 9,
+        date: "10/29",
+        weekday: "週四",
+        theme: "滿載而歸・福岡機場免稅店血拼與包車返回溫暖的家",
+        colorTheme: "from-slate-800 via-blue-900 to-indigo-900",
+        budget: {
+          transport: "約 1,000 ～ 1,500 日圓/人 (GO App 計程車2台平攤，不含台灣包車)",
+          tickets: "0 日圓/人",
+          baseCost: "約 1,500 日圓",
+        },
+        paymentWeapon: {
+          subway: "【GO App 計程車直達機場】：App 內線上信用卡扣款，下車直接提行李走人，完全免掏現金！(4人4大箱叫2台車)。",
+          taiwanVan: "【台灣接送包車】：四人同行原車原司機直送新竹竹東與台中住家。"
+        },
+        stages: [
+          {
+            time: "08:30 - 09:45",
+            title: "第一階段：悠閒早晨、安全帽登機打包 ＆ 飯店退房",
+            icon: "fa-suitcase-rolling",
+            items: [
+              {
+                time: "08:30 - 09:15",
+                name: "退房前最終行李盤點 ＆ 安全帽打包法",
+                mapQuery: "BASE LAYER HOTEL 福岡",
+                transfer: "房內享用前晚 SUNNY 超市水果與早餐。",
+                tips: "【安全帽登機法】：SHOEI Z-9 裝入原廠絨布袋並束緊，外包大張氣泡紙以膠帶固定，裝入 3COINS 黑色旅行袋 (約2.2kg)，直接作個人手提行李登機(過X光免拆)；全體確認總計「4大箱、4手提、4後背」。"
+              },
+              {
+                time: "09:15 - 09:45",
+                name: "BASE LAYER HOTEL 福岡 (正式退房 Check-out)",
+                mapQuery: "BASE LAYER HOTEL 福岡",
+                transfer: "1 樓人工櫃檯退房交還房卡。",
+                tips: "日文客氣版退房禮儀，點擊下方發音按鈕可直接發聲播放或向櫃檯出示。",
+                phrases: [
+                  {
+                    title: "飯店櫃檯｜辦理退房手續",
+                    ja: "チェックアウトをお願いします。お世話になりました。",
+                    romaji: "Check-out o onegai shimasu. Osewa ni narimashita.",
+                    zh: "我要辦理退房。這幾天受您照顧了，非常感謝。",
+                    en: "I'd like to check out, please. Thank you very much for everything."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            time: "09:50 - 12:15",
+            title: "第二階段：GO App 專車直達機場 3 樓 ＆ 報到通關血拼",
+            icon: "fa-taxi",
+            items: [
+              {
+                time: "09:50 - 10:20",
+                name: "飯店 ➔ 福岡機場國際線 3 樓出發大廳",
+                mapQuery: "福岡空港 国際線 3階出発ロビー",
+                transfer: "使用 GO App 叫 2 台一般計程車 (每台 2人+2大箱+隨身)，輸入目的地標註「3 階 出発ロビー」。",
+                tips: "計程車直接開上高架專用降車場，正前方就是長榮報到大廳！【注意】：日本計程車門由司機自動控制開關，切勿自己動手拉車門！"
+              },
+              {
+                time: "10:25 - 11:00",
+                name: "長榮航空報到托運 ＆ 【安檢前買：砂糖樹地瓜口味】",
+                mapQuery: "福岡機場國際線 長榮航空",
+                transfer: "托運 4 大行李箱，手提(含安全帽)隨身攜帶。",
+                tips: "【安檢前限定】：托運後「先別過安檢」，至 3 樓出境大廳兩側洗手間旁「ROYAL キャフェテリア MIYABI」附屬賣店，搶購 Royal 獨家「砂糖樹地瓜口味 (ロイヤルのスイートポテト風)」！"
+              },
+              {
+                time: "11:00 - 12:15",
+                name: "出境通關 ＆ 【Gate 55 免稅店掃貨】 ➔ 登機起飛",
+                mapQuery: "福岡空港 免稅店",
+                transfer: "過安檢證照查驗 ➔ 長榮登機門多在 Gate 53/56/57 ➔ 正中間 Gate 55 免稅店集中採買。",
+                tips: "搶買明太子法式麵包、博多限定砂糖樹甘王草莓口味。11:35 登機門候機，12:15 起飛 (日本時間)。"
+              }
+            ]
+          },
+          {
+            time: "13:50 - 17:30",
+            title: "第三與四階段：飛抵台灣・通關領行李 ＆ 包車溫暖返家",
+            icon: "fa-house-chimney",
+            items: [
+              {
+                time: "13:50 - 15:10",
+                name: "桃園國際機場第二航廈 ➔ 入境通關領行李",
+                mapQuery: "桃園機場第二航廈",
+                transfer: "13:50 班機抵達 T2 (台灣時間) ➔ 1. e-Gate 自動通關 ➔ 2. 領取 4 個大行李箱 ➔ 3. 綠線海關免申報放行。",
+                tips: "開手機連線聯繫原訂接送司機，於指定巡迴車道上車。"
+              },
+              {
+                time: "15:10 - 17:30",
+                name: "包車接送：桃機 T2 ➔ 新竹竹東 ➔ 台中市福順路",
+                mapQuery: "新竹縣竹東鎮",
+                transfer: "15:10 機場出發 ➔ 16:10 抵達新竹竹東旭光一路卸下弟弟行李 ➔ 16:10 續行 ➔ 17:30 抵達台中福順路住家卸車。",
+                tips: "4大箱、4手提、4後背完美歸位，平安結束 9 天豐富充實的九州福岡之旅！"
+              }
+            ]
+          }
+        ]
+      }
+    ];
+
+    let currentDayIndex = 0;
+
+    function switchDay(index) {
+      if (index < 0 || index >= ITINERARY_DATA.length) return;
+      currentDayIndex = index;
+      updateView();
+      const banner = document.getElementById('day-banner');
+      if (banner) {
+        banner.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function updateView() {
+      const currentData = ITINERARY_DATA[currentDayIndex];
+      renderDayTabs();
+      renderDayBanner(currentData);
+      renderBudgetAndPayment(currentData);
+      renderTimeline(currentData);
+      renderExtraNotes(currentData);
+    }
+
+    function renderDayTabs() {
+      const container = document.getElementById('day-tabs');
+      container.innerHTML = ITINERARY_DATA.map((d, index) => {
+        const isActive = index === currentDayIndex;
+        return `
+          <button onclick="switchDay(${index})" 
+                  class="flex-shrink-0 flex items-center gap-2 px-3.5 py-1.5 rounded-xl font-medium text-xs md:text-sm transition-all duration-200 ${
+                    isActive 
+                      ? 'bg-blue-600 text-white shadow-sm ring-2 ring-blue-400/40 font-semibold' 
+                      : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200/80 dark:border-slate-800 hover:text-slate-900 dark:hover:text-white'
+                  }">
+            <span class="w-2 h-2 rounded-full ${isActive ? 'bg-emerald-300 animate-pulse' : 'bg-slate-300 dark:bg-slate-700'}"></span>
+            <span>Day ${d.day}</span>
+            <span class="${isActive ? 'text-blue-100' : 'text-slate-400 dark:text-slate-500'} text-[11px]">(${d.date} ${d.weekday})</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function renderDayBanner(data) {
+      const banner = document.getElementById('day-banner');
+      banner.className = `rounded-2xl p-5 md:p-7 text-white shadow-md relative overflow-hidden transition-all duration-300 bg-gradient-to-r ${data.colorTheme}`;
+      banner.innerHTML = `
+        <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="space-y-1.5">
+            <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase">
+              <i class="fa-regular fa-calendar-check"></i>
+              DAY ${data.day} • ${data.date} (${data.weekday})
+            </div>
+            <h2 class="text-xl md:text-2xl lg:text-3xl font-extrabold tracking-tight">${data.theme}</h2>
+            <p class="text-xs md:text-sm text-blue-100 flex items-center gap-3 pt-1">
+              <span><i class="fa-solid fa-hotel mr-1.5"></i>住宿：BASE LAYER HOTEL 福岡</span>
+              <span>•</span>
+              <span><i class="fa-solid fa-users mr-1.5"></i>4人同行規格</span>
+            </p>
+          </div>
+          <div class="flex items-center gap-2 self-start md:self-auto">
+            <span class="text-xs bg-black/25 backdrop-blur-md px-3 py-2 rounded-xl border border-white/10 flex items-center gap-2">
+              <i class="fa-solid fa-map-pin text-amber-300"></i>
+              點擊站點或景點可直開 Google 地圖
+            </span>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderBudgetAndPayment(data) {
+      const container = document.getElementById('budget-payment-cards');
+      
+      const budgetHtml = `
+        <div class="bg-white dark:bg-slate-900 p-4 md:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xs space-y-3">
+          <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 flex items-center gap-1.5">
+              <i class="fa-solid fa-wallet text-amber-500"></i> 本日費用預估
+            </span>
+            <span class="text-[11px] text-slate-500 font-medium bg-amber-50 dark:bg-amber-950/50 text-amber-700 dark:text-amber-300 px-2 py-0.5 rounded-full whitespace-nowrap">單人基本開銷</span>
+          </div>
+          <div class="space-y-2 text-xs md:text-sm">
+            <div class="flex justify-between items-start text-slate-600 dark:text-slate-300 gap-2">
+              <span class="text-slate-500 dark:text-slate-400 whitespace-nowrap shrink-0">交通預估：</span>
+              <span class="font-semibold text-slate-900 dark:text-white text-right leading-snug">${data.budget.transport}</span>
+            </div>
+            <div class="flex justify-between items-start text-slate-600 dark:text-slate-300 gap-2">
+              <span class="text-slate-500 dark:text-slate-400 whitespace-nowrap shrink-0">門票支出：</span>
+              <span class="font-semibold text-slate-900 dark:text-white text-right leading-snug">${data.budget.tickets}</span>
+            </div>
+            ${data.budget.charter ? `
+            <div class="flex justify-between items-start text-emerald-700 dark:text-emerald-400 font-medium gap-2">
+              <span class="whitespace-nowrap shrink-0">包車平攤：</span>
+              <span class="font-semibold text-right leading-snug">${data.budget.charter}</span>
+            </div>` : ''}
+            <div class="pt-2 border-t border-slate-100 dark:border-slate-800 flex justify-between items-baseline font-bold text-blue-700 dark:text-blue-400 text-sm md:text-base gap-2">
+              <span class="whitespace-nowrap shrink-0">單日不含餐飲：</span>
+              <span class="text-right leading-snug">${data.budget.baseCost}</span>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const paymentHtml = `
+        <div class="bg-white dark:bg-slate-900 p-4 md:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xs space-y-3 md:col-span-2">
+          <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 flex items-center gap-1.5">
+              <i class="fa-solid fa-credit-card text-blue-600 dark:text-blue-400"></i> 雙武器支付防呆切換攻略
+            </span>
+            <span class="text-[11px] font-semibold bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 px-2 py-0.5 rounded-full border border-blue-200 dark:border-blue-800">
+              地鐵單日封頂 640円 規則
+            </span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs md:text-sm">
+            <div class="p-3 bg-blue-50/70 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/60 rounded-xl space-y-1">
+              <div class="font-bold text-blue-900 dark:text-blue-300 flex items-center gap-1.5">
+                <i class="fa-solid fa-train-subway text-blue-600 dark:text-blue-400"></i>
+                地下鐵系統 (七隈/空港線)
+              </div>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed">${data.paymentWeapon.subway}</p>
+            </div>
+            <div class="p-3 bg-emerald-50/70 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-900/60 rounded-xl space-y-1">
+              <div class="font-bold text-emerald-900 dark:text-emerald-300 flex items-center gap-1.5">
+                <i class="fa-solid fa-bus-simple text-emerald-600 dark:text-emerald-400"></i>
+                西鐵巴士 / 電車 / 特急
+              </div>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed">${data.paymentWeapon.bus || data.paymentWeapon.charterPay || "iPhone 逼交通卡，Pixel 實體 IC 卡"}</p>
+            </div>
+          </div>
+        </div>
+      `;
+
+      container.innerHTML = budgetHtml + paymentHtml;
+    }
+
+    // Helper to highlight transit keywords (platforms, fares, step numbers, and arrows) with vivid badges
+    function decorateKeywords(text) {
+      if (!text) return '';
+      return text
+        // Replace arrows with a sleek, colored arrow symbol without bulky badges
+        .replace(/\s*(?:➔|->|→)\s*/g, ' <span class="font-bold text-blue-600 text-sm md:text-base px-1">➔</span> ')
+        // Highlight step numbers at start or in sentences (e.g. 1. 2. 3. 4.)
+        .replace(/(?:^|\s)([1-5])[\.、]\s*/g, ' <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-blue-600 text-white font-bold text-[11px] mx-1 align-middle">$1</span> ')
+        // Highlight platform tags like 【2號月台】 or 【1號月台】
+        .replace(/(【[^】]+】)/g, '<span class="font-bold text-blue-900 bg-blue-100/80 px-2 py-0.5 rounded border border-blue-200 inline-block my-0.5 align-middle text-[12px] md:text-[13px]">$1</span>')
+        // Highlight transit cost/fare info like (車資 260円...) or (單程 420 日圓...)
+        .replace(/(\([^)]*?(?:車資|日圓|円|封頂|逼卡|刷卡)[^)]*?\))/g, '<span class="font-medium text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 inline-block my-0.5 align-middle text-[12px] md:text-[13px]">$1</span>');
+    }
+
+    // Helper to format transit routes as a unified block with matching balanced font size
+    function formatTransferSteps(transferText) {
+      if (!transferText) return '';
+      return `
+        <div class="text-[13px] md:text-sm font-normal text-slate-700 dark:text-slate-300 leading-relaxed">
+          ${decorateKeywords(transferText)}
+        </div>
+      `;
+    }
+
+    // Dynamic stage color palette palette generator based on the active Day's theme
+    const DAY_THEME_PALETTES = {
+      // Day 1: 博多藍調
+      1: [
+        { bg: "bg-sky-50 dark:bg-slate-800/90", border: "border-sky-200/80 dark:border-slate-700", iconBg: "bg-sky-600 text-white", titleColor: "text-sky-950 dark:text-white", badge: "bg-sky-100 text-sky-800 border-sky-300 dark:bg-slate-700 dark:text-sky-300 dark:border-slate-600" },
+        { bg: "bg-blue-50 dark:bg-slate-800/90", border: "border-blue-200/80 dark:border-slate-700", iconBg: "bg-blue-600 text-white", titleColor: "text-blue-950 dark:text-white", badge: "bg-blue-100 text-blue-800 border-blue-300 dark:bg-slate-700 dark:text-blue-300 dark:border-slate-600" },
+        { bg: "bg-indigo-50 dark:bg-slate-800/90", border: "border-indigo-200/80 dark:border-slate-700", iconBg: "bg-indigo-600 text-white", titleColor: "text-indigo-950 dark:text-white", badge: "bg-indigo-100 text-indigo-800 border-indigo-300 dark:bg-slate-700 dark:text-indigo-300 dark:border-slate-600" },
+        { bg: "bg-cyan-50 dark:bg-slate-800/90", border: "border-cyan-200/80 dark:border-slate-700", iconBg: "bg-cyan-700 text-white", titleColor: "text-cyan-950 dark:text-white", badge: "bg-cyan-100 text-cyan-800 border-cyan-300 dark:bg-slate-700 dark:text-cyan-300 dark:border-slate-600" },
+        { bg: "bg-blue-100/70 dark:bg-slate-800/90", border: "border-blue-300/80 dark:border-slate-700", iconBg: "bg-blue-800 text-white", titleColor: "text-blue-950 dark:text-white", badge: "bg-blue-200/70 text-blue-900 border-blue-400 dark:bg-slate-700 dark:text-blue-300 dark:border-slate-600" },
+      ],
+      // Day 2: 綠意與湖水
+      2: [
+        { bg: "bg-emerald-50 dark:bg-slate-800/90", border: "border-emerald-200/80 dark:border-slate-700", iconBg: "bg-emerald-600 text-white", titleColor: "text-emerald-950 dark:text-white", badge: "bg-emerald-100 text-emerald-800 border-emerald-300 dark:bg-slate-700 dark:text-emerald-300 dark:border-slate-600" },
+        { bg: "bg-teal-50 dark:bg-slate-800/90", border: "border-teal-200/80 dark:border-slate-700", iconBg: "bg-teal-600 text-white", titleColor: "text-teal-950 dark:text-white", badge: "bg-teal-100 text-teal-800 border-teal-300 dark:bg-slate-700 dark:text-teal-300 dark:border-slate-600" },
+        { bg: "bg-green-50 dark:bg-slate-800/90", border: "border-green-200/80 dark:border-slate-700", iconBg: "bg-green-600 text-white", titleColor: "text-green-950 dark:text-white", badge: "bg-green-100 text-green-800 border-green-300 dark:bg-slate-700 dark:text-green-300 dark:border-slate-600" },
+        { bg: "bg-cyan-50 dark:bg-slate-800/90", border: "border-cyan-200/80 dark:border-slate-700", iconBg: "bg-cyan-700 text-white", titleColor: "text-cyan-950 dark:text-white", badge: "bg-cyan-100 text-cyan-800 border-cyan-300 dark:bg-slate-700 dark:text-cyan-300 dark:border-slate-600" },
+        { bg: "bg-teal-100/60 dark:bg-slate-800/90", border: "border-teal-300/80 dark:border-slate-700", iconBg: "bg-teal-800 text-white", titleColor: "text-teal-950 dark:text-white", badge: "bg-teal-200/70 text-teal-900 border-teal-400 dark:bg-slate-700 dark:text-teal-300 dark:border-slate-600" },
+      ],
+      // Day 3: 紫羅蘭微醺
+      3: [
+        { bg: "bg-purple-50 dark:bg-slate-800/90", border: "border-purple-200/80 dark:border-slate-700", iconBg: "bg-purple-600 text-white", titleColor: "text-purple-950 dark:text-white", badge: "bg-purple-100 text-purple-800 border-purple-300 dark:bg-slate-700 dark:text-purple-300 dark:border-slate-600" },
+        { bg: "bg-fuchsia-50 dark:bg-slate-800/90", border: "border-fuchsia-200/80 dark:border-slate-700", iconBg: "bg-fuchsia-600 text-white", titleColor: "text-fuchsia-950 dark:text-white", badge: "bg-fuchsia-100 text-fuchsia-800 border-fuchsia-300 dark:bg-slate-700 dark:text-fuchsia-300 dark:border-slate-600" },
+        { bg: "bg-violet-50 dark:bg-slate-800/90", border: "border-violet-200/80 dark:border-slate-700", iconBg: "bg-violet-600 text-white", titleColor: "text-violet-950 dark:text-white", badge: "bg-violet-100 text-violet-800 border-violet-300 dark:bg-slate-700 dark:text-violet-300 dark:border-slate-600" },
+        { bg: "bg-pink-50 dark:bg-slate-800/90", border: "border-pink-200/80 dark:border-slate-700", iconBg: "bg-pink-600 text-white", titleColor: "text-pink-950 dark:text-white", badge: "bg-pink-100 text-pink-800 border-pink-300 dark:bg-slate-700 dark:text-pink-300 dark:border-slate-600" },
+        { bg: "bg-purple-100/60 dark:bg-slate-800/90", border: "border-purple-300/80 dark:border-slate-700", iconBg: "bg-purple-800 text-white", titleColor: "text-purple-950 dark:text-white", badge: "bg-purple-200/70 text-purple-900 border-purple-400 dark:bg-slate-700 dark:text-purple-300 dark:border-slate-600" },
+      ],
+      // Day 4: 暖陽太宰府
+      4: [
+        { bg: "bg-amber-50 dark:bg-slate-800/90", border: "border-amber-200/80 dark:border-slate-700", iconBg: "bg-amber-600 text-white", titleColor: "text-amber-950 dark:text-white", badge: "bg-amber-100 text-amber-800 border-amber-300 dark:bg-slate-700 dark:text-amber-300 dark:border-slate-600" },
+        { bg: "bg-orange-50 dark:bg-slate-800/90", border: "border-orange-200/80 dark:border-slate-700", iconBg: "bg-orange-600 text-white", titleColor: "text-orange-950 dark:text-white", badge: "bg-orange-100 text-orange-800 border-orange-300 dark:bg-slate-700 dark:text-orange-300 dark:border-slate-600" },
+        { bg: "bg-yellow-50 dark:bg-slate-800/90", border: "border-yellow-200/80 dark:border-slate-700", iconBg: "bg-yellow-600 text-white", titleColor: "text-yellow-950 dark:text-white", badge: "bg-yellow-100 text-yellow-800 border-yellow-300 dark:bg-slate-700 dark:text-yellow-300 dark:border-slate-600" },
+        { bg: "bg-rose-50 dark:bg-slate-800/90", border: "border-rose-200/80 dark:border-slate-700", iconBg: "bg-rose-600 text-white", titleColor: "text-rose-950 dark:text-white", badge: "bg-rose-100 text-rose-800 border-rose-300 dark:bg-slate-700 dark:text-rose-300 dark:border-slate-600" },
+        { bg: "bg-amber-100/70 dark:bg-slate-800/90", border: "border-amber-300/80 dark:border-slate-700", iconBg: "bg-amber-800 text-white", titleColor: "text-amber-950 dark:text-white", badge: "bg-amber-200/70 text-amber-900 border-amber-400 dark:bg-slate-700 dark:text-amber-300 dark:border-slate-600" },
+      ],
+      // Day 5: 關門海峽深邃海藍
+      5: [
+        { bg: "bg-slate-100 dark:bg-slate-800/90", border: "border-slate-300/80 dark:border-slate-700", iconBg: "bg-slate-700 text-white", titleColor: "text-slate-950 dark:text-white", badge: "bg-slate-200 text-slate-800 border-slate-300 dark:bg-slate-700 dark:text-slate-200 dark:border-slate-600" },
+        { bg: "bg-blue-100/70 dark:bg-slate-800/90", border: "border-blue-300/80 dark:border-slate-700", iconBg: "bg-blue-800 text-white", titleColor: "text-blue-950 dark:text-white", badge: "bg-blue-200/70 text-blue-900 border-blue-300 dark:bg-slate-700 dark:text-blue-300 dark:border-slate-600" },
+        { bg: "bg-indigo-100/70 dark:bg-slate-800/90", border: "border-indigo-300/80 dark:border-slate-700", iconBg: "bg-indigo-800 text-white", titleColor: "text-indigo-950 dark:text-white", badge: "bg-indigo-200/70 text-indigo-900 border-indigo-300 dark:bg-slate-700 dark:text-indigo-300 dark:border-slate-600" },
+        { bg: "bg-sky-100/70 dark:bg-slate-800/90", border: "border-sky-300/80 dark:border-slate-700", iconBg: "bg-sky-800 text-white", titleColor: "text-sky-950 dark:text-white", badge: "bg-sky-200/70 text-sky-900 border-sky-300 dark:bg-slate-700 dark:text-sky-300 dark:border-slate-600" },
+        { bg: "bg-slate-200/70 dark:bg-slate-800/90", border: "border-slate-400/70 dark:border-slate-700", iconBg: "bg-slate-900 text-white", titleColor: "text-slate-950 dark:text-white", badge: "bg-slate-300/70 text-slate-900 border-slate-400 dark:bg-slate-700 dark:text-slate-300 dark:border-slate-600" },
+      ],
+      // Day 6: 由布院山林翠綠
+      6: [
+        { bg: "bg-emerald-50 dark:bg-slate-800/90", border: "border-emerald-200/80 dark:border-slate-700", iconBg: "bg-emerald-700 text-white", titleColor: "text-emerald-950 dark:text-white", badge: "bg-emerald-100 text-emerald-800 border-emerald-300 dark:bg-slate-700 dark:text-emerald-300 dark:border-slate-600" },
+        { bg: "bg-green-50 dark:bg-slate-800/90", border: "border-green-200/80 dark:border-slate-700", iconBg: "bg-green-700 text-white", titleColor: "text-green-950 dark:text-white", badge: "bg-green-100 text-green-800 border-green-300 dark:bg-slate-700 dark:text-green-300 dark:border-slate-600" },
+        { bg: "bg-teal-50 dark:bg-slate-800/90", border: "border-teal-200/80 dark:border-slate-700", iconBg: "bg-teal-700 text-white", titleColor: "text-teal-950 dark:text-white", badge: "bg-teal-100 text-teal-800 border-teal-300 dark:bg-slate-700 dark:text-teal-300 dark:border-slate-600" },
+        { bg: "bg-lime-50 dark:bg-slate-800/90", border: "border-lime-200/80 dark:border-slate-700", iconBg: "bg-lime-700 text-white", titleColor: "text-lime-950 dark:text-white", badge: "bg-lime-100 text-lime-800 border-lime-300 dark:bg-slate-700 dark:text-lime-300 dark:border-slate-600" },
+        { bg: "bg-emerald-100/70 dark:bg-slate-800/90", border: "border-emerald-300/80 dark:border-slate-700", iconBg: "bg-emerald-900 text-white", titleColor: "text-emerald-950 dark:text-white", badge: "bg-emerald-200/70 text-emerald-900 border-emerald-400 dark:bg-slate-700 dark:text-emerald-300 dark:border-slate-600" },
+      ],
+      // Day 7: 糸島海洋青藍
+      7: [
+        { bg: "bg-cyan-50 dark:bg-slate-800/90", border: "border-cyan-200/80 dark:border-slate-700", iconBg: "bg-cyan-600 text-white", titleColor: "text-cyan-950 dark:text-white", badge: "bg-cyan-100 text-cyan-800 border-cyan-300 dark:bg-slate-700 dark:text-cyan-300 dark:border-slate-600" },
+        { bg: "bg-teal-50 dark:bg-slate-800/90", border: "border-teal-200/80 dark:border-slate-700", iconBg: "bg-teal-600 text-white", titleColor: "text-teal-950 dark:text-white", badge: "bg-teal-100 text-teal-800 border-teal-300 dark:bg-slate-700 dark:text-teal-300 dark:border-slate-600" },
+        { bg: "bg-sky-50 dark:bg-slate-800/90", border: "border-sky-200/80 dark:border-slate-700", iconBg: "bg-sky-600 text-white", titleColor: "text-sky-950 dark:text-white", badge: "bg-sky-100 text-sky-800 border-sky-300 dark:bg-slate-700 dark:text-sky-300 dark:border-slate-600" },
+        { bg: "bg-cyan-100/60 dark:bg-slate-800/90", border: "border-cyan-300/80 dark:border-slate-700", iconBg: "bg-cyan-700 text-white", titleColor: "text-cyan-950 dark:text-white", badge: "bg-cyan-200/70 text-cyan-900 border-cyan-400 dark:bg-slate-700 dark:text-cyan-300 dark:border-slate-600" },
+        { bg: "bg-teal-100/70 dark:bg-slate-800/90", border: "border-teal-300/80 dark:border-slate-700", iconBg: "bg-teal-800 text-white", titleColor: "text-teal-950 dark:text-white", badge: "bg-teal-200/70 text-teal-900 border-teal-400 dark:bg-slate-700 dark:text-teal-300 dark:border-slate-600" },
+      ],
+      // Day 8: 百道夕照與天際藍
+      8: [
+        { bg: "bg-blue-50 dark:bg-slate-800/90", border: "border-blue-200/80 dark:border-slate-700", iconBg: "bg-blue-600 text-white", titleColor: "text-blue-950 dark:text-white", badge: "bg-blue-100 text-blue-800 border-blue-300 dark:bg-slate-700 dark:text-blue-300 dark:border-slate-600" },
+        { bg: "bg-indigo-50 dark:bg-slate-800/90", border: "border-indigo-200/80 dark:border-slate-700", iconBg: "bg-indigo-600 text-white", titleColor: "text-indigo-950 dark:text-white", badge: "bg-indigo-100 text-indigo-800 border-indigo-300 dark:bg-slate-700 dark:text-indigo-300 dark:border-slate-600" },
+        { bg: "bg-sky-50 dark:bg-slate-800/90", border: "border-sky-200/80 dark:border-slate-700", iconBg: "bg-sky-700 text-white", titleColor: "text-sky-950 dark:text-white", badge: "bg-sky-100 text-sky-800 border-sky-300 dark:bg-slate-700 dark:text-sky-300 dark:border-slate-600" },
+        { bg: "bg-blue-100/60 dark:bg-slate-800/90", border: "border-blue-300/80 dark:border-slate-700", iconBg: "bg-blue-700 text-white", titleColor: "text-blue-950 dark:text-white", badge: "bg-blue-200/70 text-blue-900 border-blue-400 dark:bg-slate-700 dark:text-blue-300 dark:border-slate-600" },
+        { bg: "bg-indigo-100/70 dark:bg-slate-800/90", border: "border-indigo-300/80 dark:border-slate-700", iconBg: "bg-indigo-900 text-white", titleColor: "text-indigo-950 dark:text-white", badge: "bg-indigo-200/70 text-indigo-900 border-indigo-400 dark:bg-slate-700 dark:text-indigo-300 dark:border-slate-600" },
+      ],
+      // Day 9: 賦歸岩灰藍
+      9: [
+        { bg: "bg-slate-50 dark:bg-slate-800/90", border: "border-slate-200/80 dark:border-slate-700", iconBg: "bg-slate-600 text-white", titleColor: "text-slate-950 dark:text-white", badge: "bg-slate-100 text-slate-800 border-slate-300 dark:bg-slate-700 dark:text-slate-300 dark:border-slate-600" },
+        { bg: "bg-blue-50/80 dark:bg-slate-800/90", border: "border-blue-200/80 dark:border-slate-700", iconBg: "bg-blue-600 text-white", titleColor: "text-blue-950 dark:text-white", badge: "bg-blue-100 text-blue-800 border-blue-300 dark:bg-slate-700 dark:text-blue-300 dark:border-slate-600" },
+        { bg: "bg-zinc-50 dark:bg-slate-800/90", border: "border-zinc-200/80 dark:border-slate-700", iconBg: "bg-zinc-600 text-white", titleColor: "text-zinc-950 dark:text-white", badge: "bg-zinc-100 text-zinc-800 border-zinc-300 dark:bg-slate-700 dark:text-zinc-300 dark:border-slate-600" },
+        { bg: "bg-slate-100/70 dark:bg-slate-800/90", border: "border-slate-300/80 dark:border-slate-700", iconBg: "bg-slate-700 text-white", titleColor: "text-slate-950 dark:text-white", badge: "bg-slate-200/70 text-slate-900 border-slate-300 dark:bg-slate-700 dark:text-slate-300 dark:border-slate-600" },
+        { bg: "bg-blue-100/70 dark:bg-slate-800/90", border: "border-blue-300/80 dark:border-slate-700", iconBg: "bg-blue-800 text-white", titleColor: "text-blue-950 dark:text-white", badge: "bg-blue-200/70 text-blue-900 border-blue-400 dark:bg-slate-700 dark:text-blue-300 dark:border-slate-600" },
+      ]
+    };
+
+    function renderTimeline(data) {
+      const container = document.getElementById('timeline-container');
+      const dayPalettes = DAY_THEME_PALETTES[data.day] || DAY_THEME_PALETTES[1];
+      
+      container.innerHTML = data.stages.map((stage, sIdx) => {
+        const theme = dayPalettes[sIdx % dayPalettes.length];
+        return `
+          <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xs overflow-hidden transition-all duration-200">
+            <!-- Stage Header with Day-Coordinated Palette and High-Contrast Dark Mode Styling -->
+            <div class="px-4 md:px-5 py-3 ${theme.bg} border-b ${theme.border} flex flex-wrap items-center justify-between gap-2">
+              <div class="flex items-center gap-2.5">
+                <span class="w-7 h-7 md:w-8 md:h-8 rounded-lg ${theme.iconBg} flex items-center justify-center text-xs md:text-sm font-semibold shadow-2xs">
+                  <i class="fa-solid ${stage.icon || 'fa-location-dot'}"></i>
+                </span>
+                <div>
+                  <h3 class="font-bold ${theme.titleColor} text-sm md:text-base tracking-tight">${stage.title}</h3>
+                  <span class="text-[11px] md:text-xs text-slate-500 dark:text-slate-300 font-medium"><i class="fa-regular fa-clock mr-1 text-slate-400 dark:text-slate-400"></i>${stage.time}</span>
+                </div>
+              </div>
+              <span class="text-[10px] md:text-[11px] font-semibold px-2 py-0.5 rounded-full border ${theme.badge}">
+                STAGE 0${sIdx + 1}
+              </span>
+            </div>
+
+            <!-- Stage Items List -->
+            <div class="p-3.5 md:p-5 space-y-3.5 divide-y divide-slate-100 dark:divide-slate-800">
+              ${stage.items.map((item, iIdx) => {
+                const mapLink = gmapUrl(item.mapQuery || item.name);
+                return `
+                  <div class="${iIdx > 0 ? 'pt-3.5' : ''} space-y-2">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                      <div class="flex items-center gap-2 flex-wrap">
+                        <span class="text-[11px] md:text-xs font-semibold px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                          ${item.time}
+                        </span>
+                        <a href="${mapLink}" target="_blank" rel="noopener noreferrer" 
+                           class="group inline-flex items-center gap-1.5 font-bold text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm md:text-base">
+                          <span>${item.name}</span>
+                          <span class="text-slate-400 dark:text-slate-500 group-hover:text-blue-500 text-xs transition-transform group-hover:translate-x-0.5">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                          </span>
+                        </a>
+                      </div>
+
+                      <a href="${mapLink}" target="_blank" rel="noopener noreferrer" 
+                         class="inline-flex items-center justify-center gap-1.5 text-[11px] md:text-xs font-medium px-2.5 py-1 rounded-lg bg-blue-50 hover:bg-blue-100 dark:bg-blue-950/60 dark:hover:bg-blue-900/60 text-blue-700 dark:text-blue-300 border border-blue-200/70 dark:border-blue-800 transition-colors shadow-2xs self-start sm:self-auto">
+                        <i class="fa-solid fa-location-arrow text-[10px] text-blue-500"></i>
+                        開啟 Google 地圖
+                      </a>
+                    </div>
+
+                    <!-- Transit / Transfer Instruction Box -->
+                    <div class="bg-slate-50/80 dark:bg-slate-800/50 p-3 md:p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 space-y-1.5 shadow-2xs">
+                      <div class="flex items-center justify-between border-b border-slate-200/70 dark:border-slate-700/70 pb-1.5">
+                        <div class="flex items-center gap-1.5">
+                          <span class="w-5 h-5 rounded bg-blue-600 text-white flex items-center justify-center text-[10px] shadow-2xs">
+                            <i class="fa-solid fa-route"></i>
+                          </span>
+                          <span class="text-slate-900 dark:text-slate-100 font-bold text-[12px] md:text-[13px]">交通轉乘動線</span>
+                        </div>
+                        <span class="text-[10px] md:text-[11px] font-medium text-slate-500 dark:text-slate-400">
+                          路線指引
+                        </span>
+                      </div>
+                      ${formatTransferSteps(item.transfer)}
+                    </div>
+
+                    <!-- Key Tips and Anti-Mistake Alert with compact refined font -->
+                    ${item.tips ? `
+                      <div class="flex items-start gap-2 pt-2 border-t border-amber-200 dark:border-amber-900/60 bg-amber-50/70 dark:bg-amber-950/30 p-3 rounded-xl text-amber-950 dark:text-amber-200 shadow-2xs">
+                        <span class="mt-0.5 text-amber-600 dark:text-amber-400 text-sm md:text-base flex-shrink-0"><i class="fa-solid fa-triangle-exclamation"></i></span>
+                        <div class="flex-1 leading-relaxed">
+                          <strong class="text-amber-900 dark:text-amber-300 font-bold block text-[12px] md:text-[13px] mb-0.5 flex items-center gap-1.5">
+                            <span>重點提示與防呆</span>
+                            <span class="text-[10px] font-semibold px-1.5 py-0.2 rounded-full bg-amber-200/80 dark:bg-amber-900/60 text-amber-900 dark:text-amber-200">必看核對</span>
+                          </strong>
+                          <p class="text-[13px] md:text-sm font-normal text-slate-800 dark:text-slate-200 leading-relaxed">${item.tips}</p>
+                        </div>
+                      </div>
+                    ` : ''}
+
+                    <!-- Multilingual Speaking Helper Cards with Audio -->
+                    ${item.phrases && item.phrases.length > 0 ? `
+                      <div class="space-y-2.5 pt-2">
+                        ${item.phrases.map((phrase) => `
+                          <div class="p-3 md:p-3.5 rounded-xl bg-gradient-to-br from-indigo-50/90 via-sky-50/40 to-white dark:from-slate-800/90 dark:via-slate-800/60 dark:to-slate-900 border border-indigo-200/80 dark:border-indigo-900/50 shadow-2xs space-y-2.5">
+                            <div class="flex items-center justify-between border-b border-indigo-100 dark:border-slate-700 pb-1.5">
+                              <span class="font-bold text-xs md:text-sm text-indigo-950 dark:text-indigo-300 flex items-center gap-1.5">
+                                <i class="fa-solid fa-comments text-indigo-600 dark:text-indigo-400"></i>
+                                ${phrase.title}
+                              </span>
+                              <span class="text-[10px] font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-100/70 dark:bg-indigo-950/60 px-2 py-0.5 rounded-full">
+                                三語對照 ＆ 語音
+                              </span>
+                            </div>
+
+                            <!-- Japanese Section -->
+                            <div class="bg-white dark:bg-slate-900/90 p-2.5 rounded-lg border border-indigo-100/80 dark:border-slate-800 space-y-1">
+                              <div class="flex items-center justify-between gap-2">
+                                <span class="text-[11px] font-bold text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                                  <span class="inline-block w-2 h-2 rounded-full bg-red-500"></span> 日文原句
+                                </span>
+                                <button onclick="playSpeech('${phrase.ja.replace(/'/g, "\\'")}', 'ja-JP')" 
+                                        class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-red-600 hover:bg-red-700 active:scale-95 text-white font-bold text-[11px] shadow-xs transition-all">
+                                  <i class="fa-solid fa-volume-high animate-pulse text-[10px]"></i>
+                                  <span>播放日語發音</span>
+                                </button>
+                              </div>
+                              <p class="text-sm md:text-base font-bold text-slate-900 dark:text-white tracking-wide">${phrase.ja}</p>
+                              <p class="text-[11px] md:text-xs font-medium text-slate-500 dark:text-slate-400 italic font-mono pt-0.5">${phrase.romaji}</p>
+                            </div>
+
+                            <!-- Chinese & English Section -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                              <div class="bg-white dark:bg-slate-900/90 p-2.5 rounded-lg border border-slate-200/80 dark:border-slate-800">
+                                <span class="text-[10px] font-bold text-emerald-700 dark:text-emerald-400 block mb-0.5">
+                                  <i class="fa-solid fa-earth-asia mr-1"></i>繁體中文意思
+                                </span>
+                                <p class="text-[12px] md:text-[13px] font-medium text-slate-800 dark:text-slate-200">${phrase.zh}</p>
+                              </div>
+
+                              <div class="bg-white dark:bg-slate-900/90 p-2.5 rounded-lg border border-slate-200/80 dark:border-slate-800 space-y-1">
+                                <div class="flex items-center justify-between gap-1">
+                                  <span class="text-[10px] font-bold text-blue-700 dark:text-blue-400">
+                                    <i class="fa-solid fa-earth-americas mr-1"></i>English
+                                  </span>
+                                  <button onclick="playSpeech('${phrase.en.replace(/'/g, "\\'")}', 'en-US')" 
+                                          class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-blue-100 hover:bg-blue-200 dark:bg-blue-900/60 dark:hover:bg-blue-800 active:scale-95 text-blue-800 dark:text-blue-300 font-semibold text-[10px] transition-all">
+                                    <i class="fa-solid fa-volume-high text-[9px]"></i>
+                                    <span>朗讀英語</span>
+                                  </button>
+                                </div>
+                                <p class="text-[12px] md:text-[13px] font-normal text-slate-700 dark:text-slate-300">${phrase.en}</p>
+                              </div>
+                            </div>
+                          </div>
+                        `).join('')}
+                      </div>
+                    ` : ''}
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Text-to-Speech audio speech synthesis helper
+    function playSpeech(text, lang = 'ja-JP') {
+      if (!('speechSynthesis' in window)) {
+        // Fallback message if speech is not supported in the user agent
+        console.warn('Speech synthesis not supported in this browser.');
+        return;
+      }
+
+      window.speechSynthesis.cancel(); // Stop any ongoing speech
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = lang;
+      utterance.rate = 0.88; // Slightly relaxed pace for crystal clear comprehension
+      utterance.pitch = 1.0;
+
+      // Select matching localized voice if available
+      const voices = window.speechSynthesis.getVoices();
+      if (voices && voices.length > 0) {
+        const matchedVoice = voices.find(v => v.lang.startsWith(lang) || v.lang.replace('_', '-').startsWith(lang));
+        if (matchedVoice) {
+          utterance.voice = matchedVoice;
+        }
+      }
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    // Ensure voices are loaded ahead of time
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = () => {
+        window.speechSynthesis.getVoices();
+      };
+    }
+
+    function renderExtraNotes(data) {
+      const container = document.getElementById('extra-notes-container');
+      container.innerHTML = `
+        <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3 mb-3">
+          <h4 class="font-bold text-slate-900 dark:text-white text-sm md:text-base flex items-center gap-2">
+            <i class="fa-solid fa-shield-halved text-emerald-600 dark:text-emerald-400"></i>
+            Day ${data.day} 專屬防呆守則 ＆ 實戰小抄
+          </h4>
+          <span class="text-xs text-slate-400">出門前快速核對</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs md:text-sm text-slate-600 dark:text-slate-300">
+          <div class="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200/70 dark:border-slate-700 space-y-1">
+            <span class="font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+              <i class="fa-solid fa-ticket text-indigo-500"></i> 月台確認最高守則 (防迷路)
+            </span>
+            <p class="leading-relaxed text-xs">日本鐵路調度偶有微調，進改札口穿過閘門時，請務必抬頭看大螢幕核對「發車時刻、終點站與番線 (月台編號)」，切勿死背固定月台。</p>
+          </div>
+          <div class="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200/70 dark:border-slate-700 space-y-1">
+            <span class="font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+              <i class="fa-solid fa-receipt text-blue-500"></i> 退稅收據與消耗品保管
+            </span>
+            <p class="leading-relaxed text-xs">所有購物實體收據及明細請保留至返台！福岡機場安檢後海關可能抽查免稅品，切勿提早拆封免稅封條袋。</p>
+          </div>
+        </div>
+      `;
+    }
+
+    // Modal helpers for Add to Home screen
+    function openAddToHomeModal() {
+      const modal = document.getElementById('pwa-modal');
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeAddToHomeModal() {
+      const modal = document.getElementById('pwa-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    // Dark Mode Toggle Logic
+    function toggleDarkMode() {
+      const htmlEl = document.documentElement;
+      const isDark = htmlEl.classList.toggle('dark');
+      updateThemeIcons(isDark);
+      try {
+        localStorage.setItem('fukuoka_dark_mode', isDark ? 'true' : 'false');
+      } catch (e) {}
+    }
+
+    function updateThemeIcons(isDark) {
+      const moon = document.getElementById('theme-moon-icon');
+      const sun = document.getElementById('theme-sun-icon');
+      if (!moon || !sun) return;
+      if (isDark) {
+        moon.classList.add('hidden');
+        sun.classList.remove('hidden');
+      } else {
+        moon.classList.remove('hidden');
+        sun.classList.add('hidden');
+      }
+    }
+
+    function initTheme() {
+      try {
+        const savedMode = localStorage.getItem('fukuoka_dark_mode');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const shouldBeDark = savedMode === 'true' || (savedMode === null && prefersDark);
+        
+        if (shouldBeDark) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+        updateThemeIcons(shouldBeDark);
+      } catch (e) {
+        updateThemeIcons(false);
+      }
+    }
+
+    // Live Japan Clock Updater (UTC+9 JST)
+    function updateJapanClock() {
+      const clockEl = document.getElementById('japan-clock');
+      if (!clockEl) return;
+
+      const now = new Date();
+      const options = {
+        timeZone: 'Asia/Tokyo',
+        month: 'numeric',
+        day: 'numeric',
+        weekday: 'short',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      };
+
+      const jstString = new Intl.DateTimeFormat('zh-TW', options).format(now);
+      clockEl.innerHTML = `${jstString} <span class="text-blue-600 dark:text-blue-400 font-bold ml-0.5">JST</span>`;
+    }
+
+    // Fetch Live Fukuoka Weather
+    async function fetchFukuokaWeather() {
+      const weatherEl = document.getElementById('fukuoka-weather');
+      if (!weatherEl) return;
+
+      try {
+        const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=33.5904&longitude=130.4017&current=temperature_2m,weather_code&timezone=Asia%2FTokyo');
+        if (!response.ok) throw new Error('Weather fetch failed');
+        const data = await response.json();
+        const current = data.current;
+        const temp = Math.round(current.temperature_2m);
+        const code = current.weather_code;
+
+        let icon = 'fa-sun text-amber-500';
+        let desc = '晴朗';
+
+        if (code === 0) {
+          icon = 'fa-sun text-amber-500';
+          desc = '晴天';
+        } else if ([1, 2, 3].includes(code)) {
+          icon = 'fa-cloud-sun text-sky-500';
+          desc = '多雲時晴';
+        } else if ([45, 48].includes(code)) {
+          icon = 'fa-smog text-slate-400';
+          desc = '有霧';
+        } else if ([51, 53, 55, 61, 63, 65, 80, 81, 82].includes(code)) {
+          icon = 'fa-cloud-rain text-blue-500';
+          desc = '有雨';
+        } else if ([71, 73, 75, 85, 86].includes(code)) {
+          icon = 'fa-snowflake text-indigo-400';
+          desc = '有雪';
+        } else if ([95, 96, 99].includes(code)) {
+          icon = 'fa-cloud-bolt text-amber-600';
+          desc = '雷雨';
+        }
+
+        weatherEl.innerHTML = `
+          <i class="fa-solid ${icon}"></i>
+          <span class="font-bold text-slate-900 dark:text-white">福岡 ${temp}°C</span>
+          <span class="text-slate-500 dark:text-slate-400 text-[11px]">${desc}</span>
+        `;
+      } catch (err) {
+        weatherEl.innerHTML = `
+          <i class="fa-solid fa-cloud-sun text-amber-500"></i>
+          <span class="font-bold text-slate-900 dark:text-white">福岡 舒適</span>
+        `;
+      }
+    }
+
+    // Initialize on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      initTheme();
+      updateView();
+      updateJapanClock();
+      setInterval(updateJapanClock, 1000);
+      fetchFukuokaWeather();
+      setInterval(fetchFukuokaWeather, 15 * 60 * 1000);
+    });
+  </script>
+</body>
+</html>
