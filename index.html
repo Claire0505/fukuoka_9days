@@ -2,7 +2,8 @@
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta id="meta-theme-color" name="theme-color" content="#f8fafc">
   <title>2026 福岡 9 日深度自由行手冊</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -119,121 +120,121 @@
         </div>
       </div>
 
-      <!-- Row 3: Flight Itinerary Accordion Card -->
-      <div class="rounded-xl border border-slate-200/90 dark:border-slate-800 bg-gradient-to-r from-blue-50/70 via-indigo-50/40 to-slate-50/70 dark:from-slate-900 dark:via-slate-900 dark:to-slate-900 text-xs shadow-2xs overflow-hidden transition-all duration-200">
-        <button onclick="toggleFlightAccordion()" 
-                id="flight-accordion-btn"
-                class="w-full flex items-center justify-between p-2.5 sm:p-3 text-left hover:bg-blue-100/40 dark:hover:bg-slate-800/60 transition-colors focus:outline-none"
-                aria-expanded="false"
-                aria-controls="flight-accordion-content">
-          <div class="flex items-center gap-2 min-w-0">
-            <span class="w-6 h-6 rounded-lg bg-blue-600/10 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 text-[11px]">
-              <i class="fa-solid fa-plane"></i>
-            </span>
-            <span class="font-bold text-slate-900 dark:text-white text-[11px] sm:text-xs truncate">
-              長榮航空航班資訊
-            </span>
-            <span class="hidden sm:inline-block text-[10px] text-slate-500 dark:text-slate-400 font-medium">
-              波音 787-9・BR106 / BR105
-            </span>
-          </div>
-
-          <div class="flex items-center gap-2 shrink-0">
-            <span id="flight-accordion-hint" class="text-[10px] text-blue-600 dark:text-blue-400 font-medium bg-blue-50 dark:bg-blue-950/80 px-2 py-0.5 rounded-full border border-blue-200/60 dark:border-blue-900/60">
-              點擊展開
-            </span>
-            <i id="flight-accordion-icon" class="fa-solid fa-chevron-down text-slate-400 dark:text-slate-500 text-[10px] transition-transform duration-300"></i>
-          </div>
-        </button>
-
-        <div id="flight-accordion-content" class="hidden px-2.5 pb-2.5 sm:px-3 sm:pb-3 border-t border-blue-100/70 dark:border-slate-800 pt-2 space-y-2">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] sm:text-xs leading-relaxed">
-            <div class="p-2 rounded-lg bg-white/95 dark:bg-slate-800/90 border border-blue-100 dark:border-slate-700/80 space-y-1 shadow-2xs">
-              <div class="flex items-center justify-between font-bold text-blue-900 dark:text-blue-300">
-                <span class="flex items-center gap-1">
-                  <i class="fa-solid fa-plane-departure text-[10px] text-blue-600"></i>
-                  去程 BR106 (W艙)
-                </span>
-                <span class="text-[10px] font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-1.5 py-0.5 rounded">2h 20m</span>
-              </div>
-              <div class="text-slate-700 dark:text-slate-300 space-y-0.5">
-                <p><span class="text-slate-400 dark:text-slate-400">起飛：</span>10/21 (三) 08:00 桃園 T2</p>
-                <p><span class="text-slate-400 dark:text-slate-400">抵達：</span>10/21 (三) 11:20 福岡 FUK 國際線</p>
-              </div>
+      <!-- Row 3: Combined Accordion Row (Flight + Hotel side by side) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+        <!-- Flight Accordion Card -->
+        <div class="rounded-xl border border-slate-200/90 dark:border-slate-800 bg-gradient-to-r from-blue-50/70 via-indigo-50/40 to-slate-50/70 dark:from-slate-900 dark:via-slate-900 dark:to-slate-900 shadow-2xs overflow-hidden transition-all duration-200">
+          <button onclick="toggleFlightAccordion()" 
+                  id="flight-accordion-btn"
+                  class="w-full flex items-center justify-between p-2.5 sm:p-3 text-left hover:bg-blue-100/40 dark:hover:bg-slate-800/60 transition-colors focus:outline-none"
+                  aria-expanded="false"
+                  aria-controls="flight-accordion-content">
+            <div class="flex items-center gap-2 min-w-0">
+              <span class="w-6 h-6 rounded-lg bg-blue-600/10 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 text-[11px]">
+                <i class="fa-solid fa-plane"></i>
+              </span>
+              <span class="font-bold text-slate-900 dark:text-white text-[11px] sm:text-xs truncate">
+                長榮航空航班資訊
+              </span>
             </div>
 
-            <div class="p-2 rounded-lg bg-white/95 dark:bg-slate-800/90 border border-blue-100 dark:border-slate-700/80 space-y-1 shadow-2xs">
-              <div class="flex items-center justify-between font-bold text-indigo-900 dark:text-indigo-300">
-                <span class="flex items-center gap-1">
-                  <i class="fa-solid fa-plane-arrival text-[10px] text-indigo-600"></i>
-                  回程 BR105 (W艙)
-                </span>
-                <span class="text-[10px] font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/60 px-1.5 py-0.5 rounded">2h 35m</span>
+            <div class="flex items-center gap-1.5 shrink-0">
+              <span id="flight-accordion-hint" class="text-[10px] text-blue-600 dark:text-blue-400 font-medium bg-blue-50 dark:bg-blue-950/80 px-2 py-0.5 rounded-full border border-blue-200/60 dark:border-blue-900/60">
+                點擊展開
+              </span>
+              <i id="flight-accordion-icon" class="fa-solid fa-chevron-down text-slate-400 dark:text-slate-500 text-[10px] transition-transform duration-300"></i>
+            </div>
+          </button>
+
+          <div id="flight-accordion-content" class="hidden px-2.5 pb-2.5 sm:px-3 sm:pb-3 border-t border-blue-100/70 dark:border-slate-800 pt-2 space-y-2">
+            <div class="space-y-1.5 text-[11px] leading-relaxed">
+              <div class="p-2 rounded-lg bg-white/95 dark:bg-slate-800/90 border border-blue-100 dark:border-slate-700/80 space-y-1 shadow-2xs">
+                <div class="flex items-center justify-between font-bold text-blue-900 dark:text-blue-300">
+                  <span class="flex items-center gap-1">
+                    <i class="fa-solid fa-plane-departure text-[10px] text-blue-600"></i>
+                    去程 BR106 (W艙)
+                  </span>
+                  <span class="text-[10px] font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-1.5 py-0.5 rounded">2h 20m</span>
+                </div>
+                <div class="text-slate-700 dark:text-slate-300 space-y-0.5">
+                  <p><span class="text-slate-400 dark:text-slate-400">起飛：</span>10/21 (三) 08:00 桃園 T2</p>
+                  <p><span class="text-slate-400 dark:text-slate-400">抵達：</span>10/21 (三) 11:20 福岡 FUK 國際線</p>
+                </div>
               </div>
-              <div class="text-slate-700 dark:text-slate-300 space-y-0.5">
-                <p><span class="text-slate-400 dark:text-slate-400">起飛：</span>10/29 (四) 12:15 福岡 FUK 國際線</p>
-                <p><span class="text-slate-400 dark:text-slate-400">抵達：</span>10/29 (四) 13:50 桃園 T2</p>
+
+              <div class="p-2 rounded-lg bg-white/95 dark:bg-slate-800/90 border border-blue-100 dark:border-slate-700/80 space-y-1 shadow-2xs">
+                <div class="flex items-center justify-between font-bold text-indigo-900 dark:text-indigo-300">
+                  <span class="flex items-center gap-1">
+                    <i class="fa-solid fa-plane-arrival text-[10px] text-indigo-600"></i>
+                    回程 BR105 (W艙)
+                  </span>
+                  <span class="text-[10px] font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/60 px-1.5 py-0.5 rounded">2h 35m</span>
+                </div>
+                <div class="text-slate-700 dark:text-slate-300 space-y-0.5">
+                  <p><span class="text-slate-400 dark:text-slate-400">起飛：</span>10/29 (四) 12:15 福岡 FUK 國際線</p>
+                  <p><span class="text-slate-400 dark:text-slate-400">抵達：</span>10/29 (四) 13:50 桃園 T2</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Row 4: Hotel Information Accordion Card -->
-      <div class="rounded-xl border border-slate-200/90 dark:border-slate-800 bg-gradient-to-r from-emerald-50/70 via-teal-50/40 to-slate-50/70 dark:from-slate-900 dark:via-slate-900 dark:to-slate-900 text-xs shadow-2xs overflow-hidden transition-all duration-200">
-        <button onclick="toggleHotelAccordion()" 
-                id="hotel-accordion-btn"
-                class="w-full flex items-center justify-between p-2.5 sm:p-3 text-left hover:bg-emerald-100/40 dark:hover:bg-slate-800/60 transition-colors focus:outline-none"
-                aria-expanded="false"
-                aria-controls="hotel-accordion-content">
-          <div class="flex items-center gap-2 min-w-0">
-            <span class="w-6 h-6 rounded-lg bg-emerald-600/10 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 text-[11px]">
-              <i class="fa-solid fa-hotel"></i>
-            </span>
-            <span class="font-bold text-slate-900 dark:text-white text-[11px] sm:text-xs truncate">
-              住宿飯店資訊・BASE LAYER HOTEL FUKUOKA
-            </span>
-          </div>
-
-          <div class="flex items-center gap-2 shrink-0">
-            <span id="hotel-accordion-hint" class="text-[10px] text-emerald-600 dark:text-emerald-400 font-medium bg-emerald-50 dark:bg-emerald-950/80 px-2 py-0.5 rounded-full border border-emerald-200/60 dark:border-emerald-900/60">
-              點擊展開
-            </span>
-            <i id="hotel-accordion-icon" class="fa-solid fa-chevron-down text-slate-400 dark:text-slate-500 text-[10px] transition-transform duration-300"></i>
-          </div>
-        </button>
-
-        <div id="hotel-accordion-content" class="hidden px-2.5 pb-2.5 sm:px-3 sm:pb-3 border-t border-emerald-100/70 dark:border-slate-800 pt-2 space-y-2">
-          <div class="p-2.5 rounded-lg bg-white/95 dark:bg-slate-800/90 border border-emerald-100 dark:border-slate-700/80 space-y-2 text-[11px] sm:text-xs leading-relaxed shadow-2xs">
-            <div class="flex flex-wrap items-center justify-between gap-1.5 border-b border-slate-100 dark:border-slate-700 pb-1.5">
-              <a href="https://www.google.com/maps/search/?api=1&query=BASE+LAYER+HOTEL+FUKUOKA" 
-                 target="_blank" 
-                 rel="noopener noreferrer" 
-                 class="group inline-flex items-center gap-1.5 font-bold text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 transition-colors text-xs sm:text-sm">
-                <span>BASE LAYER HOTEL FUKUOKA</span>
-                <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-emerald-500 group-hover:translate-x-0.5 transition-transform"></i>
-                <span class="text-[10px] font-normal text-slate-500 dark:text-slate-400">(點擊開 Google 地圖)</span>
-              </a>
-              <div class="flex items-center gap-2 text-slate-600 dark:text-slate-300">
-                <span class="font-medium"><i class="fa-solid fa-phone text-emerald-600 mr-1"></i><a href="tel:+81924061256" class="hover:underline font-mono">+81 92-406-1256</a></span>
-                <span class="text-slate-300 dark:text-slate-600">•</span>
-                <span class="font-mono text-slate-500 dark:text-slate-400">〒810-0005</span>
-              </div>
+        <!-- Hotel Accordion Card -->
+        <div class="rounded-xl border border-slate-200/90 dark:border-slate-800 bg-gradient-to-r from-emerald-50/70 via-teal-50/40 to-slate-50/70 dark:from-slate-900 dark:via-slate-900 dark:to-slate-900 shadow-2xs overflow-hidden transition-all duration-200">
+          <button onclick="toggleHotelAccordion()" 
+                  id="hotel-accordion-btn"
+                  class="w-full flex items-center justify-between p-2.5 sm:p-3 text-left hover:bg-emerald-100/40 dark:hover:bg-slate-800/60 transition-colors focus:outline-none"
+                  aria-expanded="false"
+                  aria-controls="hotel-accordion-content">
+            <div class="flex items-center gap-2 min-w-0">
+              <span class="w-6 h-6 rounded-lg bg-emerald-600/10 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 text-[11px]">
+                <i class="fa-solid fa-hotel"></i>
+              </span>
+              <span class="font-bold text-slate-900 dark:text-white text-[11px] sm:text-xs truncate">
+                住宿：BASE LAYER HOTEL FUKUOKA
+              </span>
             </div>
 
-            <!-- Addresses List: Japanese first, then Chinese, then English -->
-            <div class="space-y-1 text-slate-700 dark:text-slate-300">
-              <div class="flex items-start gap-1.5">
-                <span class="text-[10px] font-semibold text-emerald-800 bg-emerald-100 dark:bg-emerald-950 dark:text-emerald-300 px-1.5 py-0.2 rounded shrink-0 mt-0.5">日文地址</span>
-                <span class="font-medium select-all">福岡県福岡市中央区清川1丁目14-15</span>
+            <div class="flex items-center gap-1.5 shrink-0">
+              <span id="hotel-accordion-hint" class="text-[10px] text-emerald-600 dark:text-emerald-400 font-medium bg-emerald-50 dark:bg-emerald-950/80 px-2 py-0.5 rounded-full border border-emerald-200/60 dark:border-emerald-900/60">
+                點擊展開
+              </span>
+              <i id="hotel-accordion-icon" class="fa-solid fa-chevron-down text-slate-400 dark:text-slate-500 text-[10px] transition-transform duration-300"></i>
+            </div>
+          </button>
+
+          <div id="hotel-accordion-content" class="hidden px-2.5 pb-2.5 sm:px-3 sm:pb-3 border-t border-emerald-100/70 dark:border-slate-800 pt-2 space-y-2">
+            <div class="p-2.5 rounded-lg bg-white/95 dark:bg-slate-800/90 border border-emerald-100 dark:border-slate-700/80 space-y-2 text-[11px] sm:text-xs leading-relaxed shadow-2xs">
+              <div class="flex flex-wrap items-center justify-between gap-1.5 border-b border-slate-100 dark:border-slate-700 pb-1.5">
+                <a href="https://www.google.com/maps/search/?api=1&query=BASE+LAYER+HOTEL+FUKUOKA" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="group inline-flex items-center gap-1.5 font-bold text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 transition-colors text-xs sm:text-sm">
+                  <span>BASE LAYER HOTEL FUKUOKA</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-emerald-500 group-hover:translate-x-0.5 transition-transform"></i>
+                  <span class="text-[10px] font-normal text-slate-500 dark:text-slate-400">(點擊開 Google 地圖)</span>
+                </a>
+                <div class="flex items-center gap-2 text-slate-600 dark:text-slate-300">
+                  <span class="font-medium"><i class="fa-solid fa-phone text-emerald-600 mr-1"></i><a href="tel:+81924061256" class="hover:underline font-mono">+81 92-406-1256</a></span>
+                  <span class="text-slate-300 dark:text-slate-600">•</span>
+                  <span class="font-mono text-slate-500 dark:text-slate-400">〒810-0005</span>
+                </div>
               </div>
-              <div class="flex items-start gap-1.5">
-                <span class="text-[10px] font-semibold text-blue-800 bg-blue-100 dark:bg-blue-950 dark:text-blue-300 px-1.5 py-0.2 rounded shrink-0 mt-0.5">中文地址</span>
-                <span class="select-all">日本福岡縣福岡市中央區清川1丁目14-15</span>
-              </div>
-              <div class="flex items-start gap-1.5">
-                <span class="text-[10px] font-semibold text-slate-700 bg-slate-200 dark:bg-slate-700 dark:text-slate-300 px-1.5 py-0.2 rounded shrink-0 mt-0.5">英文地址</span>
-                <span class="text-slate-600 dark:text-slate-400 font-mono text-[10px] sm:text-[11px] select-all">1-14-15 Kiyokawa, Chuo Ward, Fukuoka, 810-0005, Japan</span>
+
+              <!-- Addresses List: Japanese first, then Chinese, then English -->
+              <div class="space-y-1 text-slate-700 dark:text-slate-300">
+                <div class="flex items-start gap-1.5">
+                  <span class="text-[10px] font-semibold text-emerald-800 bg-emerald-100 dark:bg-emerald-950 dark:text-emerald-300 px-1.5 py-0.2 rounded shrink-0 mt-0.5">日：</span>
+                  <span class="font-medium select-all">福岡県福岡市中央区清川1丁目14-15</span>
+                </div>
+                <div class="flex items-start gap-1.5">
+                  <span class="text-[10px] font-semibold text-blue-800 bg-blue-100 dark:bg-blue-950 dark:text-blue-300 px-1.5 py-0.2 rounded shrink-0 mt-0.5">中：</span>
+                  <span class="select-all">日本福岡縣福岡市中央區清川1丁目14-15</span>
+                </div>
+                <div class="flex items-start gap-1.5">
+                  <span class="text-[10px] font-semibold text-slate-700 bg-slate-200 dark:bg-slate-700 dark:text-slate-300 px-1.5 py-0.2 rounded shrink-0 mt-0.5">英：</span>
+                  <span class="text-slate-600 dark:text-slate-400 font-mono text-[10px] sm:text-[11px] select-all">1-14-15 Kiyokawa, Chuo Ward, Fukuoka, 810-0005, Japan</span>
+                </div>
               </div>
             </div>
           </div>
@@ -271,7 +272,6 @@
     </div>
   </main>
 
-  <!-- Add to Home Screen Modal -->
   <div id="pwa-modal" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4 hidden">
     <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-sm w-full p-5 border border-slate-200 dark:border-slate-800 shadow-xl space-y-4">
       <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
@@ -316,7 +316,6 @@
     </div>
   </div>
 
-  <!-- Footer -->
   <footer class="mt-auto border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 py-6 text-center text-xs text-slate-500 dark:text-slate-400">
     <div class="max-w-6xl mx-auto px-4 space-y-2">
       <p class="font-medium text-slate-700 dark:text-slate-300">福岡・太宰府・門司港・由布院・糸島・南藏院 9 日全圖解行程手冊</p>
@@ -2056,9 +2055,17 @@
       const htmlEl = document.documentElement;
       const isDark = htmlEl.classList.toggle('dark');
       updateThemeIcons(isDark);
+      updateThemeColorMeta(isDark);
       try {
         localStorage.setItem('fukuoka_dark_mode', isDark ? 'true' : 'false');
       } catch (e) {}
+    }
+
+    function updateThemeColorMeta(isDark) {
+      const meta = document.getElementById('meta-theme-color');
+      if (meta) {
+        meta.setAttribute('content', isDark ? '#020617' : '#f8fafc');
+      }
     }
 
     function updateThemeIcons(isDark) {
@@ -2086,8 +2093,10 @@
           document.documentElement.classList.remove('dark');
         }
         updateThemeIcons(shouldBeDark);
+        updateThemeColorMeta(shouldBeDark);
       } catch (e) {
         updateThemeIcons(false);
+        updateThemeColorMeta(false);
       }
     }
 
