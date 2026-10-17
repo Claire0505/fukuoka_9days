@@ -194,88 +194,217 @@
   </main>
 
   <!-- Flight Modal Dialog -->
-  <div id="flight-modal" class="fixed inset-0 z-50 bg-slate-950/65 backdrop-blur-xs flex items-center justify-center p-4 hidden">
-    <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full p-5 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4">
-      <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-        <h3 class="font-bold text-slate-900 dark:text-white text-base flex items-center gap-2">
-          <span class="w-7 h-7 rounded-lg bg-blue-600 text-white flex items-center justify-center text-xs">
+  <div id="flight-modal" class="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 hidden">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full max-h-[90vh] flex flex-col border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden">
+      <!-- Fixed Modal Header -->
+      <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-4 py-3 shrink-0 bg-white/95 dark:bg-slate-900/95">
+        <div class="flex items-center gap-2">
+          <span class="w-7 h-7 rounded-lg bg-blue-600 text-white flex items-center justify-center text-xs shrink-0 shadow-2xs">
             <i class="fa-solid fa-plane"></i>
           </span>
-          長榮航空航班詳細資訊
-        </h3>
-        <button onclick="closeFlightModal()" class="w-8 h-8 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 flex items-center justify-center">
-          <i class="fa-solid fa-xmark text-lg"></i>
+          <div>
+            <h3 class="font-bold text-slate-900 dark:text-white text-sm sm:text-base leading-tight">長榮航空航班資訊・機場計程車字卡</h3>
+            <span class="text-[10px] text-blue-600 dark:text-blue-400 font-medium">去回程航班 ＆ 運転手さんに見せる画面</span>
+          </div>
+        </div>
+        <button onclick="closeFlightModal()" 
+                type="button"
+                aria-label="關閉視窗"
+                class="w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 flex items-center justify-center transition-colors">
+          <i class="fa-solid fa-xmark text-base"></i>
         </button>
       </div>
 
-      <div class="space-y-3 text-xs md:text-sm">
-        <!-- Outbound -->
-        <div class="p-3.5 rounded-xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/60 space-y-2">
-          <div class="flex items-center justify-between font-bold text-blue-950 dark:text-blue-300">
-            <span class="flex items-center gap-1.5 text-sm">
-              <i class="fa-solid fa-plane-departure text-blue-600"></i>
-              去程 BR106 (W艙)
-            </span>
-            <span class="text-xs font-semibold text-blue-700 dark:text-blue-300 bg-white dark:bg-slate-800 px-2 py-0.5 rounded-full border border-blue-200/60">
-              飛行 2h 20m
-            </span>
+      <!-- Scrollable Modal Content -->
+      <div class="overflow-y-auto px-4 py-3.5 space-y-3.5 tab-scrollbar flex-1 text-slate-800 dark:text-slate-200">
+        <!-- Flight Info Accordion/Summary -->
+        <div class="space-y-2.5">
+          <!-- Outbound -->
+          <div class="p-3 rounded-xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/60 space-y-1.5">
+            <div class="flex items-center justify-between font-bold text-blue-950 dark:text-blue-300">
+              <span class="flex items-center gap-1.5 text-xs sm:text-sm">
+                <i class="fa-solid fa-plane-departure text-blue-600"></i>
+                去程 BR106 (W艙)
+              </span>
+              <span class="text-[11px] font-semibold text-blue-700 dark:text-blue-300 bg-white dark:bg-slate-800 px-2 py-0.5 rounded-full border border-blue-200/60">
+                飛行 2h 20m
+              </span>
+            </div>
+            <div class="space-y-0.5 text-xs text-slate-700 dark:text-slate-300">
+              <p><span class="text-slate-500 dark:text-slate-400">起飛：</span>10/21 (三) 08:00 桃園 T2 (台灣時間)</p>
+              <p><span class="text-slate-500 dark:text-slate-400">抵達：</span>10/21 (三) 11:20 福岡 FUK 國際線 (日本時間)</p>
+            </div>
           </div>
-          <div class="space-y-1 text-slate-700 dark:text-slate-300">
-            <p><span class="text-slate-500 dark:text-slate-400">起飛：</span>10/21 (三) 08:00 桃園 T2 (台灣時間)</p>
-            <p><span class="text-slate-500 dark:text-slate-400">抵達：</span>10/21 (三) 11:20 福岡 FUK 國際線 (日本時間)</p>
+
+          <!-- Inbound -->
+          <div class="p-3 rounded-xl bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-900/60 space-y-1.5">
+            <div class="flex items-center justify-between font-bold text-indigo-950 dark:text-indigo-300">
+              <span class="flex items-center gap-1.5 text-xs sm:text-sm">
+                <i class="fa-solid fa-plane-arrival text-indigo-600"></i>
+                回程 BR105 (W艙)
+              </span>
+              <span class="text-[11px] font-semibold text-indigo-700 dark:text-indigo-300 bg-white dark:bg-slate-800 px-2 py-0.5 rounded-full border border-indigo-200/60">
+                飛行 2h 35m
+              </span>
+            </div>
+            <div class="space-y-0.5 text-xs text-slate-700 dark:text-slate-300">
+              <p><span class="text-slate-500 dark:text-slate-400">起飛：</span>10/29 (四) 12:15 福岡 FUK 國際線 (日本時間)</p>
+              <p><span class="text-slate-500 dark:text-slate-400">抵達：</span>10/29 (四) 13:50 桃園 T2 (台灣時間)</p>
+            </div>
           </div>
         </div>
 
-        <!-- Inbound -->
-        <div class="p-3.5 rounded-xl bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-900/60 space-y-2">
-          <div class="flex items-center justify-between font-bold text-indigo-950 dark:text-indigo-300">
-            <span class="flex items-center gap-1.5 text-sm">
-              <i class="fa-solid fa-plane-arrival text-indigo-600"></i>
-              回程 BR105 (W艙)
+        <!-- Section 1: Boarding Taxi to Airport -->
+        <div class="p-3.5 rounded-2xl bg-amber-50/90 dark:bg-slate-800/95 border-2 border-amber-300 dark:border-amber-700 space-y-3">
+          <div class="flex items-center justify-between border-b border-amber-200/80 dark:border-slate-700 pb-1.5">
+            <span class="text-xs font-black text-amber-950 dark:text-amber-300 flex items-center gap-1.5 uppercase tracking-wide">
+              <i class="fa-solid fa-car text-amber-600 dark:text-amber-400"></i>
+              【第一階段：上車時出示】
             </span>
-            <span class="text-xs font-semibold text-indigo-700 dark:text-indigo-300 bg-white dark:bg-slate-800 px-2 py-0.5 rounded-full border border-indigo-200/60">
-              飛行 2h 35m
-            </span>
-          </div>
-          <div class="space-y-1 text-slate-700 dark:text-slate-300">
-            <p><span class="text-slate-500 dark:text-slate-400">起飛：</span>10/29 (四) 12:15 福岡 FUK 國際線 (日本時間)</p>
-            <p><span class="text-slate-500 dark:text-slate-400">抵達：</span>10/29 (四) 13:50 桃園 T2 (台灣時間)</p>
-          </div>
-        </div>
-
-        <!-- Taxi Driver Card: To Fukuoka Airport International Terminal -->
-        <div class="p-3.5 rounded-2xl bg-amber-50/90 dark:bg-amber-950/40 border-2 border-amber-300 dark:border-amber-700/80 space-y-2.5">
-          <div class="flex items-center justify-between">
-            <span class="text-[11px] font-bold text-amber-900 dark:text-amber-300 flex items-center gap-1.5 uppercase tracking-wide">
-              <i class="fa-solid fa-taxi text-amber-600 dark:text-amber-400"></i>
-              計程車司機溝通卡（前往機場）
-            </span>
-            <button onclick="playSpeech('福岡空港の国際線ターミナル、3階の出発ロビーまでお願いします。', 'ja-JP')" 
+            <button onclick="playSpeech('運転手さんへ、こんにちは。お忙しいところ恐れ入りますが、福岡空港の国際線ターミナルまでお願いいたします。荷物がありますので、トランクを開けていただけますでしょうか。また、忘れ物防止のため、到着時にレシートを一枚いただきたいです。', 'ja-JP')" 
                     type="button"
-                    class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-600 hover:bg-amber-700 active:scale-95 text-white font-bold text-[11px] shadow-xs transition-all">
-              <i class="fa-solid fa-volume-high animate-pulse text-[10px]"></i>
+                    class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-amber-600 hover:bg-amber-700 active:scale-95 text-white font-bold text-[10px] shadow-2xs transition-all">
+              <i class="fa-solid fa-volume-high animate-pulse text-[9px]"></i>
               <span>播放日語給司機聽</span>
             </button>
           </div>
 
-          <div class="bg-white dark:bg-slate-900/90 p-3 rounded-xl border border-amber-200 dark:border-slate-700 space-y-1">
-            <span class="text-[10px] text-slate-400 block font-semibold">運転手さんに見せる画面 (給司機看)：</span>
-            <p class="text-base sm:text-lg font-black text-slate-950 dark:text-white leading-snug">
-              「福岡空港の国際線ターミナル（3階出発ロビー）までお願いします。」
+          <!-- Pure Japanese Block for Driver -->
+          <div class="bg-white dark:bg-slate-900 p-3 rounded-xl border border-amber-200/90 dark:border-slate-700 space-y-2">
+            <span class="text-[10px] font-bold text-slate-400 dark:text-slate-500 block">運転手さんへ (給司機先生)：</span>
+            <p class="text-sm sm:text-base font-bold text-slate-950 dark:text-white leading-relaxed">
+              こんにちは。お忙しいところ恐れ入りますが、福岡空港の「国際線ターミナル」までお願いいたします。<br>
+              荷物がありますので、トランクを開けていただけますでしょうか。<br>
+              また、忘れ物防止のため、到着時にレシート（領収書）を一枚いただきたいです。
             </p>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400 font-mono italic">
-              Fukuoka kūkō no kokusaisen tāminaru, sangai no shuppatsu robī made onegai shimasu.
+
+            <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-1">
+              <span class="text-[10px] font-bold text-amber-800 dark:text-amber-300 uppercase tracking-wider block">【目的地】</span>
+              <p class="text-base sm:text-lg font-black text-slate-950 dark:text-white leading-tight">
+                福岡空港 国際線ターミナル<br>
+                <span class="text-xs font-semibold text-amber-700 dark:text-amber-400">（3階 出発ロビー）</span>
+              </p>
+            </div>
+          </div>
+
+          <!-- Chinese Reference (Small Text) -->
+          <div class="bg-amber-100/40 dark:bg-slate-900/50 p-2.5 rounded-xl border border-amber-200/60 dark:border-slate-700 text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
+            <span class="font-bold text-amber-900 dark:text-amber-300 block mb-0.5">💡 第一階段對話中文對照：</span>
+            給司機先生：您好。百忙之中打擾您真不好意思，麻煩請載我到福岡機場的「國際線航廈」。因為有行李，可以麻煩您幫我開一下後車廂嗎？另外，為了防止遺忘隨身物品，抵達時希望能給我一張收據。
+          </div>
+        </div>
+
+        <!-- Section 2: Payment Options (4-in-1) -->
+        <div class="p-3.5 rounded-2xl bg-blue-50/90 dark:bg-slate-800/95 border-2 border-blue-300 dark:border-blue-800 space-y-2.5">
+          <div class="border-b border-blue-200/80 dark:border-slate-700 pb-1.5">
+            <span class="text-xs font-black text-blue-950 dark:text-blue-300 flex items-center gap-1.5 uppercase tracking-wide">
+              <i class="fa-solid fa-receipt text-blue-600 dark:text-blue-400"></i>
+              【第二階段：抵達付款時出示 (4選1)】
+            </span>
+          </div>
+
+          <!-- Option A: Physical Credit Card -->
+          <div class="bg-white dark:bg-slate-900 p-2.5 rounded-xl border border-blue-200/80 dark:border-slate-700 space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-bold text-blue-900 dark:text-blue-300 flex items-center gap-1">
+                <i class="fa-solid fa-credit-card text-blue-600"></i> 方案 A：實體信用卡
+              </span>
+              <button onclick="playSpeech('お会計をお願いいたします。クレジットカードで支払います。レシートもお願いいたします。', 'ja-JP')" 
+                      type="button"
+                      class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold text-[9px] transition-all">
+                <i class="fa-solid fa-volume-high text-[8px]"></i>
+                <span>播放發音</span>
+              </button>
+            </div>
+            <p class="text-sm font-bold text-slate-950 dark:text-white leading-snug">
+              お会計をお願いいたします。<br>
+              クレジットカード（タッチ、またはICチップ）で支払います。<br>
+              レシートもお願いいたします。
             </p>
-            <p class="text-[12px] font-medium text-amber-800 dark:text-amber-300 pt-0.5">
-              中文：請載我到「福岡機場國際線航廈（3樓出發大廳）」，麻煩您了。
+            <p class="text-[10px] text-slate-500 dark:text-slate-400 pt-0.5">
+              💡 中文：麻煩結帳。我要用信用卡付款（感應或插卡）。收據也麻煩了。
+            </p>
+          </div>
+
+          <!-- Option B: Cash -->
+          <div class="bg-white dark:bg-slate-900 p-2.5 rounded-xl border border-blue-200/80 dark:border-slate-700 space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-bold text-emerald-900 dark:text-emerald-300 flex items-center gap-1">
+                <i class="fa-solid fa-money-bill-wave text-emerald-600"></i> 方案 B：日圓現金
+              </span>
+              <button onclick="playSpeech('お会計をお願いいたします。現金でお支払いいたします。レシートもお願いいたします。', 'ja-JP')" 
+                      type="button"
+                      class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold text-[9px] transition-all">
+                <i class="fa-solid fa-volume-high text-[8px]"></i>
+                <span>播放發音</span>
+              </button>
+            </div>
+            <p class="text-sm font-bold text-slate-950 dark:text-white leading-snug">
+              お会計をお願いいたします。<br>
+              現金でお支払いいたします。<br>
+              レシートもお願いいたします。
+            </p>
+            <p class="text-[10px] text-slate-500 dark:text-slate-400 pt-0.5">
+              💡 中文：麻煩結帳。我要用現金付款。收據也麻煩了。
+            </p>
+          </div>
+
+          <!-- Option C: Google Pay (Pixel) -->
+          <div class="bg-white dark:bg-slate-900 p-2.5 rounded-xl border border-blue-200/80 dark:border-slate-700 space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-bold text-indigo-900 dark:text-indigo-300 flex items-center gap-1">
+                <i class="fa-brands fa-google text-indigo-600"></i> 方案 C：Google Pay 感應 (Pixel組)
+              </span>
+              <button onclick="playSpeech('お会計をお願いいたします。グーグルペイで支払います。レシートもお願いいたします。', 'ja-JP')" 
+                      type="button"
+                      class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-bold text-[9px] transition-all">
+                <i class="fa-solid fa-volume-high text-[8px]"></i>
+                <span>播放發音</span>
+              </button>
+            </div>
+            <p class="text-sm font-bold text-slate-950 dark:text-white leading-snug">
+              お会計をお願いいたします。<br>
+              Google Pay（クレジットのタッチ決済）で支払います。<br>
+              レシートもお願いいたします。
+            </p>
+            <p class="text-[10px] text-slate-500 dark:text-slate-400 pt-0.5">
+              💡 中文：麻煩結帳。我要用 Google Pay 付款（信用卡感應）。收據也麻煩了。
+            </p>
+          </div>
+
+          <!-- Option D: Apple Pay (iPhone) -->
+          <div class="bg-white dark:bg-slate-900 p-2.5 rounded-xl border border-blue-200/80 dark:border-slate-700 space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-bold text-slate-900 dark:text-slate-200 flex items-center gap-1">
+                <i class="fa-brands fa-apple text-slate-800 dark:text-slate-200"></i> 方案 D：Apple Pay 感應 (iPhone組)
+              </span>
+              <button onclick="playSpeech('お会計をお願いいたします。アップルペイで支払います。レシートもお願いいたします。', 'ja-JP')" 
+                      type="button"
+                      class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-800 hover:bg-slate-900 dark:bg-slate-700 dark:hover:bg-slate-600 active:scale-95 text-white font-bold text-[9px] transition-all">
+                <i class="fa-solid fa-volume-high text-[8px]"></i>
+                <span>播放發音</span>
+              </button>
+            </div>
+            <p class="text-sm font-bold text-slate-950 dark:text-white leading-snug">
+              お会計をお願いいたします。<br>
+              Apple Pay（クレジットのタッチ決済）で支払います。<br>
+              レシートもお願いいたします。
+            </p>
+            <p class="text-[10px] text-slate-500 dark:text-slate-400 pt-0.5">
+              💡 中文：麻煩結帳。我要用 Apple Pay 付款（信用卡感應）。收據也麻煩了。
             </p>
           </div>
         </div>
       </div>
 
-      <button onclick="closeFlightModal()" class="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-xs transition-colors">
-        關閉視窗
-      </button>
+      <!-- Fixed Bottom Action Buttons Footer -->
+      <div class="border-t border-slate-100 dark:border-slate-800 p-3 bg-slate-50/90 dark:bg-slate-900/90 shrink-0">
+        <button onclick="closeFlightModal()" 
+                type="button"
+                class="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm transition-colors shadow-xs active:scale-[0.99]">
+          關閉視窗
+        </button>
+      </div>
     </div>
   </div>
 
@@ -289,8 +418,8 @@
             <i class="fa-solid fa-taxi"></i>
           </span>
           <div>
-            <h3 class="font-bold text-slate-900 dark:text-white text-sm sm:text-base leading-tight">住宿資訊・計程車司機導航卡</h3>
-            <span class="text-[10px] text-emerald-600 dark:text-emerald-400 font-medium">運転手さんに見せる画面 (給司機看)</span>
+            <h3 class="font-bold text-slate-900 dark:text-white text-sm sm:text-base leading-tight">住宿資訊・日本計程車溝通字卡 (FUKUOKA)</h3>
+            <span class="text-[10px] text-emerald-600 dark:text-emerald-400 font-medium">運転手さんに見せる画面 (給司機看・可截圖)</span>
           </div>
         </div>
         <button onclick="closeHotelModal()" 
@@ -302,102 +431,163 @@
       </div>
 
       <!-- Scrollable Modal Content -->
-      <div class="overflow-y-auto px-4 py-3.5 space-y-3 tab-scrollbar flex-1">
-        <!-- Driver Friendly Big Card -->
-        <div class="p-3.5 rounded-2xl bg-emerald-50/80 dark:bg-slate-800/90 border-2 border-emerald-300 dark:border-emerald-700 space-y-2.5">
-          <div>
-            <span class="text-[10px] font-bold text-emerald-800 dark:text-emerald-300 uppercase tracking-wider block">飯店名稱 / ホテル名</span>
-            <p class="text-lg sm:text-xl font-black text-slate-950 dark:text-white leading-tight">BASE LAYER HOTEL FUKUOKA</p>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">ベースレイヤーホテル福岡</p>
+      <div class="overflow-y-auto px-4 py-3.5 space-y-3.5 tab-scrollbar flex-1 text-slate-800 dark:text-slate-200">
+        <!-- Section 1: Boarding Taxi -->
+        <div class="p-3.5 rounded-2xl bg-emerald-50/90 dark:bg-slate-800/95 border-2 border-emerald-300 dark:border-emerald-700 space-y-3">
+          <div class="flex items-center justify-between border-b border-emerald-200/80 dark:border-slate-700 pb-1.5">
+            <span class="text-xs font-black text-emerald-900 dark:text-emerald-300 flex items-center gap-1.5 uppercase tracking-wide">
+              <i class="fa-solid fa-car text-emerald-600 dark:text-emerald-400"></i>
+              【第一階段：上車時出示】
+            </span>
+            <button onclick="playSpeech('運転手さんへ、こんにちは。お忙しいところ恐れ入りますが、下記の目的地までお願いいたします。カーナビに電話番号、または住所をご入力いただけますでしょうか。また、忘れ物防止のため、到着時にレシートを一枚いただきたいです。', 'ja-JP')" 
+                    type="button"
+                    class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold text-[10px] shadow-2xs transition-all">
+              <i class="fa-solid fa-volume-high animate-pulse text-[9px]"></i>
+              <span>播放日語給司機聽</span>
+            </button>
           </div>
 
-          <div class="border-t border-emerald-200/80 dark:border-slate-700 pt-2">
-            <span class="text-[10px] font-bold text-emerald-800 dark:text-emerald-300 uppercase tracking-wider block">日文地址 / ご住所（目的地）</span>
-            <p class="text-base sm:text-lg font-bold text-slate-900 dark:text-emerald-200 leading-snug select-all bg-white dark:bg-slate-900 p-2 rounded-xl border border-emerald-200 dark:border-slate-700 mt-1">
-              〒810-0005<br>福岡県福岡市中央区清川1丁目14-15
+          <!-- Pure Japanese Block for Driver -->
+          <div class="bg-white dark:bg-slate-900 p-3 rounded-xl border border-emerald-200/90 dark:border-slate-700 space-y-2">
+            <span class="text-[10px] font-bold text-slate-400 dark:text-slate-500 block">運転手さんへ (給司機先生)：</span>
+            <p class="text-sm sm:text-base font-bold text-slate-950 dark:text-white leading-relaxed">
+              こんにちは。お忙しいところ恐れ入りますが、下記の目的地までお願いいたします。<br>
+              カーナビに電話番号、または住所をご入力いただけますでしょうか。<br>
+              また、忘れ物防止のため、到着時にレシート（領収書）を一枚いただきたいです。
             </p>
+
+            <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-1.5">
+              <div>
+                <span class="text-[10px] font-bold text-emerald-800 dark:text-emerald-300 uppercase tracking-wider block">【目的地（ホテル名）】</span>
+                <p class="text-base sm:text-lg font-black text-slate-950 dark:text-white leading-tight">
+                  BASE LAYER HOTEL 福岡<br>
+                  <span class="text-xs font-medium text-slate-500 dark:text-slate-400">(ベースレイヤーホテル福岡)</span>
+                </p>
+              </div>
+
+              <div>
+                <span class="text-[10px] font-bold text-emerald-800 dark:text-emerald-300 uppercase tracking-wider block">【ナビ用 電話番号】</span>
+                <a href="tel:+81924061256" class="font-bold font-mono text-emerald-700 dark:text-emerald-400 text-base sm:text-lg hover:underline inline-flex items-center gap-1.5">
+                  <i class="fa-solid fa-phone text-xs"></i> 092-406-1256
+                </a>
+              </div>
+
+              <div>
+                <span class="text-[10px] font-bold text-emerald-800 dark:text-emerald-300 uppercase tracking-wider block">【住所】</span>
+                <p class="text-sm sm:text-base font-bold text-slate-900 dark:text-emerald-200 leading-snug select-all bg-emerald-50/50 dark:bg-slate-800/80 p-2 rounded-lg border border-emerald-200/70 dark:border-slate-700">
+                  〒810-0005 福岡県福岡市中央区清川1丁目14-15
+                </p>
+              </div>
+            </div>
           </div>
 
-          <!-- Phone & Landmarks -->
-          <div class="grid grid-cols-2 gap-2 text-xs pt-0.5">
-            <div class="bg-white/90 dark:bg-slate-900/80 p-2 rounded-xl border border-emerald-100 dark:border-slate-700">
-              <span class="text-slate-500 dark:text-slate-400 block text-[9px]">導航電話 (TEL)</span>
-              <a href="tel:+81924061256" class="font-bold font-mono text-emerald-700 dark:text-emerald-400 text-xs sm:text-sm hover:underline flex items-center gap-1">
-                <i class="fa-solid fa-phone text-[10px]"></i> 092-406-1256
-              </a>
-            </div>
-            <div class="bg-white/90 dark:bg-slate-900/80 p-2 rounded-xl border border-emerald-100 dark:border-slate-700">
-              <span class="text-slate-500 dark:text-slate-400 block text-[9px]">近鄰地標</span>
-              <span class="font-bold text-slate-800 dark:text-slate-200 text-[11px] sm:text-xs">渡辺通駅・清川交差点</span>
-            </div>
-          </div>
-
-          <!-- Voice phrase to driver (Split into 2 sentences with independent playback buttons) -->
-          <div class="bg-white/95 dark:bg-slate-900/90 p-2.5 rounded-xl border border-emerald-200 dark:border-slate-700 space-y-2 mt-1">
-            <div class="flex items-center justify-between border-b border-emerald-100 dark:border-slate-700 pb-1">
-              <span class="text-[10px] font-bold text-emerald-800 dark:text-emerald-300 flex items-center gap-1">
-                <i class="fa-solid fa-taxi text-emerald-600"></i>
-                司機溝通卡（分段語音發音）
-              </span>
-              <button onclick="playSpeech('こちらのホテル、ベースレイヤーホテル福岡までお願いします。住所は中央区清川1丁目14-15です。', 'ja-JP')" 
-                      type="button"
-                      class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-[9px] transition-all">
-                <i class="fa-solid fa-play text-[8px] text-emerald-600"></i>
-                <span>連續播全文</span>
-              </button>
-            </div>
-
-            <!-- Sentence 1 -->
-            <div class="p-2 rounded-lg bg-emerald-50/50 dark:bg-slate-800/60 border border-emerald-100 dark:border-slate-700 space-y-0.5">
-              <div class="flex items-center justify-between gap-2">
-                <span class="text-[9px] font-bold text-emerald-700 dark:text-emerald-400">第 1 句：指名飯店</span>
-                <button onclick="playSpeech('こちらのホテル、ベースレイヤーホテル福岡までお願いします。', 'ja-JP')" 
-                        type="button"
-                        class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold text-[10px] shadow-2xs transition-all">
-                  <i class="fa-solid fa-volume-high animate-pulse text-[9px]"></i>
-                  <span>播放第 1 句</span>
-                </button>
-              </div>
-              <p class="text-sm sm:text-base font-black text-slate-950 dark:text-white leading-snug">
-                「こちらのホテル（BASE LAYER HOTEL 福岡）までお願いします。」
-              </p>
-              <p class="text-[10px] text-slate-500 dark:text-slate-400 font-mono italic">
-                Kochira no hoteru (Bēsu Reiyā Hoteru Fukuoka) made onegai shimasu.
-              </p>
-              <p class="text-[10px] text-slate-600 dark:text-slate-300">
-                中文：請載我到這間飯店，麻煩您了。
-              </p>
-            </div>
-
-            <!-- Sentence 2 -->
-            <div class="p-2 rounded-lg bg-emerald-50/50 dark:bg-slate-800/60 border border-emerald-100 dark:border-slate-700 space-y-0.5">
-              <div class="flex items-center justify-between gap-2">
-                <span class="text-[9px] font-bold text-emerald-700 dark:text-emerald-400">第 2 句：告知地址</span>
-                <button onclick="playSpeech('住所は中央区清川1丁目14-15です。', 'ja-JP')" 
-                        type="button"
-                        class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold text-[10px] shadow-2xs transition-all">
-                  <i class="fa-solid fa-volume-high animate-pulse text-[9px]"></i>
-                  <span>播放第 2 句</span>
-                </button>
-              </div>
-              <p class="text-sm sm:text-base font-black text-slate-950 dark:text-white leading-snug">
-                「住所は中央区清川1丁目14-15です。」
-              </p>
-              <p class="text-[10px] text-slate-500 dark:text-slate-400 font-mono italic">
-                Jūsho wa Chūō-ku Kiyokawa itchōme jūyon no jūgo desu.
-              </p>
-              <p class="text-[10px] text-slate-600 dark:text-slate-300">
-                中文：地址在中央區清川1丁目14-15。
-              </p>
-            </div>
+          <!-- Chinese Reference (Small Text) -->
+          <div class="bg-emerald-100/40 dark:bg-slate-900/50 p-2.5 rounded-xl border border-emerald-200/60 dark:border-slate-700 text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
+            <span class="font-bold text-emerald-900 dark:text-emerald-300 block mb-0.5">💡 第一階段對話中文對照：</span>
+            給司機先生：您好。百忙之中打擾您真不好意思，麻煩請載我到下方的目的地。可以請您在汽車導航中輸入電話號碼或地址嗎？另外，為了防止遺忘隨身物品，抵達時希望能給我一張收據。
           </div>
         </div>
 
-        <!-- Additional Address Reference -->
-        <div class="space-y-1 text-[11px] text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/50 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700">
-          <p><strong class="text-slate-800 dark:text-slate-200">日：</strong>福岡県福岡市中央区清川1丁目14-15</p>
-          <p><strong class="text-slate-800 dark:text-slate-200">中：</strong>日本福岡縣福岡市中央區清川1丁目14-15</p>
-          <p><strong class="text-slate-800 dark:text-slate-200">英：</strong>1-14-15 Kiyokawa, Chuo Ward, Fukuoka, 810-0005, Japan</p>
+        <!-- Section 2: Payment Options (4-in-1) -->
+        <div class="p-3.5 rounded-2xl bg-blue-50/90 dark:bg-slate-800/95 border-2 border-blue-300 dark:border-blue-800 space-y-2.5">
+          <div class="border-b border-blue-200/80 dark:border-slate-700 pb-1.5">
+            <span class="text-xs font-black text-blue-950 dark:text-blue-300 flex items-center gap-1.5 uppercase tracking-wide">
+              <i class="fa-solid fa-receipt text-blue-600 dark:text-blue-400"></i>
+              【第二階段：抵達付款時出示 (4選1)】
+            </span>
+          </div>
+
+          <!-- Option A: Physical Credit Card -->
+          <div class="bg-white dark:bg-slate-900 p-2.5 rounded-xl border border-blue-200/80 dark:border-slate-700 space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-bold text-blue-900 dark:text-blue-300 flex items-center gap-1">
+                <i class="fa-solid fa-credit-card text-blue-600"></i> 方案 A：實體信用卡
+              </span>
+              <button onclick="playSpeech('お会計をお願いいたします。クレジットカードで支払います。レシートもお願いいたします。', 'ja-JP')" 
+                      type="button"
+                      class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold text-[9px] transition-all">
+                <i class="fa-solid fa-volume-high text-[8px]"></i>
+                <span>播放發音</span>
+              </button>
+            </div>
+            <p class="text-sm font-bold text-slate-950 dark:text-white leading-snug">
+              お会計をお願いいたします。<br>
+              クレジットカード（タッチ、またはICチップ）で支払います。<br>
+              レシートもお願いいたします。
+            </p>
+            <p class="text-[10px] text-slate-500 dark:text-slate-400 pt-0.5">
+              💡 中文：麻煩結帳。我要用信用卡付款（感應或插卡）。收據也麻煩了。
+            </p>
+          </div>
+
+          <!-- Option B: Cash -->
+          <div class="bg-white dark:bg-slate-900 p-2.5 rounded-xl border border-blue-200/80 dark:border-slate-700 space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-bold text-emerald-900 dark:text-emerald-300 flex items-center gap-1">
+                <i class="fa-solid fa-money-bill-wave text-emerald-600"></i> 方案 B：日圓現金
+              </span>
+              <button onclick="playSpeech('お会計をお願いいたします。現金でお支払いいたします。レシートもお願いいたします。', 'ja-JP')" 
+                      type="button"
+                      class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold text-[9px] transition-all">
+                <i class="fa-solid fa-volume-high text-[8px]"></i>
+                <span>播放發音</span>
+              </button>
+            </div>
+            <p class="text-sm font-bold text-slate-950 dark:text-white leading-snug">
+              お会計をお願いいたします。<br>
+              現金でお支払いいたします。<br>
+              レシートもお願いいたします。
+            </p>
+            <p class="text-[10px] text-slate-500 dark:text-slate-400 pt-0.5">
+              💡 中文：麻煩結帳。我要用現金付款。收據也麻煩了。
+            </p>
+          </div>
+
+          <!-- Option C: Google Pay (Pixel) -->
+          <div class="bg-white dark:bg-slate-900 p-2.5 rounded-xl border border-blue-200/80 dark:border-slate-700 space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-bold text-indigo-900 dark:text-indigo-300 flex items-center gap-1">
+                <i class="fa-brands fa-google text-indigo-600"></i> 方案 C：Google Pay 感應 (Pixel組)
+              </span>
+              <button onclick="playSpeech('お会計をお願いいたします。グーグルペイで支払います。レシートもお願いいたします。', 'ja-JP')" 
+                      type="button"
+                      class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-bold text-[9px] transition-all">
+                <i class="fa-solid fa-volume-high text-[8px]"></i>
+                <span>播放發音</span>
+              </button>
+            </div>
+            <p class="text-sm font-bold text-slate-950 dark:text-white leading-snug">
+              お会計をお願いいたします。<br>
+              Google Pay（クレジットのタッチ決済）で支払います。<br>
+              レシートもお願いいたします。
+            </p>
+            <p class="text-[10px] text-slate-500 dark:text-slate-400 pt-0.5">
+              💡 中文：麻煩結帳。我要用 Google Pay 付款（信用卡感應）。收據也麻煩了。
+            </p>
+          </div>
+
+          <!-- Option D: Apple Pay (iPhone) -->
+          <div class="bg-white dark:bg-slate-900 p-2.5 rounded-xl border border-blue-200/80 dark:border-slate-700 space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-bold text-slate-900 dark:text-slate-200 flex items-center gap-1">
+                <i class="fa-brands fa-apple text-slate-800 dark:text-slate-200"></i> 方案 D：Apple Pay 感應 (iPhone組)
+              </span>
+              <button onclick="playSpeech('お会計をお願いいたします。アップルペイで支払います。レシートもお願いいたします。', 'ja-JP')" 
+                      type="button"
+                      class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-800 hover:bg-slate-900 dark:bg-slate-700 dark:hover:bg-slate-600 active:scale-95 text-white font-bold text-[9px] transition-all">
+                <i class="fa-solid fa-volume-high text-[8px]"></i>
+                <span>播放發音</span>
+              </button>
+            </div>
+            <p class="text-sm font-bold text-slate-950 dark:text-white leading-snug">
+              お会計をお願いいたします。<br>
+              Apple Pay（クレジットのタッチ決済）で支払います。<br>
+              レシートもお願いいたします。
+            </p>
+            <p class="text-[10px] text-slate-500 dark:text-slate-400 pt-0.5">
+              💡 中文：麻煩結帳。我要用 Apple Pay 付款（信用卡感應）。收據也麻煩了。
+            </p>
+          </div>
         </div>
       </div>
 
