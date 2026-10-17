@@ -280,136 +280,151 @@
   </div>
 
   <!-- Hotel & Taxi Driver Modal Dialog (Big Typography for Drivers) -->
-  <div id="hotel-modal" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-xs flex items-center justify-center p-4 hidden">
-    <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-5 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4">
-      <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+  <div id="hotel-modal" class="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 hidden">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full max-h-[90vh] flex flex-col border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden">
+      <!-- Fixed Modal Header -->
+      <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-4 py-3 shrink-0 bg-white/95 dark:bg-slate-900/95">
         <div class="flex items-center gap-2">
-          <span class="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center text-xs">
+          <span class="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center text-xs shrink-0 shadow-2xs">
             <i class="fa-solid fa-taxi"></i>
           </span>
           <div>
-            <h3 class="font-bold text-slate-900 dark:text-white text-base">住宿資訊 ＆ 計程車司機導航卡</h3>
+            <h3 class="font-bold text-slate-900 dark:text-white text-sm sm:text-base leading-tight">住宿資訊・計程車司機導航卡</h3>
             <span class="text-[10px] text-emerald-600 dark:text-emerald-400 font-medium">運転手さんに見せる画面 (給司機看)</span>
           </div>
         </div>
-        <button onclick="closeHotelModal()" class="w-8 h-8 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 flex items-center justify-center">
-          <i class="fa-solid fa-xmark text-lg"></i>
-        </button>
-      </div>
-
-      <!-- Driver Friendly Big Card -->
-      <div class="p-4 rounded-2xl bg-emerald-50/80 dark:bg-slate-800/90 border-2 border-emerald-300 dark:border-emerald-700 space-y-3">
-        <div>
-          <span class="text-[11px] font-bold text-emerald-800 dark:text-emerald-300 uppercase tracking-wider block">飯店名稱 / ホテル名</span>
-          <p class="text-xl sm:text-2xl font-black text-slate-950 dark:text-white leading-tight">BASE LAYER HOTEL FUKUOKA</p>
-          <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">ベースレイヤーホテル福岡</p>
-        </div>
-
-        <div class="border-t border-emerald-200/80 dark:border-slate-700 pt-3">
-          <span class="text-[11px] font-bold text-emerald-800 dark:text-emerald-300 uppercase tracking-wider block">日文地址 / ご住所（目的地）</span>
-          <p class="text-lg sm:text-xl font-bold text-slate-900 dark:text-emerald-200 leading-snug select-all bg-white dark:bg-slate-900 p-2.5 rounded-xl border border-emerald-200 dark:border-slate-700 mt-1">
-            〒810-0005<br>福岡県福岡市中央区清川1丁目14-15
-          </p>
-        </div>
-
-        <!-- Phone & Landmarks -->
-        <div class="grid grid-cols-2 gap-2 text-xs pt-1">
-          <div class="bg-white/90 dark:bg-slate-900/80 p-2.5 rounded-xl border border-emerald-100 dark:border-slate-700">
-            <span class="text-slate-500 dark:text-slate-400 block text-[10px]">導航電話 (TEL)</span>
-            <a href="tel:+81924061256" class="font-bold font-mono text-emerald-700 dark:text-emerald-400 text-sm hover:underline flex items-center gap-1">
-              <i class="fa-solid fa-phone text-xs"></i> 092-406-1256
-            </a>
-          </div>
-          <div class="bg-white/90 dark:bg-slate-900/80 p-2.5 rounded-xl border border-emerald-100 dark:border-slate-700">
-            <span class="text-slate-500 dark:text-slate-400 block text-[10px]">近鄰地標</span>
-            <span class="font-bold text-slate-800 dark:text-slate-200 text-xs">渡辺通駅・清川交差点</span>
-          </div>
-        </div>
-
-        <!-- Voice phrase to driver (Split into 2 sentences with independent playback buttons) -->
-        <div class="bg-white/90 dark:bg-slate-900/90 p-3 rounded-xl border border-emerald-200 dark:border-slate-700 space-y-2.5 mt-2">
-          <div class="flex items-center justify-between border-b border-emerald-100 dark:border-slate-700 pb-1.5">
-            <span class="text-[11px] font-bold text-emerald-800 dark:text-emerald-300 flex items-center gap-1.5">
-              <i class="fa-solid fa-taxi text-emerald-600"></i>
-              計程車司機溝通卡（前往飯店・分段語音）
-            </span>
-            <button onclick="playSpeech('こちらのホテル、ベースレイヤーホテル福岡までお願いします。住所は中央区清川1丁目14-15です。', 'ja-JP')" 
-                    type="button"
-                    class="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-[10px] transition-all">
-              <i class="fa-solid fa-play text-[9px] text-emerald-600"></i>
-              <span>連續播放全文</span>
-            </button>
-          </div>
-
-          <!-- Sentence 1 -->
-          <div class="p-2.5 rounded-lg bg-emerald-50/50 dark:bg-slate-800/60 border border-emerald-100 dark:border-slate-700 space-y-1">
-            <div class="flex items-center justify-between gap-2">
-              <span class="text-[10px] font-bold text-emerald-700 dark:text-emerald-400">第一句：指名飯店</span>
-              <button onclick="playSpeech('こちらのホテル、ベースレイヤーホテル福岡までお願いします。', 'ja-JP')" 
-                      type="button"
-                      class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold text-[11px] shadow-2xs transition-all">
-                <i class="fa-solid fa-volume-high animate-pulse text-[10px]"></i>
-                <span>播放第 1 句</span>
-              </button>
-            </div>
-            <p class="text-base sm:text-lg font-black text-slate-950 dark:text-white leading-snug">
-              「こちらのホテル（BASE LAYER HOTEL 福岡）までお願いします。」
-            </p>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400 font-mono italic">
-              Kochira no hoteru (Bēsu Reiyā Hoteru Fukuoka) made onegai shimasu.
-            </p>
-            <p class="text-[11px] text-slate-600 dark:text-slate-300">
-              中文：請載我到這間飯店（BASE LAYER HOTEL 福岡），麻煩您了。
-            </p>
-          </div>
-
-          <!-- Sentence 2 -->
-          <div class="p-2.5 rounded-lg bg-emerald-50/50 dark:bg-slate-800/60 border border-emerald-100 dark:border-slate-700 space-y-1">
-            <div class="flex items-center justify-between gap-2">
-              <span class="text-[10px] font-bold text-emerald-700 dark:text-emerald-400">第二句：告知地址</span>
-              <button onclick="playSpeech('住所は中央区清川1丁目14-15です。', 'ja-JP')" 
-                      type="button"
-                      class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold text-[11px] shadow-2xs transition-all">
-                <i class="fa-solid fa-volume-high animate-pulse text-[10px]"></i>
-                <span>播放第 2 句</span>
-              </button>
-            </div>
-            <p class="text-base sm:text-lg font-black text-slate-950 dark:text-white leading-snug">
-              「住所は中央区清川1丁目14-15です。」
-            </p>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400 font-mono italic">
-              Jūsho wa Chūō-ku Kiyokawa itchōme jūyon no jūgo desu.
-            </p>
-            <p class="text-[11px] text-slate-600 dark:text-slate-300">
-              中文：地址在中央區清川1丁目14-15。
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Additional Details -->
-      <div class="space-y-1.5 text-xs text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-slate-200 dark:border-slate-700">
-        <p><strong class="text-slate-800 dark:text-slate-200">日：</strong>福岡県福岡市中央区清川1丁目14-15</p>
-        <p><strong class="text-slate-800 dark:text-slate-200">中：</strong>日本福岡縣福岡市中央區清川1丁目14-15</p>
-        <p><strong class="text-slate-800 dark:text-slate-200">英：</strong>1-14-15 Kiyokawa, Chuo Ward, Fukuoka, 810-0005, Japan</p>
-      </div>
-
-      <!-- Action Buttons -->
-      <div class="grid grid-cols-2 gap-2">
-        <button onclick="copyHotelAddress()" 
+        <button onclick="closeHotelModal()" 
                 type="button"
-                class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-bold text-xs flex items-center justify-center gap-1.5 transition-colors">
-          <i class="fa-regular fa-copy"></i>
-          <span id="copy-text">複製日文地址</span>
+                aria-label="關閉視窗"
+                class="w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 flex items-center justify-center transition-colors">
+          <i class="fa-solid fa-xmark text-base"></i>
         </button>
+      </div>
 
-        <a href="https://www.google.com/maps/search/?api=1&query=BASE+LAYER+HOTEL+FUKUOKA" 
-           target="_blank" 
-           rel="noopener noreferrer"
-           class="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-colors shadow-xs">
-          <i class="fa-solid fa-map-location-dot"></i>
-          <span>開啟 Google 地圖</span>
-        </a>
+      <!-- Scrollable Modal Content -->
+      <div class="overflow-y-auto px-4 py-3.5 space-y-3 tab-scrollbar flex-1">
+        <!-- Driver Friendly Big Card -->
+        <div class="p-3.5 rounded-2xl bg-emerald-50/80 dark:bg-slate-800/90 border-2 border-emerald-300 dark:border-emerald-700 space-y-2.5">
+          <div>
+            <span class="text-[10px] font-bold text-emerald-800 dark:text-emerald-300 uppercase tracking-wider block">飯店名稱 / ホテル名</span>
+            <p class="text-lg sm:text-xl font-black text-slate-950 dark:text-white leading-tight">BASE LAYER HOTEL FUKUOKA</p>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">ベースレイヤーホテル福岡</p>
+          </div>
+
+          <div class="border-t border-emerald-200/80 dark:border-slate-700 pt-2">
+            <span class="text-[10px] font-bold text-emerald-800 dark:text-emerald-300 uppercase tracking-wider block">日文地址 / ご住所（目的地）</span>
+            <p class="text-base sm:text-lg font-bold text-slate-900 dark:text-emerald-200 leading-snug select-all bg-white dark:bg-slate-900 p-2 rounded-xl border border-emerald-200 dark:border-slate-700 mt-1">
+              〒810-0005<br>福岡県福岡市中央区清川1丁目14-15
+            </p>
+          </div>
+
+          <!-- Phone & Landmarks -->
+          <div class="grid grid-cols-2 gap-2 text-xs pt-0.5">
+            <div class="bg-white/90 dark:bg-slate-900/80 p-2 rounded-xl border border-emerald-100 dark:border-slate-700">
+              <span class="text-slate-500 dark:text-slate-400 block text-[9px]">導航電話 (TEL)</span>
+              <a href="tel:+81924061256" class="font-bold font-mono text-emerald-700 dark:text-emerald-400 text-xs sm:text-sm hover:underline flex items-center gap-1">
+                <i class="fa-solid fa-phone text-[10px]"></i> 092-406-1256
+              </a>
+            </div>
+            <div class="bg-white/90 dark:bg-slate-900/80 p-2 rounded-xl border border-emerald-100 dark:border-slate-700">
+              <span class="text-slate-500 dark:text-slate-400 block text-[9px]">近鄰地標</span>
+              <span class="font-bold text-slate-800 dark:text-slate-200 text-[11px] sm:text-xs">渡辺通駅・清川交差点</span>
+            </div>
+          </div>
+
+          <!-- Voice phrase to driver (Split into 2 sentences with independent playback buttons) -->
+          <div class="bg-white/95 dark:bg-slate-900/90 p-2.5 rounded-xl border border-emerald-200 dark:border-slate-700 space-y-2 mt-1">
+            <div class="flex items-center justify-between border-b border-emerald-100 dark:border-slate-700 pb-1">
+              <span class="text-[10px] font-bold text-emerald-800 dark:text-emerald-300 flex items-center gap-1">
+                <i class="fa-solid fa-taxi text-emerald-600"></i>
+                司機溝通卡（分段語音發音）
+              </span>
+              <button onclick="playSpeech('こちらのホテル、ベースレイヤーホテル福岡までお願いします。住所は中央区清川1丁目14-15です。', 'ja-JP')" 
+                      type="button"
+                      class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-[9px] transition-all">
+                <i class="fa-solid fa-play text-[8px] text-emerald-600"></i>
+                <span>連續播全文</span>
+              </button>
+            </div>
+
+            <!-- Sentence 1 -->
+            <div class="p-2 rounded-lg bg-emerald-50/50 dark:bg-slate-800/60 border border-emerald-100 dark:border-slate-700 space-y-0.5">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[9px] font-bold text-emerald-700 dark:text-emerald-400">第 1 句：指名飯店</span>
+                <button onclick="playSpeech('こちらのホテル、ベースレイヤーホテル福岡までお願いします。', 'ja-JP')" 
+                        type="button"
+                        class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold text-[10px] shadow-2xs transition-all">
+                  <i class="fa-solid fa-volume-high animate-pulse text-[9px]"></i>
+                  <span>播放第 1 句</span>
+                </button>
+              </div>
+              <p class="text-sm sm:text-base font-black text-slate-950 dark:text-white leading-snug">
+                「こちらのホテル（BASE LAYER HOTEL 福岡）までお願いします。」
+              </p>
+              <p class="text-[10px] text-slate-500 dark:text-slate-400 font-mono italic">
+                Kochira no hoteru (Bēsu Reiyā Hoteru Fukuoka) made onegai shimasu.
+              </p>
+              <p class="text-[10px] text-slate-600 dark:text-slate-300">
+                中文：請載我到這間飯店，麻煩您了。
+              </p>
+            </div>
+
+            <!-- Sentence 2 -->
+            <div class="p-2 rounded-lg bg-emerald-50/50 dark:bg-slate-800/60 border border-emerald-100 dark:border-slate-700 space-y-0.5">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[9px] font-bold text-emerald-700 dark:text-emerald-400">第 2 句：告知地址</span>
+                <button onclick="playSpeech('住所は中央区清川1丁目14-15です。', 'ja-JP')" 
+                        type="button"
+                        class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold text-[10px] shadow-2xs transition-all">
+                  <i class="fa-solid fa-volume-high animate-pulse text-[9px]"></i>
+                  <span>播放第 2 句</span>
+                </button>
+              </div>
+              <p class="text-sm sm:text-base font-black text-slate-950 dark:text-white leading-snug">
+                「住所は中央区清川1丁目14-15です。」
+              </p>
+              <p class="text-[10px] text-slate-500 dark:text-slate-400 font-mono italic">
+                Jūsho wa Chūō-ku Kiyokawa itchōme jūyon no jūgo desu.
+              </p>
+              <p class="text-[10px] text-slate-600 dark:text-slate-300">
+                中文：地址在中央區清川1丁目14-15。
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional Address Reference -->
+        <div class="space-y-1 text-[11px] text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/50 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700">
+          <p><strong class="text-slate-800 dark:text-slate-200">日：</strong>福岡県福岡市中央区清川1丁目14-15</p>
+          <p><strong class="text-slate-800 dark:text-slate-200">中：</strong>日本福岡縣福岡市中央區清川1丁目14-15</p>
+          <p><strong class="text-slate-800 dark:text-slate-200">英：</strong>1-14-15 Kiyokawa, Chuo Ward, Fukuoka, 810-0005, Japan</p>
+        </div>
+      </div>
+
+      <!-- Fixed Bottom Action Buttons Footer -->
+      <div class="border-t border-slate-100 dark:border-slate-800 p-3 bg-slate-50/90 dark:bg-slate-900/90 shrink-0 space-y-2">
+        <div class="grid grid-cols-2 gap-2">
+          <button onclick="copyHotelAddress()" 
+                  type="button"
+                  class="w-full py-2.5 rounded-xl bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-bold text-xs flex items-center justify-center gap-1.5 transition-colors shadow-2xs active:scale-95">
+            <i class="fa-regular fa-copy"></i>
+            <span id="copy-text">複製日文地址</span>
+          </button>
+
+          <a href="https://www.google.com/maps/search/?api=1&query=BASE+LAYER+HOTEL+FUKUOKA" 
+             target="_blank" 
+             rel="noopener noreferrer"
+             class="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-colors shadow-2xs active:scale-95">
+            <i class="fa-solid fa-map-location-dot"></i>
+            <span>開啟 Google 地圖</span>
+          </a>
+        </div>
+
+        <button onclick="closeHotelModal()" 
+                type="button"
+                class="w-full py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-400 font-semibold text-xs transition-colors">
+          關閉視窗
+        </button>
       </div>
     </div>
   </div>
