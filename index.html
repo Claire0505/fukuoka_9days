@@ -110,125 +110,41 @@
         </div>
       </div>
 
-      <!-- Row 3: Combined Accordion Row (Flight + Hotel side by side) -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-        <!-- Flight Accordion Card -->
-        <div class="rounded-xl border border-slate-200/90 dark:border-slate-800 bg-gradient-to-r from-blue-50/70 via-indigo-50/40 to-slate-50/70 dark:from-slate-900 dark:via-slate-900 dark:to-slate-900 shadow-2xs overflow-hidden transition-all duration-200">
-          <button onclick="toggleFlightAccordion()" 
-                  id="flight-accordion-btn"
-                  class="w-full flex items-center justify-between p-2.5 sm:p-3 text-left hover:bg-blue-100/40 dark:hover:bg-slate-800/60 transition-colors focus:outline-none"
-                  aria-expanded="false"
-                  aria-controls="flight-accordion-content">
-            <div class="flex items-center gap-2 min-w-0">
-              <span class="w-6 h-6 rounded-lg bg-blue-600/10 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 text-[11px]">
-                <i class="fa-solid fa-plane"></i>
-              </span>
-              <span class="font-bold text-slate-900 dark:text-white text-[11px] sm:text-xs truncate">
-                長榮航空航班資訊
-              </span>
-            </div>
-
-            <div class="flex items-center gap-1.5 shrink-0">
-              <span id="flight-accordion-hint" class="text-[10px] text-blue-600 dark:text-blue-400 font-medium bg-blue-50 dark:bg-blue-950/80 px-2 py-0.5 rounded-full border border-blue-200/60 dark:border-blue-900/60">
-                點擊展開
-              </span>
-              <i id="flight-accordion-icon" class="fa-solid fa-chevron-down text-slate-400 dark:text-slate-500 text-[10px] transition-transform duration-300"></i>
-            </div>
-          </button>
-
-          <div id="flight-accordion-content" class="hidden px-2.5 pb-2.5 sm:px-3 sm:pb-3 border-t border-blue-100/70 dark:border-slate-800 pt-2 space-y-2">
-            <div class="space-y-1.5 text-[11px] leading-relaxed">
-              <div class="p-2 rounded-lg bg-white/95 dark:bg-slate-800/90 border border-blue-100 dark:border-slate-700/80 space-y-1 shadow-2xs">
-                <div class="flex items-center justify-between font-bold text-blue-900 dark:text-blue-300">
-                  <span class="flex items-center gap-1">
-                    <i class="fa-solid fa-plane-departure text-[10px] text-blue-600"></i>
-                    去程 BR106 (W艙)
-                  </span>
-                  <span class="text-[10px] font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-1.5 py-0.5 rounded">2h 20m</span>
-                </div>
-                <div class="text-slate-700 dark:text-slate-300 space-y-0.5">
-                  <p><span class="text-slate-400 dark:text-slate-400">起飛：</span>10/21 (三) 08:00 桃園 T2</p>
-                  <p><span class="text-slate-400 dark:text-slate-400">抵達：</span>10/21 (三) 11:20 福岡 FUK 國際線</p>
-                </div>
-              </div>
-
-              <div class="p-2 rounded-lg bg-white/95 dark:bg-slate-800/90 border border-blue-100 dark:border-slate-700/80 space-y-1 shadow-2xs">
-                <div class="flex items-center justify-between font-bold text-indigo-900 dark:text-indigo-300">
-                  <span class="flex items-center gap-1">
-                    <i class="fa-solid fa-plane-arrival text-[10px] text-indigo-600"></i>
-                    回程 BR105 (W艙)
-                  </span>
-                  <span class="text-[10px] font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/60 px-1.5 py-0.5 rounded">2h 35m</span>
-                </div>
-                <div class="text-slate-700 dark:text-slate-300 space-y-0.5">
-                  <p><span class="text-slate-400 dark:text-slate-400">起飛：</span>10/29 (四) 12:15 福岡 FUK 國際線</p>
-                  <p><span class="text-slate-400 dark:text-slate-400">抵達：</span>10/29 (四) 13:50 桃園 T2</p>
-                </div>
-              </div>
+      <!-- Row 3: Flight and Hotel Integrated Row (Icon buttons triggering modals) -->
+      <div class="grid grid-cols-2 gap-2 text-xs">
+        <button onclick="openFlightModal()" 
+                type="button"
+                class="flex items-center justify-between px-3 py-2 rounded-xl border border-blue-200/90 dark:border-blue-900/80 bg-blue-50/70 hover:bg-blue-100/80 dark:bg-slate-900 dark:hover:bg-slate-800 transition-all text-left shadow-2xs active:scale-[0.99]">
+          <div class="flex items-center gap-2 min-w-0">
+            <span class="w-6 h-6 rounded-lg bg-blue-600 text-white flex items-center justify-center shrink-0 text-xs shadow-2xs">
+              <i class="fa-solid fa-plane"></i>
+            </span>
+            <div class="min-w-0">
+              <span class="font-bold text-slate-900 dark:text-white block text-[11px] sm:text-xs truncate">航班資訊</span>
+              <span class="text-[10px] text-blue-600 dark:text-blue-400 font-medium block truncate">長榮航空來回</span>
             </div>
           </div>
-        </div>
+          <span class="text-[10px] text-blue-600 dark:text-blue-400 font-bold bg-white dark:bg-slate-800 px-1.5 py-0.5 rounded border border-blue-200/70 dark:border-slate-700 shrink-0">
+            查看
+          </span>
+        </button>
 
-        <!-- Hotel Accordion Card -->
-        <div class="rounded-xl border border-slate-200/90 dark:border-slate-800 bg-gradient-to-r from-emerald-50/70 via-teal-50/40 to-slate-50/70 dark:from-slate-900 dark:via-slate-900 dark:to-slate-900 shadow-2xs overflow-hidden transition-all duration-200">
-          <button onclick="toggleHotelAccordion()" 
-                  id="hotel-accordion-btn"
-                  class="w-full flex items-center justify-between p-2.5 sm:p-3 text-left hover:bg-emerald-100/40 dark:hover:bg-slate-800/60 transition-colors focus:outline-none"
-                  aria-expanded="false"
-                  aria-controls="hotel-accordion-content">
-            <div class="flex items-center gap-2 min-w-0">
-              <span class="w-6 h-6 rounded-lg bg-emerald-600/10 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 text-[11px]">
-                <i class="fa-solid fa-hotel"></i>
-              </span>
-              <span class="font-bold text-slate-900 dark:text-white text-[11px] sm:text-xs truncate">
-                住宿：BASE LAYER HOTEL FUKUOKA
-              </span>
-            </div>
-
-            <div class="flex items-center gap-1.5 shrink-0">
-              <span id="hotel-accordion-hint" class="text-[10px] text-emerald-600 dark:text-emerald-400 font-medium bg-emerald-50 dark:bg-emerald-950/80 px-2 py-0.5 rounded-full border border-emerald-200/60 dark:border-emerald-900/60">
-                點擊展開
-              </span>
-              <i id="hotel-accordion-icon" class="fa-solid fa-chevron-down text-slate-400 dark:text-slate-500 text-[10px] transition-transform duration-300"></i>
-            </div>
-          </button>
-
-          <div id="hotel-accordion-content" class="hidden px-2.5 pb-2.5 sm:px-3 sm:pb-3 border-t border-emerald-100/70 dark:border-slate-800 pt-2 space-y-2">
-            <div class="p-2.5 rounded-lg bg-white/95 dark:bg-slate-800/90 border border-emerald-100 dark:border-slate-700/80 space-y-2 text-[11px] sm:text-xs leading-relaxed shadow-2xs">
-              <div class="flex flex-wrap items-center justify-between gap-1.5 border-b border-slate-100 dark:border-slate-700 pb-1.5">
-                <a href="https://www.google.com/maps/search/?api=1&query=BASE+LAYER+HOTEL+FUKUOKA" 
-                   target="_blank" 
-                   rel="noopener noreferrer" 
-                   class="group inline-flex items-center gap-1.5 font-bold text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 transition-colors text-xs sm:text-sm">
-                  <span>BASE LAYER HOTEL FUKUOKA</span>
-                  <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-emerald-500 group-hover:translate-x-0.5 transition-transform"></i>
-                  <span class="text-[10px] font-normal text-slate-500 dark:text-slate-400">(點擊開 Google 地圖)</span>
-                </a>
-                <div class="flex items-center gap-2 text-slate-600 dark:text-slate-300">
-                  <span class="font-medium"><i class="fa-solid fa-phone text-emerald-600 mr-1"></i><a href="tel:+81924061256" class="hover:underline font-mono">+81 92-406-1256</a></span>
-                  <span class="text-slate-300 dark:text-slate-600">•</span>
-                  <span class="font-mono text-slate-500 dark:text-slate-400">〒810-0005</span>
-                </div>
-              </div>
-
-              <!-- Addresses List: Japanese first, then Chinese, then English -->
-              <div class="space-y-1 text-slate-700 dark:text-slate-300">
-                <div class="flex items-start gap-1.5">
-                  <span class="text-[10px] font-semibold text-emerald-800 bg-emerald-100 dark:bg-emerald-950 dark:text-emerald-300 px-1.5 py-0.2 rounded shrink-0 mt-0.5">日：</span>
-                  <span class="font-medium select-all">福岡県福岡市中央区清川1丁目14-15</span>
-                </div>
-                <div class="flex items-start gap-1.5">
-                  <span class="text-[10px] font-semibold text-blue-800 bg-blue-100 dark:bg-blue-950 dark:text-blue-300 px-1.5 py-0.2 rounded shrink-0 mt-0.5">中：</span>
-                  <span class="select-all">日本福岡縣福岡市中央區清川1丁目14-15</span>
-                </div>
-                <div class="flex items-start gap-1.5">
-                  <span class="text-[10px] font-semibold text-slate-700 bg-slate-200 dark:bg-slate-700 dark:text-slate-300 px-1.5 py-0.2 rounded shrink-0 mt-0.5">英：</span>
-                  <span class="text-slate-600 dark:text-slate-400 font-mono text-[10px] sm:text-[11px] select-all">1-14-15 Kiyokawa, Chuo Ward, Fukuoka, 810-0005, Japan</span>
-                </div>
-              </div>
+        <button onclick="openHotelModal()" 
+                type="button"
+                class="flex items-center justify-between px-3 py-2 rounded-xl border border-emerald-200/90 dark:border-emerald-900/80 bg-emerald-50/70 hover:bg-emerald-100/80 dark:bg-slate-900 dark:hover:bg-slate-800 transition-all text-left shadow-2xs active:scale-[0.99]">
+          <div class="flex items-center gap-2 min-w-0">
+            <span class="w-6 h-6 rounded-lg bg-emerald-600 text-white flex items-center justify-center shrink-0 text-xs shadow-2xs">
+              <i class="fa-solid fa-hotel"></i>
+            </span>
+            <div class="min-w-0">
+              <span class="font-bold text-slate-900 dark:text-white block text-[11px] sm:text-xs truncate">住宿・計程車卡</span>
+              <span class="text-[10px] text-emerald-600 dark:text-emerald-400 font-medium block truncate">BASE LAYER 福岡</span>
             </div>
           </div>
-        </div>
+          <span class="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold bg-white dark:bg-slate-800 px-1.5 py-0.5 rounded border border-emerald-200/70 dark:border-slate-700 shrink-0">
+            司機卡
+          </span>
+        </button>
       </div>
     </div>
 
@@ -276,6 +192,137 @@
       <!-- Extra Notes Content -->
     </div>
   </main>
+
+  <!-- Flight Modal Dialog -->
+  <div id="flight-modal" class="fixed inset-0 z-50 bg-slate-950/65 backdrop-blur-xs flex items-center justify-center p-4 hidden">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full p-5 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+        <h3 class="font-bold text-slate-900 dark:text-white text-base flex items-center gap-2">
+          <span class="w-7 h-7 rounded-lg bg-blue-600 text-white flex items-center justify-center text-xs">
+            <i class="fa-solid fa-plane"></i>
+          </span>
+          長榮航空航班詳細資訊
+        </h3>
+        <button onclick="closeFlightModal()" class="w-8 h-8 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 flex items-center justify-center">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="space-y-3 text-xs md:text-sm">
+        <!-- Outbound -->
+        <div class="p-3.5 rounded-xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/60 space-y-2">
+          <div class="flex items-center justify-between font-bold text-blue-950 dark:text-blue-300">
+            <span class="flex items-center gap-1.5 text-sm">
+              <i class="fa-solid fa-plane-departure text-blue-600"></i>
+              去程 BR106 (W艙)
+            </span>
+            <span class="text-xs font-semibold text-blue-700 dark:text-blue-300 bg-white dark:bg-slate-800 px-2 py-0.5 rounded-full border border-blue-200/60">
+              飛行 2h 20m
+            </span>
+          </div>
+          <div class="space-y-1 text-slate-700 dark:text-slate-300">
+            <p><span class="text-slate-500 dark:text-slate-400">起飛：</span>10/21 (三) 08:00 桃園 T2 (台灣時間)</p>
+            <p><span class="text-slate-500 dark:text-slate-400">抵達：</span>10/21 (三) 11:20 福岡 FUK 國際線 (日本時間)</p>
+          </div>
+        </div>
+
+        <!-- Inbound -->
+        <div class="p-3.5 rounded-xl bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-900/60 space-y-2">
+          <div class="flex items-center justify-between font-bold text-indigo-950 dark:text-indigo-300">
+            <span class="flex items-center gap-1.5 text-sm">
+              <i class="fa-solid fa-plane-arrival text-indigo-600"></i>
+              回程 BR105 (W艙)
+            </span>
+            <span class="text-xs font-semibold text-indigo-700 dark:text-indigo-300 bg-white dark:bg-slate-800 px-2 py-0.5 rounded-full border border-indigo-200/60">
+              飛行 2h 35m
+            </span>
+          </div>
+          <div class="space-y-1 text-slate-700 dark:text-slate-300">
+            <p><span class="text-slate-500 dark:text-slate-400">起飛：</span>10/29 (四) 12:15 福岡 FUK 國際線 (日本時間)</p>
+            <p><span class="text-slate-500 dark:text-slate-400">抵達：</span>10/29 (四) 13:50 桃園 T2 (台灣時間)</p>
+          </div>
+        </div>
+      </div>
+
+      <button onclick="closeFlightModal()" class="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-xs transition-colors">
+        關閉視窗
+      </button>
+    </div>
+  </div>
+
+  <!-- Hotel & Taxi Driver Modal Dialog (Big Typography for Drivers) -->
+  <div id="hotel-modal" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-xs flex items-center justify-center p-4 hidden">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-5 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+        <div class="flex items-center gap-2">
+          <span class="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center text-xs">
+            <i class="fa-solid fa-taxi"></i>
+          </span>
+          <div>
+            <h3 class="font-bold text-slate-900 dark:text-white text-base">住宿資訊 ＆ 計程車司機導航卡</h3>
+            <span class="text-[10px] text-emerald-600 dark:text-emerald-400 font-medium">運転手さんに見せる画面 (給司機看)</span>
+          </div>
+        </div>
+        <button onclick="closeHotelModal()" class="w-8 h-8 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 flex items-center justify-center">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Driver Friendly Big Card -->
+      <div class="p-4 rounded-2xl bg-emerald-50/80 dark:bg-slate-800/90 border-2 border-emerald-300 dark:border-emerald-700 space-y-3">
+        <div>
+          <span class="text-[11px] font-bold text-emerald-800 dark:text-emerald-300 uppercase tracking-wider block">飯店名稱 / ホテル名</span>
+          <p class="text-xl sm:text-2xl font-black text-slate-950 dark:text-white leading-tight">BASE LAYER HOTEL FUKUOKA</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">ベースレイヤーホテル福岡</p>
+        </div>
+
+        <div class="border-t border-emerald-200/80 dark:border-slate-700 pt-3">
+          <span class="text-[11px] font-bold text-emerald-800 dark:text-emerald-300 uppercase tracking-wider block">日文地址 / ご住所（目的地）</span>
+          <p class="text-lg sm:text-xl font-bold text-slate-900 dark:text-emerald-200 leading-snug select-all bg-white dark:bg-slate-900 p-2.5 rounded-xl border border-emerald-200 dark:border-slate-700 mt-1">
+            〒810-0005<br>福岡県福岡市中央区清川1丁目14-15
+          </p>
+        </div>
+
+        <!-- Phone & Landmarks -->
+        <div class="grid grid-cols-2 gap-2 text-xs pt-1">
+          <div class="bg-white/90 dark:bg-slate-900/80 p-2.5 rounded-xl border border-emerald-100 dark:border-slate-700">
+            <span class="text-slate-500 dark:text-slate-400 block text-[10px]">導航電話 (TEL)</span>
+            <a href="tel:+81924061256" class="font-bold font-mono text-emerald-700 dark:text-emerald-400 text-sm hover:underline flex items-center gap-1">
+              <i class="fa-solid fa-phone text-xs"></i> 092-406-1256
+            </a>
+          </div>
+          <div class="bg-white/90 dark:bg-slate-900/80 p-2.5 rounded-xl border border-emerald-100 dark:border-slate-700">
+            <span class="text-slate-500 dark:text-slate-400 block text-[10px]">近鄰地標</span>
+            <span class="font-bold text-slate-800 dark:text-slate-200 text-xs">渡辺通駅・清川交差点</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional Details -->
+      <div class="space-y-1.5 text-xs text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-slate-200 dark:border-slate-700">
+        <p><strong class="text-slate-800 dark:text-slate-200">中文：</strong>日本福岡縣福岡市中央區清川1丁目14-15</p>
+        <p><strong class="text-slate-800 dark:text-slate-200">英文：</strong>1-14-15 Kiyokawa, Chuo Ward, Fukuoka, 810-0005, Japan</p>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="grid grid-cols-2 gap-2">
+        <button onclick="copyHotelAddress()" 
+                type="button"
+                class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-bold text-xs flex items-center justify-center gap-1.5 transition-colors">
+          <i class="fa-regular fa-copy"></i>
+          <span id="copy-text">複製日文地址</span>
+        </button>
+
+        <a href="https://www.google.com/maps/search/?api=1&query=BASE+LAYER+HOTEL+FUKUOKA" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-colors shadow-xs">
+          <i class="fa-solid fa-map-location-dot"></i>
+          <span>開啟 Google 地圖</span>
+        </a>
+      </div>
+    </div>
+  </div>
 
   <!-- PWA Add to Home Modal -->
   <div id="pwa-modal" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4 hidden">
@@ -926,7 +973,7 @@
                 time: "11:30 - 12:15",
                 name: "轉戰天開稻荷神社 (下車平移・免爬階梯)",
                 mapQuery: "天開稻荷神社",
-                transfer: "交通：於內山原站牌搭下山方向公車，於半山腰「三条公民館前」下車，往回走進山洞隧道平移直達天開稻荷神社。\n\n(巴士車資 100 日圓｜支付方式同上，逼 IC 卡或投現)。",
+                transfer: "交通：於內山原站牌搭下山方向公車，於半山腰「三条公民館前」下車，往回走進山洞隧道平移直達天開稻荷神社。\n\n(巴士車資 100 日圓｜支付方式同上，逼 IC卡或投現)。",
                 tips: "免爬百階好漢坡！走平移山洞隧道直達九州極靈驗開運稻荷神社。"
               },
               {
@@ -2286,51 +2333,81 @@
       if (modal) modal.classList.add('hidden');
     }
 
-    function toggleFlightAccordion() {
-      const content = document.getElementById('flight-accordion-content');
-      const icon = document.getElementById('flight-accordion-icon');
-      const hint = document.getElementById('flight-accordion-hint');
-      const btn = document.getElementById('flight-accordion-btn');
-
-      if (!content || !icon) return;
-
-      const isExpanded = !content.classList.contains('hidden');
-
-      if (isExpanded) {
-        content.classList.add('hidden');
-        icon.classList.remove('rotate-180');
-        if (hint) hint.textContent = '點擊展開';
-        if (btn) btn.setAttribute('aria-expanded', 'false');
-      } else {
-        content.classList.remove('hidden');
-        icon.classList.add('rotate-180');
-        if (hint) hint.textContent = '點擊收合';
-        if (btn) btn.setAttribute('aria-expanded', 'true');
+    /* Flight Modal Controls */
+    function openFlightModal() {
+      const modal = document.getElementById('flight-modal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
       }
     }
 
-    function toggleHotelAccordion() {
-      const content = document.getElementById('hotel-accordion-content');
-      const icon = document.getElementById('hotel-accordion-icon');
-      const hint = document.getElementById('hotel-accordion-hint');
-      const btn = document.getElementById('hotel-accordion-btn');
-
-      if (!content || !icon) return;
-
-      const isExpanded = !content.classList.contains('hidden');
-
-      if (isExpanded) {
-        content.classList.add('hidden');
-        icon.classList.remove('rotate-180');
-        if (hint) hint.textContent = '點擊展開';
-        if (btn) btn.setAttribute('aria-expanded', 'false');
-      } else {
-        content.classList.remove('hidden');
-        icon.classList.add('rotate-180');
-        if (hint) hint.textContent = '點擊收合';
-        if (btn) btn.setAttribute('aria-expanded', 'true');
+    function closeFlightModal() {
+      const modal = document.getElementById('flight-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
       }
     }
+
+    /* Hotel & Taxi Driver Card Modal Controls */
+    function openHotelModal() {
+      const modal = document.getElementById('hotel-modal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
+      }
+    }
+
+    function closeHotelModal() {
+      const modal = document.getElementById('hotel-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+      }
+    }
+
+    /* Clipboard Copy for Hotel Japanese Address */
+    function copyHotelAddress() {
+      const address = "〒810-0005 福岡県福岡市中央区清川1丁目14-15 BASE LAYER HOTEL FUKUOKA";
+      const copyTextEl = document.getElementById('copy-text');
+      
+      const tempInput = document.createElement("input");
+      tempInput.value = address;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      try {
+        document.execCommand('copy');
+        if (copyTextEl) {
+          copyTextEl.textContent = "已複製地址！";
+          setTimeout(() => {
+            copyTextEl.textContent = "複製日文地址";
+          }, 2000);
+        }
+      } catch (err) {
+        console.warn('Copy failed', err);
+      }
+      document.body.removeChild(tempInput);
+    }
+
+    /* Close Modals on Backdrop Click or Escape key */
+    window.addEventListener('click', (e) => {
+      const flightModal = document.getElementById('flight-modal');
+      const hotelModal = document.getElementById('hotel-modal');
+      const pwaModal = document.getElementById('pwa-modal');
+
+      if (e.target === flightModal) closeFlightModal();
+      if (e.target === hotelModal) closeHotelModal();
+      if (e.target === pwaModal) closeAddToHomeModal();
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeFlightModal();
+        closeHotelModal();
+        closeAddToHomeModal();
+      }
+    });
 
     function toggleDarkMode() {
       const htmlEl = document.documentElement;
