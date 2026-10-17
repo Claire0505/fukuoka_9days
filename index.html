@@ -1,27 +1,17 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-TW" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta id="meta-theme-color" name="theme-color" content="#f8fafc">
+  <meta name="theme-color" id="meta-theme-color" content="#f8fafc">
   <title>2026 福岡 9 日深度自由行手冊</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Google Fonts Inter & Noto Sans TC -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
-  
   <script>
     tailwind.config = {
       darkMode: 'class',
       theme: {
         extend: {
-          fontFamily: {
-            sans: ['Inter', 'Noto Sans TC', 'sans-serif'],
-          },
           colors: {
             brand: {
               50: '#eff6ff',
@@ -29,14 +19,14 @@
               500: '#3b82f6',
               600: '#2563eb',
               700: '#1d4ed8',
-              800: '#1e40af',
-              900: '#1e3a8a',
             }
           }
         }
       }
     }
   </script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     .tab-scrollbar::-webkit-scrollbar {
       height: 4px;
@@ -65,7 +55,7 @@
 
   <header class="sticky top-0 z-50 glass-nav border-b border-slate-200/80 shadow-xs">
     <div class="max-w-6xl mx-auto px-4 py-2.5 space-y-2">
-      <!-- Row 1: Brand title & ONLY compact icon-only action buttons -->
+      <!-- Row 1: Brand title & Compact Action Buttons -->
       <div class="flex items-center justify-between gap-2">
         <div class="flex items-center gap-2 min-w-0 flex-1">
           <span class="w-8 h-8 md:w-9 md:h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white flex items-center justify-center font-bold text-sm md:text-base shadow-xs shrink-0">
@@ -79,7 +69,7 @@
           </div>
         </div>
 
-        <!-- Right: Pure Icon-Only Action Buttons (書本 + 手機 + 齒輪) -->
+        <!-- Right: Action Buttons -->
         <div class="flex items-center gap-1.5 shrink-0">
           <a href="https://claire0505.github.io/japan_fukuoka_trip_lesson/" 
              target="_blank" 
@@ -256,12 +246,27 @@
       <!-- Dynamic Banner Content Loaded via JS -->
     </div>
 
-    <!-- Payment & Budget Guide Row -->
+    <!-- Payment & Budget Guide Row (Collapsible) -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="budget-payment-cards">
       <!-- Dynamic Cost and Payment Cards Loaded via JS -->
     </div>
 
-    <!-- Timeline Itinerary Details -->
+    <!-- Controls for Expanding / Collapsing All Stages -->
+    <div class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 px-1">
+      <span class="font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5 text-sm">
+        <i class="fa-solid fa-timeline text-blue-600"></i> 當日行程階段 (點擊可個別折疊)
+      </span>
+      <div class="flex items-center gap-2">
+        <button onclick="toggleAllStages(true)" class="px-2.5 py-1 rounded-lg bg-slate-200/80 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium transition-all active:scale-95 shadow-2xs">
+          <i class="fa-solid fa-angles-down text-[10px] mr-1"></i>全部展開
+        </button>
+        <button onclick="toggleAllStages(false)" class="px-2.5 py-1 rounded-lg bg-slate-200/80 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium transition-all active:scale-95 shadow-2xs">
+          <i class="fa-solid fa-angles-up text-[10px] mr-1"></i>全部收合
+        </button>
+      </div>
+    </div>
+
+    <!-- Timeline Itinerary Details (Collapsible Stages) -->
     <div class="space-y-4" id="timeline-container">
       <!-- Timeline cards inserted dynamically -->
     </div>
@@ -272,6 +277,7 @@
     </div>
   </main>
 
+  <!-- PWA Add to Home Modal -->
   <div id="pwa-modal" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4 hidden">
     <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-sm w-full p-5 border border-slate-200 dark:border-slate-800 shadow-xl space-y-4">
       <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
@@ -336,6 +342,70 @@
       return `https://www.google.com/maps/search/?api=1&query=${q}`;
     }
 
+    /* Accordion Toggle Helpers */
+    function toggleSectionAccordion(contentId, iconId, hintId) {
+      const content = document.getElementById(contentId);
+      const icon = document.getElementById(iconId);
+      const hint = document.getElementById(hintId);
+
+      if (!content || !icon) return;
+
+      const isExpanded = !content.classList.contains('hidden');
+
+      if (isExpanded) {
+        content.classList.add('hidden');
+        icon.classList.remove('rotate-180');
+        if (hint) hint.textContent = '點擊展開';
+      } else {
+        content.classList.remove('hidden');
+        icon.classList.add('rotate-180');
+        if (hint) hint.textContent = '點擊收合';
+      }
+    }
+
+    function toggleStageAccordion(stageId, iconId, hintId) {
+      const content = document.getElementById(stageId);
+      const icon = document.getElementById(iconId);
+      const hint = document.getElementById(hintId);
+
+      if (!content || !icon) return;
+
+      const isExpanded = !content.classList.contains('hidden');
+
+      if (isExpanded) {
+        content.classList.add('hidden');
+        icon.classList.remove('rotate-180');
+        if (hint) hint.textContent = '點擊展開';
+      } else {
+        content.classList.remove('hidden');
+        icon.classList.add('rotate-180');
+        if (hint) hint.textContent = '點擊收合';
+      }
+    }
+
+    function toggleAllStages(expand = true) {
+      const currentData = ITINERARY_DATA[currentDayIndex];
+      if (!currentData || !currentData.stages) return;
+
+      currentData.stages.forEach((_, sIdx) => {
+        const content = document.getElementById(`stage-content-${sIdx}`);
+        const icon = document.getElementById(`stage-icon-${sIdx}`);
+        const hint = document.getElementById(`stage-hint-${sIdx}`);
+
+        if (content && icon) {
+          if (expand) {
+            content.classList.remove('hidden');
+            icon.classList.add('rotate-180');
+            if (hint) hint.textContent = '點擊收合';
+          } else {
+            content.classList.add('hidden');
+            icon.classList.remove('rotate-180');
+            if (hint) hint.textContent = '點擊展開';
+          }
+        }
+      });
+    }
+
     const ITINERARY_DATA = [
       {
         day: 1,
@@ -383,8 +453,8 @@
                 time: "12:00 - 12:30",
                 name: "【機場大廳動線與交通分流】（前往飯店 2 選 1）",
                 mapQuery: "福岡機場國際線 計程車乘車處",
-                transfer: "出關順通道直走，經過右側 LAWSON 後右轉往出口。前往飯店請視行李多寡與戰力「2 選 1」：\n\n【選項 A：無腦最爽】使用 GO / Uber 叫車 App 直達飯店：\n• 動線：走向 A4 出口外的計程車乘車處，或依據 App 提示於指定上車點（Pick-up point）等候。\n• 叫車指南：開啟 GO App（日本最大叫車平台，強烈推薦）或 Uber App（在日會派遣當地合作計程車），直接定位目的地「BASE LAYER HOTEL 福岡」。\n• 車資與時間：車程約 15-20 分鐘，車資約 1,500 - 2,500 日圓（多人平分划算，免搬大件行李轉車，省時省力）。\n• 支付防呆：請務必在台灣先下載好 App 並綁定信用卡，到達時直接 App 叫車自動扣款，抵達飯店直接優雅下車免掏現金！\n\n【選項 B：省錢小資】地鐵／國內線接駁車：\n• 動線與轉乘：走向 A2 / A3 出口，搭「國際線↔國內線免費接駁車」至國內線航廈。\n• 轉乘空港線：進入地下鐵福岡空港站，下樓至【第 1 或 2 月台】，確認螢幕指示往「博多・天神・姪浜」方向上車搭乘至「博多站」。\n• 轉乘七隈線：在博多站轉乘地下鐵七隈線，前往【第 3 或 4 月台】，確認螢幕指示往「橋本」方向上車搭乘至「渡邊通站」下車，步行約 7 分鐘抵達飯店。(地鐵車資 260 日圓｜iPhone 組：逼實體感應信用卡 / Pixel 組：逼感應信用卡，開始累積今日 640 封頂額度)。",
-                tips: "【乘車禮儀防呆提醒】：日本計程車的後車門為司機控制的全自動門。上下車時請絕對不要自己動手拉車門（強行拉扯會損壞機械結構並造成司機困擾）。請站在門邊等門自動打開即可上車；下車時直接離開，司機會自動將門關上。"
+                transfer: "出關順通道直走，經過右側 LAWSON 後右轉往出口。前往飯店請視行李多寡與戰力「2 選 1」：\n\n【選項 A：無腦最爽】使用 GO / Uber 叫車 App 直達飯店：\n• 動線：走向 A4 出口外的計程車乘車處，或依據 App 提示於指定上車點（Pick-up point）等候。\n• 叫車指南：開啟 GO App（日本最大叫車平台，強烈推薦）或 Uber App（在日會派遣當地合作計程車），直接定位目的地「BASE LAYER HOTEL 福岡」。\n• 車資與時間：車程約 15-20 分鐘，車資約 1,500 - 2,500 日圓（多人平分划算，免搬大件行李轉車，省時省力）。\n• 支付防呆：請務必在台灣先下載好 App 並綁定信用卡，到達時直接 App 叫車自動扣款，抵達飯店直接優雅下車免掏現金！\n\n【選項 B：省錢小資】地鐵／國內線接駁車\n動線與轉乘：\n1. 走向 A2/A3 出口，搭「國際線 ➔ 國內線免費接駁車」至國內線航廈。\n2. 進入地下鐵福岡空港站，下樓至月台層。福岡空港站為終點端點站，第 1 與第 2 月台皆為開往市區班次。抬頭確認螢幕顯示「往 博多・天神・姪浜」方向即可隨到隨上，搭乘 2 站至「博多站」。\n3. 在博多站轉乘地下鐵七隈線：依指標下至七隈線深層月台（通常為第 3 或第 4 月台），抬頭確認螢幕顯示「往 橋本」方向，搭乘 3 站至「渡邊通站」下車，步行約 7 分鐘抵達飯店。(地鐵車資 260 日圓｜iPhone 組：逼實體感應信用卡 / Pixel 組：逼感應信用卡，開始累積今日 640 封頂額度)。",
+                tips: "【乘車禮儀防呆提醒（自動門）】：\n日本計程車的後車門為司機控制的全自動門。上下車時請絕對不要自己動手拉車門（強行拉扯會損壞機械結構並造成司機困擾）。請站在門邊等門自動打開即可上車；下車時直接離開，司機會自動將門關上。"
               },
               {
                 time: "12:36 - 12:45",
@@ -833,9 +903,9 @@
               },
               {
                 time: "09:47 - 10:14",
-                name: "西鐵天神 ➔ 西鐵太宰府 (首選：直達車 / 備案：轉乘法)",
+                name: "西鐵天神 ➔ 西鐵太宰府（首選：直達車 / 備案：轉乘法）",
                 mapQuery: "西鐵太宰府站",
-                transfer: "【首選 (09:47 直達車)】：於西鐵福岡(天神)站【第 1 或 2 月台】(請看螢幕確認「旅人 09:47 太宰府行」) 排隊搭乘。免轉乘直達太宰府。\n\n【備案 (錯過直達車的兩段式搭法)】：\n1. 於天神站【第 2 或 3 月台】搭往南的特急/急行，至「西鐵二日市站」。\n2. 於二日市站【第 1 或 4 月台】(依站內「太宰府線」指標)，轉普通車至終點。\n\n(西鐵車資單程 420 日圓｜iPhone 組：逼 Apple Pay 交通卡 / Pixel 組：逼實體交通 IC 卡或投現)。",
+                transfer: "【去程首選（09:47 觀光列車直達車）】：\n1. 西鐵福岡（天神）站為高架端點站。進站前抬頭核對中央發車大螢幕，「旅人 (Tabito) 09:47 太宰府行」通常固定於【第 1 或 2 月台】發車。免轉乘直達太宰府。\n\n【去程備案（二日市轉乘法）】：\n1. 若錯過直達車，於天神站【第 2 或 3 月台】搭乘特急/急行（往小郡/久留米/大牟田方向）。\n2. 抵達「西鐵二日市站」下車，依站內醒目藍底「太宰府線」指標走過空橋，轉至【第 1 或 4 月台】搭乘太宰府支線接駁普通電車直達終點。\n\n(西鐵車資：單程 420 日圓｜iPhone 組：逼 Apple Pay 交通卡 / Pixel 組：逼實體交通 IC 卡或投現購票)。",
                 tips: "優先搭乘 09:47 直達旅人觀光列車免轉乘！"
               }
             ]
@@ -884,7 +954,7 @@
                 time: "14:30 - 15:10",
                 name: "共用返程交通：太宰府 ➔ 天神 ➔ 飯店卸貨",
                 mapQuery: "BASE LAYER HOTEL 福岡",
-                transfer: "【第一段 (西鐵回程)】：太宰府 ➔ 西鐵天神\n於太宰府站搭車至二日市站，於二日市站【第 6 或 7 月台】(螢幕顯示往福岡(天神)行) 轉乘特急車至西鐵福岡(天神)站南口。\n(西鐵車資 420 日圓｜iPhone 組：逼 Apple Pay 交通卡 / Pixel 組：逼實體交通 IC 卡或投現)。\n\n【第二段 (卸貨動線)】：天神南口 ➔ 飯店 (視當下體力 2 選 1)\n• 方案 A：平面純步行 (最直覺) ➔ 從南口下至 1F 渡邊通，筆直往南走 6-8 分鐘回飯店。\n• 方案 B：轉搭七隈線 (少走路) ➔ 至地下「天神南站」【第 1 月台】搭 1 站至「渡邊通站」。(地鐵車資 210 日圓｜全體逼感應信用卡，計入 640 封頂)。",
+                transfer: "【第一段（西鐵回程：太宰府 ➔ 西鐵天神）】：\n1. 於太宰府站月台搭乘支線電車返回「西鐵二日市站」。\n2. 於二日市站下車，依頭頂指標前往【第 5 或 6 月台】（北上上行月台），抬頭核對月台跑馬燈顯示「特急 / 急行 往 福岡（天神）」後上車，直達西鐵福岡（天神）站南口。\n(西鐵車資：單程 420 日圓｜iPhone 組：逼 Apple Pay 交通卡 / Pixel 組：逼實體交通 IC 卡或投現購票)。\n\n【第二段（卸貨動線）：天神南口 ➔ 飯店 (視當下體力 2 選 1)】：\n• 方案 A：平面純步行 (最直覺) ➔ 從南口下至 1F 渡邊通，筆直往南走 6-8 分鐘回飯店。\n• 方案 B：轉搭七隈線 (少走路) ➔ 至地下「天神南站」【第 1 月台】搭 1 站至「渡邊通站」。(地鐵車資 210 日圓｜全體逼感應信用卡，計入 640 封頂)。",
                 tips: "回飯店稍作休息，隨後依前兩日購物進度二選一出發補考！"
               },
               {
@@ -960,8 +1030,8 @@
         },
         paymentWeapon: {
           subway: "【福岡市地下鐵（七隈線/空港線）：全體強制刷「感應信用卡」】\n為了觸發單日 640 日圓自動封頂優惠，絕對不可刷交通 IC 卡！\n• iPhone 組：直接拿「實體感應信用卡」逼卡。\n• Pixel 組：使用手機 Google Pay 信用卡或實體信用卡。",
-          bus: "【公車與其他鐵路（西鐵公車/JR在來線/關門聯絡船/皿倉山纜車）：全體強制刷「交通 IC 卡」或現金】\n為了統一團隊防呆，這類交通全體強制刷「交通 IC 卡 (Suica / ICOCA)」或現金。\n• iPhone 組：直接逼 Apple Pay 交通卡。\n• Pixel 組：拿實體交通 IC 卡（若無實體卡則公車抽整理券投現、電車售票機投現）。",
-          shinkansen: "【新幹線外國人專屬優惠票（博多 ⇄ 小倉）】：進出站嚴禁走自動閘門，必須憑紙本整理票與護照正本走「人工驗票通道」！"
+          bus: "【公車與其他鐵路（西鐵公車/JR在來線/關門聯絡船/皿倉山纜車）：全體強制刷「交通 IC 卡」或現金】\n為了統一防呆，這類交通全體強制刷「交通 IC 卡 (Suica / ICOCA)」或現金。\n• iPhone 組：直接逼 Apple Pay 交通卡。\n• Pixel 組：拿實體交通 IC 卡（若無實體卡則公車抽整理券投現、電車售票機投現）。",
+          shinkansen: "【新幹線外國人專屬優惠票（博多 ⇄ 小倉）】：\n• 適用範圍：已提前於 KKDAY 購買，限搭指定區間新幹線自由席。\n• 通關方式：進出站嚴禁走自動閘門，必須憑紙本整理票與護照正本走「人工驗票通道」！"
         },
         stages: [
           {
@@ -978,10 +1048,10 @@
               },
               {
                 time: "08:12 - 08:27",
-                name: "博多 ➔ 小倉 (JR西日本 山陽新幹線)",
+                name: "博多 ➔ 小倉 (去程新幹線防呆總整理)",
                 mapQuery: "JR小倉站",
-                transfer: "請至新幹線月台【通常為第 11 或 12 月台】，上車前抬頭核對月台跑馬燈：「山陽新幹線往廣島/新大阪方向 (自由席車廂 1~3 號)」，15 分鐘極速直達小倉站！(特惠票 1,600 日圓｜iPhone 組：出示紙本整理票+護照 / Pixel 組：出示紙本整理票+護照)。",
-                tips: "直奔 1~3 號自由席車廂找位子，極速 15 分鐘即達小倉。"
+                transfer: "搭乘路線：JR西日本【山陽新幹線】。\n• 車資與支付：KKDAY 已提前購票 (特惠票 1,600 日圓)。全體通關請準備好「紙本整理票 + 護照正本」走人工驗票通道。\n\n【新幹線搭車防呆口訣：看方向看跑馬燈 ➔ 找 1~3 車廂】\n• 方向核對：進入新幹線月台 (博多站通常為第 13~16 月台)，抬頭核對月台螢幕，尋找往「小倉、廣島、新大阪、東京」方向的列車。\n• 車種與座位防呆：完全不限車種，見車就上！(因博多到小倉無中間站，皆為 15 分鐘直達)。請直奔 1~3 號自由席車廂候車區排隊。\n\n【山陽新幹線車種與自由席一覽表（依速度快慢排列）】：\n• NOZOMI (希望號)：最快、班次最多｜自由席：1~3 號車廂\n• MIZUHO (瑞穗號)：最快、班次較少｜自由席：1~3 號車廂\n• SAKURA (櫻花號)：次快、班次中等｜自由席：1~3 號車廂\n• HIKARI (光號)：中等、班次較少｜自由席：通常 1~5 號 (1~3 號一定有)\n• KODAMA (回聲號)：站站停、班次中等｜自由席：幾乎全車皆是 (1~3 號一定有)\n\n【終極防呆結論】：不管跑馬燈顯示什麼車名，只要看到往本州方向，直接排在「1號、2號或3號車廂」候車線，有車就上！",
+                tips: "不管跑馬燈顯示什麼車名，只要看到往本州方向，直接排在 1~3 號自由席車廂，有車就上！"
               },
               {
                 time: "08:30 - 08:40",
@@ -1083,10 +1153,10 @@
               },
               {
                 time: "21:10 左右",
-                name: "小倉 ➔ 博多 (JR西日本 山陽新幹線)",
+                name: "小倉 ➔ 博多 (回程新幹線防呆總整理)",
                 mapQuery: "JR博多站",
-                transfer: "搭乘山陽新幹線自由席 (直奔 1~3 號自由席車廂)，極速 15 分鐘返抵博多。(特惠票 1,600 日圓｜iPhone 組：出示紙本整理票+護照通關 / Pixel 組：出示紙本整理票+護照通關)。",
-                tips: "新幹線走人工通道驗票，舒適快速返抵博多站。"
+                transfer: "搭乘路線：JR西日本【山陽新幹線】。\n• 車資與支付：KKDAY 已提前購票 (特惠票 1,600 日圓)。全體通關請準備好「紙本整理票 + 護照正本」走人工驗票通道。\n\n【新幹線回程防呆口訣：看方向看跑馬燈 ➔ 找 1~3 車廂】\n• 方向核對：進入人工閘口後請至新幹線月台 (小倉站通常為第 11 或 12 月台)，抬頭核對月台螢幕，尋找往「博多、熊本、鹿兒島中央」方向的列車。\n• 車種與座位防呆：完全不限車種，見車就上！(皆為一站直達博多)。同樣直奔 1~3 號自由席車廂候車區排隊即可。(車種同樣適用：NOZOMI、MIZUHO、SAKURA、HIKARI、KODAMA，皆可直接上車！)",
+                tips: "完全不限車種，往博多方向見車就上！一站 15 分鐘極速直達博多。"
               },
               {
                 time: "21:30 左右",
@@ -1103,16 +1173,17 @@
         day: 6,
         date: "10/26",
         weekday: "週一",
-        theme: "由布院之森景觀鐵道・湯之坪街道散策・金鱗湖仙境 ＆ 博多站伴手禮夜戰",
+        theme: "由布院之森景觀鐵道・湯之坪街道散策・金鱗湖仙境・博多車站 1F 伴手禮夜戰",
         colorTheme: "from-emerald-800 via-teal-900 to-green-900",
         budget: {
-          transport: "約 420 日圓/人 (地鐵七隈線往返，由布院之森特急已預先結帳)",
+          transport: "約 420 日圓/人 (飯店-博多站往返地下鐵七隈線單趟210日圓來回420日圓，由布院之森特急已預先結帳)",
           tickets: "0 日圓/人",
           baseCost: "約 420 日圓",
         },
         paymentWeapon: {
-          subway: "【全體強制刷 實體感應信用卡】渡邊通往返博多站。\n• iPhone 組：直接拿實體感應信用卡免去手動切換困擾。\n• Pixel 組：Google Pay 或實體卡。",
-          yufuinNoMori: "【QR Code 電子車票過閘】博多站在來線中央剪票口出示專屬網址 QR Code，過閘後按更新轉為綠色「乘車中」。"
+          subway: "【全體強制刷 實體感應信用卡】地下鐵七隈線往返博多站（為了觸發單日 640 日圓自動封頂優惠，不可刷交通 IC 卡）。\n• iPhone 組：請直接拿「實體感應信用卡」逼卡。\n• Pixel 組：使用手機 Google Pay 信用卡或實體信用卡。",
+          bus: "【公車與其他鐵路（西鐵公車/西鐵電車/JR 在來線等一般通勤）】：全體強制刷「交通 IC 卡 (Suica/ICOCA)」\n• iPhone 組：逼 Apple Pay 交通卡。\n• Pixel 組：拿實體交通 IC 卡（無卡則公車抽整理券投現、電車售票機投現）。",
+          yufuinNoMori: "【特例：觀光特急「由布院之森」】：全體皆使用預先劃位之 QR Code 電子車票進站，切勿刷交通 IC 卡或信用卡！"
         },
         stages: [
           {
@@ -1122,17 +1193,17 @@
             items: [
               {
                 time: "09:30 - 09:50",
-                name: "飯店 ➔ JR 博多站",
+                name: "飯店 ➔ 抵達 JR 博多站",
                 mapQuery: "渡邊通站",
-                transfer: "渡邊通站前往【第 2 月台】，抬頭確認螢幕指示往「博多」方向搭七隈線直達終點「博多站」。(車資 210 日圓｜iPhone 組：逼實體感應信用卡 / Pixel 組：逼感應信用卡)。",
+                transfer: "從飯店步行至「渡邊通站」搭乘七隈線直達終點「博多站」。進站請抬頭核對螢幕指示往「博多」方向，通常停靠於【第 1 月台】。\n\n(地鐵車資 210 日圓｜iPhone 組：逼實體感應信用卡 / Pixel 組：逼感應信用卡)。",
                 tips: "一車直達博多站地下一樓。"
               },
               {
                 time: "09:50 - 12:27",
                 name: "搭乘 特急由布院之森 3 號 (ゆふいんの森)",
                 mapQuery: "JR由布院站",
-                transfer: "博多站 1F「在來線中央改札」刷 QR Code 進站 ➔ 抬頭看電子大螢幕找 10:11 發車的「特急ゆふいんの森 3 号」，前往【在來線第 5、6 或 7 月台】(請依現場螢幕『のりば』為準) ➔ 10:11 發車 ➔ 12:27 抵達 JR 由布院站。(車資已預結｜全體刷網址 QR Code 電子車票)。",
-                tips: "【QR 故障備案】：若手機無網路或 QR Code 無法使用，持訂票時使用的信用卡＋訂票電話末四碼（1256），到 JR 綠色窗口／指定席售票機列印實體車票。\n\n博多站請走「在來線中央剪票口」（或博多口／筑紫口在來線閘門），切勿走藍色招牌的新幹線閘門！4 號車廂 12 番 CD、13 番 CD。"
+                transfer: "1. 驗票進站：上至 1 樓大廳找「JR在來線中央改札口」。全體開啟各自 Email 裡的專屬網址 (粉紅畫面)，對準自動閘門「QR Code 掃描器」過閘，進站後務必按「更新」轉為綠色「乘車中」。\n\n2. 月台與跑馬燈防呆確認：刷 QR Code 通過 JR在來線中央改札口後，抬頭看長條液晶出發時刻表。尋找「10:11 特急ゆふいんの森 3号 (別府行)」。月台常態為【第 5 或第 6 月台】(在來線特急南向月台)，請依螢幕標示之番線搭乘手扶梯上樓，並在月台地面尋找「ゆふいんの森 4 號車廂」乘車標誌排隊。\n\n3. 10:11 發車 ➔ 12:27 抵達 JR 由布院站。(座位：4 號車廂 12 番 CD、13 番 CD｜車資已預結｜全體刷網址 QR Code 電子車票)。",
+                tips: "【QR 故障備案】：若手機無網路或 QR Code 無法使用，請持訂票用「熊本熊信用卡」＋訂票電話末四碼（1256），到 JR 綠色窗口／指定席售票機列印實體紙本車票進站。\n\n博多站請走「在來線中央剪票口」（或博多口／筑紫口在來線閘門），切勿走藍色招牌的新幹線閘門！"
               }
             ]
           },
@@ -1150,7 +1221,7 @@
               },
               {
                 time: "13:30 - 14:30",
-                name: "午餐：由布まぶし 心 (金鱗湖本店)",
+                name: "午餐：由布釜飯「心」金鱗湖本店",
                 mapQuery: "由布まぶし 心 金鱗湖本店",
                 transfer: "緊鄰金鱗湖畔。",
                 tips: "享用大分在地特產「豐後牛」或「地雞」釜飯三吃 (原味、拌柚子胡椒醬菜、注高湯成茶泡飯)。"
@@ -1174,35 +1245,49 @@
                 name: "金鱗湖 ➔ 漫步返回 JR 由布院站",
                 mapQuery: "JR由布院站",
                 transfer: "沿途逛特色小店與吉卜力專賣店，悠閒散步回車站候車。",
-                tips: "進站看電子看板確認月台 (通常為 1 或 2 號月台)。"
+                tips: "預留充裕時間抵達月台候車。"
               },
               {
                 time: "17:17 - 19:28",
                 name: "搭乘 特急由布院之森 6 號返回博多",
                 mapQuery: "JR博多站",
-                transfer: "於由布院站進站前往【第 1 或 2 月台】(看螢幕確認)，17:17 發車 ➔ 19:28 抵達博多站。(車資已預結｜全體刷網址 QR Code 電子車票)。",
+                transfer: "1. 由布院站回程月台防呆確認：由布院站為平面溫泉小站，刷 QR Code 進站後，抬頭確認人工剪票口上方螢幕「17:17 特急ゆふいんの森 6号 (博多行)」。由布院之森常態停靠於【第 1 月台】(站房側免過天橋)，若遇交會則走天橋至【第 2 月台】，請聽從現場廣播或站員指引。\n\n2. 17:17 發車 ➔ 19:28 抵達博多站。(車資已預結｜全體刷網址 QR Code 電子車票)。",
                 tips: "座位：5 號車廂 CD 側相連座位 (預約番號：65516)。"
               }
             ]
           },
           {
             time: "19:30 - 22:30",
-            title: "第四與五階段：博多站 1F 伴手禮夜戰 ＆ 空天百萬夜景晚餐",
+            title: "第四與五階段：博多站 1F 伴手禮夜戰 ＆ 空天晚餐與頂樓夜景",
             icon: "fa-gift",
             items: [
               {
-                time: "19:30 - 21:00",
+                time: "19:30 - 20:30",
                 name: "博多車站 1F 伴手禮名店街 (營業至 21:00)",
                 mapQuery: "マイング (Ming) 博多",
-                transfer: "下車不出站體，直接進入 1F マイング (Ming)、DEITOS 與名品市場。",
-                tips: "搶買名單：マイング 1F 努努雞 (冷炸雞易售罄下車先衝)、中央改札旁 PRESS BUTTER SAND 現烤焦糖奶油餅、ふくや 明太子、KOKONEKO貓掌費南雪。"
+                transfer: "下車不出站體，直接進入 1F「マイング (Ming)」、「DEITOS」與「おみやげ市場」全力採買。\n\n(註：抵達時已接近 19:30，博多阪急與 AMU PLAZA 皆於 20:00 打烊，無法充裕辦理退稅，故集中火力於 1F 商場！)",
+                tips: "【夜戰搶購清單】：\n• 努努雞 (冷炸雞)：位於マイング 1F，極易提早完售，建議一下車第一站先衝去搶！\n• PRESS BUTTER SAND (現烤)：位於中央通連北改札口旁。\n• ふくや (明太子) ＆ KOKONEKO 等伴手禮：皆可於一樓特產街一網打盡。"
               },
               {
-                time: "21:00 - 22:30",
-                name: "頂樓燕林廣場空中花園夜景 ＆ 空天 (Kooten) 晚餐",
+                time: "20:30 - 21:30",
+                name: "JR博多城 空天 (City Dining Kooten 9F/10F) 晚餐",
                 mapQuery: "博多城 City Dining Kooten",
-                transfer: "搭乘直達電梯上 10F/RF 頂樓 (開放至 22:00)，再至 9F/10F 挑選餐廳 ➔ 餐後自博多站下樓至七隈線改札口前往【第 3 或 4 月台】，抬頭確認螢幕指示往「天神南・橋本」方向搭回「渡邊通站」。(車資 210 日圓｜iPhone 組：逼實體感應信用卡 / Pixel 組：逼感應信用卡)。",
-                tips: "利久牛舌或博多華味鳥水瀧雞肉鍋；餐後自博多站搭七隈線回渡邊通站。"
+                transfer: "買完伴手禮後直接搭電梯至 9F/10F 挑選餐廳享用晚餐。",
+                tips: "【營業時間對策：先吃晚餐，再看夜景】：\n同樓層各餐廳最後點餐時間 (L.O.) 均不同，例如茅乃舍直營「ごはんや椒房庵」為 21:00，利久牛舌為 22:00。為保留最大彈性避免撲空，強烈建議「先吃晚餐，再看夜景」最為保險！可品嚐茅乃舍特製高湯做出的明太子玉子燒與炊飯 (椒房庵)，或依喜好選擇利久牛舌 (多數營業至 22:00~23:00)。"
+              },
+              {
+                time: "21:30 - 22:00",
+                name: "頂樓空中花園 (つばめの杜ひろば) 欣賞夜景",
+                mapQuery: "JR博多城 屋上庭園",
+                transfer: "吃飽後搭手扶梯直上 10F/RF 頂樓 (開放至 22:00)，欣賞博多車站專屬夜景與散步消化。",
+                tips: "開放至 22:00，視野寬闊，吃飽上來吹吹風非常舒服。"
+              },
+              {
+                time: "22:00 之後",
+                name: "返回 BASE LAYER HOTEL 福岡",
+                mapQuery: "BASE LAYER HOTEL 福岡",
+                transfer: "自博多站下樓至七隈線改札口前往【第 3 或 4 月台】，抬頭看電子螢幕往「橋本」方向搭乘七隈線直達「渡邊通站」，出站步行返回飯店。\n\n(地鐵車資 210 日圓｜iPhone 組：逼實體感應信用卡 / Pixel 組：逼感應信用卡)。",
+                tips: "一車直達飯店樓下渡邊通站，完美結束充實的一天！"
               }
             ]
           }
@@ -1212,66 +1297,80 @@
         day: 7,
         date: "10/27",
         weekday: "週二",
-        theme: "糸島山海秘境包車慢遊 ＆ 博多商圈大採買 (精修版)",
+        theme: "糸島山海秘境包車慢遊 ＆ 博多商圈大採買 (終極完美版)",
         colorTheme: "from-teal-700 via-cyan-800 to-sky-900",
         budget: {
-          transport: "約 1,940 ～ 2,240 日圓/人 (飯店-博多短駁平攤+加布里直通720x2+晚間返程)",
+          transport: "約 1,600 ～ 1,940 日圓/人 (博多接駁+筑前前原直通雙向+晚間返程)",
           tickets: "400 日圓/人 (雷山千如寺參拜料)",
           charter: "專屬包車 28,000 日圓/車 (4人平攤每人 7,000 日圓，當日現場支付日圓現金整數)",
-          baseCost: "約 9,340 ～ 9,640 日圓 (含包車)",
+          baseCost: "約 9,000 ～ 9,340 日圓 (含包車，晚餐約 3,000~15,000 日圓另計)",
         },
         paymentWeapon: {
-          subway: "【福岡市地下鐵（七隈線/空港線/箱崎線）：全體強制刷「感應信用卡」】\n為了觸發單日 640 日圓自動封頂優惠，不可刷交通 IC 卡！\n• iPhone 組：請直接拿「實體感應信用卡」逼卡進出站。\n• Pixel 組：使用手機 Google Pay 信用卡或「實體信用卡」逼卡進出站。",
-          bus: "【公車與其他鐵路（西鐵公車/西鐵電車/JR 在來線）：全體強制刷「交通 IC 卡」】\n市區公車不支援信用卡，為了統一防呆全體強制刷交通 IC 卡 (Suica/ICOCA)！\n• iPhone 組：直接逼手機 Apple Pay 交通卡。\n• Pixel 組：拿「實體交通 IC 卡」逼卡 (無卡則公車抽整理券投現、電車售票機投現購票)。",
-          charterPay: "【包車尾款支付】：請備妥日圓現金整數支付予司機。"
+          subway: "【福岡市地下鐵（市區七隈線/晚間市區空港線）：全體強制刷「感應信用卡」】\n為了觸發單日 640 日圓自動封頂優惠，絕對不可刷交通 IC 卡！\n• iPhone 組：請直接拿「實體感應信用卡」逼卡進出站。\n• Pixel 組：請使用手機 Google Pay 信用卡或「實體信用卡」逼卡進出站。",
+          bus: "【公車與其他鐵路（往返糸島之聯絡線）：全體強制刷「交通 IC 卡」】\n因為這段路線跨越 JR 系統不支援信用卡，為了統一防呆全體強制刷交通 IC 卡 (Suica/ICOCA)！\n• iPhone 組：直接逼手機 Apple Pay 交通卡。\n• Pixel 組：拿「實體交通 IC 卡」逼卡 (強烈建議 Day 1 就買好實體卡儲值，轉乘最安全無腦。無卡則需在售票機投現購票)。",
+          charterPay: "【包車尾款支付】：請備妥 28,000 日圓現金整數支付予司機。"
         },
         stages: [
           {
-            time: "08:20 - 09:20",
-            title: "第一階段：飯店出發 ＆ 直通電車奔赴加布里",
+            time: "08:20 - 10:00",
+            title: "第一階段：飯店出發 ＆ 直通電車奔赴筑前前原 (最強雙方案 2 選 1)",
             icon: "fa-car-side",
             items: [
               {
-                time: "08:20 - 08:35",
-                name: "飯店 ➔ 博多站筑紫口或博多口 (計程車短駁)",
-                mapQuery: "JR博多站 筑紫口",
-                transfer: "從 Base Layer Hotel 門口搭乘計程車直達「博多站筑紫口或博多口」(平攤車資約每人 250-300 日圓，免去早起轉車疲勞)。",
-                tips: "【乘車禮儀防呆提醒】：日本計程車的後車門為司機控制的全自動門。上下車時請絕對不要自己動手拉車門，站在門邊等門自動打開即可上車；下車時直接離開，司機會自動將門關上。"
+                time: "主力首選",
+                name: "【主力首選：計程車上游攔截流】飯店 ➔ 博多站 ➔ 筑前前原 (提早於 09:26 抵達)",
+                mapQuery: "JR筑前前原站",
+                transfer: "【08:20 - 08:35｜飯店 ➔ 博多站 (計程車上游攔截)】：\n• 動線：從 Base Layer Hotel 門口搭乘計程車直達「博多站筑紫口或博多口」(車資平攤約 250-300 日圓/人)。完美避開天神地面的塞車潮。\n\n【08:44 - 09:26｜博多 ➔ JR 筑前前原 (一車直達免換乘)】：\n• 月台與指標：進入地下鐵博多站，於【第 2 月台】搭乘。抬頭請核對螢幕指示方向為「往 筑前前原行」、「往 唐津行」或「往 西唐津行」。\n• 座位戰略：在博多站上車先往車廂內站，忍耐約 5 分鐘抵達天神站時，大量通勤族會下車，此時即可無縫接軌坐下，一路睡到底。\n• 車資與支付：單程 600 日圓。(此段跨越 JR 系統，不可刷信用卡｜iPhone 組：逼 Apple Pay 交通卡 / Pixel 組：逼實體交通 IC 卡或售票機投現)。",
+                tips: "【車內飲食規範】：嚴禁食用冰淇淋、霜淇淋及氣味濃烈之食物 (如炸物、燒烤包裝)，一般無味小點心或飲品可於車內食用。\n\n【防暈車對策】：一早前往雷山有山路彎道，容易暈車的旅伴請於上車前 30 分鐘備妥酸梅含於口中，或提早服用暈車藥。若感到不適，可隨時請司機減速通風。"
               },
               {
-                time: "08:44 - 09:20",
-                name: "博多站 ➔ JR 加布里站 (一車直達免換乘)",
-                mapQuery: "JR加布里站",
-                transfer: "於地下鐵博多站【第 2 月台】搭乘。抬頭請核對螢幕指示方向為「筑前前原行」或「西唐津行」。\n\n【直通規則】：列車行經姪濱站後，會自動切換為「JR筑肥線」，完全不需要下車換乘，一車直達「JR加布里站」。車程約 36 分鐘，可於車上補眠。\n\n(地鐵/JR車資 720 日圓｜此段跨越 JR 系統，不適用地鐵封頂優惠，全體請遵照 JR 在來線支付規則：iPhone 組：逼 Apple Pay 交通卡 / Pixel 組：逼實體交通 IC 卡或售票機投現)。",
-                tips: "【車內飲食規範】：嚴禁食用冰淇淋、霜淇淋及氣味濃烈之食物 (如炸物、燒烤包裝)，一般無味小點心或飲品可於車內食用。\n\n【防暈車對策】：前往山區 (千如寺、白絲瀑布) 有連續蜿蜒彎道，容易暈車的旅伴請於上車前 30 分鐘備妥酸梅含於口中，或提早服用暈車藥。若感到不適，可隨時請司機減速或停靠便利商店通風。"
-              },
-              {
-                time: "09:20 - 09:30",
-                name: "JR 加布里站 出站會合整裝",
-                mapQuery: "JR加布里站",
-                transfer: "於 JR 加布里站使用洗手間整裝，與包車司機會合登車展開糸島行程。",
-                tips: "【包車尾款支付】：請備妥日圓現金整數支付予司機。"
+                time: "備用動線",
+                name: "【備用動線：博多站內轉乘流】渡邊通 ➔ 博多站 ➔ 筑前前原 (09:52 抵達・省錢免吹風)",
+                mapQuery: "JR筑前前原站",
+                transfer: "【08:51 - 08:59｜飯店步行 ➔ 七隈線渡邊通站】：\n• 動線：步行約 8 分鐘至七隈線「渡邊通站」2 號出口。\n\n【08:59 - 09:05｜渡邊通 ➔ 博多站】：\n• 月台與指標：於【第 2 月台】搭乘，螢幕指示為「往 博多行」，搭乘 3 站至終點「博多站」。\n• 車資與支付：為了後續與 JR 的聯絡優惠，進站時請全體強制刷交通 IC 卡，絕對不可刷信用卡 (iPhone 組：逼 Apple Pay 交通卡 / Pixel 組：逼實體交通 IC 卡)。\n\n【09:05 - 09:10｜博多站內轉乘 (七隈線 ➔ 空港線)】：\n• 站內動線：下車後跟著「空港線 (姪浜・唐津方面)」指標，利用平面電動步道步行約 5-7 分鐘。\n• 轉乘防呆：尋找標示為「乗換改札口 (綠色閘門)」的內部轉乘通道，用進站的同一張 IC 卡逼過去。\n\n【09:10 - 09:52｜博多 ➔ JR 筑前前原 (一車直達免換乘)】：\n• 月台與指標：抵達空港線【第 2 月台】，搭乘 09:10 發車之快速列車，螢幕指示為「往 西唐津行」(顯示筑前前原、唐津亦可)。\n• 出站與結算：抵達 JR 筑前前原站，系統自動扣除聯絡總車資 680 日圓 (iPhone 組：逼 Apple Pay 交通卡出站 / Pixel 組：逼實體交通 IC 卡出站)。",
+                tips: "全程於站內轉乘免受風吹日曬，出站即與包車司機會合。"
               }
             ]
           },
           {
-            time: "09:30 - 16:00",
-            title: "第二階段：糸島山海雙境・歷史傳說與深度慢遊 (依當日飲食偏好 2 選 1 執行)",
+            time: "10:00 - 16:00",
+            title: "第二階段：糸島山海雙境・秋季慢遊版 (不趕路・完美順路銜接)",
             icon: "fa-camera-retro",
             items: [
               {
-                time: "【選擇 A 路線】",
-                name: "選擇A：【住吉丸牡蠣小屋】加布里漁港炭烤熟食海鮮路線",
-                mapQuery: "住吉丸 牡蠣小屋 糸島",
-                transfer: "【行程時程與景點規劃】：\n\n• 09:30 - 10:50｜【第一站：住吉丸牡蠣小屋】：避開正午人潮享用熱騰騰炭烤。必點獨家招牌「牡蠣燒賣 (かきしゅうまい)」、天然加布里蛤蜊、以及螃蟹/星鰻熟食釜飯，全數皆為熟食，不吃生食的旅伴可安心點用。\n\n• 11:15 - 12:05｜【第二站：雷山千如寺大悲王院】(停留 50 分鐘)：西元 725 年清賀上人開山；鎌倉幕府祈求擊退元寇之敕願道場。藏有國家重要文化財千手觀音立像，流傳「Samuhara」開運御守文化。慢遊參觀本堂庭園，於 400 年「雷山大楓樹」前取景合影。\n\n• 12:25 - 13:10｜【第三站：白絲瀑布】(停留 45 分鐘)：自古為山伏僧侶苦修之所；相傳鎌倉大將軍北條實政曾在此閉關祈願退敵。漫步 24 公尺清冽飛瀑旁深吸負離子；於觀瀑棧橋前拍攝山林水勢。\n\n• 13:45 - 14:30｜【第四站：龍貓森林 / 芥屋大門公園】(停留 45 分鐘)：盡頭之「芥屋大門」為日本最大玄武岩海蝕洞；傳說為天岩戶入口與「神風」發源洞窟。穿梭於自然交織的防風林綠色隧道，抵達展望台遠眺玄界灘壯麗海浪。\n\n• 14:50 - 15:35｜【第五站：櫻井二見浦 白色鳥居 ＆ 夫婦岩】(停留 45 分鐘)：黑田藩世代守護靈場，櫻井神社「宇良宮」，象徵伊邪那岐與伊邪那美結緣；並列為「夕陽二見浦」。下車漫步玄界灘細沙，下午陽光偏西斜射，捕捉純白大鳥居與夫婦岩波光倒影。\n\n• 16:00｜抵達 JR 加布里站，包車結束。",
-                tips: "【熟食安心承諾】：牡蠣小屋提供豐富熟食選項，不吃生食亦能大飽口福。"
+                time: "10:00 - 11:20",
+                name: "【第一站：秋楓古剎】雷山千如寺大悲王院 (停留 60 分鐘)",
+                mapQuery: "雷山千如寺大悲王院",
+                transfer: "10:00 - 10:20 自 JR 筑前前原站出發，車程約 20 分鐘抵達雷山 (含酸梅防暈)。\n\n11:20 參觀結束登車出發，車程約 20 分鐘前往下一站。",
+                tips: "【歷史與傳說】：西元 725 年清賀上人開山；鎌倉幕府祈求擊退元寇之敕願道場。藏有國家重要文化財千手觀音立像。\n\n【慢遊安排】：這是 10 月下旬的重頭戲！購票入內參觀本堂 (參拜料 400 日圓)，在 400 年「雷山大楓樹」前享受平日無人的幽靜，從容拍照。"
               },
               {
-                time: "【選擇 B 路線】",
-                name: "選擇B：【糸島食堂 ほもり】日式手作熟肉定食路線",
+                time: "11:40 - 12:20",
+                name: "【第二站：百年酒造與麥香】杉能舎 浜地酒造 (停留 40 分鐘)",
+                mapQuery: "杉能舎 浜地酒造",
+                transfer: "11:40 抵達酒造參觀採買。\n\n12:20 登車出發，車程約 20 分鐘前往午餐餐廳。",
+                tips: "【歷史與背景】：創立於 1870 年，橫跨傳統日本酒與近代精釀啤酒工藝的在地百年名門酒造。\n\n【慢遊安排】：完美取代中午容易撲空的產銷超市。在此品鑑、採買在地釀造的高質感清酒與精釀啤酒，務必造訪附設的麵包工房，外帶幾個剛出爐的「酒粕貝果」或手工吐司，享受最道地的麥香滋味。"
+              },
+              {
+                time: "12:40 - 13:50",
+                name: "【第三站：在地純熟食午餐】糸島食堂 ほもり (停留 70 分鐘)",
                 mapQuery: "糸島食堂 ほもり",
-                transfer: "【行程時程與景點規劃】：\n\n• 09:30 - 09:55｜加布里站集合出發，直奔山區。\n\n• 09:55 - 10:50｜【第一站：雷山千如寺大悲王院】(停留 55 分鐘)：參觀 1300 年歷史敕願道場，參拜千手觀音並於 400 年大楓樹前合影。\n\n• 11:10 - 11:55｜【第二站：白絲瀑布】(停留 45 分鐘)：漫步修驗道靈地，於觀瀑平台取景，不在小鋪食用正餐保留食量給午餐定食。\n\n• 12:20 - 13:30｜【第三站：糸島食堂 ほもり】(定食午餐・停留 70 分鐘)：在地純熟食定食名店。必點爆汁「A5 和牛漢堡排」、手作塔塔醬「南蠻炸雞定食」與櫻井產「大豆野菜天婦羅」。\n\n• 13:45 - 14:30｜【第四站：龍貓森林 / 芥屋大門公園】(停留 45 分鐘)：飯後穿梭防風林綠色隧道，至展望台遠眺玄界灘海蝕斷崖。\n\n• 14:50 - 15:35｜【第五站：櫻井二見浦 白色鳥居 ＆ 夫婦岩】(停留 45 分鐘)：漫步結緣海岸，拍攝夕照海中鳥居與注連繩雙岩，吹海風放空。\n\n• 16:00｜抵達 JR 加布里站，包車結束。",
-                tips: "【定食慢食】：避開生冷海鮮，以在地手作和牛漢堡排與野菜天婦羅享受山海悠閒。"
+                transfer: "抵達櫻井地區的手作定食店，全體享用午餐。\n\n13:50 用餐完畢登車，車程約 5 分鐘前往櫻井神社。",
+                tips: "【慢遊安排】：櫻井地區手作定食名店，完全無生冷海鮮負擔。必點爆汁「A5 和牛漢堡排」、手作塔塔醬「南蠻炸雞定食」與櫻井產「大豆野菜天婦羅」。"
+              },
+              {
+                time: "13:55 - 14:35",
+                name: "【第四站：神木靈氣】櫻井神社 (停留 40 分鐘)",
+                mapQuery: "櫻井神社 糸島",
+                transfer: "飯後至神社散步消化。\n\n14:35 登車出發，往海岸線前進，車程約 10 分鐘。",
+                tips: "【歷史與傳說】：黑田藩世代守護靈場，海中鳥居的「本體」與遙拜起源。\n\n【慢遊安排】：神社被參天巨木包圍，氛圍靜謐清幽，為知名祈求結緣聖地。"
+              },
+              {
+                time: "14:45 - 15:35",
+                name: "【第五站：神道之境】櫻井二見浦 白色鳥居 ＆ 夫婦岩 (停留 50 分鐘)",
+                mapQuery: "櫻井二見浦 夫婦岩",
+                transfer: "穿出田園抵達海岸線漫步沙灘。\n\n15:35 準時上車返程，車程約 25 分鐘前往車站。16:00 抵達 JR 筑前前原站，包車結束。",
+                tips: "【歷史與傳說】：櫻井神社「宇良宮」，象徵伊邪那岐與伊邪那美結緣；並列為「夕陽二見浦」。\n\n【慢遊安排】：漫步沙灘吹海風，下午 3 點多的斜陽是捕捉純白大鳥居與夫婦岩波光倒影的最佳光線，最適合拍人像合影！"
               }
             ]
           },
@@ -1282,9 +1381,9 @@
             items: [
               {
                 time: "16:15 - 16:58",
-                name: "JR 加布里站 ➔ 博多站 (一車直達免換乘)",
-                mapQuery: "JR加布里站",
-                transfer: "於 JR 加布里站【第 1 或 2 月台】(請依站內指標確認往「博多・福岡空港」方向)，抬頭請核對螢幕指示為「福岡空港行」。\n\n【直通規則】：行經姪濱站後自動切換為「福岡市地下鐵空港線」，免換車一車直達「博多站」，車程 43 分鐘，全體補眠。\n\n(地鐵/JR車資 720 日圓｜跨系統不適用地鐵封頂優惠，全體請遵照 JR 在來線支付規則：iPhone 組：逼 Apple Pay 交通卡 / Pixel 組：逼實體交通 IC 卡或售票機投現)。",
+                name: "JR 筑前前原 ➔ 博多 (一車直達免換乘)",
+                mapQuery: "JR筑前前原站",
+                transfer: "於 JR 筑前前原站搭乘。抬頭請核對螢幕指示為往博多方向的「往 福岡空港行」。\n\n【直通規則】：行經姪濱站後自動切換為「福岡市地下鐵空港線」，免換車直達「博多站」，車程 43 分鐘，全體補眠。\n\n(地鐵/JR車資單程 600 日圓｜跨系統不適用地鐵封頂優惠：iPhone 組：逼 Apple Pay 交通卡 / Pixel 組：逼實體交通 IC 卡或售票機投現)。",
                 tips: "一車直通免下車換乘，全體旅伴可在車上閉目養神補眠。"
               }
             ]
@@ -1312,14 +1411,14 @@
                 time: "慶功選擇 A",
                 name: "選擇A：【九州頂級和牛盛宴】焼肉 すどう 春吉 (需轉乘地鐵至春吉)",
                 mapQuery: "焼肉 すどう 春吉",
-                transfer: "【19:30 - 19:50｜博多 ➔ 春吉商圈 (搭乘地鐵前往餐廳)】：\n• 於地下鐵博多站【第 1 或 2 月台】搭乘地下鐵七隈線，抬頭核對螢幕指示為「橋本行」。\n• 搭乘至「天神南站」或「渡邊通站」下車 (車程約 3-4 分鐘)，出站步行前往春吉商圈。(地鐵車資 210 日圓｜全體請遵照地下鐵 640 封頂支付規則：iPhone 組：逼實體感應信用卡 / Pixel 組：逼感應信用卡)。\n\n【19:50 - 22:00｜慶功晚宴：焼肉 すどう 春吉 (Tabelog 4.12 九州全域燒肉百名店)】：\n• 頂級犒賞體驗：全九州最頂尖的燒肉名店之一。全程提供「專人桌邊代烤服務」，熟度完美拿捏，肉香四溢且入口即化。\n• 無生食疑慮：以最高級黑毛和牛炭火燒烤為主軸，旅伴只需輕鬆動筷、舉起生啤酒乾杯，在熱絡且具隱私的環境中完美慶祝 Day7 行程大成功！(提醒：此等名店極度熱門，務必提早於線上完成訂位手續)。\n\n【22:00 之後｜散步消化回飯店】：\n• 餐廳所在的「春吉」距離下榻飯店非常近，順著柳橋連合市場旁的方向往南散步，約 10 分鐘即可抵達 Base Layer Hotel 休息。",
+                transfer: "【19:30 - 19:50｜博多 ➔ 春吉商圈 (搭乘地鐵前往餐廳)】：\n• 於地下鐵博多站【第 1 或 2 月台】搭乘地下鐵七隈線，抬頭核對螢幕指示為「往 橋本行」。\n• 搭乘至「天神南站」或「渡邊通站」下車 (車程約 3-4 分鐘)，出站步行前往春吉商圈。(地鐵車資 210 日圓｜全體請遵照地下鐵 640 封頂規則：iPhone 組：逼實體感應信用卡 / Pixel 組：逼感應信用卡)。\n\n【19:50 - 22:00｜慶功晚宴：焼肉 すどう 春吉 (九州全域燒肉百名店)】：\n• 頂級犒賞體驗：全九州最頂尖的燒肉名店之一。全程提供「專人桌邊代烤服務」，熟度完美拿捏，肉香四溢且入口即化。\n• 無生食疑慮：以最高級黑毛和牛炭火燒烤為主軸，旅伴只需舉杯慶祝 Day 7 成功！(提醒：此等名店極度熱門，務必提早於線上完成訂位手續)。\n\n【22:00 之後｜返程回飯店】：\n• 散步消化：餐廳所在的「春吉」距離下榻飯店非常近，順著柳橋連合市場方向往南散步，約 10 分鐘即可抵達 Base Layer Hotel 休息。",
                 tips: "【神級名店推薦】：Tabelog 4.12 九州燒肉天花板，專人桌邊代烤，無生食疑慮，極力推薦提早訂位犒賞！"
               },
               {
                 time: "慶功選擇 B",
                 name: "選擇B：【平價歡樂飽食】鳥貴族 筑紫口店 (留在博多車站商圈)",
                 mapQuery: "鳥貴族 博多筑紫口店",
-                transfer: "【19:30 - 21:30｜慶功晚宴：鳥貴族 筑紫口店 (營業至 00:00 / L.O. 23:30)】：\n• 位於博多站筑紫口步行 2 分鐘。\n• 無腦點餐：全店平板點餐 (含繁體中文)，全品項均一價且 100% 全熟食。如果燒肉店客滿，或想輕鬆大口吃肉喝酒，這裡氣氛熱鬧、絕對是歡樂神備案。必吃推薦：巨無霸蔥段烤雞肉串與現炊 30 分鐘雞肉釜飯。\n\n【21:30 之後｜博多 ➔ 返回飯店 (2 選 1)】：\n• 動線 A（地鐵）：於地下鐵博多站【第 1 或 2 月台】搭乘地下鐵七隈線，抬頭核對螢幕指示為「橋本行」，搭乘 3 站至「渡邊通站」下車，出站步行 2 分鐘返回 Base Layer Hotel。(地鐵車資 210 日圓｜全體請遵照地下鐵 640 封頂支付規則：iPhone 組：逼實體感應信用卡 / Pixel 組：逼感應信用卡)。\n• 計程車備案：若戰利品過重未鎖進置物櫃，直接於博多站排班區搭計程車返回飯店 (平攤約 250-300 日圓/人)。",
+                transfer: "【19:30 - 21:30｜慶功晚宴：鳥貴族 筑紫口店 (營業至 00:00 / L.O. 23:30)】：\n• 位於博多站筑紫口步行 2 分鐘。\n• 無腦點餐：全店平板點餐 (含繁體中文)，全品項均一價且 100% 全熟食。氣氛熱鬧，絕對是歡樂神備案。必吃推薦：巨無霸蔥段烤雞肉串與現炊 30 分鐘雞肉釜飯。\n\n【21:30 之後｜博多 ➔ 返回飯店 (2 選 1)】：\n• 動線 A（地鐵）：於地下鐵博多站【第 1 或 2 月台】搭乘地下鐵七隈線，抬頭核對螢幕指示為「往 橋本行」，搭乘 3 站至「渡邊通站」下車，步行 2 分鐘返回飯店。(地鐵車資 210 日圓｜全體請遵照地下鐵 640 封頂規則：iPhone 組：逼實體感應信用卡 / Pixel 組：逼感應信用卡)。\n• 計程車備案：若戰利品過重未鎖進置物櫃，直接於博多站排班區搭計程車返回飯店 (平攤約 250-300 日圓/人)。",
                 tips: "【歡樂飽足備案】：全中文平板點餐均一價，熟食串燒與熱炊釜飯，喝酒聊天零負擔。"
               }
             ]
@@ -1566,6 +1665,101 @@
             ]
           }
         ]
+      },
+      {
+        day: "appendix",
+        date: "附錄",
+        weekday: "特典",
+        theme: "【附錄特典】彈性美食外掛庫・周邊地頭蛇與名人聖地指南",
+        colorTheme: "from-amber-700 via-orange-800 to-rose-900",
+        budget: {
+          transport: "0 日圓 (飯店周邊步行 2~4 分鐘，或各日行程順路走訪)",
+          tickets: "0 日圓 (自由入座享用)",
+          baseCost: "自由點餐消費 (單份約 180 ~ 3,500 日圓不等)",
+        },
+        paymentWeapon: {
+          subway: "【自由抽換備案】：本頁為「自由抽換／深夜與早晨即興備案」，當主行程名店客滿、早起想買早餐、或晚上回飯店嘴饞時，隨翻隨用！",
+          bus: "【支付通用建議】：多數店家可刷信用卡或電子支付，老字號小店（如三宅烏龍麵、屋台）建議備妥日圓千元鈔現金投現。"
+        },
+        stages: [
+          {
+            time: "步行 2~4 分鐘",
+            title: "一、飯店 (BASE LAYER HOTEL) 周邊地頭蛇",
+            icon: "fa-store",
+            items: [
+              {
+                time: "晨間早餐 (07:30~)",
+                name: "BAKERY CHIKARANOMOTO (力的源麵包工房)",
+                mapQuery: "BAKERY CHIKARANOMOTO 福岡",
+                transfer: "從 Base Layer Hotel 門口步行約 2 分鐘，位於清川巷弄內。",
+                tips: "【特色】：清川巷弄溫馨烘焙坊。每天現烤「鹽可頌 (塩パン)」與「紅豆麵包」，香酥軟綿。\n\n【時機】：Day 2、4、8 早晨出門前，散步 2 分鐘買回飯店配鮮乳，最道地的博多日常早餐。"
+              },
+              {
+                time: "24 小時營業",
+                name: "彌生軒 (やよい軒) 高砂店 (24H營業)",
+                mapQuery: "やよい軒 高砂店 福岡",
+                transfer: "從飯店步行約 3 分鐘，過馬路直達高砂店。",
+                tips: "【特色】：平價日式定食，熱白飯無限續。\n\n【時機】：Day 5 趕早班 07:40 新幹線、或長輩早起想吃熱鮭魚、味噌湯白飯時的最佳熱食補給。"
+              },
+              {
+                time: "營業至深夜 02:00",
+                name: "有吉商店 清川店 (深夜拉麵居酒屋)",
+                mapQuery: "有吉商店 清川店",
+                transfer: "出飯店轉角下樓步行 2 分鐘即可抵達。",
+                tips: "【特色】：拉麵居酒屋酒場，主打「黑麻油擔擔麵」、煎餃與高球生啤。\n\n【時機】：Day 2、4、7 逛街回飯店卸貨後，若晚上 22:00 肚子餓，轉角下樓 2 分鐘即可開吃。"
+              }
+            ]
+          },
+          {
+            time: "出差隨訪",
+            title: "二、《孤獨的美食家》五郎叔福岡出差聖地",
+            icon: "fa-person-walking",
+            items: [
+              {
+                time: "18:00 - 深夜",
+                name: "中洲屋台 純ちゃん (Jun-chan)",
+                mapQuery: "中洲屋台 純ちゃん 福岡",
+                transfer: "位於中洲清流公園那珂川河畔屋台街。",
+                tips: "【特色】：五郎叔中洲運河篇登場。無可怕豬腥味的順口豚骨拉麵＋烤明太子天婦羅。\n\n【時機】：Day 1 晚上逛完運河城，沿著那珂川散步至清流公園屋台街時指名享用。"
+              },
+              {
+                time: "11:00 - 17:00",
+                name: "みやけうどん (三宅烏龍麵)",
+                mapQuery: "みやけうどん 福岡",
+                transfer: "自東長寺或地下鐵祇園站步行約 3~5 分鐘。",
+                tips: "【特色】：昭和木造老店 (Tabelog 3.56)，吸飽柴魚清甜高湯、粗如手指且極度軟綿的「博多軟烏龍」。\n\n【時機】：Day 3 下午不逛街組走訪東長寺大佛時，順路往北散步 5 分鐘點「丸天烏龍麵＋豆皮壽司」當下午點心。"
+              },
+              {
+                time: "18:00 - 23:00",
+                name: "一富 (Kazutomi / 人形小路)",
+                mapQuery: "一富 博多",
+                transfer: "位於中洲中央通人形小路巷內。",
+                tips: "【特色】：中洲老字號居酒屋 (Tabelog 3.58)。招牌「鯖魚芝麻醬油生魚片」與手作割烹 (需提早預約)。"
+              }
+            ]
+          },
+          {
+            time: "大神同款",
+            title: "三、木村拓哉 (木村大神) 同款福岡足跡",
+            icon: "fa-star",
+            items: [
+              {
+                time: "08:00 - 20:00",
+                name: "mills by TruffleBAKERY (ソラリアステージ店)",
+                mapQuery: "mills by TruffleBAKERY ソラリアステージ店",
+                transfer: "天神 Solaria Stage 1F / 鄰接天神地下街與西鐵天神站。",
+                tips: "【特色】：木村拍戲指定慰勞品！招牌「白松露鹽奶油捲麵包 (白トリュフ塩パン)」外脆內 Q 帶松露清香，福岡限定「稚加榮明太子法棍」必買。\n\n【時機】：Day 2 或 Day 4 在天神地下街與西鐵站採買時順手買一袋當點心或隔日早餐。"
+              },
+              {
+                time: "10:00 - 17:00",
+                name: "一蘭之森 糸島店 (一蘭の森)",
+                mapQuery: "一蘭之森 糸島",
+                transfer: "位於糸島市志摩地區，包車車程約 20~25 分鐘。",
+                tips: "【特色】：木村 YouTube 走訪的一蘭研發工廠兼博物館，曾令大神讚嘆喝光整碗湯底。\n\n【時機】：Day 7 糸島包車日，可視時間作為行車途中的景點備案。"
+              }
+            ]
+          }
+        ]
       }
     ];
 
@@ -1604,16 +1798,17 @@
       const container = document.getElementById('day-tabs');
       const tabsHtml = ITINERARY_DATA.map((d, index) => {
         const isActive = index === currentDayIndex;
+        const isAppendix = d.day === 'appendix';
         return `
           <button onclick="switchDay(${index})" 
                   class="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-medium text-xs md:text-sm transition-all duration-200 select-none ${
                     isActive 
-                      ? 'bg-blue-600 text-white shadow-sm ring-2 ring-blue-400/40 font-semibold' 
-                      : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200/80 dark:border-slate-800 hover:text-slate-900 dark:hover:text-white'
+                      ? (isAppendix ? 'bg-amber-600 text-white shadow-sm ring-2 ring-amber-400/50 font-semibold' : 'bg-blue-600 text-white shadow-sm ring-2 ring-blue-400/40 font-semibold')
+                      : (isAppendix ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 hover:bg-amber-100 border border-amber-300 dark:border-amber-800' : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200/80 dark:border-slate-800 hover:text-slate-900 dark:hover:text-white')
                   }">
-            <span class="w-2 h-2 rounded-full ${isActive ? 'bg-emerald-300 animate-pulse' : 'bg-slate-300 dark:bg-slate-700'}"></span>
-            <span>Day ${d.day}</span>
-            <span class="${isActive ? 'text-blue-100' : 'text-slate-400 dark:text-slate-500'} text-[11px]">(${d.date})</span>
+            <span class="w-2 h-2 rounded-full ${isActive ? 'bg-emerald-300 animate-pulse' : (isAppendix ? 'bg-amber-400' : 'bg-slate-300 dark:bg-slate-700')}"></span>
+            <span>${isAppendix ? '附錄特典' : `Day ${d.day}`}</span>
+            <span class="${isActive ? (isAppendix ? 'text-amber-100' : 'text-blue-100') : 'text-slate-400 dark:text-slate-500'} text-[11px]">${isAppendix ? '★美食' : `(${d.date})`}</span>
           </button>
         `;
       }).join('');
@@ -1623,25 +1818,26 @@
 
     function renderDayBanner(data) {
       const banner = document.getElementById('day-banner');
+      const isAppendix = data.day === 'appendix';
       banner.className = `rounded-2xl p-5 md:p-7 text-white shadow-md relative overflow-hidden transition-all duration-300 bg-gradient-to-r ${data.colorTheme}`;
       banner.innerHTML = `
         <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div class="space-y-1.5">
             <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase">
-              <i class="fa-regular fa-calendar-check"></i>
-              DAY ${data.day} • ${data.date} (${data.weekday})
+              <i class="fa-solid ${isAppendix ? 'fa-utensils' : 'fa-calendar-check'}"></i>
+              ${isAppendix ? 'SPECIAL BONUS • 彈性美食外掛庫' : `DAY ${data.day} • ${data.date} (${data.weekday})`}
             </div>
             <h2 class="text-xl md:text-2xl lg:text-3xl font-extrabold tracking-tight">${data.theme}</h2>
-            <p class="text-xs md:text-sm text-blue-100 flex items-center gap-3 pt-1">
-              <span><i class="fa-solid fa-hotel mr-1.5"></i>住宿：BASE LAYER HOTEL 福岡</span>
+            <p class="text-xs md:text-sm text-amber-100 flex items-center gap-3 pt-1">
+              <span><i class="fa-solid fa-compass mr-1.5"></i>${isAppendix ? '自由抽換・早晨與深夜即興指南' : '住宿：BASE LAYER HOTEL 福岡'}</span>
               <span>•</span>
-              <span><i class="fa-solid fa-users mr-1.5"></i>4人同行規格</span>
+              <span><i class="fa-solid fa-location-dot mr-1.5"></i>${isAppendix ? '地頭蛇與名人聖地全收錄' : '4人同行規格'}</span>
             </p>
           </div>
           <div class="flex items-center gap-2 self-start md:self-auto">
             <span class="text-xs bg-black/25 backdrop-blur-md px-3 py-2 rounded-xl border border-white/10 flex items-center gap-2">
               <i class="fa-solid fa-map-pin text-amber-300"></i>
-              點擊站點或景點可直開 Google 地圖
+              點擊店家名稱直開 Google 地圖導航
             </span>
           </div>
         </div>
@@ -1652,14 +1848,27 @@
       const container = document.getElementById('budget-payment-cards');
       
       const budgetHtml = `
-        <div class="bg-white dark:bg-slate-900 p-4 md:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xs space-y-3">
-          <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-2">
-            <span class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 flex items-center gap-1.5">
-              <i class="fa-solid fa-wallet text-amber-500"></i> 本日費用預估
-            </span>
-            <span class="text-[11px] text-slate-500 font-medium bg-amber-50 dark:bg-amber-950/50 text-amber-700 dark:text-amber-300 px-2 py-0.5 rounded-full whitespace-nowrap">單人基本開銷</span>
-          </div>
-          <div class="space-y-2 text-xs md:text-sm">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xs overflow-hidden transition-all duration-200">
+          <button onclick="toggleSectionAccordion('budget-content', 'budget-icon', 'budget-hint')" 
+                  class="w-full flex items-center justify-between p-3.5 md:p-4 text-left hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors focus:outline-none">
+            <div class="flex items-center gap-2 min-w-0">
+              <span class="w-6 h-6 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0 text-xs">
+                <i class="fa-solid fa-wallet"></i>
+              </span>
+              <div class="min-w-0">
+                <span class="font-bold text-slate-900 dark:text-white text-xs md:text-sm block truncate">本日費用預估</span>
+                <span class="text-[10px] text-slate-500 font-mono">${data.budget.baseCost}</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-1.5 shrink-0">
+              <span id="budget-hint" class="text-[10px] text-amber-700 dark:text-amber-300 font-medium bg-amber-50 dark:bg-amber-950/60 px-2 py-0.5 rounded-full border border-amber-200/80 dark:border-amber-900/60">
+                點擊展開
+              </span>
+              <i id="budget-icon" class="fa-solid fa-chevron-down text-slate-400 text-[10px] transition-transform duration-300"></i>
+            </div>
+          </button>
+          
+          <div id="budget-content" class="hidden px-4 pb-4 border-t border-slate-100 dark:border-slate-800 pt-3 space-y-2 text-xs md:text-sm">
             <div class="flex justify-between items-start text-slate-600 dark:text-slate-300 gap-2">
               <span class="text-slate-500 dark:text-slate-400 whitespace-nowrap shrink-0">交通預估：</span>
               <span class="font-semibold text-slate-900 dark:text-white text-right leading-snug">${data.budget.transport}</span>
@@ -1682,38 +1891,51 @@
       `;
 
       const paymentHtml = `
-        <div class="bg-white dark:bg-slate-900 p-4 md:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xs space-y-3 md:col-span-2">
-          <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-2">
-            <span class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 flex items-center gap-1.5">
-              <i class="fa-solid fa-credit-card text-blue-600 dark:text-blue-400"></i> 雙武器支付防呆切換攻略
-            </span>
-            <span class="text-[11px] font-semibold bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 px-2 py-0.5 rounded-full border border-blue-200 dark:border-blue-800">
-              地鐵單日封頂 640円 規則
-            </span>
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs md:text-sm">
-            <div class="p-3 bg-blue-50/70 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/60 rounded-xl space-y-1">
-              <div class="font-bold text-blue-900 dark:text-blue-300 flex items-center gap-1.5">
-                <i class="fa-solid fa-train-subway text-blue-600 dark:text-blue-400"></i>
-                地下鐵系統 (七隈/空港線)
+        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xs overflow-hidden md:col-span-2 transition-all duration-200">
+          <button onclick="toggleSectionAccordion('payment-content', 'payment-icon', 'payment-hint')" 
+                  class="w-full flex items-center justify-between p-3.5 md:p-4 text-left hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors focus:outline-none">
+            <div class="flex items-center gap-2 min-w-0">
+              <span class="w-6 h-6 rounded-lg bg-blue-600/10 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 text-xs">
+                <i class="fa-solid fa-credit-card"></i>
+              </span>
+              <div class="min-w-0">
+                <span class="font-bold text-slate-900 dark:text-white text-xs md:text-sm block truncate">雙武器支付防呆切換攻略</span>
+                <span class="text-[10px] text-blue-600 dark:text-blue-400 font-medium truncate block">地下鐵單日封頂 640円 ＆ 交通IC卡防呆</span>
               </div>
-              <div class="text-slate-600 dark:text-slate-300 leading-relaxed space-y-1 whitespace-pre-line">${data.paymentWeapon.subway}</div>
             </div>
-            <div class="p-3 bg-emerald-50/70 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-900/60 rounded-xl space-y-1">
-              <div class="font-bold text-emerald-900 dark:text-emerald-300 flex items-center gap-1.5">
-                <i class="fa-solid fa-bus-simple text-emerald-600 dark:text-emerald-400"></i>
-                西鐵巴士 / 電車 / JR在來線
+            <div class="flex items-center gap-1.5 shrink-0">
+              <span id="payment-hint" class="text-[10px] text-blue-700 dark:text-blue-300 font-medium bg-blue-50 dark:bg-blue-950/60 px-2 py-0.5 rounded-full border border-blue-200/80 dark:border-blue-900/60">
+                點擊展開
+              </span>
+              <i id="payment-icon" class="fa-solid fa-chevron-down text-slate-400 text-[10px] transition-transform duration-300"></i>
+            </div>
+          </button>
+
+          <div id="payment-content" class="hidden px-4 pb-4 border-t border-slate-100 dark:border-slate-800 pt-3 space-y-3 text-xs md:text-sm">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div class="p-3 bg-blue-50/70 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/60 rounded-xl space-y-1">
+                <div class="font-bold text-blue-900 dark:text-blue-300 flex items-center gap-1.5">
+                  <i class="fa-solid fa-train-subway text-blue-600 dark:text-blue-400"></i>
+                  地下鐵系統 (七隈/空港線)
+                </div>
+                <div class="text-slate-600 dark:text-slate-300 leading-relaxed space-y-1 whitespace-pre-line">${data.paymentWeapon.subway}</div>
               </div>
-              <div class="text-slate-600 dark:text-slate-300 leading-relaxed space-y-1 whitespace-pre-line">${data.paymentWeapon.bus || data.paymentWeapon.charterPay || "iPhone 逼交通卡，Pixel 實體 IC 卡 (無卡則公車抽整理券投現、電車售票機投現購票)"}</div>
+              <div class="p-3 bg-emerald-50/70 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-900/60 rounded-xl space-y-1">
+                <div class="font-bold text-emerald-900 dark:text-emerald-300 flex items-center gap-1.5">
+                  <i class="fa-solid fa-bus-simple text-emerald-600 dark:text-emerald-400"></i>
+                  西鐵巴士 / 電車 / JR在來線
+                </div>
+                <div class="text-slate-600 dark:text-slate-300 leading-relaxed space-y-1 whitespace-pre-line">${data.paymentWeapon.bus || data.paymentWeapon.charterPay || "iPhone 逼交通卡，Pixel 實體 IC 卡 (無卡則公車抽整理券投現、電車售票機投現購票)"}</div>
+              </div>
             </div>
-          </div>
-          
-          <!-- Taxi Automatic Door Manner Card -->
-          <div class="p-2.5 bg-amber-50/80 dark:bg-amber-950/30 border border-amber-200/80 dark:border-amber-900/50 rounded-xl text-amber-950 dark:text-amber-200 flex items-start gap-2 text-xs leading-relaxed">
-            <i class="fa-solid fa-door-open text-amber-600 dark:text-amber-400 mt-0.5 shrink-0 text-sm"></i>
-            <div>
-              <span class="font-bold block text-amber-900 dark:text-amber-300">乘車禮儀防呆提醒（自動門）：</span>
-              日本計程車的後車門為司機控制的全自動門。上下車時請絕對不要自己動手拉車門（強行拉扯會損壞機械結構並造成司機困擾）。請站在門邊等門自動打開即可上車；下車時直接離開，司機會自動將門關上。
+            
+            <!-- Taxi Automatic Door Manner Card -->
+            <div class="p-2.5 bg-amber-50/80 dark:bg-amber-950/30 border border-amber-200/80 dark:border-amber-900/50 rounded-xl text-amber-950 dark:text-amber-200 flex items-start gap-2 text-xs leading-relaxed">
+              <i class="fa-solid fa-door-open text-amber-600 dark:text-amber-400 mt-0.5 shrink-0 text-sm"></i>
+              <div>
+                <span class="font-bold block text-amber-900 dark:text-amber-300">乘車禮儀防呆提醒（自動門）：</span>
+                日本計程車的後車門為司機控制的全自動門。上下車時請絕對不要自己動手拉車門（強行拉扯會損壞機械結構並造成司機困擾）。請站在門邊等門自動打開即可上車；下車時直接離開，司機會自動將門關上。
+              </div>
             </div>
           </div>
         </div>
@@ -1725,28 +1947,33 @@
     function decorateInlineElements(text) {
       if (!text) return '';
       return text
-        // Distinct color badge for OPTIONS (Amber / Golden Orange), separate from subway platform badges
-        .replace(/(【(?:選項|方案|補考選擇)[^】]+】)/g, '<span class="font-bold text-amber-900 dark:text-amber-200 bg-amber-100 dark:bg-amber-950/80 px-2 py-0.5 rounded-lg border border-amber-300 dark:border-amber-800 inline-block my-1 align-middle text-[12px] md:text-[13px] shadow-2xs">$1</span>')
-        // Distinct color badge for PLATFORMS (Cobalt / Blue)
-        .replace(/(【(?:第|\d|在來線)[^】]*?月台】)/g, '<span class="font-bold text-blue-900 dark:text-blue-200 bg-blue-100 dark:bg-blue-950/80 px-2 py-0.5 rounded-lg border border-blue-300 dark:border-blue-800 inline-block my-0.5 align-middle text-[12px] md:text-[13px]">$1</span>')
-        // Other brackets
+        // Distinct color badge for OPTIONS / CHOICES (Amber / Golden Orange)
+        .replace(/(【(?:選項|方案|補考選擇|去程首選|去程備案|第一段|第二段)[^】]+】)/g, '<span class="font-bold text-amber-900 dark:text-amber-200 bg-amber-100 dark:bg-amber-950/80 px-2 py-0.5 rounded-lg border border-amber-300 dark:border-amber-800 inline-block my-1 align-middle text-[12px] md:text-[13px] shadow-2xs">$1</span>')
+        // Distinct color badge for PLATFORMS & SCREENS (Cobalt / Cyan / Blue)
+        .replace(/(【(?:第|\d|在來線)[^】]*?月台】|第\s*\d+\s*(?:或\s*第?\s*\d+)?\s*月台)/g, '<span class="font-bold text-blue-900 dark:text-blue-200 bg-blue-100 dark:bg-blue-950/80 px-2 py-0.5 rounded-lg border border-blue-300 dark:border-blue-800 inline-block my-0.5 align-middle text-[12px] md:text-[13px]">$1</span>')
+        // Distinct color badge for ROUTE PATHS & STATIONS (Rose / Violet Gradient Pill)
+        .replace(/(「往\s*[^」]+」|「旅人\s*[^」]+」|往\s*[^\s,，。]+方向)/g, '<span class="font-semibold text-purple-900 dark:text-purple-200 bg-purple-100 dark:bg-purple-950/80 px-2 py-0.5 rounded-md border border-purple-200 dark:border-purple-800 inline-block my-0.5 text-[12px] md:text-[13px]">$1</span>')
+        // Important Stations & Stops in quotes or brackets
+        .replace(/(「[^」]+(?:站|線|機場|航廈|出口|改札口|口)」)/g, '<span class="font-semibold text-sky-800 dark:text-sky-300 bg-sky-50 dark:bg-sky-950/60 px-1.5 py-0.2 rounded border border-sky-200 dark:border-sky-800 inline-block text-[12px] md:text-[13px]">$1</span>')
+        // Other general bold brackets
         .replace(/(【[^】]+】)/g, '<span class="font-bold text-indigo-900 dark:text-indigo-200 bg-indigo-100 dark:bg-indigo-950/80 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-800 inline-block my-0.5 align-middle text-[12px] md:text-[13px]">$1</span>')
-        // Colored transfer arrow
+        // Colored transfer arrows with high contrast background
         .replace(/\s*(?:➔|->|→)\s*/g, ' <span class="font-bold text-blue-600 dark:text-blue-400 text-sm md:text-base px-1">➔</span> ')
-        // Step numbered dots
-        .replace(/(?:^|\s)([1-5])[\.、]\s*/g, ' <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-blue-600 text-white font-bold text-[11px] mx-1 align-middle">$1</span> ')
-        // Payment & fee badges (Emerald)
-        .replace(/(\([^)]*?(?:車資|日圓|円|封頂|逼卡|刷卡|投現)[^)]*?\))/g, '<span class="font-medium text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-800 inline-block my-0.5 align-middle text-[12px] md:text-[13px]">$1</span>');
+        // Step numbered dots (1. 2. 3. 4. 5.)
+        .replace(/(?:^|\s)([1-5])[\.、]\s*/g, ' <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-600 text-white font-bold text-[11px] mx-1 align-middle shadow-2xs">$1</span> ')
+        // Sub-bullets
+        .replace(/(?:^|\n)\s*[•\-]\s*/g, '<span class="inline-block w-1.5 h-1.5 rounded-full bg-amber-500 mr-1.5 align-middle"></span>')
+        // Payment & fee badges (Emerald highlight)
+        .replace(/(\([^)]*?(?:車資|日圓|円|封頂|逼卡|刷卡|投現|iPhone|Pixel)[^)]*?\)|（[^）]*?(?:車資|日圓|円|封頂|逼卡|刷卡|投現|iPhone|Pixel)[^）]*?）)/g, '<span class="font-medium text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/70 px-2 py-0.5 rounded border border-emerald-300 dark:border-emerald-800 inline-block my-0.5 align-middle text-[12px] md:text-[13px]">$1</span>');
     }
 
     function formatTransferSteps(transferText) {
       if (!transferText) return '';
 
-      // Split paragraphs by double newline or distinct options to avoid cramming
       const paragraphs = transferText.split(/\n\s*\n/).filter(p => p.trim());
       
       const formattedHtml = paragraphs.map(p => {
-        const isChoiceBlock = p.includes('【選項') || p.includes('【方案') || p.includes('【機場動線') || p.includes('【機場固定');
+        const isChoiceBlock = p.includes('【選項') || p.includes('【方案') || p.includes('【機場動線') || p.includes('【第一段') || p.includes('【第二段');
         const lines = p.split('\n').filter(l => l.trim());
         
         return `
@@ -1837,24 +2064,36 @@
         const theme = dayPalettes[sIdx % dayPalettes.length];
         return `
           <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xs overflow-hidden transition-all duration-200">
-            <!-- Stage Header -->
-            <div class="px-4 md:px-5 py-3 ${theme.bg} border-b ${theme.border} flex flex-wrap items-center justify-between gap-2">
-              <div class="flex items-center gap-2.5">
-                <span class="w-7 h-7 md:w-8 md:h-8 rounded-lg ${theme.iconBg} flex items-center justify-center text-xs md:text-sm font-semibold shadow-2xs">
+            <!-- Collapsible Stage Header -->
+            <button onclick="toggleStageAccordion('stage-content-${sIdx}', 'stage-icon-${sIdx}', 'stage-hint-${sIdx}')"
+                    class="w-full px-4 md:px-5 py-3.5 ${theme.bg} border-b ${theme.border} flex flex-wrap items-center justify-between gap-2 text-left focus:outline-none transition-colors">
+              <div class="flex items-center gap-2.5 min-w-0">
+                <span class="w-7 h-7 md:w-8 md:h-8 rounded-lg ${theme.iconBg} flex items-center justify-center text-xs md:text-sm font-semibold shadow-2xs shrink-0">
                   <i class="fa-solid ${stage.icon || 'fa-location-dot'}"></i>
                 </span>
-                <div>
-                  <h3 class="font-bold ${theme.titleColor} text-sm md:text-base tracking-tight">${stage.title}</h3>
-                  <span class="text-[11px] md:text-xs text-slate-500 dark:text-slate-300 font-medium"><i class="fa-regular fa-clock mr-1 text-slate-400 dark:text-slate-400"></i>${stage.time}</span>
+                <div class="min-w-0">
+                  <h3 class="font-bold ${theme.titleColor} text-sm md:text-base tracking-tight truncate">${stage.title}</h3>
+                  <span class="text-[11px] md:text-xs text-slate-500 dark:text-slate-300 font-medium flex items-center gap-1.5">
+                    <i class="fa-regular fa-clock text-slate-400"></i>${stage.time}
+                    <span>•</span>
+                    <span>共 ${stage.items.length} 站點</span>
+                  </span>
                 </div>
               </div>
-              <span class="text-[10px] md:text-[11px] font-semibold px-2 py-0.5 rounded-full border ${theme.badge}">
-                STAGE 0${sIdx + 1}
-              </span>
-            </div>
+              
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="text-[10px] md:text-[11px] font-semibold px-2 py-0.5 rounded-full border ${theme.badge}">
+                  STAGE 0${sIdx + 1}
+                </span>
+                <span id="stage-hint-${sIdx}" class="text-[10px] font-medium text-slate-600 dark:text-slate-300 bg-white/70 dark:bg-slate-800 px-2 py-0.5 rounded-full border border-slate-200 dark:border-slate-700">
+                  點擊展開
+                </span>
+                <i id="stage-icon-${sIdx}" class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300"></i>
+              </div>
+            </button>
 
-            <!-- Stage Items List -->
-            <div class="p-3.5 md:p-5 space-y-3.5 divide-y divide-slate-100 dark:divide-slate-800">
+            <!-- Stage Items List (Hidden by Default) -->
+            <div id="stage-content-${sIdx}" class="hidden p-3.5 md:p-5 space-y-3.5 divide-y divide-slate-100 dark:divide-slate-800">
               ${stage.items.map((item, iIdx) => {
                 const mapLink = gmapUrl(item.mapQuery || item.name);
                 return `
@@ -1880,7 +2119,7 @@
                       </a>
                     </div>
 
-                    <!-- Transit / Transfer Instruction Box -->
+                    <!-- Transit / Transfer Instruction Box with line breaks -->
                     <div class="bg-slate-50/80 dark:bg-slate-800/50 p-3 md:p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 space-y-1.5 shadow-2xs">
                       <div class="flex items-center justify-between border-b border-slate-200/70 dark:border-slate-700/70 pb-1.5">
                         <div class="flex items-center gap-1.5">
@@ -1896,7 +2135,7 @@
                       ${formatTransferSteps(item.transfer)}
                     </div>
 
-                    <!-- Key Tips and Anti-Mistake Alert -->
+                    <!-- Key Tips and Anti-Mistake Alert with comfortable line breaks -->
                     ${item.tips ? `
                       <div class="flex items-start gap-2 pt-2 border-t border-amber-200 dark:border-amber-900/60 bg-amber-50/70 dark:bg-amber-950/30 p-3 rounded-xl text-amber-950 dark:text-amber-200 shadow-2xs">
                         <span class="mt-0.5 text-amber-600 dark:text-amber-400 text-sm md:text-base flex-shrink-0"><i class="fa-solid fa-triangle-exclamation"></i></span>
@@ -1906,7 +2145,7 @@
                             <span class="text-[10px] font-semibold px-1.5 py-0.2 rounded-full bg-amber-200/80 dark:bg-amber-900/60 text-amber-900 dark:text-amber-200">必看核對</span>
                           </strong>
                           ${item.tips.split('\n\n').map(para => `
-                            <p class="text-[13px] md:text-sm font-normal text-slate-800 dark:text-slate-200 leading-relaxed">${para}</p>
+                            <p class="text-[13px] md:text-sm font-normal text-slate-800 dark:text-slate-200 leading-relaxed">${decorateInlineElements(para)}</p>
                           `).join('')}
                         </div>
                       </div>
@@ -1979,7 +2218,7 @@
       }).join('');
     }
 
-    // Text-to-Speech audio speech synthesis helper
+    /* Text-to-Speech audio speech synthesis helper */
     function playSpeech(text, lang = 'ja-JP') {
       if (!('speechSynthesis' in window)) {
         console.warn('Speech synthesis not supported in this browser.');
@@ -2210,7 +2449,6 @@
       }
     }
 
-    // Touch Swipe Gesture for Switching Days on Mobile
     function initSwipeGestures() {
       const mainEl = document.querySelector('main');
       if (!mainEl) return;
