@@ -53,7 +53,7 @@
 </head>
 <body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 antialiased min-h-screen flex flex-col font-sans selection:bg-blue-100 selection:text-blue-900 transition-colors duration-200">
 
-  <header class="sticky top-0 z-50 glass-nav border-b border-slate-200/80 shadow-xs">
+  <header class="sticky top-0 z-50 glass-nav border-b border-slate-200/80 dark:border-slate-800 shadow-xs">
     <div class="max-w-6xl mx-auto px-4 py-2.5 space-y-2">
       <!-- Row 1: Brand title & Compact Action Buttons -->
       <div class="flex items-center justify-between gap-2">
@@ -81,6 +81,7 @@
           </a>
 
           <button onclick="openAddToHomeModal()" 
+                  type="button"
                   class="w-8 h-8 rounded-xl flex items-center justify-center bg-blue-50 hover:bg-blue-100 dark:bg-blue-950/70 dark:hover:bg-blue-900/80 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 transition-all shadow-2xs active:scale-95"
                   title="將手冊加入手機主畫面捷徑"
                   aria-label="加入手機主畫面捷徑">
@@ -88,12 +89,13 @@
           </button>
 
           <button onclick="toggleDarkMode()" 
+                  type="button"
                   id="theme-toggle-btn"
                   class="w-8 h-8 rounded-xl flex items-center justify-center bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-amber-400 border border-slate-200 dark:border-slate-700 transition-all shadow-2xs active:scale-95"
                   title="切換暗黑 / 明亮模式"
                   aria-label="切換主題模式">
-            <i id="theme-moon-icon" class="fa-solid fa-gear text-xs"></i>
-            <i id="theme-sun-icon" class="fa-solid fa-gear text-xs hidden"></i>
+            <i id="theme-moon-icon" class="fa-solid fa-moon text-xs"></i>
+            <i id="theme-sun-icon" class="fa-solid fa-sun text-xs hidden"></i>
           </button>
         </div>
       </div>
@@ -110,7 +112,7 @@
         </div>
       </div>
 
-      <!-- Row 3: Flight and Hotel Integrated Row (Icon buttons triggering modals) -->
+      <!-- Row 3: Flight and Hotel Integrated Row (Modals) -->
       <div class="grid grid-cols-2 gap-2 text-xs">
         <button onclick="openFlightModal()" 
                 type="button"
@@ -162,9 +164,9 @@
       <!-- Dynamic Banner Content Loaded via JS -->
     </div>
 
-    <!-- Payment & Budget Guide Row (Collapsible) -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="budget-payment-cards">
-      <!-- Dynamic Cost and Payment Cards Loaded via JS -->
+    <!-- Payment & Budget Guide Row (Single-row Buttons triggering Modals) -->
+    <div class="grid grid-cols-2 gap-2" id="budget-payment-cards">
+      <!-- Dynamic Cost and Payment Buttons Loaded via JS -->
     </div>
 
     <!-- Controls for Expanding / Collapsing All Stages -->
@@ -173,10 +175,10 @@
         <i class="fa-solid fa-timeline text-blue-600"></i> 當日行程階段 (點擊可個別折疊)
       </span>
       <div class="flex items-center gap-2">
-        <button onclick="toggleAllStages(true)" class="px-2.5 py-1 rounded-lg bg-slate-200/80 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium transition-all active:scale-95 shadow-2xs">
+        <button onclick="toggleAllStages(true)" type="button" class="px-2.5 py-1 rounded-lg bg-slate-200/80 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium transition-all active:scale-95 shadow-2xs">
           <i class="fa-solid fa-angles-down text-[10px] mr-1"></i>全部展開
         </button>
-        <button onclick="toggleAllStages(false)" class="px-2.5 py-1 rounded-lg bg-slate-200/80 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium transition-all active:scale-95 shadow-2xs">
+        <button onclick="toggleAllStages(false)" type="button" class="px-2.5 py-1 rounded-lg bg-slate-200/80 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium transition-all active:scale-95 shadow-2xs">
           <i class="fa-solid fa-angles-up text-[10px] mr-1"></i>全部收合
         </button>
       </div>
@@ -187,11 +189,87 @@
       <!-- Timeline cards inserted dynamically -->
     </div>
 
-    <!-- Daily Special Tips & Logistics Modal / Card -->
+    <!-- Daily Special Tips & Logistics Card -->
     <div id="extra-notes-container" class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-xs">
       <!-- Extra Notes Content -->
     </div>
   </main>
+
+  <!-- Budget Detail Modal Dialog -->
+  <div id="budget-modal" class="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 hidden">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full max-h-[85vh] flex flex-col border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden">
+      <!-- Fixed Modal Header -->
+      <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-4 py-3 shrink-0 bg-white/95 dark:bg-slate-900/95">
+        <div class="flex items-center gap-2">
+          <span class="w-7 h-7 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center text-xs shrink-0 shadow-2xs">
+            <i class="fa-solid fa-wallet"></i>
+          </span>
+          <div>
+            <h3 class="font-bold text-slate-900 dark:text-white text-sm sm:text-base leading-tight" id="budget-modal-title">本日預估總費用</h3>
+            <span class="text-[10px] text-amber-600 dark:text-amber-400 font-medium" id="budget-modal-subtitle">費用明細預估</span>
+          </div>
+        </div>
+        <button onclick="closeBudgetModal()" 
+                type="button"
+                aria-label="關閉視窗"
+                class="w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 flex items-center justify-center transition-colors">
+          <i class="fa-solid fa-xmark text-base"></i>
+        </button>
+      </div>
+
+      <!-- Scrollable Modal Content -->
+      <div class="overflow-y-auto px-4 py-4 space-y-3 tab-scrollbar flex-1 text-slate-800 dark:text-slate-200 text-xs sm:text-sm" id="budget-modal-body">
+        <!-- Injected dynamically -->
+      </div>
+
+      <!-- Fixed Footer -->
+      <div class="border-t border-slate-100 dark:border-slate-800 p-3 bg-slate-50/90 dark:bg-slate-900/90 shrink-0">
+        <button onclick="closeBudgetModal()" 
+                type="button"
+                class="w-full py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs sm:text-sm transition-colors shadow-xs active:scale-[0.99]">
+          確認關閉
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment Weapon Modal Dialog -->
+  <div id="payment-modal" class="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 hidden">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full max-h-[90vh] flex flex-col border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden">
+      <!-- Fixed Modal Header -->
+      <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-4 py-3 shrink-0 bg-white/95 dark:bg-slate-900/95">
+        <div class="flex items-center gap-2">
+          <span class="w-7 h-7 rounded-lg bg-blue-600/10 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xs shrink-0 shadow-2xs">
+            <i class="fa-solid fa-credit-card"></i>
+          </span>
+          <div>
+            <h3 class="font-bold text-slate-900 dark:text-white text-sm sm:text-base leading-tight">全九州交通支付通用黃金法則</h3>
+            <span class="text-[10px] text-blue-600 dark:text-blue-400 font-medium">地下鐵封頂 640円 ＆ 交通IC卡防呆</span>
+          </div>
+        </div>
+        <button onclick="closePaymentModal()" 
+                type="button"
+                aria-label="關閉視窗"
+                class="w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 flex items-center justify-center transition-colors">
+          <i class="fa-solid fa-xmark text-base"></i>
+        </button>
+      </div>
+
+      <!-- Scrollable Modal Content -->
+      <div class="overflow-y-auto px-4 py-4 space-y-3.5 tab-scrollbar flex-1 text-slate-800 dark:text-slate-200 text-xs sm:text-sm" id="payment-modal-body">
+        <!-- Injected dynamically -->
+      </div>
+
+      <!-- Fixed Footer -->
+      <div class="border-t border-slate-100 dark:border-slate-800 p-3 bg-slate-50/90 dark:bg-slate-900/90 shrink-0">
+        <button onclick="closePaymentModal()" 
+                type="button"
+                class="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm transition-colors shadow-xs active:scale-[0.99]">
+          確認關閉
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- Flight Modal Dialog -->
   <div id="flight-modal" class="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 hidden">
@@ -627,7 +705,7 @@
           <i class="fa-solid fa-mobile-screen text-blue-600"></i>
           加入手機主畫面捷徑
         </h3>
-        <button onclick="closeAddToHomeModal()" class="w-7 h-7 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 flex items-center justify-center">
+        <button onclick="closeAddToHomeModal()" type="button" class="w-7 h-7 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 flex items-center justify-center">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
@@ -658,7 +736,7 @@
         </div>
       </div>
 
-      <button onclick="closeAddToHomeModal()" class="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs md:text-sm shadow-xs transition-colors">
+      <button onclick="closeAddToHomeModal()" type="button" class="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs md:text-sm shadow-xs transition-colors">
         我知道了
       </button>
     </div>
@@ -684,34 +762,203 @@
       return `https://www.google.com/maps/search/?api=1&query=${q}`;
     }
 
-    /* Accordion Toggle Helpers */
-    function toggleSectionAccordion(contentId, iconId, hintId) {
-      const content = document.getElementById(contentId);
-      const icon = document.getElementById(iconId);
-      const hint = document.getElementById(hintId);
+    /* Modal Controllers (Defined on window for reliable inline HTML access) */
+    window.openBudgetModal = function() {
+      const currentData = ITINERARY_DATA[currentDayIndex];
+      if (!currentData || !currentData.budget) return;
 
-      if (!content || !icon) return;
+      const titleEl = document.getElementById('budget-modal-title');
+      const subEl = document.getElementById('budget-modal-subtitle');
+      const bodyEl = document.getElementById('budget-modal-body');
 
-      const isExpanded = !content.classList.contains('hidden');
+      const isAppx = currentData.day === 'appendix';
+      titleEl.textContent = isAppx ? '【附錄特典】費用說明' : `Day ${currentData.day} (${currentData.date}) 預估總費用`;
+      subEl.textContent = isAppx ? '自由消費備案' : '單人整日不含餐飲基本開銷';
 
-      if (isExpanded) {
-        content.classList.add('hidden');
-        icon.classList.remove('rotate-180');
-        if (hint) hint.textContent = '點擊展開';
-      } else {
-        content.classList.remove('hidden');
-        icon.classList.add('rotate-180');
-        if (hint) hint.textContent = '點擊收合';
+      bodyEl.innerHTML = `
+        <div class="p-3.5 rounded-xl bg-amber-50/80 dark:bg-slate-800/90 border border-amber-200/80 dark:border-slate-700 space-y-2.5">
+          <div class="flex items-center justify-between border-b border-amber-200/60 dark:border-slate-700 pb-2">
+            <span class="font-bold text-amber-950 dark:text-amber-300 text-xs sm:text-sm flex items-center gap-1.5">
+              <i class="fa-solid fa-coins text-amber-600 dark:text-amber-400"></i>
+              基本開銷統計
+            </span>
+            <span class="text-xs font-mono font-bold text-amber-700 dark:text-amber-300 bg-white dark:bg-slate-900 px-2 py-0.5 rounded-full border border-amber-200 dark:border-slate-700">
+              ${currentData.budget.baseCost}
+            </span>
+          </div>
+
+          <div class="space-y-2 text-xs sm:text-sm">
+            <div class="flex justify-between items-start gap-2">
+              <span class="text-slate-500 dark:text-slate-400 shrink-0 font-medium">交通預估：</span>
+              <span class="font-semibold text-slate-900 dark:text-white text-right leading-snug">${currentData.budget.transport}</span>
+            </div>
+            <div class="flex justify-between items-start gap-2">
+              <span class="text-slate-500 dark:text-slate-400 shrink-0 font-medium">門票支出：</span>
+              <span class="font-semibold text-slate-900 dark:text-white text-right leading-snug">${currentData.budget.tickets}</span>
+            </div>
+            ${currentData.budget.charter ? `
+            <div class="flex justify-between items-start gap-2 text-emerald-700 dark:text-emerald-400 font-medium">
+              <span class="shrink-0 font-medium">專屬包車：</span>
+              <span class="font-semibold text-right leading-snug">${currentData.budget.charter}</span>
+            </div>` : ''}
+          </div>
+        </div>
+
+        <div class="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200/70 dark:border-slate-700 space-y-1">
+          <span class="font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5 text-xs">
+            <i class="fa-solid fa-circle-info text-blue-500"></i> 預算防呆提醒
+          </span>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            以上金額為基本交通與門票預估。市區地下鐵刷同一張信用卡滿 640 日圓後當日後續搭乘全部自動免收！
+          </p>
+        </div>
+      `;
+
+      const modal = document.getElementById('budget-modal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
       }
-    }
+    };
 
-    function toggleStageAccordion(stageId, iconId, hintId) {
+    window.closeBudgetModal = function() {
+      const modal = document.getElementById('budget-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+      }
+    };
+
+    window.openPaymentModal = function() {
+      const currentData = ITINERARY_DATA[currentDayIndex];
+      if (!currentData || !currentData.paymentWeapon) return;
+
+      const bodyEl = document.getElementById('payment-modal-body');
+      bodyEl.innerHTML = `
+        <div class="space-y-3">
+          <!-- Subway Strategy -->
+          <div class="p-3.5 bg-blue-50/80 dark:bg-blue-950/40 border-2 border-blue-200 dark:border-blue-900/60 rounded-xl space-y-1.5">
+            <div class="font-bold text-blue-950 dark:text-blue-300 flex items-center justify-between text-xs sm:text-sm">
+              <span class="flex items-center gap-1.5">
+                <i class="fa-solid fa-train-subway text-blue-600 dark:text-blue-400"></i>
+                地下鐵系統 (七隈線/空港線/箱崎線)
+              </span>
+              <span class="text-[10px] font-semibold bg-blue-200/70 dark:bg-blue-900/80 text-blue-900 dark:text-blue-200 px-2 py-0.5 rounded-full">
+                全體刷感應信用卡
+              </span>
+            </div>
+            <div class="text-slate-700 dark:text-slate-300 text-xs sm:text-sm leading-relaxed whitespace-pre-line">${currentData.paymentWeapon.subway}</div>
+          </div>
+
+          <!-- Bus & JR Strategy -->
+          <div class="p-3.5 bg-emerald-50/80 dark:bg-emerald-950/40 border-2 border-emerald-200 dark:border-emerald-900/60 rounded-xl space-y-1.5">
+            <div class="font-bold text-emerald-950 dark:text-emerald-300 flex items-center justify-between text-xs sm:text-sm">
+              <span class="flex items-center gap-1.5">
+                <i class="fa-solid fa-bus-simple text-emerald-600 dark:text-emerald-400"></i>
+                西鐵巴士 / 西鐵電車 / JR在來線
+              </span>
+              <span class="text-[10px] font-semibold bg-emerald-200/70 dark:bg-emerald-900/80 text-emerald-900 dark:text-emerald-200 px-2 py-0.5 rounded-full">
+                全體刷交通 IC 卡
+              </span>
+            </div>
+            <div class="text-slate-700 dark:text-slate-300 text-xs sm:text-sm leading-relaxed whitespace-pre-line">${currentData.paymentWeapon.bus || currentData.paymentWeapon.charterPay || "iPhone 逼交通卡，Pixel 實體 IC 卡 (無卡則公車抽整理券投現、電車售票機投現購票)"}</div>
+          </div>
+
+          ${currentData.paymentWeapon.shinkansen ? `
+          <div class="p-3 bg-purple-50/80 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-900/60 rounded-xl space-y-1">
+            <div class="font-bold text-purple-950 dark:text-purple-300 flex items-center gap-1.5 text-xs sm:text-sm">
+              <i class="fa-solid fa-bolt text-purple-600"></i>
+              新幹線外國人專屬票 (博多 ⇄ 小倉)
+            </div>
+            <div class="text-slate-700 dark:text-slate-300 text-xs leading-relaxed whitespace-pre-line">${currentData.paymentWeapon.shinkansen}</div>
+          </div>` : ''}
+
+          ${currentData.paymentWeapon.yufuinNoMori ? `
+          <div class="p-3 bg-emerald-100/70 dark:bg-emerald-950/50 border border-emerald-300 dark:border-emerald-800 rounded-xl space-y-1">
+            <div class="font-bold text-emerald-950 dark:text-emerald-300 flex items-center gap-1.5 text-xs sm:text-sm">
+              <i class="fa-solid fa-tree text-emerald-600"></i>
+              特急由布院之森專屬車票
+            </div>
+            <div class="text-slate-700 dark:text-slate-300 text-xs leading-relaxed whitespace-pre-line">${currentData.paymentWeapon.yufuinNoMori}</div>
+          </div>` : ''}
+
+          <!-- Taxi Automatic Door Manner Card -->
+          <div class="p-3 bg-amber-50/80 dark:bg-amber-950/30 border border-amber-200/80 dark:border-amber-900/50 rounded-xl text-amber-950 dark:text-amber-200 flex items-start gap-2 text-xs leading-relaxed">
+            <i class="fa-solid fa-door-open text-amber-600 dark:text-amber-400 mt-0.5 shrink-0 text-sm"></i>
+            <div>
+              <span class="font-bold block text-amber-900 dark:text-amber-300">乘車禮儀防呆提醒（自動門）：</span>
+              日本計程車的後車門為司機控制的全自動門。上下車時請絕對不要自己動手拉車門（強行拉扯會損壞機械結構並造成司機困擾）。請站在門邊等門自動打開即可上車；下車時直接離開，司機會自動將門關上。
+            </div>
+          </div>
+        </div>
+      `;
+
+      const modal = document.getElementById('payment-modal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
+      }
+    };
+
+    window.closePaymentModal = function() {
+      const modal = document.getElementById('payment-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+      }
+    };
+
+    /* Flight Modal Controls */
+    window.openFlightModal = function() {
+      const modal = document.getElementById('flight-modal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
+      }
+    };
+
+    window.closeFlightModal = function() {
+      const modal = document.getElementById('flight-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+      }
+    };
+
+    /* Hotel Modal Controls */
+    window.openHotelModal = function() {
+      const modal = document.getElementById('hotel-modal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
+      }
+    };
+
+    window.closeHotelModal = function() {
+      const modal = document.getElementById('hotel-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+      }
+    };
+
+    window.openAddToHomeModal = function() {
+      const modal = document.getElementById('pwa-modal');
+      if (modal) modal.classList.remove('hidden');
+    };
+
+    window.closeAddToHomeModal = function() {
+      const modal = document.getElementById('pwa-modal');
+      if (modal) modal.classList.add('hidden');
+    };
+
+    /* Accordion Toggle Helpers */
+    window.toggleStageAccordion = function(stageId, iconId, hintId) {
       const content = document.getElementById(stageId);
       const icon = document.getElementById(iconId);
       const hint = document.getElementById(hintId);
 
       if (!content || !icon) return;
-
       const isExpanded = !content.classList.contains('hidden');
 
       if (isExpanded) {
@@ -723,9 +970,9 @@
         icon.classList.add('rotate-180');
         if (hint) hint.textContent = '點擊收合';
       }
-    }
+    };
 
-    function toggleAllStages(expand = true) {
+    window.toggleAllStages = function(expand = true) {
       const currentData = ITINERARY_DATA[currentDayIndex];
       if (!currentData || !currentData.stages) return;
 
@@ -746,7 +993,7 @@
           }
         }
       });
-    }
+    };
 
     const ITINERARY_DATA = [
       {
@@ -2131,7 +2378,7 @@
       const currentData = ITINERARY_DATA[currentDayIndex];
       renderDayTabs();
       renderDayBanner(currentData);
-      renderBudgetAndPayment(currentData);
+      renderBudgetAndPaymentButtons(currentData);
       renderTimeline(currentData);
       renderExtraNotes(currentData);
     }
@@ -2143,6 +2390,7 @@
         const isAppendix = d.day === 'appendix';
         return `
           <button onclick="switchDay(${index})" 
+                  type="button"
                   class="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-medium text-xs md:text-sm transition-all duration-200 select-none ${
                     isActive 
                       ? (isAppendix ? 'bg-amber-600 text-white shadow-sm ring-2 ring-amber-400/50 font-semibold' : 'bg-blue-600 text-white shadow-sm ring-2 ring-blue-400/40 font-semibold')
@@ -2186,138 +2434,68 @@
       `;
     }
 
-    function renderBudgetAndPayment(data) {
+    function renderBudgetAndPaymentButtons(data) {
       const container = document.getElementById('budget-payment-cards');
       
-      const budgetHtml = `
-        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xs overflow-hidden transition-all duration-200">
-          <button onclick="toggleSectionAccordion('budget-content', 'budget-icon', 'budget-hint')" 
-                  class="w-full flex items-center justify-between p-3.5 md:p-4 text-left hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors focus:outline-none">
-            <div class="flex items-center gap-2 min-w-0">
-              <span class="w-6 h-6 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0 text-xs">
-                <i class="fa-solid fa-wallet"></i>
-              </span>
-              <div class="min-w-0">
-                <span class="font-bold text-slate-900 dark:text-white text-xs md:text-sm block truncate">本日費用預估</span>
-                <span class="text-[10px] text-slate-500 font-mono">${data.budget.baseCost}</span>
-              </div>
-            </div>
-            <div class="flex items-center gap-1.5 shrink-0">
-              <span id="budget-hint" class="text-[10px] text-amber-700 dark:text-amber-300 font-medium bg-amber-50 dark:bg-amber-950/60 px-2 py-0.5 rounded-full border border-amber-200/80 dark:border-amber-900/60">
-                點擊展開
-              </span>
-              <i id="budget-icon" class="fa-solid fa-chevron-down text-slate-400 text-[10px] transition-transform duration-300"></i>
-            </div>
-          </button>
-          
-          <div id="budget-content" class="hidden px-4 pb-4 border-t border-slate-100 dark:border-slate-800 pt-3 space-y-2 text-xs md:text-sm">
-            <div class="flex justify-between items-start text-slate-600 dark:text-slate-300 gap-2">
-              <span class="text-slate-500 dark:text-slate-400 whitespace-nowrap shrink-0">交通預估：</span>
-              <span class="font-semibold text-slate-900 dark:text-white text-right leading-snug">${data.budget.transport}</span>
-            </div>
-            <div class="flex justify-between items-start text-slate-600 dark:text-slate-300 gap-2">
-              <span class="text-slate-500 dark:text-slate-400 whitespace-nowrap shrink-0">門票支出：</span>
-              <span class="font-semibold text-slate-900 dark:text-white text-right leading-snug">${data.budget.tickets}</span>
-            </div>
-            ${data.budget.charter ? `
-            <div class="flex justify-between items-start text-emerald-700 dark:text-emerald-400 font-medium gap-2">
-              <span class="whitespace-nowrap shrink-0">包車平攤：</span>
-              <span class="font-semibold text-right leading-snug">${data.budget.charter}</span>
-            </div>` : ''}
-            <div class="pt-2 border-t border-slate-100 dark:border-slate-800 flex justify-between items-baseline font-bold text-blue-700 dark:text-blue-400 text-sm md:text-base gap-2">
-              <span class="whitespace-nowrap shrink-0">單日不含餐飲：</span>
-              <span class="text-right leading-snug">${data.budget.baseCost}</span>
+      container.innerHTML = `
+        <!-- Budget Button (Col 1) -->
+        <button onclick="openBudgetModal()" 
+                type="button"
+                class="flex items-center justify-between p-3 rounded-2xl border border-amber-200/90 dark:border-amber-900/80 bg-amber-50/70 hover:bg-amber-100/80 dark:bg-slate-900 dark:hover:bg-slate-800 transition-all text-left shadow-2xs active:scale-[0.99] group">
+          <div class="flex items-center gap-2 min-w-0">
+            <span class="w-7 h-7 rounded-xl bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0 text-xs shadow-2xs group-hover:scale-105 transition-transform">
+              <i class="fa-solid fa-wallet"></i>
+            </span>
+            <div class="min-w-0">
+              <span class="font-bold text-slate-900 dark:text-white block text-xs sm:text-sm truncate">本日費用預估</span>
+              <span class="text-[10px] text-amber-700 dark:text-amber-400 font-mono font-medium block truncate">${data.budget.baseCost}</span>
             </div>
           </div>
-        </div>
-      `;
+          <span class="text-[10px] text-amber-700 dark:text-amber-300 font-bold bg-white dark:bg-slate-800 px-2 py-0.5 rounded-lg border border-amber-200/80 dark:border-slate-700 shrink-0 shadow-2xs">
+            詳情
+          </span>
+        </button>
 
-      const paymentHtml = `
-        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xs overflow-hidden md:col-span-2 transition-all duration-200">
-          <button onclick="toggleSectionAccordion('payment-content', 'payment-icon', 'payment-hint')" 
-                  class="w-full flex items-center justify-between p-3.5 md:p-4 text-left hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors focus:outline-none">
-            <div class="flex items-center gap-2 min-w-0">
-              <span class="w-6 h-6 rounded-lg bg-blue-600/10 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 text-xs">
-                <i class="fa-solid fa-credit-card"></i>
-              </span>
-              <div class="min-w-0">
-                <span class="font-bold text-slate-900 dark:text-white text-xs md:text-sm block truncate">雙武器支付防呆切換攻略</span>
-                <span class="text-[10px] text-blue-600 dark:text-blue-400 font-medium truncate block">地下鐵單日封頂 640円 ＆ 交通IC卡防呆</span>
-              </div>
-            </div>
-            <div class="flex items-center gap-1.5 shrink-0">
-              <span id="payment-hint" class="text-[10px] text-blue-700 dark:text-blue-300 font-medium bg-blue-50 dark:bg-blue-950/60 px-2 py-0.5 rounded-full border border-blue-200/80 dark:border-blue-900/60">
-                點擊展開
-              </span>
-              <i id="payment-icon" class="fa-solid fa-chevron-down text-slate-400 text-[10px] transition-transform duration-300"></i>
-            </div>
-          </button>
-
-          <div id="payment-content" class="hidden px-4 pb-4 border-t border-slate-100 dark:border-slate-800 pt-3 space-y-3 text-xs md:text-sm">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div class="p-3 bg-blue-50/70 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900/60 rounded-xl space-y-1">
-                <div class="font-bold text-blue-900 dark:text-blue-300 flex items-center gap-1.5">
-                  <i class="fa-solid fa-train-subway text-blue-600 dark:text-blue-400"></i>
-                  地下鐵系統 (七隈/空港線)
-                </div>
-                <div class="text-slate-600 dark:text-slate-300 leading-relaxed space-y-1 whitespace-pre-line">${data.paymentWeapon.subway}</div>
-              </div>
-              <div class="p-3 bg-emerald-50/70 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-900/60 rounded-xl space-y-1">
-                <div class="font-bold text-emerald-900 dark:text-emerald-300 flex items-center gap-1.5">
-                  <i class="fa-solid fa-bus-simple text-emerald-600 dark:text-emerald-400"></i>
-                  西鐵巴士 / 電車 / JR在來線
-                </div>
-                <div class="text-slate-600 dark:text-slate-300 leading-relaxed space-y-1 whitespace-pre-line">${data.paymentWeapon.bus || data.paymentWeapon.charterPay || "iPhone 逼交通卡，Pixel 實體 IC 卡 (無卡則公車抽整理券投現、電車售票機投現購票)"}</div>
-              </div>
-            </div>
-            
-            <!-- Taxi Automatic Door Manner Card -->
-            <div class="p-2.5 bg-amber-50/80 dark:bg-amber-950/30 border border-amber-200/80 dark:border-amber-900/50 rounded-xl text-amber-950 dark:text-amber-200 flex items-start gap-2 text-xs leading-relaxed">
-              <i class="fa-solid fa-door-open text-amber-600 dark:text-amber-400 mt-0.5 shrink-0 text-sm"></i>
-              <div>
-                <span class="font-bold block text-amber-900 dark:text-amber-300">乘車禮儀防呆提醒（自動門）：</span>
-                日本計程車的後車門為司機控制的全自動門。上下車時請絕對不要自己動手拉車門（強行拉扯會損壞機械結構並造成司機困擾）。請站在門邊等門自動打開即可上車；下車時直接離開，司機會自動將門關上。
-              </div>
+        <!-- Payment Strategy Button (Col 2) -->
+        <button onclick="openPaymentModal()" 
+                type="button"
+                class="flex items-center justify-between p-3 rounded-2xl border border-blue-200/90 dark:border-blue-900/80 bg-blue-50/70 hover:bg-blue-100/80 dark:bg-slate-900 dark:hover:bg-slate-800 transition-all text-left shadow-2xs active:scale-[0.99] group">
+          <div class="flex items-center gap-2 min-w-0">
+            <span class="w-7 h-7 rounded-xl bg-blue-600/15 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 text-xs shadow-2xs group-hover:scale-105 transition-transform">
+              <i class="fa-solid fa-credit-card"></i>
+            </span>
+            <div class="min-w-0">
+              <span class="font-bold text-slate-900 dark:text-white block text-xs sm:text-sm truncate">雙武器支付攻略</span>
+              <span class="text-[10px] text-blue-600 dark:text-blue-400 font-medium block truncate">地鐵封頂 640円</span>
             </div>
           </div>
-        </div>
+          <span class="text-[10px] text-blue-600 dark:text-blue-300 font-bold bg-white dark:bg-slate-800 px-2 py-0.5 rounded-lg border border-blue-200/80 dark:border-slate-700 shrink-0 shadow-2xs">
+            攻略
+          </span>
+        </button>
       `;
-
-      container.innerHTML = budgetHtml + paymentHtml;
     }
 
     function decorateInlineElements(text) {
       if (!text) return '';
       return text
-        // Distinct color badge for OPTIONS / CHOICES (Amber / Golden Orange)
-        .replace(/(【(?:選項|方案|補考選擇|去程首選|去程備案|第一段|第二段)[^】]+】)/g, '<span class="font-bold text-amber-900 dark:text-amber-200 bg-amber-100 dark:bg-amber-950/80 px-2 py-0.5 rounded-lg border border-amber-300 dark:border-amber-800 inline-block my-1 align-middle text-[12px] md:text-[13px] shadow-2xs">$1</span>')
-        // Distinct color badge for PLATFORMS & SCREENS (Cobalt / Cyan / Blue)
+        .replace(/(【(?:選項|方案|補考選擇|去程首選|去程備案|第一段|第二段|主力首選|備用動線)[^】]+】)/g, '<span class="font-bold text-amber-900 dark:text-amber-200 bg-amber-100 dark:bg-amber-950/80 px-2 py-0.5 rounded-lg border border-amber-300 dark:border-amber-800 inline-block my-1 align-middle text-[12px] md:text-[13px] shadow-2xs">$1</span>')
         .replace(/(【(?:第|\d|在來線)[^】]*?月台】|第\s*\d+\s*(?:或\s*第?\s*\d+)?\s*月台)/g, '<span class="font-bold text-blue-900 dark:text-blue-200 bg-blue-100 dark:bg-blue-950/80 px-2 py-0.5 rounded-lg border border-blue-300 dark:border-blue-800 inline-block my-0.5 align-middle text-[12px] md:text-[13px]">$1</span>')
-        // Distinct color badge for ROUTE PATHS & STATIONS (Rose / Violet Gradient Pill)
         .replace(/(「往\s*[^」]+」|「旅人\s*[^」]+」|往\s*[^\s,，。]+方向)/g, '<span class="font-semibold text-purple-900 dark:text-purple-200 bg-purple-100 dark:bg-purple-950/80 px-2 py-0.5 rounded-md border border-purple-200 dark:border-purple-800 inline-block my-0.5 text-[12px] md:text-[13px]">$1</span>')
-        // Important Stations & Stops in quotes or brackets
         .replace(/(「[^」]+(?:站|線|機場|航廈|出口|改札口|口)」)/g, '<span class="font-semibold text-sky-800 dark:text-sky-300 bg-sky-50 dark:bg-sky-950/60 px-1.5 py-0.2 rounded border border-sky-200 dark:border-sky-800 inline-block text-[12px] md:text-[13px]">$1</span>')
-        // Other general bold brackets
         .replace(/(【[^】]+】)/g, '<span class="font-bold text-indigo-900 dark:text-indigo-200 bg-indigo-100 dark:bg-indigo-950/80 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-800 inline-block my-0.5 align-middle text-[12px] md:text-[13px]">$1</span>')
-        // Colored transfer arrows with high contrast background
         .replace(/\s*(?:➔|->|→)\s*/g, ' <span class="font-bold text-blue-600 dark:text-blue-400 text-sm md:text-base px-1">➔</span> ')
-        // Step numbered dots (1. 2. 3. 4. 5.)
         .replace(/(?:^|\s)([1-5])[\.、]\s*/g, ' <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-600 text-white font-bold text-[11px] mx-1 align-middle shadow-2xs">$1</span> ')
-        // Sub-bullets
         .replace(/(?:^|\n)\s*[•\-]\s*/g, '<span class="inline-block w-1.5 h-1.5 rounded-full bg-amber-500 mr-1.5 align-middle"></span>')
-        // Payment & fee badges (Emerald highlight)
         .replace(/(\([^)]*?(?:車資|日圓|円|封頂|逼卡|刷卡|投現|iPhone|Pixel)[^)]*?\)|（[^）]*?(?:車資|日圓|円|封頂|逼卡|刷卡|投現|iPhone|Pixel)[^）]*?）)/g, '<span class="font-medium text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/70 px-2 py-0.5 rounded border border-emerald-300 dark:border-emerald-800 inline-block my-0.5 align-middle text-[12px] md:text-[13px]">$1</span>');
     }
 
     function formatTransferSteps(transferText) {
       if (!transferText) return '';
-
       const paragraphs = transferText.split(/\n\s*\n/).filter(p => p.trim());
-      
-      const formattedHtml = paragraphs.map(p => {
-        const isChoiceBlock = p.includes('【選項') || p.includes('【方案') || p.includes('【機場動線') || p.includes('【第一段') || p.includes('【第二段');
+      return paragraphs.map(p => {
+        const isChoiceBlock = p.includes('【選項') || p.includes('【方案') || p.includes('【主力首選') || p.includes('【備用動線') || p.includes('【第一段') || p.includes('【第二段');
         const lines = p.split('\n').filter(l => l.trim());
-        
         return `
           <div class="${isChoiceBlock ? 'p-3 my-2 rounded-xl bg-white/90 dark:bg-slate-800/80 border border-slate-200/90 dark:border-slate-700 shadow-2xs space-y-1.5' : 'space-y-1'}">
             ${lines.map(line => `
@@ -2328,8 +2506,6 @@
           </div>
         `;
       }).join('');
-
-      return formattedHtml;
     }
 
     const DAY_THEME_PALETTES = {
@@ -2338,62 +2514,6 @@
         { bg: "bg-blue-50 dark:bg-slate-800/90", border: "border-blue-200/80 dark:border-slate-700", iconBg: "bg-blue-600 text-white", titleColor: "text-blue-950 dark:text-white", badge: "bg-blue-100 text-blue-800 border-blue-300 dark:bg-slate-700 dark:text-blue-300 dark:border-slate-600" },
         { bg: "bg-indigo-50 dark:bg-slate-800/90", border: "border-indigo-200/80 dark:border-slate-700", iconBg: "bg-indigo-600 text-white", titleColor: "text-indigo-950 dark:text-white", badge: "bg-indigo-100 text-indigo-800 border-indigo-300 dark:bg-slate-700 dark:text-indigo-300 dark:border-slate-600" },
         { bg: "bg-cyan-50 dark:bg-slate-800/90", border: "border-cyan-200/80 dark:border-slate-700", iconBg: "bg-cyan-700 text-white", titleColor: "text-cyan-950 dark:text-white", badge: "bg-cyan-100 text-cyan-800 border-cyan-300 dark:bg-slate-700 dark:text-cyan-300 dark:border-slate-600" },
-        { bg: "bg-blue-100/70 dark:bg-slate-800/90", border: "border-blue-300/80 dark:border-slate-700", iconBg: "bg-blue-800 text-white", titleColor: "text-blue-950 dark:text-white", badge: "bg-blue-200/70 text-blue-900 border-blue-400 dark:bg-slate-700 dark:text-blue-300 dark:border-slate-600" },
-      ],
-      2: [
-        { bg: "bg-emerald-50 dark:bg-slate-800/90", border: "border-emerald-200/80 dark:border-slate-700", iconBg: "bg-emerald-600 text-white", titleColor: "text-emerald-950 dark:text-white", badge: "bg-emerald-100 text-emerald-800 border-emerald-300 dark:bg-slate-700 dark:text-emerald-300 dark:border-slate-600" },
-        { bg: "bg-teal-50 dark:bg-slate-800/90", border: "border-teal-200/80 dark:border-slate-700", iconBg: "bg-teal-600 text-white", titleColor: "text-teal-950 dark:text-white", badge: "bg-teal-100 text-teal-800 border-teal-300 dark:bg-slate-700 dark:text-teal-300 dark:border-slate-600" },
-        { bg: "bg-green-50 dark:bg-slate-800/90", border: "border-green-200/80 dark:border-slate-700", iconBg: "bg-green-600 text-white", titleColor: "text-green-950 dark:text-white", badge: "bg-green-100 text-green-800 border-green-300 dark:bg-slate-700 dark:text-green-300 dark:border-slate-600" },
-        { bg: "bg-cyan-50 dark:bg-slate-800/90", border: "border-cyan-200/80 dark:border-slate-700", iconBg: "bg-cyan-700 text-white", titleColor: "text-cyan-950 dark:text-white", badge: "bg-cyan-100 text-cyan-800 border-cyan-300 dark:bg-slate-700 dark:text-cyan-300 dark:border-slate-600" },
-        { bg: "bg-teal-100/60 dark:bg-slate-800/90", border: "border-teal-300/80 dark:border-slate-700", iconBg: "bg-teal-800 text-white", titleColor: "text-teal-950 dark:text-white", badge: "bg-teal-200/70 text-teal-900 border-teal-400 dark:bg-slate-700 dark:text-teal-300 dark:border-slate-600" },
-      ],
-      3: [
-        { bg: "bg-purple-50 dark:bg-slate-800/90", border: "border-purple-200/80 dark:border-slate-700", iconBg: "bg-purple-600 text-white", titleColor: "text-purple-950 dark:text-white", badge: "bg-purple-100 text-purple-800 border-purple-300 dark:bg-slate-700 dark:text-purple-300 dark:border-slate-600" },
-        { bg: "bg-fuchsia-50 dark:bg-slate-800/90", border: "border-fuchsia-200/80 dark:border-slate-700", iconBg: "bg-fuchsia-600 text-white", titleColor: "text-fuchsia-950 dark:text-white", badge: "bg-fuchsia-100 text-fuchsia-800 border-fuchsia-300 dark:bg-slate-700 dark:text-fuchsia-300 dark:border-slate-600" },
-        { bg: "bg-violet-50 dark:bg-slate-800/90", border: "border-violet-200/80 dark:border-slate-700", iconBg: "bg-violet-600 text-white", titleColor: "text-violet-950 dark:text-white", badge: "bg-violet-100 text-violet-800 border-violet-300 dark:bg-slate-700 dark:text-violet-300 dark:border-slate-600" },
-        { bg: "bg-pink-50 dark:bg-slate-800/90", border: "border-pink-200/80 dark:border-slate-700", iconBg: "bg-pink-600 text-white", titleColor: "text-pink-950 dark:text-white", badge: "bg-pink-100 text-pink-800 border-pink-300 dark:bg-slate-700 dark:text-pink-300 dark:border-slate-600" },
-        { bg: "bg-purple-100/60 dark:bg-slate-800/90", border: "border-purple-300/80 dark:border-slate-700", iconBg: "bg-purple-800 text-white", titleColor: "text-purple-950 dark:text-white", badge: "bg-purple-200/70 text-purple-900 border-purple-400 dark:bg-slate-700 dark:text-purple-300 dark:border-slate-600" },
-      ],
-      4: [
-        { bg: "bg-amber-50 dark:bg-slate-800/90", border: "border-amber-200/80 dark:border-slate-700", iconBg: "bg-amber-600 text-white", titleColor: "text-amber-950 dark:text-white", badge: "bg-amber-100 text-amber-800 border-amber-300 dark:bg-slate-700 dark:text-amber-300 dark:border-slate-600" },
-        { bg: "bg-orange-50 dark:bg-slate-800/90", border: "border-orange-200/80 dark:border-slate-700", iconBg: "bg-orange-600 text-white", titleColor: "text-orange-950 dark:text-white", badge: "bg-orange-100 text-orange-800 border-orange-300 dark:bg-slate-700 dark:text-orange-300 dark:border-slate-600" },
-        { bg: "bg-yellow-50 dark:bg-slate-800/90", border: "border-yellow-200/80 dark:border-slate-700", iconBg: "bg-yellow-600 text-white", titleColor: "text-yellow-950 dark:text-white", badge: "bg-yellow-100 text-yellow-800 border-yellow-300 dark:bg-slate-700 dark:text-yellow-300 dark:border-slate-600" },
-        { bg: "bg-rose-50 dark:bg-slate-800/90", border: "border-rose-200/80 dark:border-slate-700", iconBg: "bg-rose-600 text-white", titleColor: "text-rose-950 dark:text-white", badge: "bg-rose-100 text-rose-800 border-rose-300 dark:bg-slate-700 dark:text-rose-300 dark:border-slate-600" },
-        { bg: "bg-amber-100/70 dark:bg-slate-800/90", border: "border-amber-300/80 dark:border-slate-700", iconBg: "bg-amber-800 text-white", titleColor: "text-amber-950 dark:text-white", badge: "bg-amber-200/70 text-amber-900 border-amber-400 dark:bg-slate-700 dark:text-amber-300 dark:border-slate-600" },
-      ],
-      5: [
-        { bg: "bg-slate-100 dark:bg-slate-800/90", border: "border-slate-300/80 dark:border-slate-700", iconBg: "bg-slate-700 text-white", titleColor: "text-slate-950 dark:text-white", badge: "bg-slate-200 text-slate-800 border-slate-300 dark:bg-slate-700 dark:text-slate-200 dark:border-slate-600" },
-        { bg: "bg-blue-100/70 dark:bg-slate-800/90", border: "border-blue-300/80 dark:border-slate-700", iconBg: "bg-blue-800 text-white", titleColor: "text-blue-950 dark:text-white", badge: "bg-blue-200/70 text-blue-900 border-blue-300 dark:bg-slate-700 dark:text-blue-300 dark:border-slate-600" },
-        { bg: "bg-indigo-100/70 dark:bg-slate-800/90", border: "border-indigo-300/80 dark:border-slate-700", iconBg: "bg-indigo-800 text-white", titleColor: "text-indigo-950 dark:text-white", badge: "bg-indigo-200/70 text-indigo-900 border-indigo-300 dark:bg-slate-700 dark:text-indigo-300 dark:border-slate-600" },
-        { bg: "bg-sky-100/70 dark:bg-slate-800/90", border: "border-sky-300/80 dark:border-slate-700", iconBg: "bg-sky-800 text-white", titleColor: "text-sky-950 dark:text-white", badge: "bg-sky-200/70 text-sky-900 border-sky-300 dark:bg-slate-700 dark:text-sky-300 dark:border-slate-600" },
-        { bg: "bg-slate-200/70 dark:bg-slate-800/90", border: "border-slate-400/70 dark:border-slate-700", iconBg: "bg-slate-900 text-white", titleColor: "text-slate-950 dark:text-white", badge: "bg-slate-300/70 text-slate-900 border-slate-400 dark:bg-slate-700 dark:text-slate-300 dark:border-slate-600" },
-      ],
-      6: [
-        { bg: "bg-emerald-50 dark:bg-slate-800/90", border: "border-emerald-200/80 dark:border-slate-700", iconBg: "bg-emerald-700 text-white", titleColor: "text-emerald-950 dark:text-white", badge: "bg-emerald-100 text-emerald-800 border-emerald-300 dark:bg-slate-700 dark:text-emerald-300 dark:border-slate-600" },
-        { bg: "bg-green-50 dark:bg-slate-800/90", border: "border-green-200/80 dark:border-slate-700", iconBg: "bg-green-700 text-white", titleColor: "text-green-950 dark:text-white", badge: "bg-green-100 text-green-800 border-green-300 dark:bg-slate-700 dark:text-green-300 dark:border-slate-600" },
-        { bg: "bg-teal-50 dark:bg-slate-800/90", border: "border-teal-200/80 dark:border-slate-700", iconBg: "bg-teal-700 text-white", titleColor: "text-teal-950 dark:text-white", badge: "bg-teal-100 text-teal-800 border-teal-300 dark:bg-slate-700 dark:text-teal-300 dark:border-slate-600" },
-        { bg: "bg-lime-50 dark:bg-slate-800/90", border: "border-lime-200/80 dark:border-slate-700", iconBg: "bg-lime-700 text-white", titleColor: "text-lime-950 dark:text-white", badge: "bg-lime-100 text-lime-800 border-lime-300 dark:bg-slate-700 dark:text-lime-300 dark:border-slate-600" },
-        { bg: "bg-emerald-100/70 dark:bg-slate-800/90", border: "border-emerald-300/80 dark:border-slate-700", iconBg: "bg-emerald-900 text-white", titleColor: "text-emerald-950 dark:text-white", badge: "bg-emerald-200/70 text-emerald-900 border-emerald-400 dark:bg-slate-700 dark:text-emerald-300 dark:border-slate-600" },
-      ],
-      7: [
-        { bg: "bg-cyan-50 dark:bg-slate-800/90", border: "border-cyan-200/80 dark:border-slate-700", iconBg: "bg-cyan-600 text-white", titleColor: "text-cyan-950 dark:text-white", badge: "bg-cyan-100 text-cyan-800 border-cyan-300 dark:bg-slate-700 dark:text-cyan-300 dark:border-slate-600" },
-        { bg: "bg-teal-50 dark:bg-slate-800/90", border: "border-teal-200/80 dark:border-slate-700", iconBg: "bg-teal-600 text-white", titleColor: "text-teal-950 dark:text-white", badge: "bg-teal-100 text-teal-800 border-teal-300 dark:bg-slate-700 dark:text-teal-300 dark:border-slate-600" },
-        { bg: "bg-sky-50 dark:bg-slate-800/90", border: "border-sky-200/80 dark:border-slate-700", iconBg: "bg-sky-600 text-white", titleColor: "text-sky-950 dark:text-white", badge: "bg-sky-100 text-sky-800 border-sky-300 dark:bg-slate-700 dark:text-sky-300 dark:border-slate-600" },
-        { bg: "bg-cyan-100/60 dark:bg-slate-800/90", border: "border-cyan-300/80 dark:border-slate-700", iconBg: "bg-cyan-700 text-white", titleColor: "text-cyan-950 dark:text-white", badge: "bg-cyan-200/70 text-cyan-900 border-cyan-400 dark:bg-slate-700 dark:text-cyan-300 dark:border-slate-600" },
-        { bg: "bg-teal-100/70 dark:bg-slate-800/90", border: "border-teal-300/80 dark:border-slate-700", iconBg: "bg-teal-800 text-white", titleColor: "text-teal-950 dark:text-white", badge: "bg-teal-200/70 text-teal-900 border-teal-400 dark:bg-slate-700 dark:text-teal-300 dark:border-slate-600" },
-      ],
-      8: [
-        { bg: "bg-blue-50 dark:bg-slate-800/90", border: "border-blue-200/80 dark:border-slate-700", iconBg: "bg-blue-600 text-white", titleColor: "text-blue-950 dark:text-white", badge: "bg-blue-100 text-blue-800 border-blue-300 dark:bg-slate-700 dark:text-blue-300 dark:border-slate-600" },
-        { bg: "bg-indigo-50 dark:bg-slate-800/90", border: "border-indigo-200/80 dark:border-slate-700", iconBg: "bg-indigo-600 text-white", titleColor: "text-indigo-950 dark:text-white", badge: "bg-indigo-100 text-indigo-800 border-indigo-300 dark:bg-slate-700 dark:text-indigo-300 dark:border-slate-600" },
-        { bg: "bg-sky-50 dark:bg-slate-800/90", border: "border-sky-200/80 dark:border-slate-700", iconBg: "bg-sky-700 text-white", titleColor: "text-sky-950 dark:text-white", badge: "bg-sky-100 text-sky-800 border-sky-300 dark:bg-slate-700 dark:text-sky-300 dark:border-slate-600" },
-        { bg: "bg-blue-100/60 dark:bg-slate-800/90", border: "border-blue-300/80 dark:border-slate-700", iconBg: "bg-blue-700 text-white", titleColor: "text-blue-950 dark:text-white", badge: "bg-blue-200/70 text-blue-900 border-blue-400 dark:bg-slate-700 dark:text-blue-300 dark:border-slate-600" },
-        { bg: "bg-indigo-100/70 dark:bg-slate-800/90", border: "border-indigo-300/80 dark:border-slate-700", iconBg: "bg-indigo-900 text-white", titleColor: "text-indigo-950 dark:text-white", badge: "bg-indigo-200/70 text-indigo-900 border-indigo-400 dark:bg-slate-700 dark:text-indigo-300 dark:border-slate-600" },
-      ],
-      9: [
-        { bg: "bg-slate-50 dark:bg-slate-800/90", border: "border-slate-200/80 dark:border-slate-700", iconBg: "bg-slate-600 text-white", titleColor: "text-slate-950 dark:text-white", badge: "bg-slate-100 text-slate-800 border-slate-300 dark:bg-slate-700 dark:text-slate-300 dark:border-slate-600" },
-        { bg: "bg-blue-50/80 dark:bg-slate-800/90", border: "border-blue-200/80 dark:border-slate-700", iconBg: "bg-blue-600 text-white", titleColor: "text-blue-950 dark:text-white", badge: "bg-blue-100 text-blue-800 border-blue-300 dark:bg-slate-700 dark:text-blue-300 dark:border-slate-600" },
-        { bg: "bg-zinc-50 dark:bg-slate-800/90", border: "border-zinc-200/80 dark:border-slate-700", iconBg: "bg-zinc-600 text-white", titleColor: "text-zinc-950 dark:text-white", badge: "bg-zinc-100 text-zinc-800 border-zinc-300 dark:bg-slate-700 dark:text-zinc-300 dark:border-slate-600" },
-        { bg: "bg-slate-100/70 dark:bg-slate-800/90", border: "border-slate-300/80 dark:border-slate-700", iconBg: "bg-slate-700 text-white", titleColor: "text-slate-950 dark:text-white", badge: "bg-slate-200/70 text-slate-900 border-slate-300 dark:bg-slate-700 dark:text-slate-300 dark:border-slate-600" },
         { bg: "bg-blue-100/70 dark:bg-slate-800/90", border: "border-blue-300/80 dark:border-slate-700", iconBg: "bg-blue-800 text-white", titleColor: "text-blue-950 dark:text-white", badge: "bg-blue-200/70 text-blue-900 border-blue-400 dark:bg-slate-700 dark:text-blue-300 dark:border-slate-600" },
       ]
     };
@@ -2408,6 +2528,7 @@
           <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xs overflow-hidden transition-all duration-200">
             <!-- Collapsible Stage Header -->
             <button onclick="toggleStageAccordion('stage-content-${sIdx}', 'stage-icon-${sIdx}', 'stage-hint-${sIdx}')"
+                    type="button"
                     class="w-full px-4 md:px-5 py-3.5 ${theme.bg} border-b ${theme.border} flex flex-wrap items-center justify-between gap-2 text-left focus:outline-none transition-colors">
               <div class="flex items-center gap-2.5 min-w-0">
                 <span class="w-7 h-7 md:w-8 md:h-8 rounded-lg ${theme.iconBg} flex items-center justify-center text-xs md:text-sm font-semibold shadow-2xs shrink-0">
@@ -2461,7 +2582,7 @@
                       </a>
                     </div>
 
-                    <!-- Transit / Transfer Instruction Box with line breaks -->
+                    <!-- Transit / Transfer Instruction Box -->
                     <div class="bg-slate-50/80 dark:bg-slate-800/50 p-3 md:p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 space-y-1.5 shadow-2xs">
                       <div class="flex items-center justify-between border-b border-slate-200/70 dark:border-slate-700/70 pb-1.5">
                         <div class="flex items-center gap-1.5">
@@ -2477,7 +2598,7 @@
                       ${formatTransferSteps(item.transfer)}
                     </div>
 
-                    <!-- Key Tips and Anti-Mistake Alert with comfortable line breaks -->
+                    <!-- Key Tips and Anti-Mistake Alert -->
                     ${item.tips ? `
                       <div class="flex items-start gap-2 pt-2 border-t border-amber-200 dark:border-amber-900/60 bg-amber-50/70 dark:bg-amber-950/30 p-3 rounded-xl text-amber-950 dark:text-amber-200 shadow-2xs">
                         <span class="mt-0.5 text-amber-600 dark:text-amber-400 text-sm md:text-base flex-shrink-0"><i class="fa-solid fa-triangle-exclamation"></i></span>
@@ -2515,6 +2636,7 @@
                                   <span class="inline-block w-2 h-2 rounded-full bg-red-500"></span> 日文原句
                                 </span>
                                 <button onclick="playSpeech('${phrase.ja.replace(/'/g, "\\'")}', 'ja-JP')" 
+                                        type="button"
                                         class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-red-600 hover:bg-red-700 active:scale-95 text-white font-bold text-[11px] shadow-xs transition-all">
                                   <i class="fa-solid fa-volume-high animate-pulse text-[10px]"></i>
                                   <span>播放日語發音</span>
@@ -2539,6 +2661,7 @@
                                     <i class="fa-solid fa-earth-americas mr-1"></i>English
                                   </span>
                                   <button onclick="playSpeech('${phrase.en.replace(/'/g, "\\'")}', 'en-US')" 
+                                          type="button"
                                           class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-blue-100 hover:bg-blue-200 dark:bg-blue-900/60 dark:hover:bg-blue-800 active:scale-95 text-blue-800 dark:text-blue-300 font-semibold text-[10px] transition-all">
                                     <i class="fa-solid fa-volume-high text-[9px]"></i>
                                     <span>朗讀英語</span>
@@ -2560,15 +2683,12 @@
       }).join('');
     }
 
-    /* Text-to-Speech audio speech synthesis helper */
     function playSpeech(text, lang = 'ja-JP') {
       if (!('speechSynthesis' in window)) {
         console.warn('Speech synthesis not supported in this browser.');
         return;
       }
-
       window.speechSynthesis.cancel();
-
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = lang;
       utterance.rate = 0.88;
@@ -2581,7 +2701,6 @@
           utterance.voice = matchedVoice;
         }
       }
-
       window.speechSynthesis.speak(utterance);
     }
 
@@ -2618,51 +2737,6 @@
       `;
     }
 
-    function openAddToHomeModal() {
-      const modal = document.getElementById('pwa-modal');
-      if (modal) modal.classList.remove('hidden');
-    }
-
-    function closeAddToHomeModal() {
-      const modal = document.getElementById('pwa-modal');
-      if (modal) modal.classList.add('hidden');
-    }
-
-    /* Flight Modal Controls */
-    function openFlightModal() {
-      const modal = document.getElementById('flight-modal');
-      if (modal) {
-        modal.classList.remove('hidden');
-        document.body.classList.add('overflow-hidden');
-      }
-    }
-
-    function closeFlightModal() {
-      const modal = document.getElementById('flight-modal');
-      if (modal) {
-        modal.classList.add('hidden');
-        document.body.classList.remove('overflow-hidden');
-      }
-    }
-
-    /* Hotel & Taxi Driver Card Modal Controls */
-    function openHotelModal() {
-      const modal = document.getElementById('hotel-modal');
-      if (modal) {
-        modal.classList.remove('hidden');
-        document.body.classList.add('overflow-hidden');
-      }
-    }
-
-    function closeHotelModal() {
-      const modal = document.getElementById('hotel-modal');
-      if (modal) {
-        modal.classList.add('hidden');
-        document.body.classList.remove('overflow-hidden');
-      }
-    }
-
-    /* Clipboard Copy for Hotel Japanese Address */
     function copyHotelAddress() {
       const address = "〒810-0005 福岡県福岡市中央区清川1丁目14-15 BASE LAYER HOTEL FUKUOKA";
       const copyTextEl = document.getElementById('copy-text');
@@ -2685,15 +2759,18 @@
       document.body.removeChild(tempInput);
     }
 
-    /* Close Modals on Backdrop Click or Escape key */
     window.addEventListener('click', (e) => {
       const flightModal = document.getElementById('flight-modal');
       const hotelModal = document.getElementById('hotel-modal');
       const pwaModal = document.getElementById('pwa-modal');
+      const budgetModal = document.getElementById('budget-modal');
+      const paymentModal = document.getElementById('payment-modal');
 
       if (e.target === flightModal) closeFlightModal();
       if (e.target === hotelModal) closeHotelModal();
       if (e.target === pwaModal) closeAddToHomeModal();
+      if (e.target === budgetModal) closeBudgetModal();
+      if (e.target === paymentModal) closePaymentModal();
     });
 
     window.addEventListener('keydown', (e) => {
@@ -2701,6 +2778,8 @@
         closeFlightModal();
         closeHotelModal();
         closeAddToHomeModal();
+        closeBudgetModal();
+        closePaymentModal();
       }
     });
 
