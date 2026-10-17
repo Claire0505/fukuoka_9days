@@ -299,31 +299,6 @@
 
       <!-- Driver Friendly Big Card -->
       <div class="p-4 rounded-2xl bg-emerald-50/80 dark:bg-slate-800/90 border-2 border-emerald-300 dark:border-emerald-700 space-y-3">
-        <!-- Voice phrase to driver -->
-        <div class="bg-white/90 dark:bg-slate-900/90 p-3 rounded-xl border border-emerald-200 dark:border-slate-700 space-y-1.5">
-          <div class="flex items-center justify-between">
-            <span class="text-[11px] font-bold text-emerald-800 dark:text-emerald-300 flex items-center gap-1.5">
-              <i class="fa-solid fa-taxi text-emerald-600"></i>
-              計程車司機溝通卡（前往飯店）
-            </span>
-            <button onclick="playSpeech('こちらのホテル、ベースレイヤーホテル福岡までお願いします。住所は中央区清川1丁目14-15です。', 'ja-JP')" 
-                    type="button"
-                    class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold text-[11px] shadow-xs transition-all">
-              <i class="fa-solid fa-volume-high animate-pulse text-[10px]"></i>
-              <span>播放日語給司機聽</span>
-            </button>
-          </div>
-          <p class="text-base sm:text-lg font-black text-slate-950 dark:text-white leading-snug">
-            「こちらのホテル（BASE LAYER HOTEL 福岡）までお願いします。住所は中央区清川1丁目14-15です。」
-          </p>
-          <p class="text-[11px] text-slate-500 dark:text-slate-400 font-mono italic">
-            Kochira no hoteru (Bēsu Reiyā Hoteru Fukuoka) made onegai shimasu. Jūsho wa Chūō-ku Kiyokawa itchōme jūyon no jūgo desu.
-          </p>
-          <p class="text-[12px] font-medium text-emerald-800 dark:text-emerald-300 pt-0.5">
-            中文：請載我到這間飯店（BASE LAYER HOTEL 福岡），地址在中央區清川1丁目14-15，麻煩您了。
-          </p>
-        </div>
-
         <div>
           <span class="text-[11px] font-bold text-emerald-800 dark:text-emerald-300 uppercase tracking-wider block">飯店名稱 / ホテル名</span>
           <p class="text-xl sm:text-2xl font-black text-slate-950 dark:text-white leading-tight">BASE LAYER HOTEL FUKUOKA</p>
@@ -348,6 +323,66 @@
           <div class="bg-white/90 dark:bg-slate-900/80 p-2.5 rounded-xl border border-emerald-100 dark:border-slate-700">
             <span class="text-slate-500 dark:text-slate-400 block text-[10px]">近鄰地標</span>
             <span class="font-bold text-slate-800 dark:text-slate-200 text-xs">渡辺通駅・清川交差点</span>
+          </div>
+        </div>
+
+        <!-- Voice phrase to driver (Split into 2 sentences with independent playback buttons) -->
+        <div class="bg-white/90 dark:bg-slate-900/90 p-3 rounded-xl border border-emerald-200 dark:border-slate-700 space-y-2.5 mt-2">
+          <div class="flex items-center justify-between border-b border-emerald-100 dark:border-slate-700 pb-1.5">
+            <span class="text-[11px] font-bold text-emerald-800 dark:text-emerald-300 flex items-center gap-1.5">
+              <i class="fa-solid fa-taxi text-emerald-600"></i>
+              計程車司機溝通卡（前往飯店・分段語音）
+            </span>
+            <button onclick="playSpeech('こちらのホテル、ベースレイヤーホテル福岡までお願いします。住所は中央区清川1丁目14-15です。', 'ja-JP')" 
+                    type="button"
+                    class="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-[10px] transition-all">
+              <i class="fa-solid fa-play text-[9px] text-emerald-600"></i>
+              <span>連續播放全文</span>
+            </button>
+          </div>
+
+          <!-- Sentence 1 -->
+          <div class="p-2.5 rounded-lg bg-emerald-50/50 dark:bg-slate-800/60 border border-emerald-100 dark:border-slate-700 space-y-1">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-[10px] font-bold text-emerald-700 dark:text-emerald-400">第一句：指名飯店</span>
+              <button onclick="playSpeech('こちらのホテル、ベースレイヤーホテル福岡までお願いします。', 'ja-JP')" 
+                      type="button"
+                      class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold text-[11px] shadow-2xs transition-all">
+                <i class="fa-solid fa-volume-high animate-pulse text-[10px]"></i>
+                <span>播放第 1 句</span>
+              </button>
+            </div>
+            <p class="text-base sm:text-lg font-black text-slate-950 dark:text-white leading-snug">
+              「こちらのホテル（BASE LAYER HOTEL 福岡）までお願いします。」
+            </p>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 font-mono italic">
+              Kochira no hoteru (Bēsu Reiyā Hoteru Fukuoka) made onegai shimasu.
+            </p>
+            <p class="text-[11px] text-slate-600 dark:text-slate-300">
+              中文：請載我到這間飯店（BASE LAYER HOTEL 福岡），麻煩您了。
+            </p>
+          </div>
+
+          <!-- Sentence 2 -->
+          <div class="p-2.5 rounded-lg bg-emerald-50/50 dark:bg-slate-800/60 border border-emerald-100 dark:border-slate-700 space-y-1">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-[10px] font-bold text-emerald-700 dark:text-emerald-400">第二句：告知地址</span>
+              <button onclick="playSpeech('住所は中央区清川1丁目14-15です。', 'ja-JP')" 
+                      type="button"
+                      class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold text-[11px] shadow-2xs transition-all">
+                <i class="fa-solid fa-volume-high animate-pulse text-[10px]"></i>
+                <span>播放第 2 句</span>
+              </button>
+            </div>
+            <p class="text-base sm:text-lg font-black text-slate-950 dark:text-white leading-snug">
+              「住所は中央区清川1丁目14-15です。」
+            </p>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 font-mono italic">
+              Jūsho wa Chūō-ku Kiyokawa itchōme jūyon no jūgo desu.
+            </p>
+            <p class="text-[11px] text-slate-600 dark:text-slate-300">
+              中文：地址在中央區清川1丁目14-15。
+            </p>
           </div>
         </div>
       </div>
